@@ -9,17 +9,25 @@
     @font-face{font-family:'calibre';src:url("./fonts/Calibre-Medium.otf") format("opentype");src:url("./fonts/Calibre-Medium.woff") format("woff");font-weight:normal;font-style:600}
     @font-face{font-family:'calibre';src:url("./fonts/Calibre-Semibold.otf") format("opentype");src:url("./fonts/Calibre-Semibold.woff") format("woff");font-weight:normal;font-style:700}
     @font-face{font-family:'calibre';src:url("./fonts/Calibre-Bold.otf") format("opentype");src:url("./fonts/Calibre-Bold.woff") format("woff");font-weight:normal;font-style:bold}
+    
     :root {
       --ink: #1C203C;
+      --ink: #141730;
+      --ink: #10132A;
       --btncolor: var(--ink);
+      --btnhover: var(--ink2);
+      --btnpress: var(--ink3);
       --btntext: white;
     }
+    
     * {}
-    html {font:normal 14px calibre, sans-serif;background:#fafafa}
+    html {font:normal 14px calibre, sans-serif;background:#fff}
     
     #btntest {}
     
-    .btn {display:inline-flex;border-radius:8px;color:var(--btntext);background:var(--btncolor);font-size:16;font-weight:700;height:40px;padding:0 16px;}
+    .btn {transition:background-color 200ms ease-in-out;display:inline-flex;cursor:pointer;border-radius:8px;color:var(--btntext);background:var(--btncolor);font-size:16px;font-weight:700;height:40px;padding:0 16px;align-items: center;align-content: center;}
+      .btn:hover {background:var(--btnhover);}
+      .btn:active {background:var(--btnpress);}
   </style>
 
 </head>
