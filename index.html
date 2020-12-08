@@ -15,18 +15,7 @@
     @font-face{font-family:'calibre';src:url("./fonts/Calibre-Bold.otf") format("opentype");src:url("./fonts/Calibre-Bold.woff") format("woff");font-weight:700;font-style:normal}
     
     :root {
-      --ink1:#0B0E24;
-      --ink2:#10132A;
-      --ink3:#141730;
-      --ink4:#171B36;
-      --ink5:#1C203C; /* Ink */
-      --ink6:#272B45;
-      --ink7:#33364F;
-      --ink8:#494C62;
-      --ink9:#606376; 
-      --ink10:#B1B3C4;
-      --ink11:#E5E6EC;
-      --ink12:#EEEFF2;
+
 
       --btndefaultstate: var(--ink5);
       --btnhoverstate: var(--ink6);
@@ -45,9 +34,14 @@
     body {-webkit-font-smoothing: antialiased;}
     
     #swatches {padding:24px;display: flex;gap:8px;}
-    .swatch {width:100px;}
-      .scolor {width:100%;height:60px;border-radius:4px 4px 0 0;padding: 4px;box-sizing: border-box;}
-      .sinfo {background:#eaeaea;border-radius:0 0 4px 4px;}
+    .swatch {width:100px;cursor:pointer;border-radius:4px;overflow:hidden;box-shadow:0 0 0 3px transparent;transition:box-shadow 150ms ease-in-out;}
+      .scolor {width:100%;height:60px;padding: 4px;box-sizing: border-box;}
+      .sinfo {background:#eaeaea;padding:0 4px 2px;}
+
+      .swatch:hover {box-shadow:0 0 0 3px var(--ink10);}
+      .swatch:active {box-shadow:0 0 0 3px var(--ink9);}
+
+      .swatch.copied {box-shadow:0 0 0 3px #4CE1D8;}
     
     #btntest {padding:40px 0;}
       #btntest .btn {width:200px;}
@@ -130,27 +124,58 @@
 
     }
 
+    function swatchcopy(e){
+      var a = this;
+      navigator.clipboard.writeText('#' + this.dataset.color).then(function() {
+        a.classList.add('copied');
+
+        if ( a.timer){
+          clearTimeout(a.timer);
+        }
+        a.timer = setTimeout(function(){a.classList.remove('copied');}, 1000);
+      }, function(err) {
+        console.error('Async: Could not copy text: ', err);
+      });
+    }
+
     Attach.on('click', '.toggle', toggle);
     Attach.on('click', '.checkbox', checkbox);
+    Attach.on('click', '.swatch', swatchcopy);
+
+    let inks = [{color:'0B0E24', name:'ink1'}, 
+                {color:'10132A', name:'ink2'}, 
+                {color:'141730', name:'ink3'}, 
+                {color:'171B36', name:'ink4'}, 
+                {color: '1C203C', name:'ink5'},
+                {color:'272B45', name:'ink6'}, 
+                {color:'33364F', name:'ink7'}, 
+                {color:'494C62', name:'ink8'}, 
+                {color:'606376', name:'ink9'}, 
+                {color:'B1B3C4', name:'ink10'},
+                {color:'E5E6EC', name:'ink11'},
+                {color:'EEEFF2', name:'ink12'}
+              ];
+
+    function cssvars(){
+      var style = document.createElement('style');
+
+      var vars = '';
+      for(var i=0;i<inks.length;i++){
+        let ink = inks[i];
+        vars += '--' + ink.name + ': #' + ink.color + ';';
+      }
+
+      style.innerHTML = ':root{' + vars +'}';
+
+
+
+      document.getElementsByTagName('head')[0].appendChild(style);
+    }
 
     function swatches(){
-      let colors = [{color:'0B0E24', name:'ink1'}, 
-                    {color:'10132A', name:'ink2'}, 
-                    {color:'141730', name:'ink3'}, 
-                    {color:'171B36', name:'ink4'}, 
-                    {color: '1C203C', name:'ink5'},
-                    {color:'272B45', name:'ink6'}, 
-                    {color:'33364F', name:'ink7'}, 
-                    {color:'494C62', name:'ink8'}, 
-                    {color:'606376', name:'ink9'}, 
-                    {color:'B1B3C4', name:'ink10'},
-                    {color:'E5E6EC', name:'ink11'},
-                    {color:'EEEFF2', name:'ink12'}
-                  ];
-      
       let container = document.getElementById('swatches');
       
-      for(var i=0;i<colors.length;i++){
+      for(var i=0;i<inks.length;i++){
         let wrap = document.createElement('div');
         let swatch = document.createElement('div');
         let info = document.createElement('div');
@@ -159,7 +184,7 @@
         let drgb = document.createElement('div');
         let title = document.createElement('div');
         
-        let item = colors[i];
+        let item = inks[i];
         let hex = item.color;
         let name = item.name;
 
@@ -170,13 +195,16 @@
         let dcon1 = document.createElement('div');
         let dcon2 = document.createElement('div');
 
+        wrap.dataset.color = hex;
+        wrap.title = 'Click to Copy Color';
+
         let rgbs = rgb[0] + ', ' + rgb[1] + ', ' + rgb[2];
         
         wrap.className = 'swatch';
         swatch.className = 'scolor';
         info.className = 'sinfo';
         
-        swatch.style.backgroundColor = '#' + hex;
+        swatch.style.backgroundColor = info.style.backgroundColor = '#' + hex;
 
         dcon1.style.color = '#1C203C';
         dcon2.style.color = 'white';
@@ -187,12 +215,23 @@
         var cpass2 = '';
 
         if ( conb >= 3){
-          cpass1 = 'Aa'
+          // cpass1 = 'Aa';
+
+          info.style.color = 'black';
         }
 
         if ( conw >= 3){
-          cpass2 = 'Aa'
+          // cpass2 = 'Aa';
+          info.style.color = 'white';
         }
+
+        if ( conb >= 3 && conw >= 3){
+          cpass1 = 'Aa';
+          cpass2 = 'Aa';
+        }
+
+        title.style.fontWeight = 500;
+        dhex.style.opacity = 0.8;
 
         dcon1.appendChild(document.createTextNode(cpass1));
         dcon2.appendChild(document.createTextNode(cpass2));
@@ -200,13 +239,13 @@
         swatch.appendChild(dcon1);
         swatch.appendChild(dcon2);
 
-        dhex.appendChild(document.createTextNode(hex));
+        dhex.appendChild(document.createTextNode('#' + hex));
         drgb.appendChild(document.createTextNode(rgbs));
         title.appendChild(document.createTextNode(name));
 
         info.appendChild(title);
         info.appendChild(dhex);
-        info.appendChild(drgb);
+        // info.appendChild(drgb);
 
         wrap.appendChild(swatch);
         wrap.appendChild(info);
@@ -255,6 +294,7 @@
       }
     }
 
+    cssvars();
     swatches();
   </script>
 </body>
