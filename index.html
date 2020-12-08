@@ -17,31 +17,37 @@
     :root {
 
 
-      --btndefaultstate: var(--ink5);
-      --btnhoverstate: var(--ink6);
-      --btnpressedstate: var(--ink7);
+      --btndefaultstate: var(--ink8);
+      --btnhoverstate: var(--ink7);
+      --btnpressedstate: var(--ink6);
       --btntext: white;
 
       --toggleselect: rgba(0,0,0,0.05);
+      --toggleborder: var(--ink1);
+
+      --ink: var(--ink8);
     }
 
     .onink {
       --toggleselect: rgba(255,255,255,0.075);
+      --toggleborder: var(--ink6);
     }
     
     * {margin:0;padding:0;}
     html {font:400 14px calibre, sans-serif;background:#fff}
     body {-webkit-font-smoothing: antialiased;}
     
-    #swatches {padding:24px;display: flex;gap:8px;}
+    #swatches {padding:24px;}
+    .swatchwrap {display: flex;gap:8px;margin-bottom:8px;}
+      .swatchwrap:last-child {margin:0;}
     .swatch {width:100px;cursor:pointer;border-radius:4px;overflow:hidden;box-shadow:0 0 0 3px transparent;transition:box-shadow 150ms ease-in-out;}
       .scolor {width:100%;height:60px;padding: 4px;box-sizing: border-box;}
       .sinfo {background:#eaeaea;padding:0 4px 2px;}
 
-      .swatch:hover {box-shadow:0 0 0 3px var(--ink10);}
-      .swatch:active {box-shadow:0 0 0 3px var(--ink9);}
+      .swatch:hover {box-shadow:0 0 0 3px var(--ink3);}
+      .swatch:active {box-shadow:0 0 0 3px var(--ink4);}
 
-      .swatch.copied {box-shadow:0 0 0 3px #4CE1D8;}
+      .swatch.copied {box-shadow:0 0 0 3px var(--tsharp3);}
     
     #btntest {padding:40px 0;}
       #btntest .btn {width:200px;}
@@ -57,7 +63,7 @@
     .outline .btn:active, .pressonly.outline .btn:active {background-color: transparent;border-color:var(--btnpressedstate);color: var(--btnpressedstate);}
 
 
-    .toggle {cursor:pointer;display:inline-block;border-radius:2px;padding:4px 8px;font-weight: 500;box-sizing: border-box;margin-right:12px;}
+    .toggle {cursor:pointer;display:inline-block;border-radius:2px;padding:4px 8px;font-weight: 500;box-sizing: border-box;margin-right:12px;border:  1px solid var(--toggleborder);}
       .toggle.on {background:var(--toggleselect);}
 
     .checkcolumn  {width:200px;display:inline-block;margin-right:16px;}
@@ -69,7 +75,7 @@
       h3 {font-size:12px;font-weight:600;text-transform: uppercase;margin-bottom:4px;}
 
     .sandbox {padding:24px;background:white;}
-      .onink .sandbox {background:var(--ink5);color:white;}
+      .onink .sandbox {background:var(--ink);color:white;}
 
     #toggles {margin-bottom:24px;}
   </style>
@@ -85,7 +91,7 @@
     </div>
 
     <div id=toggles>
-      <div class=toggle data-class=outline>Outline Button</div> <div class=toggle data-class=pressonly>Pressed State Only</div> <div class=toggle data-class=onink>Ink Background</div>
+      <div class=toggle data-class=outline>Outline Button</div> <div class=toggle data-class=onink>Ink Background</div> <div class=toggle data-class=pressonly>Pressed State Only</div> 
     </div>
     <div id=default1 class=checkcolumn>
       <h3>Default State</h3>
@@ -142,40 +148,54 @@
     Attach.on('click', '.checkbox', checkbox);
     Attach.on('click', '.swatch', swatchcopy);
 
-    let inks = [{color:'0B0E24', name:'ink1'}, 
-                {color:'10132A', name:'ink2'}, 
-                {color:'141730', name:'ink3'}, 
-                {color:'171B36', name:'ink4'}, 
-                {color: '1C203C', name:'ink5'},
-                {color:'272B45', name:'ink6'}, 
-                {color:'33364F', name:'ink7'}, 
-                {color:'494C62', name:'ink8'}, 
-                {color:'606376', name:'ink9'}, 
-                {color:'B1B3C4', name:'ink10'},
-                {color:'E5E6EC', name:'ink11'},
-                {color:'EEEFF2', name:'ink12'}
-              ];
+    let inks = [
+      {color:'0B0E24', name:'ink12'}, 
+      {color:'10132A', name:'ink11'}, 
+      {color:'141730', name:'ink10'}, 
+      {color:'171B36', name:'ink9'}, 
+      {color:'1C203C', name:'ink8'},
+      {color:'272B45', name:'ink7'}, 
+      {color:'33364F', name:'ink6'}, 
+      {color:'494C62', name:'ink5'}, 
+      {color:'606376', name:'ink4'}, 
+      {color:'B1B3C4', name:'ink3'},
+      {color:'E5E6EC', name:'ink2'},
+      {color:'EEEFF2', name:'ink1'}
+    ];
+
+    let tsharps = [
+      {color:'0FA49B', name:'tsharp5'},
+      {color:'11BDB2', name:'tsharp4'},
+      {color:'14D8CC', name:'tsharp3'},
+      {color:'4CE1D8', name:'tsharp2'},
+      {color:'A5F0EB', name:'tsharp1'}
+    ];
 
     function cssvars(){
       var style = document.createElement('style');
-
       var vars = '';
+
       for(var i=0;i<inks.length;i++){
-        let ink = inks[i];
-        vars += '--' + ink.name + ': #' + ink.color + ';';
+        let x = inks[i];
+        vars += '--' + x.name + ': #' + x.color + ';';
+      }
+
+      for(var i=0;i<tsharps.length;i++){
+        let x = tsharps[i];
+        vars += '--' + x.name + ': #' + x.color + ';';
       }
 
       style.innerHTML = ':root{' + vars +'}';
 
-
-
       document.getElementsByTagName('head')[0].appendChild(style);
     }
 
-    function swatches(){
+    function swatches(colors){
       let container = document.getElementById('swatches');
-      
-      for(var i=0;i<inks.length;i++){
+      let swatchwrap = document.createElement('div');
+      swatchwrap.className = 'swatchwrap';
+
+      for(var i=0;i<colors.length;i++){
         let wrap = document.createElement('div');
         let swatch = document.createElement('div');
         let info = document.createElement('div');
@@ -184,7 +204,7 @@
         let drgb = document.createElement('div');
         let title = document.createElement('div');
         
-        let item = inks[i];
+        let item = colors[i];
         let hex = item.color;
         let name = item.name;
 
@@ -192,8 +212,8 @@
         let conb = contrastr('#1C203C', hex);
         let conw = contrastr(hex, '#fff');
 
-        let dcon1 = document.createElement('div');
-        let dcon2 = document.createElement('div');
+        let dcon1 = document.createElement('span');
+        let dcon2 = document.createElement('span');
 
         wrap.dataset.color = hex;
         wrap.title = 'Click to Copy Color';
@@ -226,7 +246,7 @@
         }
 
         if ( conb >= 3 && conw >= 3){
-          cpass1 = 'Aa';
+          cpass1 = 'Aa ';
           cpass2 = 'Aa';
         }
 
@@ -250,7 +270,19 @@
         wrap.appendChild(swatch);
         wrap.appendChild(info);
         
-        container.appendChild(wrap);
+        swatchwrap.appendChild(wrap);
+      }
+
+      container.appendChild(swatchwrap);
+    }
+
+    function switches(){
+      
+      for(var i=0;i<inks.length;i++){
+        
+        let item = inks[i];
+        let hex = item.color;
+        let name = item.name;
 
 
         let checkbox = document.createElement('div');
@@ -275,15 +307,15 @@
         c2.className += c2.dataset.state =  ' hoverstate';
         c3.className += c3.dataset.state =  ' pressedstate';
 
-        if ( name == 'ink5'){
+        if ( name == 'ink8'){
           checkbox.className += ' on';
         }
 
-        if ( name == 'ink6'){
+        if ( name == 'ink7'){
           c2.className += ' on';
         }
 
-        if ( name == 'ink7'){
+        if ( name == 'ink6'){
           c3.className += ' on';
         }
 
@@ -295,7 +327,10 @@
     }
 
     cssvars();
-    swatches();
+    swatches(inks);
+    swatches(tsharps);
+
+    switches();
   </script>
 </body>
 </html>
