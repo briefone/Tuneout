@@ -5,17 +5,21 @@
   <title>Sandbox</title>
 
   <style>
-  :root {
-    --ink: #1C203C;
-    --btncolor: var(--ink);
-    --btntext: white;
-  }
+    @font-face{font-family:'calibre';src:url("./fonts/Calibre-Regular.otf") format("opentype");src:url("./fonts/Calibre-Regular.woff") format("woff");font-weight:normal;font-style:normal}
+    @font-face{font-family:'calibre';src:url("./fonts/Calibre-Medium.otf") format("opentype");src:url("./fonts/Calibre-Medium.woff") format("woff");font-weight:normal;font-style:600}
+    @font-face{font-family:'calibre';src:url("./fonts/Calibre-Semibold.otf") format("opentype");src:url("./fonts/Calibre-Semibold.woff") format("woff");font-weight:normal;font-style:700}
+    @font-face{font-family:'calibre';src:url("./fonts/Calibre-Bold.otf") format("opentype");src:url("./fonts/Calibre-Bold.woff") format("woff");font-weight:normal;font-style:bold}
+    :root {
+      --ink: #1C203C;
+      --btncolor: var(--ink);
+      --btntext: white;
+    }
     * {}
     html {font:normal 14px calibre, sans-serif;background:#fafafa}
     
     #btntest {}
     
-    .btn {display:inline-flex;border-radius:8px;color:var(--btntext);background:var(--btncolor);font-size:16;font-weight:600;height:40px;padding:0 16px;}
+    .btn {display:inline-flex;border-radius:8px;color:var(--btntext);background:var(--btncolor);font-size:16;font-weight:700;height:40px;padding:0 16px;}
   </style>
 
 </head>
