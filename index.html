@@ -65,7 +65,7 @@
       .pressonly .btn.cta:hover {background:var(--ctadefaultstate);}
       .btn.cta:active, .pressonly .btn.cta:active {background:var(--ctapressedstate);}
 
-    .outline .btn {background-color: transparent;border:2px solid var(--btndefaultstate);color: var(--btndefaultstate);}
+    .outline .btn {background-color: transparent;border:2px solid var(--btndefaultstate);color: var(--btndefaultstate);padding:0 14px;}
     .outline .btn:hover {background-color: transparent;border-color:var(--btnhoverstate);color: var(--btnhoverstate);}
     .pressonly.outline  .btn:hover {background-color: transparent;border-color:var(--btndefaultstate);color: var(--btndefaultstate);}
     .outline .btn:active, .pressonly.outline .btn:active {background-color: transparent;border-color:var(--btnpressedstate);color: var(--btnpressedstate);}
@@ -95,6 +95,7 @@
 
 </head>
 <body class="">
+  <div id=reset class="btn" style="height:24px;min-width:0;background:transparent;border:2px solid red;color:red;position:absolute;top:24px;right:24px;padding:0 10px;border-radius:12px;">Reset</div>
   <div id=swatches></div>
 
   <div class=sandbox id=primarybtnsandbox>
@@ -185,9 +186,15 @@
       cp.click();
     }
 
+    function reset(e){
+      window.location.hash = '';
+      window.location.reload();
+    }
+
     Attach.on('click', '.toggle', toggle);
     Attach.on('click', '.checkbox', checkbox);
     Attach.on('click', '.swatch', swatchcopy);
+    Attach.on('click', '#reset', reset);
 
 
     let Colors = {
@@ -457,11 +464,35 @@
       container.appendChild(press);
     }
 
+    unhash();
     cssvars();
     swatches();
     switches(Colors, 'primarybtnsandbox', 'btn');
 
+    function hash(){
+      let string  = JSON.stringify(Colors);
+      let a64 = btoa(string);
+      history.replaceState(undefined, undefined, '#colors=' + a64)
+    }
+
+    function unhash(){
+      let hash = window.location.hash;
+      if ( !hash.includes('#colors=') ){
+        return;
+      }
+      hash = hash.replace('#colors=', '').trim();
+      if ( hash == ''){
+        return;
+      }
+      
+      let a64 = atob(hash);
+      let json  = JSON.parse(a64);
+
+      Colors = json;
+    }
+
     function regen(){
+      hash();
       cssvars();
     }
 
