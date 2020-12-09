@@ -70,6 +70,9 @@
     .pressonly.outline  .btn:hover {background-color: transparent;border-color:var(--btndefaultstate);color: var(--btndefaultstate);}
     .outline .btn:active, .pressonly.outline .btn:active {background-color: transparent;border-color:var(--btnpressedstate);color: var(--btnpressedstate);}
 
+    .outline.fill .btn:active, .pressonly.outline.fill .btn:active {background-color: var(--btnpressedstate);border-color:var(--btnpressedstate);color: white;}
+      .outline.fill.onink .btn:active, .pressonly.outline.fill.onink .btn:active {color: var(--ink);}
+
     .darktext .btn {color:var(--ink);}
 
     .pill .btn {height:36px;border-radius:18px;min-width:0;}
@@ -103,7 +106,7 @@
       <div class=btn>Button</div>
     </div>
     <div id=toggles>
-      <div class=toggle data-class=outline>Outline Button</div> <div class=toggle data-class=pill>Pill Button</div> <div class=toggle data-class=onink>Ink Background</div> <div class=toggle data-class=darktext>Dark Text</div> <div class=toggle data-class=pressonly>Pressed State Only</div> 
+      <div class=toggle data-class=outline>Outline Button</div> <div class=toggle data-class=pill>Pill Button</div> <div class=toggle data-class=onink>Ink Background</div> <div class=toggle data-class=darktext>Dark Text</div> <div class=toggle data-class=fill>Fill on Press</div> <div class=toggle data-class=pressonly>Pressed State Only</div> 
     </div>
     <div class=switches></div>
   </div>
@@ -472,7 +475,7 @@
     function hash(){
       let string  = JSON.stringify(Colors);
       let a64 = btoa(string);
-      history.replaceState(undefined, undefined, '#colors=' + a64)
+      history.replaceState(null, null, '#colors=' + a64)
     }
 
     function unhash(){
@@ -480,7 +483,9 @@
       if ( !hash.includes('#colors=') ){
         return;
       }
+
       hash = hash.replace('#colors=', '').trim();
+
       if ( hash == ''){
         return;
       }
