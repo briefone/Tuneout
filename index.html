@@ -15,9 +15,9 @@
     @font-face{font-family:'calibre';src:url("./fonts/Calibre-Bold.otf") format("opentype");src:url("./fonts/Calibre-Bold.woff") format("woff");font-weight:700;font-style:normal}
     
     :root {
-      --btndefaultstate: var(--ink8);
-      --btnhoverstate: var(--ink7);
-      --btnpressedstate: var(--ink6);
+      --btndefaultstate: var(--ink);
+      --btnhoverstate: var(--inkhover);
+      --btnpressedstate: var(--inkpress);
 
       --ctadefaultstate: var(--tsharp3);
       --ctahoverstate: var(--tsharp2);
@@ -27,9 +27,8 @@
       --btntext: white;
 
       --toggleselect: rgba(0,0,0,0.05);
-      --toggleborder: var(--ink1);
+      --toggleborder: var(--ink2);
 
-      --ink: var(--ink8);
     }
 
     .onink {
@@ -46,7 +45,8 @@
       .swatchwrap:last-child {margin:0;}
     .swatch {width:100px;cursor:pointer;border-radius:4px;overflow:hidden;box-shadow:0 0 0 3px transparent;transition:box-shadow 150ms ease-in-out;}
       .scolor {width:100%;height:60px;padding: 4px;box-sizing: border-box;}
-      .sinfo {background:#eaeaea;padding:0 4px 2px;}
+      .sinfo {padding:0 4px 2px;}
+        .sinfo .hex {text-transform: uppercase;}
 
       .swatch:hover {box-shadow:0 0 0 3px var(--ink3);}
       .swatch:active {box-shadow:0 0 0 3px var(--ink4);}
@@ -90,6 +90,8 @@
       .onink.sandbox {background:var(--ink);color:white;}
 
     #toggles {margin-bottom:24px;}
+
+    #colorpicker {pointer-events:none;opacity:0;position: absolute;top:0;left:0;}
   </style>
 
 </head>
@@ -103,8 +105,9 @@
     <div id=toggles>
       <div class=toggle data-class=outline>Outline Button</div> <div class=toggle data-class=pill>Pill Button</div> <div class=toggle data-class=onink>Ink Background</div> <div class=toggle data-class=darktext>Dark Text</div> <div class=toggle data-class=pressonly>Pressed State Only</div> 
     </div>
+    <div class=switches></div>
   </div>
-
+  <input type="color" id=colorpicker />
   <!-- <div class=sandbox id=ctabtnsandbox>
     <div id=ctatest>
       <div class="btn cta">Button</div>
@@ -152,223 +155,297 @@
       }, function(err) {
         console.error('Async: Could not copy text: ', err);
       });
+
+      let cp = document.getElementById('colorpicker');
+
+      cp.oninput = function(e){
+        console.log(this.value);
+        let v = this.value.replace('#', '');
+        a.dataset.color = v.replace('#', '');
+        a.style.backgroundColor = '#' + v;
+
+        let hex = a.getElementsByClassName('hex')[0];
+        hex.empty();
+
+        hex.appendChild(document.createTextNode('#' + v));
+
+
+        let dex = a.dataset.index;
+        let key = a.dataset.key;
+
+        Colors[key][dex].color = v;
+
+        regen();
+      }
+
+      cp.style.top = this.offsetTop + this.offsetHeight + 'px';
+      cp.style.left = this.offsetLeft + 'px';
+      cp.value = '#' + this.dataset.color;
+
+      cp.offsetLeft;
+      cp.click();
     }
 
     Attach.on('click', '.toggle', toggle);
     Attach.on('click', '.checkbox', checkbox);
     Attach.on('click', '.swatch', swatchcopy);
 
-    let inks = [
-      {color:'0B0E24', name:'ink12'}, 
-      {color:'10132A', name:'ink11'}, 
-      {color:'141730', name:'ink10'}, 
-      {color:'171B36', name:'ink9'}, 
-      {color:'1C203C', name:'ink8'},
-      {color:'272B45', name:'ink7'}, 
-      {color:'33364F', name:'ink6'}, 
-      {color:'494C62', name:'ink5'}, 
-      {color:'606376', name:'ink4'}, 
-      {color:'B1B3C4', name:'ink3'},
-      {color:'E5E6EC', name:'ink2'},
-      {color:'f3f4f6', name:'ink1'}
-    ];
 
-    let tsharps = [
-      {color:'0FA49B', name:'tsharp5'},
-      {color:'11BDB2', name:'tsharp4'},
-      {color:'14D8CC', name:'tsharp3'},
-      {color:'4CE1D8', name:'tsharp2'},
-      {color:'A5F0EB', name:'tsharp1'}
-    ];
+    let Colors = {
+      ink: [
+        {color:'0b0e23'}, 
+        // {color:'0f1329'}, 
+        // {color:'14172f'},
+        {color: '12152D'},
+        {color:'171B36'}, 
+        
+        {color:'1c203b', default: true},
+        {color:'272B45', hover: true}, 
+        {color:'33364F', press: true}, 
+        {color:'4a4d64'}, 
+        {color:'606376'}, 
+        {color:'B1B3C4'},
+        {color:'e4e5ec'},
+        {color:'f3f4f6'},
+        {color:'ffffff'}
+      ],
+      tsharp: [
+        {color:'0FA49B'},
+        {color:'11BDB2'},
+        {color:'14D8CC'},
+        {color:'4CE1D8'},
+        {color:'A5F0EB'}
+      ],
+      gold: [
+        {color:'fdb230'},
+        {color:'fdb944'},
+        {color:'FEC25A'},
+        {color:'fecc77'},
+        {color:'fed690'}
+      ]
+    };
 
-    let golds = [
-      
-      {color:'fdb230', name:'gold5'},
-      {color:'fdb944', name:'gold4'},
-      {color:'FEC25A', name:'gold3'},
-      {color:'fecc77', name:'gold2'},
-      {color:'fed690', name:'gold1'},
-    ];
 
-    function cssvars(){
+    function cssvars(regen = false){
+      let old = document.getElementsByClassName('colorvars');
+      old.remove();
+
       var style = document.createElement('style');
+      style.className = 'colorvars';
       var vars = '';
 
-      for(var i=0;i<inks.length;i++){
-        let x = inks[i];
-        vars += '--' + x.name + ': #' + x.color + ';';
+      for (const [key, colors] of Object.entries(Colors)) {
+        // colors.forEach(async function(color) {
+          let count = colors.length;
+          for(var i=0;i<colors.length;i++){
+            let x = colors[i];
+            let name = key + (count-i);
+            vars += '--' + name + ': #' + x.color + ';';
+
+            if ( x.default ){
+              vars += '--ink: var(--' + name + ');';
+            } else if ( x.hover ){
+              vars += '--inkhover: var(--' + name + ');';
+            } else if ( x.press ){
+              vars += '--inkpress: var(--' + name + ');';
+            }
+
+          }
+        // });
       }
 
-      for(var i=0;i<tsharps.length;i++){
-        let x = tsharps[i];
-        vars += '--' + x.name + ': #' + x.color + ';';
-      }
-
-      for(var i=0;i<golds.length;i++){
-        let x = golds[i];
-        vars += '--' + x.name + ': #' + x.color + ';';
-      }
+      console.log(vars);
 
       style.innerHTML = ':root{' + vars +'}';
 
       document.getElementsByTagName('head')[0].appendChild(style);
     }
 
-    function swatches(colors){
+    function swatches(){
       let container = document.getElementById('swatches');
-      let swatchwrap = document.createElement('div');
-      swatchwrap.className = 'swatchwrap';
+      container.empty();
 
-      for(var i=0;i<colors.length;i++){
-        let wrap = document.createElement('div');
-        let swatch = document.createElement('div');
-        let info = document.createElement('div');
+      for (const [key, colors] of Object.entries(Colors)) {
 
-        let dhex = document.createElement('div');
-        let drgb = document.createElement('div');
-        let title = document.createElement('div');
-        
-        let item = colors[i];
-        let hex = item.color;
-        let name = item.name;
+        let swatchwrap = document.createElement('div');
+        swatchwrap.className = 'swatchwrap';
 
-        let rgb = hex2rgb(hex);
-        let conb = contrastr('#1C203C', hex);
-        let conw = contrastr(hex, '#fff');
+        let count = colors.length;
 
-        let dcon1 = document.createElement('span');
-        let dcon2 = document.createElement('span');
+        for(var i=0;i<colors.length;i++){
+          let wrap = document.createElement('div');
+          let swatch = document.createElement('div');
+          let info = document.createElement('div');
 
-        wrap.dataset.color = hex;
-        wrap.title = 'Click to Copy Color';
+          let dhex = document.createElement('div');
+          let drgb = document.createElement('div');
+          let title = document.createElement('div');
 
-        let rgbs = rgb[0] + ', ' + rgb[1] + ', ' + rgb[2];
-        
-        wrap.className = 'swatch';
-        swatch.className = 'scolor';
-        info.className = 'sinfo';
-        
-        swatch.style.backgroundColor = info.style.backgroundColor = '#' + hex;
+          title.className = 'name';
+          dhex.className = 'hex';
+          
+          let item = colors[i];
+          let hex = item.color;
+          let name = key + ' ' + (count - i);
 
-        dcon1.style.color = '#1C203C';
-        dcon2.style.color = 'white';
+          let rgb = hex2rgb(hex);
+          let conb = contrastr('#1C203C', hex);
+          let conw = contrastr(hex, '#fff');
 
-        dcon1.className = dcon2.className = 'contrast';
+          let dcon1 = document.createElement('span');
+          let dcon2 = document.createElement('span');
 
-        var cpass1 = '';
-        var cpass2 = '';
+          wrap.dataset.color = hex;
+          wrap.dataset.index = i;
+          wrap.dataset.key = key;
+          wrap.title = 'Click to Copy Color';
 
-        if ( conb >= 3){
-          // cpass1 = 'Aa';
+          let rgbs = rgb[0] + ', ' + rgb[1] + ', ' + rgb[2];
+          
+          wrap.className = 'swatch';
+          swatch.className = 'scolor';
+          info.className = 'sinfo';
+          
+          wrap.style.backgroundColor = '#' + hex;
 
-          info.style.color = 'black';
+          dcon1.style.color = '#1C203C';
+          dcon2.style.color = 'white';
+
+          dcon1.className = dcon2.className = 'contrast';
+
+          var cpass1 = '';
+          var cpass2 = '';
+
+          if ( conb >= 3){
+            // cpass1 = 'Aa';
+
+            info.style.color = 'black';
+          }
+
+          if ( conw >= 3){
+            // cpass2 = 'Aa';
+            info.style.color = 'white';
+          }
+
+          if ( conb >= 3 && conw >= 3){
+            cpass1 = 'Aa ';
+            cpass2 = 'Aa';
+          }
+
+          title.style.fontWeight = 500;
+          dhex.style.opacity = 0.8;
+
+          dcon1.appendChild(document.createTextNode(cpass1));
+          dcon2.appendChild(document.createTextNode(cpass2));
+
+          swatch.appendChild(dcon1);
+          swatch.appendChild(dcon2);
+
+          dhex.appendChild(document.createTextNode('#' + hex));
+          drgb.appendChild(document.createTextNode(rgbs));
+          title.appendChild(document.createTextNode(name));
+
+          info.appendChild(title);
+          info.appendChild(dhex);
+          // info.appendChild(drgb);
+
+          wrap.appendChild(swatch);
+          wrap.appendChild(info);
+          
+          swatchwrap.appendChild(wrap);
         }
-
-        if ( conw >= 3){
-          // cpass2 = 'Aa';
-          info.style.color = 'white';
-        }
-
-        if ( conb >= 3 && conw >= 3){
-          cpass1 = 'Aa ';
-          cpass2 = 'Aa';
-        }
-
-        title.style.fontWeight = 500;
-        dhex.style.opacity = 0.8;
-
-        dcon1.appendChild(document.createTextNode(cpass1));
-        dcon2.appendChild(document.createTextNode(cpass2));
-
-        swatch.appendChild(dcon1);
-        swatch.appendChild(dcon2);
-
-        dhex.appendChild(document.createTextNode('#' + hex));
-        drgb.appendChild(document.createTextNode(rgbs));
-        title.appendChild(document.createTextNode(name));
-
-        info.appendChild(title);
-        info.appendChild(dhex);
-        // info.appendChild(drgb);
-
-        wrap.appendChild(swatch);
-        wrap.appendChild(info);
-        
-        swatchwrap.appendChild(wrap);
+        container.appendChild(swatchwrap);
       }
-
-      container.appendChild(swatchwrap);
     }
 
-    function switches(colors, container, modifier){
+    function switches(colorobj, container, modifier){
       container = document.getElementById(container);
+      container = container.getElementsByClassName('switches')[0];
 
-      let idle = document.createElement('div');
-      let hover = document.createElement('div');
-      let press = document.createElement('div');
+      container.empty();
 
-      let ih3 = document.createElement('h3');
-      let hh3 = document.createElement('h3');
-      let ph3 = document.createElement('h3');
+      // var idle = container.getElementsByClassName('idlecolumn')[0];
+      // var hover = container.getElementsByClassName('hovercolumn')[0];
+      // var press = container.getElementsByClassName('presscolumn')[0];
 
-      ih3.appendChild(document.createTextNode('Default State'));
-      hh3.appendChild(document.createTextNode('Hover State'));
-      ph3.appendChild(document.createTextNode('Pressed State'));
+      // if ( !idle ){
+        let idle = document.createElement('div');
+        let hover = document.createElement('div');
+        let press = document.createElement('div');
 
-      idle.appendChild(ih3);
-      hover.appendChild(hh3);
-      press.appendChild(ph3);
+        let ih3 = document.createElement('h3');
+        let hh3 = document.createElement('h3');
+        let ph3 = document.createElement('h3');
 
-      idle.className = hover.className = press.className = 'checkcolumn';
-      
-      for(var i=0;i<colors.length;i++){
+        ih3.appendChild(document.createTextNode('Default State'));
+        hh3.appendChild(document.createTextNode('Hover State'));
+        ph3.appendChild(document.createTextNode('Pressed State'));
+
+        idle.appendChild(ih3);
+        hover.appendChild(hh3);
+        press.appendChild(ph3);
+
+        idle.className = 'checkcolumn idlecolumn';
+        hover.className = 'checkcolumn hovercolumn';
+        press.className = 'checkcolumn presscolumn';
+      // }
+
+      for (const [key, colors] of Object.entries(colorobj)) {
+        // console.log(`${key}: ${colors}`);
+
+        let count = colors.length;
         
-        let item = colors[i];
-        let hex = item.color;
-        let name = item.name;
+        for(var i=0;i<colors.length;i++){
+          
+          let item = colors[i];
+          let hex = item.color;
+          let name = key + ' ' + (count - i);
 
-        let checkbox = document.createElement('div');
-        let minis = document.createElement('div');
-        let checkname = document.createElement('div');
+          let checkbox = document.createElement('div');
+          let minis = document.createElement('div');
+          let checkname = document.createElement('div');
 
-        checkbox.className = 'checkbox';
-        minis.className = 'checkswatch';
-        checkname.className = 'checkname';
+          checkbox.className = 'checkbox';
+          minis.className = 'checkswatch';
+          checkname.className = 'checkname';
 
-        minis.style.backgroundColor = '#' + hex;
+          let vname = '--' + name.replace(/\s/g, '');
 
-        checkname.appendChild(document.createTextNode(name));
-        checkbox.appendChild(minis);
-        checkbox.appendChild(checkname);
+          minis.style.backgroundColor = 'var(' + vname +')'; //'#' + hex;
 
-        let c2 = checkbox.cloneNode(true);
-        let c3 = checkbox.cloneNode(true);
+          checkname.appendChild(document.createTextNode(name));
+          checkbox.appendChild(minis);
+          checkbox.appendChild(checkname);
 
-        checkbox.dataset.color = c2.dataset.color = c3.dataset.color = '--' + name;
-        checkbox.className += ' defaultstate';
-        c2.className += ' hoverstate';
-        c3.className += ' pressedstate';
+          let c2 = checkbox.cloneNode(true);
+          let c3 = checkbox.cloneNode(true);
 
-        checkbox.dataset.state = modifier + 'defaultstate';
-        c2.dataset.state =  modifier + 'hoverstate';
-        c3.dataset.state =  modifier + 'pressedstate';
+          checkbox.dataset.color = c2.dataset.color = c3.dataset.color = vname;
+          checkbox.className += ' defaultstate';
+          c2.className += ' hoverstate';
+          c3.className += ' pressedstate';
 
-        if ( name == 'ink8'){//} || name == 'tsharp3'){
-          checkbox.className += ' on';
+          checkbox.dataset.state = modifier + 'defaultstate';
+          c2.dataset.state =  modifier + 'hoverstate';
+          c3.dataset.state =  modifier + 'pressedstate';
+
+          if ( item.default == true){ //name == 'ink8'){//} || name == 'tsharp3'){
+            checkbox.className += ' on';
+          }
+
+          if ( item.hover == true){ //name == 'ink7'){//} || name == 'tsharp2'){
+            c2.className += ' on';
+          }
+
+          if ( item.press == true){ //name == 'ink6'){//} || name == 'tsharp1'){
+            c3.className += ' on';
+          }
+
+
+          idle.appendChild(checkbox);
+          hover.appendChild(c2);
+          press.appendChild(c3);
         }
-
-        if ( name == 'ink7'){//} || name == 'tsharp2'){
-          c2.className += ' on';
-        }
-
-        if ( name == 'ink6'){//} || name == 'tsharp1'){
-          c3.className += ' on';
-        }
-
-
-        idle.appendChild(checkbox);
-        hover.appendChild(c2);
-        press.appendChild(c3);
       }
 
       container.appendChild(idle);
@@ -376,14 +453,16 @@
       container.appendChild(press);
     }
 
-
     cssvars();
-    swatches(inks);
-    swatches(tsharps);
-    swatches(golds);
+    swatches();
+    switches(Colors, 'primarybtnsandbox', 'btn');
 
-    switches(inks.concat(tsharps).concat(golds), 'primarybtnsandbox', 'btn');
-    // switches(tsharps, 'ctabtnsandbox', 'cta');
+
+    function regen(){
+      cssvars();
+      // switches(Colors, 'primarybtnsandbox', 'btn')
+    }
+
   </script>
 </body>
 </html>
