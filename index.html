@@ -243,16 +243,16 @@ jhunter@tunein.com
       pressonly: false,
       colors: {
         ink: [
-          {color:'0b0e23'}, 
+          {color:'0b0e23', alt: 'Darkest'}, 
           // {color:'0f1329'}, 
           // {color:'14172f'},
           {color: '12152D'},
           {color:'171B36'}, 
-          {color:'1c203b', default: true},
+          {color:'1c203b', default: true, alt: 'Brand'},
           {color:'272B45', hover: true}, 
-          {color:'33364F', press: true}, 
+          {color:'33364F', press: true, alt: 'Light'}, 
           {color:'4a4d64'}, 
-          {color:'606376'}, 
+          {color:'606376', alt: 'Bright'}, 
           {color:'B1B3C4'},
           {color:'e4e5ec'},
           {color:'f3f4f6'},
@@ -285,7 +285,6 @@ jhunter@tunein.com
         ]
       }
     };
-
 
     function cssvars(regen = false){
       let old = document.getElementsByClassName('colorvars');
@@ -366,6 +365,8 @@ jhunter@tunein.com
           wrap.className = 'swatch';
           swatch.className = 'scolor';
           info.className = 'sinfo';
+
+          let alt = item.alt ? ' ' + item.alt : '';
           
           wrap.style.backgroundColor = '#' + hex;
 
@@ -401,7 +402,7 @@ jhunter@tunein.com
 
           dhex.appendChild(document.createTextNode(hex));
           drgb.appendChild(document.createTextNode(rgbs));
-          title.appendChild(document.createTextNode(name));
+          title.appendChild(document.createTextNode(name + alt));
 
           info.appendChild(title);
           info.appendChild(dhex);
@@ -467,11 +468,13 @@ jhunter@tunein.com
           minis.className = 'checkswatch';
           checkname.className = 'checkname';
 
+          let alt = item.alt ? ' ' + item.alt : '';
+
           let vname = '--' + name.replace(/\s/g, '');
 
           minis.style.backgroundColor = 'var(' + vname +')'; //'#' + hex;
 
-          checkname.appendChild(document.createTextNode(name));
+          checkname.appendChild(document.createTextNode(name + alt));
           checkbox.appendChild(minis);
           checkbox.appendChild(checkname);
 
