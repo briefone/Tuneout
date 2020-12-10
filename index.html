@@ -56,7 +56,8 @@ jhunter@tunein.com
     .swatch {width:100px;cursor:pointer;border-radius:4px;overflow:hidden;box-shadow:0 0 0 3px transparent;transition:box-shadow 150ms ease-in-out;}
       .scolor {width:100%;height:60px;padding: 4px;box-sizing: border-box;}
       .sinfo {padding:0 4px 2px;}
-        .sinfo .hex {text-transform: uppercase;}
+      .sinfo .name {font-weight:500;text-transform: ;}
+        .sinfo .hex {text-transform: uppercase;font-weight:400;opacity:0.7;}
 
       .swatch:hover {box-shadow:0 0 0 3px var(--ink3);}
       .swatch:active {box-shadow:0 0 0 3px var(--ink4);}
@@ -200,7 +201,7 @@ jhunter@tunein.com
         let hex = a.getElementsByClassName('hex')[0];
         hex.empty();
 
-        hex.appendChild(document.createTextNode('#' + v));
+        hex.appendChild(document.createTextNode(v));
 
 
         let dex = a.dataset.index;
@@ -279,8 +280,8 @@ jhunter@tunein.com
         ],
         sky: [
           {color:'7FCFEC'},
-          {color:'94D4EB'},
-          {color:'A8D8EA'},
+          {color:'91dcf7'},
+          {color:'aae3f8'},
         ]
       }
     };
@@ -392,16 +393,13 @@ jhunter@tunein.com
             cpass2 = 'Aa';
           }
 
-          title.style.fontWeight = 500;
-          dhex.style.opacity = 0.8;
-
           dcon1.appendChild(document.createTextNode(cpass1));
           dcon2.appendChild(document.createTextNode(cpass2));
 
           swatch.appendChild(dcon1);
           swatch.appendChild(dcon2);
 
-          dhex.appendChild(document.createTextNode('#' + hex));
+          dhex.appendChild(document.createTextNode(hex));
           drgb.appendChild(document.createTextNode(rgbs));
           title.appendChild(document.createTextNode(name));
 
