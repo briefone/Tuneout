@@ -136,8 +136,15 @@ jhunter@tunein.com
   
   <script>
     function toggle(e){
-      this.getparent('sandbox').classList.toggle(this.dataset.class);
+      let name = this.dataset.class;
+      this.getparent('sandbox').classList.toggle(name);
       this.classList.toggle('on');
+
+      let onoff = this.classList.contains('on');
+
+      Play[name] = onoff;
+
+      hash();
     }
 
     function checkbox(e){
@@ -146,8 +153,8 @@ jhunter@tunein.com
       on.removeclass('on');
       this.classList.add('on');
 
-      let state = this.dataset.state.trim();
-      let cssname = state + 'css';
+      let type = this.dataset.type;
+      let cssname = type + 'css';
       let css = document.getElementsByClassName(cssname);
       if ( css){
         css.remove();
@@ -155,9 +162,18 @@ jhunter@tunein.com
 
       var style = document.createElement('style');
       style.className = cssname; 
-      style.innerHTML = ':root{--' + state + ': var(' + this.dataset.color + ')}';
+      style.innerHTML = ':root{--' + type + ': var(' + this.dataset.color + ')}';
       document.getElementsByTagName('head')[0].appendChild(style);
 
+      
+      let dex = this.dataset.dex;
+      let key = this.dataset.key;
+      let state = this.dataset.state;
+
+      Play[state].key = key;
+      Play[state].dex = Number(dex);
+
+      hash();
     }
 
     function swatchcopy(e){
@@ -190,7 +206,7 @@ jhunter@tunein.com
         let dex = a.dataset.index;
         let key = a.dataset.key;
 
-        Colors[key][dex].color = v;
+        Play.colors[key][dex].color = v;
 
         regen();
       }
@@ -214,48 +230,59 @@ jhunter@tunein.com
     Attach.on('click', '#reset', reset);
 
 
-    let Colors = {
-      ink: [
-        {color:'0b0e23'}, 
-        // {color:'0f1329'}, 
-        // {color:'14172f'},
-        {color: '12152D'},
-        {color:'171B36'}, 
-        {color:'1c203b', default: true},
-        {color:'272B45', hover: true}, 
-        {color:'33364F', press: true}, 
-        {color:'4a4d64'}, 
-        {color:'606376'}, 
-        {color:'B1B3C4'},
-        {color:'e4e5ec'},
-        {color:'f3f4f6'},
-        {color:'ffffff'}
-      ],
-      tsharp: [
-        {color:'0FA49B'},
-        // {color:'11BDB2'},
-        {color:'14D8CC'},
-        {color:'4CE1D8'},
-        {color:'A5F0EB'}
-      ],
-      coral: [
-        {color:'EE6159'},
-        {color:'FD685F'},
-        {color:'FD8C85'},
-        {color:'FEC5C2'},
-      ],
-      gold: [
-        {color:'fdb230'},
-        {color:'fdb944'},
-        {color:'FEC25A'},
-        {color:'fecc77'},
-        {color:'fed690'}
-      ],
-      sky: [
-        {color:'7FCFEC'},
-        {color:'94D4EB'},
-        {color:'A8D8EA'},
-      ]
+    let Play = {
+      default: {key: 'ink', dex: 3},
+      hover: {key: 'ink', dex: 4},
+      press: {key: 'ink', dex: 5},
+      outline: false,
+      pill: false,
+      onink: false,
+      darktext: false,
+      fill: false,
+      pressonly: false,
+      colors: {
+        ink: [
+          {color:'0b0e23'}, 
+          // {color:'0f1329'}, 
+          // {color:'14172f'},
+          {color: '12152D'},
+          {color:'171B36'}, 
+          {color:'1c203b', default: true},
+          {color:'272B45', hover: true}, 
+          {color:'33364F', press: true}, 
+          {color:'4a4d64'}, 
+          {color:'606376'}, 
+          {color:'B1B3C4'},
+          {color:'e4e5ec'},
+          {color:'f3f4f6'},
+          {color:'ffffff'}
+        ],
+        tsharp: [
+          {color:'0FA49B'},
+          // {color:'11BDB2'},
+          {color:'14D8CC'},
+          {color:'4CE1D8'},
+          {color:'A5F0EB'}
+        ],
+        coral: [
+          {color:'EE6159'},
+          {color:'FD685F'},
+          {color:'FD8C85'},
+          {color:'FEC5C2'},
+        ],
+        gold: [
+          {color:'fdb230'},
+          {color:'fdb944'},
+          {color:'FEC25A'},
+          {color:'fecc77'},
+          {color:'fed690'}
+        ],
+        sky: [
+          {color:'7FCFEC'},
+          {color:'94D4EB'},
+          {color:'A8D8EA'},
+        ]
+      }
     };
 
 
@@ -267,7 +294,7 @@ jhunter@tunein.com
       style.className = 'colorvars';
       var vars = '';
 
-      for (const [key, colors] of Object.entries(Colors)) {
+      for (const [key, colors] of Object.entries(Play.colors)) {
         // colors.forEach(async function(color) {
           let count = colors.length;
           for(var i=0;i<colors.length;i++){
@@ -298,7 +325,7 @@ jhunter@tunein.com
       let container = document.getElementById('swatches');
       container.empty();
 
-      for (const [key, colors] of Object.entries(Colors)) {
+      for (const [key, colors] of Object.entries(Play.colors)) {
 
         let swatchwrap = document.createElement('div');
         swatchwrap.className = 'swatchwrap';
@@ -458,22 +485,32 @@ jhunter@tunein.com
           c2.className += ' hoverstate';
           c3.className += ' pressedstate';
 
-          checkbox.dataset.state = modifier + 'defaultstate';
-          c2.dataset.state =  modifier + 'hoverstate';
-          c3.dataset.state =  modifier + 'pressedstate';
+          checkbox.dataset.type = modifier + 'defaultstate';
+          checkbox.dataset.key = key;
+          checkbox.dataset.dex = i;
+          checkbox.dataset.state = 'default';
 
-          if ( item.default == true){ //name == 'ink8'){//} || name == 'tsharp3'){
+          c2.dataset.type =  modifier + 'hoverstate';
+          c2.dataset.key = key;
+          c2.dataset.dex = i;
+          c2.dataset.state = 'hover';
+
+          c3.dataset.type =  modifier + 'pressedstate';
+          c3.dataset.key = key;
+          c3.dataset.dex = i;
+          c3.dataset.state = 'press';
+
+          if ( Play.default.key == key && Play.default.dex == i ){//} == item.defaulton == true){ //name == 'ink8'){//} || name == 'tsharp3'){
             checkbox.className += ' on';
           }
 
-          if ( item.hover == true){ //name == 'ink7'){//} || name == 'tsharp2'){
+          if ( Play.hover.key == key && Play.hover.dex == i ){//item.hoveron == true){ //name == 'ink7'){//} || name == 'tsharp2'){
             c2.className += ' on';
           }
 
-          if ( item.press == true){ //name == 'ink6'){//} || name == 'tsharp1'){
+          if ( Play.press.key == key && Play.press.dex == i ){//item.presson == true){ //name == 'ink6'){//} || name == 'tsharp1'){
             c3.className += ' on';
           }
-
 
           idle.appendChild(checkbox);
           hover.appendChild(c2);
@@ -486,24 +523,19 @@ jhunter@tunein.com
       container.appendChild(press);
     }
 
-    unhash();
-    cssvars();
-    swatches();
-    switches(Colors, 'primarybtnsandbox', 'btn');
-
     function hash(){
-      let string  = JSON.stringify(Colors);
+      let string  = JSON.stringify(Play);
       let a64 = btoa(string);
-      history.replaceState(null, null, '#colors=' + a64)
+      history.replaceState(null, null, '#data=' + a64)
     }
 
     function unhash(){
       let hash = window.location.hash;
-      if ( !hash.includes('#colors=') ){
+      if ( !hash.includes('#data=') ){
         return;
       }
 
-      hash = hash.replace('#colors=', '').trim();
+      hash = hash.replace('#data=', '').trim();
 
       if ( hash == ''){
         return;
@@ -512,13 +544,40 @@ jhunter@tunein.com
       let a64 = atob(hash);
       let json  = JSON.parse(a64);
 
-      Colors = json;
+      Play = Object.assign(Play, json);
+
+      let defaultkey = Play.default.key;
+      let hoverkey = Play.hover.key;
+      let presskey = Play.press.key;
+
+      var vars = '--btndefaultstate: var(--' + defaultkey + (Play.colors[defaultkey].length - Number(Play.default.dex)) + ');';
+      vars += '--btnhoverstate: var(--' + hoverkey + (Play.colors[hoverkey].length - Number(Play.hover.dex)) + ');';
+      vars += '--btnpressedstate: var(--' + presskey + (Play.colors[presskey].length - Number(Play.press.dex)) + ');';
+
+      var style = document.createElement('style');
+      style.innerHTML = ':root{' + vars + '}';
+      document.getElementsByTagName('head')[0].appendChild(style);
+      
+      let toggles = document.getElementsByClassName('toggle');
+
+      for(var i=0;i<toggles.length;i++){
+        let t = toggles[i];
+        let c = t.dataset.class;
+        if ( Play[c] == true){
+          t.click();
+        }
+      }
     }
 
     function regen(){
       hash();
       cssvars();
     }
+
+    unhash();
+    cssvars();
+    swatches();
+    switches(Play.colors, 'primarybtnsandbox', 'btn');
 
   </script>
 </body>
