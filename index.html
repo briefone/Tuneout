@@ -26,7 +26,7 @@ jhunter@tunein.com
     @font-face{font-family:'calibre';src:url("./fonts/Calibre-Bold.otf") format("opentype");src:url("./fonts/Calibre-Bold.woff") format("woff");font-weight:700;font-style:normal}
     
     :root {
-      --btndefaultstate: var(--ink);
+      --btndefaultstate: var(--inkdefault);
       --btnhoverstate: var(--inkhover);
       --btnpressedstate: var(--inkpress);
 
@@ -39,6 +39,7 @@ jhunter@tunein.com
       --toggleselect: rgba(0,0,0,0.05);
       --toggleborder: var(--ink2);
 
+      --ink: var(--ink10);
     }
 
     .onink {
@@ -72,18 +73,13 @@ jhunter@tunein.com
       .pressonly .btn:hover {background:var(--btndefaultstate);}
       .btn:active, .pressonly .btn:active {background:var(--btnpressedstate);}
 
-    .cta.btn {background:var(--ctadefaultstate);color:var(--ink);}
-    .btn.cta:hover {background:var(--ctahoverstate);}
-      .pressonly .btn.cta:hover {background:var(--ctadefaultstate);}
-      .btn.cta:active, .pressonly .btn.cta:active {background:var(--ctapressedstate);}
-
     .outline .btn {background-color: transparent;border:2px solid var(--btndefaultstate);color: var(--btndefaultstate);padding:0 14px;}
     .outline .btn:hover {background-color: transparent;border-color:var(--btnhoverstate);color: var(--btnhoverstate);}
     .pressonly.outline  .btn:hover {background-color: transparent;border-color:var(--btndefaultstate);color: var(--btndefaultstate);}
     .outline .btn:active, .pressonly.outline .btn:active {background-color: transparent;border-color:var(--btnpressedstate);color: var(--btnpressedstate);}
 
     .outline.fill .btn:active, .pressonly.outline.fill .btn:active {background-color: var(--btnpressedstate);border-color:var(--btnpressedstate);color: white;}
-      .outline.fill.onink .btn:active, .pressonly.outline.fill.onink .btn:active {color: var(--ink);}
+      .outline.fill.onink .btn:active, .pressonly.outline.fill.onink .btn:active {color: var(--inkdefault);}
 
     .darktext .btn {color:var(--ink9);}
       .darktext .btn:hover {color:var(--ink10);}
@@ -232,9 +228,9 @@ jhunter@tunein.com
 
 
     let Play = {
-      default: {key: 'ink', dex: 3},
-      hover: {key: 'ink', dex: 4},
-      press: {key: 'ink', dex: 5},
+      default: {key: 'ink', dex: 2},
+      hover: {key: 'ink', dex: 3},
+      press: {key: 'ink', dex: 4},
       outline: false,
       pill: false,
       onink: false,
@@ -303,11 +299,11 @@ jhunter@tunein.com
             let name = key + (count-i);
             vars += '--' + name + ': #' + x.color + ';';
 
-            if ( x.default ){
-              vars += '--ink: var(--' + name + ');';
-            } else if ( x.hover ){
+            if ( Play.default.key == key && i == Play.default.dex ){
+              vars += '--inkdefault: var(--' + name + ');';
+            } else if ( Play.hover.key == key && i == Play.hover.dex ){
               vars += '--inkhover: var(--' + name + ');';
-            } else if ( x.press ){
+            } else if ( Play.press.key == key && i == Play.press.dex ){
               vars += '--inkpress: var(--' + name + ');';
             }
 
