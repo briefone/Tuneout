@@ -17,15 +17,48 @@ jhunter@tunein.com
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
   <meta name="google" content="notranslate">
   <meta http-equiv="Content-Language" content="en">
-  <title>Playground</title>
+  <title>Johnny's Playground</title>
   <link rel="icon" type="image/png" href="./favicon.png" />
   <style>
-    
+    * {}
+    html {font:normal 14px adobe-clean, sans-serif;background:#fafafa}
+    body {margin:100px 24px 0;}
+    .magic {margin: 8px 0;}
+
+    ::selection {background:#2d8ceb;color:white}
+
+    a {color:#1C203C;}
+    a span:hover {text-decoration:underline;}
+
+    .links span {margin:0 8px;}
+
+    .textblock {margin-right:0;}
+
+    .card {width:auto;box-shadow:none !important;background:transparent !important;display:block;max-width: 400px;margin:0 auto 32px;}
+      .card::after {content:'';display:block;clear:both;}
+      .card .img {transform:translateZ(0);border-radius:4px;overflow:hidden;border:1px solid #e1e1e1;margin-right:16px;margin-bottom:4px;}
+      .card .panel {padding:0;}
   </style>
 </head>
 <body>
-    <a href="https://tuneout.github.io/playground/colors">Color Palette</a>
+  
+  <div class=card>
+    <div class=img style='max-height:200px;'>
+        <iframe src='./colors/' style='transform:scale(.5);width:200%;height:400px;border:none;transform-origin:top left;'></iframe>
+    </div>
+    <div class=panel>
+        <a href='./colors'>Colors</a>
+    </div>
+  </div>
+  
+  <div class=card>
+    <div class=img style='max-height:200px;'>
+      <iframe src='./playlist/' style='transform:scale(.5);width:200%;height:400px;border:none;transform-origin:top left;'></iframe>
+    </div>
+    <div class=panel>
+        <a href='./playlist'>Playlist</a>
+    </div>
+  </div>
 
-    <a href="https://tuneout.github.io/playground/playlist">Playlist</a>
 </body>
 </html>
