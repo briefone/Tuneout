@@ -71,13 +71,13 @@ jhunter@tunein.com
       --inkhover:var(--ink9);
       --inkpress:var(--ink8);
 
-      --btndefaultstate: var(--inkdefault);
-      --btnhoverstate: var(--inkhover);
-      --btnpressedstate: var(--inkpress);
+      --btndefault: var(--inkdefault);
+      --btnhover: var(--inkhover);
+      --btnpress: var(--inkpress);
 
-      --ctadefaultstate: var(--tsharp3);
-      --ctahoverstate: var(--tsharp2);
-      --ctapressedstate: var(--tsharp1);
+      --ctadefault: var(--tsharp3);
+      --ctahover: var(--tsharp2);
+      --ctapress: var(--tsharp1);
 
       --btntext: var(--ink1);
 
@@ -90,6 +90,23 @@ jhunter@tunein.com
 
       --tileradius: 4px;
       --tilegap: 8px;
+
+      --tileshadowblur: 12px;
+      --tileshadowalpha: 0.2;
+      --tileshadowspread: 0;
+      --tileshadowy: 2px;
+
+      --darkui: var(--ink10);
+      --darkuitext: var(--ink1);
+
+      --darkuiicon: var(--ink1);
+      --darkuiiconhover:var(--ink3);
+      --darkuiiconpress: var(--ink5);
+
+      --rowspacing: 16px;
+
+      --contentheadspacing: 0;
+      --firstrowspacing: 12px;
     }
 
     .darkmode {
@@ -105,6 +122,13 @@ jhunter@tunein.com
       --ink10:#EBEBEF;
       --ink11:#F4F4F6;
       --ink12:#ffffff;
+
+      --darkui: var(--ink1);
+      --darkuitext: var(--ink12);
+
+      --darkuiicon: var(--ink12);
+      --darkuiiconhover:var(--ink10);
+      --darkuiiconpress: var(--ink8);
     }
 
     ::-webkit-scrollbar {display: none;}
@@ -198,17 +222,17 @@ jhunter@tunein.com
       .tweak input[type=range]:hover {background:rgba(255,255,255,.12);}
       .tweak input[type=range]:active {background:rgba(255,255,255,.15);}
 
-    .btn {min-width:200px;transition:background-color 150ms ease-in-out, border-color 150ms ease-in-out, color 150ms ease-in-out;display:inline-flex;cursor:pointer;border-radius:var(--buttonradius);color:var(--btntext);background:var(--btndefaultstate);font-size:16px;font-weight:600;height:40px;padding:0 16px;align-items: center;justify-content: center;user-select:none;box-sizing:border-box;}
-      .btn:hover {background:var(--btnhoverstate);}
-      .pressonly .btn:hover {background:var(--btndefaultstate);}
-      .btn:active, .pressonly .btn:active {background:var(--btnpressedstate);}
+    .btn {min-width:200px;transition:background-color 150ms ease-in-out, border-color 150ms ease-in-out, color 150ms ease-in-out;display:inline-flex;cursor:pointer;border-radius:var(--buttonradius);color:var(--btntext);background:var(--btndefault);font-size:16px;font-weight:600;height:40px;padding:0 16px;align-items: center;justify-content: center;user-select:none;box-sizing:border-box;}
+      .btn:hover {background:var(--btnhover);}
+      .pressonly .btn:hover {background:var(--btndefault);}
+      .btn:active, .pressonly .btn:active {background:var(--btnpress);}
 
-    .outline .btn {background-color: transparent;border:2px solid var(--btndefaultstate);color: var(--btndefaultstate);padding:0 14px;}
-    .outline .btn:hover {background-color: transparent;border-color:var(--btnhoverstate);color: var(--btnhoverstate);}
-    .pressonly.outline  .btn:hover {background-color: transparent;border-color:var(--btndefaultstate);color: var(--btndefaultstate);}
-    .outline .btn:active, .pressonly.outline .btn:active {background-color: transparent;border-color:var(--btnpressedstate);color: var(--btnpressedstate);}
+    .outline .btn {background-color: transparent;border:2px solid var(--btndefault);color: var(--btndefault);padding:0 14px;}
+    .outline .btn:hover {background-color: transparent;border-color:var(--btnhover);color: var(--btnhover);}
+    .pressonly.outline  .btn:hover {background-color: transparent;border-color:var(--btndefault);color: var(--btndefault);}
+    .outline .btn:active, .pressonly.outline .btn:active {background-color: transparent;border-color:var(--btnpress);color: var(--btnpress);}
 
-    .outline.fill .btn:active, .pressonly.outline.fill .btn:active {background-color: var(--btnpressedstate);border-color:var(--btnpressedstate);color: white;}
+    .outline.fill .btn:active, .pressonly.outline.fill .btn:active {background-color: var(--btnpress);border-color:var(--btnpress);color: white;}
       .outline.fill.onink .btn:active, .pressonly.outline.fill.onink .btn:active {color: var(--inkdefault);}
 
     .darktext .btn {color:var(--ink9);}
@@ -268,15 +292,18 @@ jhunter@tunein.com
 
     #home .content {top:136px;left:0;bottom:56px;}
 
-    .contentrow {padding:12px 0 16px 0;}
-      .contentrow .heading {padding:0 24px 8px;position: relative;display:flex;justify-content:space-between;}
+    .contentrow {padding:12px 0 var(--rowspacing) 0;}
+      .contentrow:first-child {padding-top:var(--firstrowspacing);}
+      .contentrow .heading {padding:0 24px var(--contentheadspacing);position: relative;display:flex;justify-content:space-between;}
         .heading .chevron {min-width:24px;min-height:24px;}
         .heading .chevron svg {fill:var(--ink);}
+          .heading .chevron:hover svg {fill:var(--btnhover);}
+          .heading .chevron:active svg {fill:var(--btnpress);}
         .heading.clickable {cursor: pointer;user-select:none;}
-      .scrollrow {display:flex;width:100%;align-items:start;padding: 0 0 12px 24px;box-sizing: border-box;overflow-x:scroll;white-space: nowrap;gap:var(--tilegap);scroll-padding-right:24px;-webkit-overflow-scrolling:touch; -ms-overflow-style: -ms-autohiding-scrollbar;}
-        .scrollitem {display:inline-flex;cursor:pointer;user-select:none;flex-direction: column;}
+      .scrollrow {display:flex;width:100%;align-items:start;padding:8px 0 16px 24px;box-sizing: border-box;overflow-x:auto;white-space: nowrap;gap:var(--tilegap);scroll-padding-right:24px;-webkit-overflow-scrolling:touch; -ms-overflow-style: -ms-autohiding-scrollbar;}
+        .scrollitem {display:inline-flex;cursor:pointer;user-select:none;flex-direction: column;max-width: 104px;}
           .scrollitem:last-child {padding-right:24px}
-          .scrollitem .label {padding-top:8px;color:var(--ink);font-size:16px;font-weight:500;}
+          .scrollitem .label {padding-top:8px;color:var(--ink);font-size:16px;font-weight:500;white-space:normal;}
 
         .scrollitem.centeritem {text-align:center;}
         
@@ -285,9 +312,9 @@ jhunter@tunein.com
         .thumb {width:104px;height:104px;border:1px solid var(--ink2);box-sizing: border-box;border-radius:var(--tileradius);overflow:hidden;background-size:cover;background-position:center;background-color: var(--ink3);}
         .recentthumb {width:72px;height:72px;}
 
-        .thumbshadow .thumb {border:none;box-shadow:0 2px 8px rgba(0,0,0,0.2);}
+        .thumbshadow .thumb {border:none;box-shadow:0 var(--tileshadowy) var(--tileshadowblur) var(--tileshadowspread) rgba(0,0,0,var(--tileshadowalpha));}
 
-        .thumb.circle {border-radius:50%;background:var(--ink);border:none;}
+        .thumb.circle {border-radius:50%;background-color:var(--ink);border:none;}
 
       #tabbar {position:absolute;left:0;bottom:0;right:0;height:56px;background:var(--ink);color:var(--ink6);display: flex;justify-content: space-around;}
         #tabbar .tab {display:flex;align-items: center;justify-content: center;flex-direction: column;width:88px;height:100%;font-size:15px;font-weight:500;cursor:pointer;user-select:none;}
@@ -324,6 +351,8 @@ jhunter@tunein.com
 
     .itemlist {display:flex;flex-direction: column;gap:var(--tilegap);}
       .rowitem {display:flex;padding:0 24px 0;box-sizing:border-box;gap:12px;cursor:pointer;user-select: none;}
+        .rowitem:last-child {margin-bottom:8px;}
+        .rowitem:first-child {padding-top:8px;}
         .rowitem .thumb {width:80px;height:80px;min-width:80px;min-height:80px;}
         .rowitem .description {display:flex;flex-direction: column;justify-content: center;max-width:calc(100% - 80px - 12px);}
           .rowitem .description .title {font-weight:500;font-size:18px;padding-bottom:4px;max-height: 40px;
@@ -344,34 +373,82 @@ jhunter@tunein.com
               .modalclose:hover {color:var(--inkhover);}
               .modalclose:active {color:var(--inkpress);}
 
-    #nowplaying {position: absolute;top:0;left:0;right:0;bottom:0;background:var(--ink);z-index:1337;transform:translateY(100%);pointer-events: none;transition:all 200ms ease-in-out;color:var(--ink1);}
+    #nowplaying {position: absolute;top:0;left:0;right:0;bottom:0;background:var(--darkui);z-index:1337;transform:translateY(100%);pointer-events: none;transition:all 200ms ease-in-out;color:var(--darkuitext);}
       .nppage #nowplaying {transform:translateY(0);pointer-events: all;}
 
       .topbar {padding:8px 14px;display: flex;justify-content: space-between;}
       .rightactions {}
 
+      .darkui {color:var(--darkuitext);}
+            .darkui .iconbtn  svg {fill:var(--darkuiicon);}
+              .darkui .iconbtn:hover  svg {fill:var(--darkuiiconhover);}
+              .darkui .iconbtn:active  svg {fill:var(--darkuiiconpress);}
+
       #nowplaying .album {padding:8px 0;display:flex;width:100%;align-items: center;justify-content: center;}
-            #nowplaying .album .npalbum {width:80vw;max-width:40vh;height:80vw;max-height:40vh;background-color:white;background-position: center;background-size:cover;background-image:url(./imgs/nyan.gif);}
+            #nowplaying .album .npalbum {width:80vw;max-width:40vh;height:80vw;max-height:40vh;background-color:rgba(255, 255, 255, 0.05);background-position: center;background-size:cover;background-image:url(./imgs/nyan.gif);}
 
-
+    .specialtoggles {display:none;}
+    .thumbshadow .ts-toggles {display:block;}
 
     #tweaks {position: fixed;top:40px;right:20px;border-radius:8px;max-height:calc(100% - 80px);width:200px;padding:12px 8px;background:#222;color:rgba(255, 255, 255, 0.92);z-index:9999999;box-sizing:border-box;}
+    .resetbtn {cursor:pointer;display:flex;height:36px;text-align:center;padding:0 12px;align-items:center;justify-content:center;background:rgba(255, 255, 255, 0.1);color:#ff5757;font-size:15px;text-transform:uppercase;font-weight:600;border-radius:6px;margin-bottom:12px;transition:all 200ms ease-in-out;}
+    .resetbtn:hover {background-color:rgba(255, 255, 255, 0.15);}
+    .resetbtn:active {background-color:rgba(255, 255, 255, 0.2);}
   </style>
   <script src="../js/gator.js"></script>
   <script src="../js/base.js"></script>
 </head>
 <body class="">
   <div id=tweaks>
-    <div class="tweak">
-      <label><input type="checkbox" value="ui0" id="ui0" class="tweakr" data-tweak="a1" onchange="document.documentElement.classList.toggle('darkmode')"><div class="toggle"></div> Dark Mode</label>
+    <div class=tgroup>
+      <div class=resetbtn onclick="reset()">Reset</div>
     </div>
     <div class="tweak">
-      <label><input type="checkbox" value="ui1" id="ui1" class="tweakr" data-tweak="a1" onchange="document.body.classList.toggle('thumbshadow')"><div class="toggle"></div> Tile Dropshadow</label>
+      <label><input type="checkbox" id="cb1" class="tweakr" data-tweak="a0" data-class=darkmode><div class="toggle"></div> Dark Mode</label>
+    </div>
+    
+    <div class="tweak">
+      <label><input type="checkbox" id="cb2" class="tweakr" data-tweak="a1" data-class=thumbshadow><div class="toggle"></div> Tile Drop Shadow</label>
+    </div>
+
+    <div class="tgroup specialtoggles ts-toggles"  style="margin-bottom:32px;">
+      <div class="tweak ">
+        <div class="label"><span>Blur</span><div class="value">8</div></div>
+          <input type="range" class="valuetweak" min="0" max="20" value="8" step="1" id="tileshadowblur" data-unit=px>
+      </div>
+      <div class="tweak">
+        <div class="label"><span>Alpha</span><div class="value">0.2</div></div>
+          <input type="range" class="valuetweak" min="0" max="1" value=".2" step="0.02" id="tileshadowalpha">
+      </div>
+      <div class="tweak">
+        <div class="label"><span>Y-Offset</span><div class="value">2</div></div>
+          <input type="range" class="valuetweak" min="-12" max="12" value="2" step="1" id="tileshadowy" data-unit=px>
+      </div>
+      <div class="tweak">
+        <div class="label"><span>Spread</span><div class="value">0</div></div>
+          <input type="range" class="valuetweak" min="0" max="12" value="0" step="1" id="tileshadowspread" data-unit=px>
+      </div>
     </div>
 
     <div class="tweak">
       <div class="label"><span>Tile Spacing</span><div class="value">8</div></div>
-        <input type="range" class="valuetweak" min="0" max="48" value="8" data-tweak="a2" step="2" data-id="tilegap">
+        <input type="range" class="valuetweak" min="0" max="48" value="8" step="2" id="tilegap" data-unit=px>
+    </div>
+    <div class="tweak">
+      <div class="label"><span>Tile Radius</span><div class="value">4</div></div>
+        <input type="range" class="valuetweak" min="0" max="56" value="4" step="1" id="tileradius" data-unit=px>
+    </div>
+    <div class="tweak">
+      <div class="label"><span>Row Spacing</span><div class="value">16</div></div>
+        <input type="range" class="valuetweak" min="0" max="64" value="16" step="4" id="rowspacing" data-unit=px>
+    </div>
+    <div class="tweak">
+      <div class="label"><span>Heading Spacing</span><div class="value">0</div></div>
+        <input type="range" class="valuetweak" min="0" max="64" value="0" step="2" id="contentheadspacing" data-unit=px>
+    </div>
+    <div class="tweak">
+      <div class="label"><span>First Row Spacing</span><div class="value">12</div></div>
+        <input type="range" class="valuetweak" min="0" max="64" value="12" step="2" id="firstrowspacing" data-unit=px>
     </div>
   </div>
   <div id=container class=homepage>
@@ -381,7 +458,7 @@ jhunter@tunein.com
       </div>
     </div>
 
-    <div id=nowplaying>
+    <div id=nowplaying class=darkui>
       <div class=topbar>
         <div class="iconbtn closenp invert">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -474,23 +551,23 @@ jhunter@tunein.com
             </div>
             <div class=scrollrow>
               <div class=scrollitem>
-                <div class=thumb></div>
-                <div class=label>Label</div>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/s249945/images/logoq.png);"></div>
+                <div class=label>80's Hits</div>
               </div><div class=scrollitem>
-                <div class=thumb></div>
-                <div class=label>Label</div>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/s304385/images/logoq.png);"></div>
+                <div class=label>Coffee House</div>
               </div><div class=scrollitem>
-                <div class=thumb></div>
-                <div class=label>Label</div>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/s249905/images/logoq.png);"></div>
+                <div class=label>Soft Rock Hits</div>
               </div><div class=scrollitem>
-                <div class=thumb></div>
-                <div class=label>Label</div>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/s250018/images/logoq.png);"></div>
+                <div class=label>Sounds of the Symphony</div>
               </div><div class=scrollitem>
-                <div class=thumb></div>
-                <div class=label>Label</div>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/s249937/images/logoq.png);"></div>
+                <div class=label>Relax and Unwind</div>
               </div><div class=scrollitem>
-                <div class=thumb></div>
-                <div class=label>Label</div>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/s247158/images/logoq.png);"></div>
+                <div class=label>Mix Lite</div>
               </div>
             </div>
           </div>
@@ -505,21 +582,21 @@ jhunter@tunein.com
             </div>
             <div class=itemlist>
               <div class=rowitem>
-                <div class=thumb></div><div class=description>
-                  <div class=title>title</div>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p1389549/images/logoq.png);"></div><div class=description>
+                  <div class=title>Director Kemp Powers on the creative journey behind Pixar's "Soul."</div>
                   <div class=meta>1/12/2021 - 43:12</div>
                 </div>
               </div>
               <div class=rowitem>
-                <div class=thumb></div><div class=description>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p394/images/logoq.png);"></div><div class=description>
                   <div class=title>Covid Fact Check, Aging Cells, News Roundup</div>
                   <div class=meta>Janurary 12, 2021 - 47:01</div>
                 </div>
               </div>
               <div class=rowitem>
-                <div class=thumb></div><div class=description>
-                  <div class=title>title</div>
-                  <div class=meta>Meta</div>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p1389827/images/logoq.png);"></div><div class=description>
+                  <div class=title>How to be a Better Human</div>
+                  <div class=meta>Janurary 12, 2021 - 33:07</div>
                 </div>
               </div>
             </div>
@@ -530,23 +607,32 @@ jhunter@tunein.com
             </div>
             <div class=scrollrow>
               <div class=scrollitem>
-                <div class=thumb></div>
-                <div class=label>Label</div>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p1161882/images/logoq.png);"></div>
+                <div class=label>Conan O’Brien Needs A Friend</div>
               </div><div class=scrollitem>
-                <div class=thumb></div>
-                <div class=label>Label</div>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p351052/images/logoq.png);"></div>
+                <div class=label>WTF with Marc Maron Podcast</div>
               </div><div class=scrollitem>
-                <div class=thumb></div>
-                <div class=label>Label</div>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p17/images/logoq.png);"></div>
+                <div class=label>Fresh Air</div>
               </div><div class=scrollitem>
-                <div class=thumb></div>
-                <div class=label>Label</div>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p861086/images/logoq.png);"></div>
+                <div class=label>Making Sense with Sam Harris</div>
               </div><div class=scrollitem>
-                <div class=thumb></div>
-                <div class=label>Label</div>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p1136187/images/logoq.png);"></div>
+                <div class=label>Inside of You with Michael Rosenbaum</div>
               </div><div class=scrollitem>
-                <div class=thumb></div>
-                <div class=label>Label</div>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p460956/images/logoq.png);"></div>
+                <div class=label>Here's The Thing with Alec Baldwin</div>
+              </div><div class=scrollitem>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p1222436/images/logoq.png);"></div>
+                <div class=label>The Shrink Next Door</div>
+              </div><div class=scrollitem>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p946961/images/logoq.png);"></div>
+                <div class=label>Pod Save America</div>
+              </div><div class=scrollitem>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p1220956/images/logoq.png);"></div>
+                <div class=label>Life is Short with Justin Long</div>
               </div>
             </div>
           </div>
@@ -556,23 +642,26 @@ jhunter@tunein.com
             </div>
             <div class=scrollrow>
               <div class=scrollitem>
-                <div class=thumb></div>
-                <div class=label>Label</div>
+                <div class=thumb style="background-image:url(https://cdn-radiotime-logos.tunein.com/p47926q.png);"></div>
+                <div class=label>PBS News Hour</div>
               </div><div class=scrollitem>
-                <div class=thumb></div>
-                <div class=label>Label</div>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p999743/images/logoq.png);"></div>
+                <div class=label>Deadline: White House</div>
               </div><div class=scrollitem>
-                <div class=thumb></div>
-                <div class=label>Label</div>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p295446/images/logoq.png);"></div>
+                <div class=label>Stuff You Should Know</div>
               </div><div class=scrollitem>
-                <div class=thumb></div>
-                <div class=label>Label</div>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p921985/images/logoq.png);"></div>
+                <div class=label>The 11th Hour with Brian Williams</div>
               </div><div class=scrollitem>
-                <div class=thumb></div>
-                <div class=label>Label</div>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p46/images/logoq.png);"></div>
+                <div class=label>Wait Wait... Don't Tell Me! from NPR</div>
               </div><div class=scrollitem>
-                <div class=thumb></div>
-                <div class=label>Label</div>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p212/images/logoq.png);"></div>
+                <div class=label>NPR News Now</div>
+              </div><div class=scrollitem>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p5/images/logoq.png);"></div>
+                <div class=label>News Hour</div>
               </div>
             </div>
           </div>
@@ -582,23 +671,17 @@ jhunter@tunein.com
             </div>
             <div class=scrollrow>
               <div class="scrollitem centeritem">
-                <div class="thumb circle"></div>
-                <div class=label>Label</div>
+                <div class="thumb circle" style="background-image:url(https://cdn-profiles.tunein.com/z50/images/logod.png);"></div>
+                <div class="label">Music</div>
               </div><div class="scrollitem centeritem">
-                <div class="thumb circle"></div>
-                <div class="label">Label</div>
+                <div class="thumb circle" style="background-image:url(https://cdn-profiles.tunein.com/z51/images/logod.png);"></div>
+                <div class="label">News & Talk</div>
               </div><div class="scrollitem centeritem">
-                <div class="thumb circle"></div>
-                <div class="label">Label</div>
+                <div class="thumb circle" style="background-image:url(https://cdn-profiles.tunein.com/z52/images/logod.png);"></div>
+                <div class=label>Sports</div>
               </div><div class="scrollitem centeritem">
-                <div class="thumb circle"></div>
-                <div class="label">Label</div>
-              </div><div class="scrollitem centeritem">
-                <div class="thumb circle"></div>
-                <div class=label>Label</div>
-              </div><div class="scrollitem centeritem">
-                <div class="thumb circle"></div>
-                <div class=label>Label</div>
+                <div class="thumb circle" style="background-image:url(https://cdn-profiles.tunein.com/z53/images/logod.png);"></div>
+                <div class=label>Podcast</div>
               </div>
             </div>
           </div>
@@ -676,6 +759,39 @@ jhunter@tunein.com
   <audio controls="" loop="" id="meow" style="display:none;" src="./audio/nyancat.mp3" type="audio/mpeg" preload="auto"></audio>
   <script>
 
+
+/*
+    // radio  
+    https://cdn-profiles.tunein.com/s249944/images/logoq.png
+    https://cdn-profiles.tunein.com/s249942/images/logoq.png?t=2
+
+
+    //news show
+    https://cdn-profiles.tunein.com/p54878/images/logoq.png?t=151077
+
+
+    //news
+    https://cdn-profiles.tunein.com/s309330/images/logoq.png?t=159049
+    https://cdn-profiles.tunein.com/s20407/images/logoq.png?t=1
+    https://cdn-profiles.tunein.com/s297990/images/logoq.jpg
+
+    //Radio
+    https://cdn-profiles.tunein.com/s34804/images/logoq.png?t=158759
+
+*/
+
+    function tweakr(e){
+      let c = this.dataset.class;
+      if ( this.checked){
+        document.documentElement.classList.add(c);
+      } else {
+        document.documentElement.classList.remove(c);
+      }
+
+
+      hashtweaks();
+    }
+
     function valuetweaks(){
       let tweaks = document.getElementsByClassName('valuetweak');
 
@@ -683,8 +799,9 @@ jhunter@tunein.com
 
       for( var i=0;i<tweaks.length;i++){
         let t = tweaks[i];
-        let id = t.dataset.id;
+        let id = t.id;
         let v = t.value;
+        let unit = t.dataset.unit || '';
 
         let p = t.getparent('tweak');
         let val = p.getElementsByClassName('value')[0];
@@ -694,7 +811,7 @@ jhunter@tunein.com
           val.appendChild(document.createTextNode(v));
         }
 
-        vars += '--' + id + ':' + v + 'px;';
+        vars += '--' + id + ':' + v + unit +';';
       }
 
       vars += '}';
@@ -708,6 +825,109 @@ jhunter@tunein.com
       style.innerHTML = vars;
       document.getElementsByTagName('head')[0].appendChild(style);
 
+      hashtweaks();
+    }
+
+    function hashtweaks(){
+      // let html = document.documentElement.className || '';
+
+      // var vars = '';
+      // let cv = document.getElementsByClassName('combinedvars')[0];
+
+      // if ( cv ){
+      //   vars = cv.innerText;
+      // }
+
+      // let string = {htmlclass: html, css: vars};
+
+      // let a64 = btoa(JSON.stringify(string));
+      // history.replaceState(null, null, '#tweaks=' + a64);
+
+
+      
+
+      var tweaks1 = [];
+      var tweaks2 = [];
+
+      let vt  = document.getElementsByClassName('valuetweak');
+      for(var i=0;i<vt.length;i++){
+        let t= vt[i];
+
+        let j = {value:t.value, id: t.id};
+
+        tweaks1.push(j);
+      }
+
+      let tr  = document.getElementsByClassName('tweakr');
+      for(var i=0;i<tr.length;i++){
+        let t = tr[i];
+        let j = {checked: t.checked, id: t.id};
+
+        tweaks2.push(j);
+      }
+
+      let data = {sliders:tweaks1, checkboxs: tweaks2};
+
+      console.log(data);
+
+      let string = JSON.stringify(data);
+      let a64 = btoa(string);
+      history.replaceState(null, null, '#tweaks=' + a64);
+    }
+
+    function reset(e){
+      window.location.hash = '';
+      window.location.reload();
+    }
+
+    function unhash(){
+      let hash = window.location.hash;
+      if ( !hash.includes('#tweaks=') ){
+        return;
+      }
+
+      hash = hash.replace('#tweaks=', '').trim();
+
+      if ( hash == ''){
+        return;
+      }
+      
+      let a64 = atob(hash);
+      let json  = JSON.parse(a64);
+
+      console.log(json);
+      
+      for(var i=0;i<json.checkboxs.length;i++){
+        let a = json.checkboxs[i];
+        let id = a.id;
+        let checked = a.checked ? true : false;
+        let cb = document.getElementById(id);
+
+        cb.checked = checked;
+
+        if ( checked ){
+          document.documentElement.classList.add(cb.dataset.class);
+        }
+      }
+
+      for(var i=0;i<json.sliders.length;i++){
+        let a = json.sliders[i];
+        let id = a.id;
+        let v = a.value || 0;
+        let s = document.getElementById(id);
+
+        s.value = v;
+
+        let p = s.getparent('tweak');
+        let val = p.getElementsByClassName('value')[0];
+
+        if ( val ){
+          val.empty();
+          val.appendChild(document.createTextNode(v));
+        }
+      }
+
+      valuetweaks();
     }
 
     function tabline(e){
@@ -781,6 +1001,12 @@ jhunter@tunein.com
     Attach.on('click', '.np', nowplaying);
     Attach.on('click', '.closenp', closenp);
     Attach.on('input', '.valuetweak', valuetweaks);
+    Attach.on('change', '.tweakr', tweakr);
+
+
+    (function() {
+      unhash();
+    })();
   </script>
 </body>
 </html>
