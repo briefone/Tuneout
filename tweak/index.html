@@ -107,6 +107,8 @@ jhunter@tunein.com
 
       --contentheadspacing: 0;
       --firstrowspacing: 12px;
+
+      --pagewidth: 1444px;
     }
 
     .darkmode {
@@ -252,14 +254,14 @@ jhunter@tunein.com
 
 
     #container {position:relative;background:black;border-radius:6px;
-    height: calc(100% - 80px);
-    top: 40px;
-    right: 240px;
-    left: 40px;
-    bottom: 40px;
-    width: calc(100% - 280px);
-    overflow: hidden;
-}
+      height: calc(100% - 80px);
+      top: 40px;
+      left: 40px;
+      bottom: 40px;
+      width: var(--pagewidth);
+      max-width:calc(100% - 280px);
+      overflow: hidden;
+  }
 
     #nav {position:absolute;top:0;left:0;right:0;z-index:1337;}
 
@@ -395,8 +397,12 @@ jhunter@tunein.com
     .specialtoggles {display:none;}
     .thumbshadow .ts-toggles {display:block;}
 
-    #tweaks {position: fixed;top:40px;right:20px;border-radius:8px;max-height:calc(100% - 80px);width:200px;padding:12px 8px;background:#222;color:rgba(255, 255, 255, 0.92);z-index:9999999;box-sizing:border-box;}
-    .resetbtn {cursor:pointer;display:flex;height:36px;text-align:center;padding:0 12px;align-items:center;justify-content:center;background:rgba(255, 255, 255, 0.1);color:#ff5757;font-size:15px;text-transform:uppercase;font-weight:600;border-radius:6px;margin-bottom:12px;transition:all 200ms ease-in-out;}
+    #tweaks {position: fixed;top:0;right:20px;max-height:calc(100%);width:200px;color:rgba(255, 255, 255, 0.92);z-index:9999999;box-sizing:border-box;overflow-y:scroll;-webkit-overflow-scrolling:touch;}
+            .tpanel {margin-top:8px;width:100%;padding:8px 8px;border-radius:8px;background:#222;box-sizing:border-box;}
+              .tpanel:first-child {margin-top:40px;}
+              .tpanel:last-child {margin-bottom:40px;}
+
+    .resetbtn {cursor:pointer;display:flex;height:36px;text-align:center;padding:0 12px;align-items:center;justify-content:center;background:rgba(255, 255, 255, 0.1);color:#ff5757;font-size:15px;text-transform:uppercase;font-weight:600;border-radius:6px;transition:all 200ms ease-in-out;}
     .resetbtn:hover {background-color:rgba(255, 255, 255, 0.15);}
     .resetbtn:active {background-color:rgba(255, 255, 255, 0.2);}
   </style>
@@ -405,55 +411,67 @@ jhunter@tunein.com
 </head>
 <body class="">
   <div id=tweaks>
-    <div class=tgroup>
-      <div class=resetbtn onclick="reset()">Reset</div>
+    <div class=tpanel>
+      <div class=tgroup>
+        <div class=resetbtn onclick="reset()">Reset</div>
+      </div>
     </div>
-    <div class="tweak">
-      <label><input type="checkbox" id="cb1" class="tweakr" data-tweak="a0" data-class=darkmode><div class="toggle"></div> Dark Mode</label>
+    <div class=tpanel>
+      <div class="tweak">
+        <label><input type="checkbox" id="cb1" class="tweakr" data-tweak="a0" data-class=darkmode><div class="toggle"></div> Dark Mode</label>
+      </div>
     </div>
-    
-    <div class="tweak">
-      <label><input type="checkbox" id="cb2" class="tweakr" data-tweak="a1" data-class=thumbshadow><div class="toggle"></div> Tile Drop Shadow</label>
-    </div>
+    <div class=tpanel>
+      <div class="tweak">
+        <label><input type="checkbox" id="cb2" class="tweakr" data-tweak="a1" data-class=thumbshadow><div class="toggle"></div> Tile Drop Shadow</label>
+      </div>
 
-    <div class="tgroup specialtoggles ts-toggles"  style="margin-bottom:32px;">
-      <div class="tweak ">
-        <div class="label"><span>Blur</span><div class="value">8</div></div>
-          <input type="range" class="valuetweak" min="0" max="20" value="8" step="1" id="tileshadowblur" data-unit=px>
+      <div class="tgroup specialtoggles ts-toggles">
+        <div class="tweak ">
+          <div class="label"><span>Blur</span><div class="value">8</div></div>
+            <input type="range" class="valuetweak" min="0" max="20" value="8" step="1" id="tileshadowblur" data-unit=px>
+        </div>
+        <div class="tweak">
+          <div class="label"><span>Alpha</span><div class="value">0.2</div></div>
+            <input type="range" class="valuetweak" min="0" max="1" value=".2" step="0.02" id="tileshadowalpha">
+        </div>
+        <div class="tweak">
+          <div class="label"><span>Y-Offset</span><div class="value">2</div></div>
+            <input type="range" class="valuetweak" min="-12" max="12" value="2" step="1" id="tileshadowy" data-unit=px>
+        </div>
+        <div class="tweak">
+          <div class="label"><span>Spread</span><div class="value">0</div></div>
+            <input type="range" class="valuetweak" min="0" max="12" value="0" step="1" id="tileshadowspread" data-unit=px>
+        </div>
+      </div>
+    </div>
+    <div class=tpanel>
+      <div class="tweak">
+        <div class="label"><span>Tile Spacing</span><div class="value">8</div></div>
+          <input type="range" class="valuetweak" min="0" max="48" value="8" step="2" id="tilegap" data-unit=px>
       </div>
       <div class="tweak">
-        <div class="label"><span>Alpha</span><div class="value">0.2</div></div>
-          <input type="range" class="valuetweak" min="0" max="1" value=".2" step="0.02" id="tileshadowalpha">
+        <div class="label"><span>Tile Corner Radius</span><div class="value">4</div></div>
+          <input type="range" class="valuetweak" min="0" max="56" value="4" step="1" id="tileradius" data-unit=px>
       </div>
       <div class="tweak">
-        <div class="label"><span>Y-Offset</span><div class="value">2</div></div>
-          <input type="range" class="valuetweak" min="-12" max="12" value="2" step="1" id="tileshadowy" data-unit=px>
+        <div class="label"><span>Row Spacing</span><div class="value">16</div></div>
+          <input type="range" class="valuetweak" min="0" max="64" value="16" step="4" id="rowspacing" data-unit=px>
       </div>
       <div class="tweak">
-        <div class="label"><span>Spread</span><div class="value">0</div></div>
-          <input type="range" class="valuetweak" min="0" max="12" value="0" step="1" id="tileshadowspread" data-unit=px>
+        <div class="label"><span>Heading Spacing</span><div class="value">0</div></div>
+          <input type="range" class="valuetweak" min="0" max="64" value="0" step="2" id="contentheadspacing" data-unit=px>
+      </div>
+      <div class="tweak">
+        <div class="label"><span>First Row Spacing</span><div class="value">12</div></div>
+          <input type="range" class="valuetweak" min="0" max="64" value="12" step="2" id="firstrowspacing" data-unit=px>
       </div>
     </div>
-
-    <div class="tweak">
-      <div class="label"><span>Tile Spacing</span><div class="value">8</div></div>
-        <input type="range" class="valuetweak" min="0" max="48" value="8" step="2" id="tilegap" data-unit=px>
-    </div>
-    <div class="tweak">
-      <div class="label"><span>Tile Corner Radius</span><div class="value">4</div></div>
-        <input type="range" class="valuetweak" min="0" max="56" value="4" step="1" id="tileradius" data-unit=px>
-    </div>
-    <div class="tweak">
-      <div class="label"><span>Row Spacing</span><div class="value">16</div></div>
-        <input type="range" class="valuetweak" min="0" max="64" value="16" step="4" id="rowspacing" data-unit=px>
-    </div>
-    <div class="tweak">
-      <div class="label"><span>Heading Spacing</span><div class="value">0</div></div>
-        <input type="range" class="valuetweak" min="0" max="64" value="0" step="2" id="contentheadspacing" data-unit=px>
-    </div>
-    <div class="tweak">
-      <div class="label"><span>First Row Spacing</span><div class="value">12</div></div>
-        <input type="range" class="valuetweak" min="0" max="64" value="12" step="2" id="firstrowspacing" data-unit=px>
+    <div class=tpanel>
+      <div class="tweak">
+        <div class="label"><span>Page Width</span><div class="value">1444</div></div>
+          <input type="range" class="valuetweak" min="360" max="1444" value="1444" step="0" id="pagewidth" data-unit=px>
+      </div>
     </div>
   </div>
   <div id=container class=homepage>
