@@ -1,17 +1,17 @@
 <!--
   
-88888888ba  88                        88 88                    
-88      "8b 88                        88 ""             ,d     
-88      ,8P 88                        88                88     
-88aaaaaa8P' 88 ,adPPYYba, 8b       d8 88 88 ,adPPYba, MM88MMM  
-88""""""'   88 ""     `Y8 `8b     d8' 88 88 I8[    ""   88     
-88          88 ,adPPPPP88  `8b   d8'  88 88  `"Y8ba,    88     
-88          88 88,    ,88   `8b,d8'   88 88 aa    ]8I   88,    
-88          88 `"8bbdP"Y8     Y88'    88 88 `"YbbdP"'   "Y888  
-                              d8'                              
-                             d8'                               
-                  
-                                                                                      
+ ,ggggggggggggggg                                           
+dP""""""88"""""""                                 ,dPYb,    
+Yb,_    88                                        IP'`Yb    
+ `""    88                                        I8  8I    
+        88                                        I8  8bgg, 
+        88  gg    gg    gg    ,ggg,     ,gggg,gg  I8 dP" "8 
+        88  I8    I8    88bg i8" "8i   dP"  "Y8I  I8d8bggP" 
+        88  I8    I8    8I   I8, ,8I  i8'    ,8I  I8P' "Yb, 
+        8P ,d8,  ,d8,  ,8I   `YbadP' ,d8,   ,d8b,,d8    `Yb,
+       "P' P""Y88P""Y88P"   888P"Y888P"Y8888P"`Y888P      Y8
+             
+       
 jhunter@tunein.com
 @johnny
 
@@ -22,7 +22,7 @@ jhunter@tunein.com
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
   <meta name="google" content="notranslate">
   <meta http-equiv="Content-Language" content="en">
-  <title>Playlist</title>
+  <title>Tweak</title>
   <link rel="icon" type="image/png" href="./favicon.png" />
   <style>
     @font-face{font-family:'calibre';src:url("../fonts/Calibre-Regular.otf") format("opentype");src:url("../fonts/Calibre-Regular.woff") format("woff");font-weight:400;font-style:normal}
@@ -30,7 +30,7 @@ jhunter@tunein.com
     @font-face{font-family:'calibre';src:url("../fonts/Calibre-Semibold.otf") format("opentype");src:url("../fonts/Calibre-Semibold.woff") format("woff");font-weight:600;font-style:normal}
     @font-face{font-family:'calibre';src:url("../fonts/Calibre-Bold.otf") format("opentype");src:url("../fonts/Calibre-Bold.woff") format("woff");font-weight:700;font-style:normal}
     
-    :root {
+    html {
       --ink12: #0B0E23; 
       --ink11:#131730; 
       --ink10:#1C203C;
@@ -79,45 +79,126 @@ jhunter@tunein.com
       --ctahoverstate: var(--tsharp2);
       --ctapressedstate: var(--tsharp1);
 
-      --btntext: white;
+      --btntext: var(--ink1);
 
       --textcolor: var(--ink10);
       --lighttext: var(--ink6);
 
       --background: var(--ink1);
+
+      --buttonradius: 8px;
+
+      --tileradius: 4px;
+      --tilegap: 8px;
+    }
+
+    .darkmode {
+      --ink1: #0B0E23; 
+      --ink2:#131730; 
+      --ink3:#1C203C;
+      --ink4:#33374F;
+      --ink5:#4A4D64;
+      --ink6:#606376;
+      --ink7:#8A8D9E;
+      --ink8:#C6C8D3;
+      --ink9:#DEDFE6;
+      --ink10:#EBEBEF;
+      --ink11:#F4F4F6;
+      --ink12:#ffffff;
     }
 
     ::-webkit-scrollbar {display: none;}
 
     .touchscroll {-webkit-overflow-scrolling:touch; -ms-overflow-style: -ms-autohiding-scrollbar;}
     
-    * {margin:0;padding:0;}
-    html {font:400 14px calibre, sans-serif;background:white;color:var(--textcolor); -ms-overflow-style: -ms-autohiding-scrollbar;height:100%;scroll-behavior: smooth;overflow: hidden;}
+    * {margin:0;padding:0;-webkit-overflow-scrolling: touch;-ms-overflow-style: -ms-autohiding-scrollbar;outline: none;-webkit-tap-highlight-color: transparent;-webkit-touch-callout: none;scrollbar-width: none;}
+    html {font:400 14px calibre, sans-serif;background:white;color:var(--textcolor); -ms-overflow-style: -ms-autohiding-scrollbar;height:100%;scroll-behavior: smooth;overflow: hidden;background:black;}
     body {-webkit-font-smoothing: antialiased;height:100%;overflow: hidden;}
 
     h1 {}
     h2 {font-size:22px;font-weight:600;}
     h3 {}
     h4 {font-size:13px;font-weight:700;text-transform: uppercase;}
-    
-    #swatches {padding:24px;border-bottom: 2px solid #eee;}
-    .swatchwrap {display: flex;gap:8px;margin-bottom:8px;}
-      .swatchwrap:last-child {margin:0;}
-    .swatch {width:100px;cursor:pointer;border-radius:4px;overflow:hidden;box-shadow:0 0 0 3px transparent;transition:box-shadow 150ms ease-in-out;}
-      .scolor {width:100%;height:60px;padding: 4px;box-sizing: border-box;}
-      .sinfo {padding:0 4px 2px;}
-      .sinfo .name {font-weight:500;text-transform: ;}
-        .sinfo .hex {text-transform: uppercase;font-weight:400;opacity:0.7;}
 
-      .swatch:hover {box-shadow:0 0 0 3px var(--ink3);}
-      .swatch:active {box-shadow:0 0 0 3px var(--ink4);}
+    input {border: none;background: transparent;color: var(--ink);font:500 14px calibre, sans-serif;box-sizing: border-box;border-radius: 0;}
 
-      .swatch.copied {box-shadow:0 0 0 3px var(--tsharp3);}
-    
-    #btntest, #ctatest {padding:40px 0;}
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 280px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    input[type=range] {
+        -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+        width: 280px; /* Specific width is required for Firefox. */
+        background: transparent; /* Otherwise white in Chrome */
+        border:none;
+        cursor:pointer;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+    }
+
+    input[type=range]:focus {
+        outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+        box-shadow:none;
+    }
+
+    input[type=range]::-webkit-slider-thumb {width: 16px;height: 16px;background: white;display: block;box-shadow: 0 2px 4px rgba(0,0,0,.15);border-radius: 50%;transition: all 150ms ease-in-out;}
+    input[type=range]:hover::-webkit-slider-thumb {box-shadow:0 2px 2px rgba(0,0,0,.2);}
+    input[type=range]:active::-webkit-slider-thumb {box-shadow:0 2px 2px rgba(0,0,0,.3);cursor:-webkit-grabbing;}
+    input[type=range]:focus::-webkit-slider-thumb {}
+    input[type=range]:hover:focus::-webkit-slider-thumb {}
+
+    input[type=range]::-webkit-slider-runnable-track {}
+    input[type=range]:focus::-webkit-slider-runnable-track {}
 
 
-    .btn {min-width:200px;transition:background-color 150ms ease-in-out, border-color 150ms ease-in-out, color 150ms ease-in-out;display:inline-flex;cursor:pointer;border-radius:8px;color:var(--btntext);background:var(--btndefaultstate);font-size:16px;font-weight:600;height:40px;padding:0 16px;align-items: center;justify-content: center;user-select:none;box-sizing:border-box;}
+    .colorslide input[type=range]::-webkit-slider-thumb {border:3px solid white;height:20px;width:20px;transition:none;box-sizing:border-box;box-shadow:0 3px 6px rgba(0,0,0,.2);}
+
+    label {
+      user-select: none;
+    }
+
+    .toggle {width:40px;height:24px;border-radius:30px;position:relative;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(0, 0, 0, 0.02);cursor:pointer;transition:background 150ms ease-in-out;display: inline-block;margin-right:8px;vertical-align: middle;}
+        .toggle::after {content:'';position:absolute;top:4px;left:4px;width:16px;height:16px;background:white;display:block;box-shadow:0 2px 4px rgba(0,0,0,.15);border-radius:50%;transition:transform 150ms ease-in-out;}
+        label:hover .toggle {background: rgba(255, 255, 255, 0.12);}
+        label:active .toggle {background: rgba(255, 255, 255, 0.15);}
+
+        label:hover .toggle::after {box-shadow:0 2px 5px rgba(0,0,0,.18);}
+        label:active .toggle::after {}
+
+
+    :checked ~ .toggle {background:hsl(130, 65%, 57%);box-shadow:inset 0 0 0 1px rgba(0, 0, 0, 0.0);}
+    :checked ~ .toggle:after {transform:translateX(100%);}
+
+        label:hover :checked ~ .toggle {background:hsl(130, 65%, 51%);}
+        label:active :checked ~ .toggle {background:hsl(130, 65%, 48%);}
+
+
+        label {user-select:none;}
+
+    input.tweakr {display:none;}
+
+    .tweak {cursor:pointer;padding:8px;}
+        .tweak label {display:block;cursor:pointer;font-size: 14px;}
+
+
+    .tweaked {padding: 16px 8px;}
+        .tweaked .tweak {margin-bottom:20px;}
+
+    .tweak .label {font-size:12px;display:flex;margin-bottom:8px;}
+    .tweak span {width: 100%;}
+    .tweak .value {font-size:12px;opacity:.54;text-align:right;}
+    .tweak input[type=range] {padding:0 4px;width: 100%;height: 24px;border-radius:30px;position:relative;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(0, 0, 0, 0.02);cursor:pointer;transition:background 150ms ease-in-out;display: inline-block;margin-right:8px;vertical-align: middle;}
+
+      .tweak input[type=range]:hover {background:rgba(255,255,255,.12);}
+      .tweak input[type=range]:active {background:rgba(255,255,255,.15);}
+
+    .btn {min-width:200px;transition:background-color 150ms ease-in-out, border-color 150ms ease-in-out, color 150ms ease-in-out;display:inline-flex;cursor:pointer;border-radius:var(--buttonradius);color:var(--btntext);background:var(--btndefaultstate);font-size:16px;font-weight:600;height:40px;padding:0 16px;align-items: center;justify-content: center;user-select:none;box-sizing:border-box;}
       .btn:hover {background:var(--btnhoverstate);}
       .pressonly .btn:hover {background:var(--btndefaultstate);}
       .btn:active, .pressonly .btn:active {background:var(--btnpressedstate);}
@@ -136,9 +217,7 @@ jhunter@tunein.com
 
     .pill .btn {height:36px;border-radius:18px;min-width:0;}
 
-    .toggle {cursor:pointer;display:inline-block;border-radius:4px;padding:4px 8px;font-weight: 500;box-sizing: border-box;margin-right:12px;border:  1px solid var(--toggleborder);}
-      .toggle.on {background:var(--toggleselect);}
-
+    
     .checkcolumn  {width:200px;display:inline-block;margin:0 16px 16px 0;}
     .checkbox {cursor:pointer;display:inline-flex;border-radius:3px;padding:4px;font-weight: 500;width:100%;align-items: center;box-sizing: border-box}
       .checkbox.on {background:var(--toggleselect);}
@@ -148,7 +227,15 @@ jhunter@tunein.com
 
 
 
-    #container {position:relative;height:100%;background:black;}
+    #container {position:relative;background:black;border-radius:6px;
+    height: calc(100% - 80px);
+    top: 40px;
+    right: 240px;
+    left: 40px;
+    bottom: 40px;
+    width: calc(100% - 280px);
+    overflow: hidden;
+}
 
     #nav {position:absolute;top:0;left:0;right:0;z-index:1337;}
 
@@ -165,7 +252,7 @@ jhunter@tunein.com
         .iconbtn.invert:hover svg {fill:var(--ink4);}
         .iconbtn.invert:active svg {fill:var(--ink5);}
 
-    .navlogo {width:;height:44px;display:flex;align-items: center;justify-content: center;pointer-events: none;}
+    .navlogo {height:44px;display:flex;align-items: center;justify-content: center;pointer-events: none;}
       .navlogo svg {fill:var(--inkdefault);height:32px;}
 
 
@@ -186,14 +273,21 @@ jhunter@tunein.com
         .heading .chevron {min-width:24px;min-height:24px;}
         .heading .chevron svg {fill:var(--ink);}
         .heading.clickable {cursor: pointer;user-select:none;}
-      .scrollrow {display:flex;width:100%;align-items:start;padding: 0 0 0 24px;box-sizing: border-box;overflow-x:scroll;white-space: nowrap;gap:8px;scroll-padding-right:24px;-webkit-overflow-scrolling:touch; -ms-overflow-style: -ms-autohiding-scrollbar;}
+      .scrollrow {display:flex;width:100%;align-items:start;padding: 0 0 12px 24px;box-sizing: border-box;overflow-x:scroll;white-space: nowrap;gap:var(--tilegap);scroll-padding-right:24px;-webkit-overflow-scrolling:touch; -ms-overflow-style: -ms-autohiding-scrollbar;}
         .scrollitem {display:inline-flex;cursor:pointer;user-select:none;flex-direction: column;}
           .scrollitem:last-child {padding-right:24px}
           .scrollitem .label {padding-top:8px;color:var(--ink);font-size:16px;font-weight:500;}
 
+        .scrollitem.centeritem {text-align:center;}
+        
 
-        .thumb {width:104px;height:104px;border:1px solid var(--ink2);box-sizing: border-box;border-radius:4px;overflow:hidden;background-size:cover;background-position:center;background-color: var(--ink3);}
+
+        .thumb {width:104px;height:104px;border:1px solid var(--ink2);box-sizing: border-box;border-radius:var(--tileradius);overflow:hidden;background-size:cover;background-position:center;background-color: var(--ink3);}
         .recentthumb {width:72px;height:72px;}
+
+        .thumbshadow .thumb {border:none;box-shadow:0 2px 8px rgba(0,0,0,0.2);}
+
+        .thumb.circle {border-radius:50%;background:var(--ink);border:none;}
 
       #tabbar {position:absolute;left:0;bottom:0;right:0;height:56px;background:var(--ink);color:var(--ink6);display: flex;justify-content: space-around;}
         #tabbar .tab {display:flex;align-items: center;justify-content: center;flex-direction: column;width:88px;height:100%;font-size:15px;font-weight:500;cursor:pointer;user-select:none;}
@@ -228,8 +322,8 @@ jhunter@tunein.com
 
     .premiumpage #nav {background-color:var(--gold3);}
 
-    .itemlist {}
-      .rowitem {display:flex;padding:0 24px 0;margin-bottom: 8px;box-sizing:border-box;gap:12px;cursor:pointer;user-select: none;}
+    .itemlist {display:flex;flex-direction: column;gap:var(--tilegap);}
+      .rowitem {display:flex;padding:0 24px 0;box-sizing:border-box;gap:12px;cursor:pointer;user-select: none;}
         .rowitem .thumb {width:80px;height:80px;min-width:80px;min-height:80px;}
         .rowitem .description {display:flex;flex-direction: column;justify-content: center;max-width:calc(100% - 80px - 12px);}
           .rowitem .description .title {font-weight:500;font-size:18px;padding-bottom:4px;max-height: 40px;
@@ -258,11 +352,28 @@ jhunter@tunein.com
 
       #nowplaying .album {padding:8px 0;display:flex;width:100%;align-items: center;justify-content: center;}
             #nowplaying .album .npalbum {width:80vw;max-width:40vh;height:80vw;max-height:40vh;background-color:white;background-position: center;background-size:cover;background-image:url(./imgs/nyan.gif);}
+
+
+
+    #tweaks {position: fixed;top:40px;right:20px;border-radius:8px;max-height:calc(100% - 80px);width:200px;padding:12px 8px;background:#222;color:rgba(255, 255, 255, 0.92);z-index:9999999;box-sizing:border-box;}
   </style>
   <script src="../js/gator.js"></script>
   <script src="../js/base.js"></script>
 </head>
 <body class="">
+  <div id=tweaks>
+    <div class="tweak">
+      <label><input type="checkbox" value="ui0" id="ui0" class="tweakr" data-tweak="a1" onchange="document.documentElement.classList.toggle('darkmode')"><div class="toggle"></div> Dark Mode</label>
+    </div>
+    <div class="tweak">
+      <label><input type="checkbox" value="ui1" id="ui1" class="tweakr" data-tweak="a1" onchange="document.body.classList.toggle('thumbshadow')"><div class="toggle"></div> Tile Dropshadow</label>
+    </div>
+
+    <div class="tweak">
+      <div class="label"><span>Tile Spacing</span><div class="value">8</div></div>
+        <input type="range" class="valuetweak" min="0" max="48" value="8" data-tweak="a2" step="2" data-id="tilegap">
+    </div>
+  </div>
   <div id=container class=homepage>
     <div id=profilemodal class=modal>
       <div class=modalheading>
@@ -401,7 +512,7 @@ jhunter@tunein.com
               </div>
               <div class=rowitem>
                 <div class=thumb></div><div class=description>
-                  <div class=title>Covid Fact Check, Aging CElls, News Roundup</div>
+                  <div class=title>Covid Fact Check, Aging Cells, News Roundup</div>
                   <div class=meta>Janurary 12, 2021 - 47:01</div>
                 </div>
               </div>
@@ -439,11 +550,94 @@ jhunter@tunein.com
               </div>
             </div>
           </div>
+          <div class=contentrow>
+            <div class="heading clickable">
+              <h2>Popular Podcasts in Your Area</h2>
+            </div>
+            <div class=scrollrow>
+              <div class=scrollitem>
+                <div class=thumb></div>
+                <div class=label>Label</div>
+              </div><div class=scrollitem>
+                <div class=thumb></div>
+                <div class=label>Label</div>
+              </div><div class=scrollitem>
+                <div class=thumb></div>
+                <div class=label>Label</div>
+              </div><div class=scrollitem>
+                <div class=thumb></div>
+                <div class=label>Label</div>
+              </div><div class=scrollitem>
+                <div class=thumb></div>
+                <div class=label>Label</div>
+              </div><div class=scrollitem>
+                <div class=thumb></div>
+                <div class=label>Label</div>
+              </div>
+            </div>
+          </div>
+          <div class=contentrow>
+            <div class="heading clickable">
+              <h2>What Do You Want To Listen To?</h2>
+            </div>
+            <div class=scrollrow>
+              <div class="scrollitem centeritem">
+                <div class="thumb circle"></div>
+                <div class=label>Label</div>
+              </div><div class="scrollitem centeritem">
+                <div class="thumb circle"></div>
+                <div class="label">Label</div>
+              </div><div class="scrollitem centeritem">
+                <div class="thumb circle"></div>
+                <div class="label">Label</div>
+              </div><div class="scrollitem centeritem">
+                <div class="thumb circle"></div>
+                <div class="label">Label</div>
+              </div><div class="scrollitem centeritem">
+                <div class="thumb circle"></div>
+                <div class=label>Label</div>
+              </div><div class="scrollitem centeritem">
+                <div class="thumb circle"></div>
+                <div class=label>Label</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <div id=library>
-        lib
+        <div class=contents>
+          <div class=contentrow>
+            <div class=heading>
+              <h4>Recent</h4>
+            </div>
+            <div class=scrollrow>
+              <div class=scrollitem>
+                <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/s247154/images/logoq.png);"></div>
+              </div><div class=scrollitem>
+                <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/p952868/images/logoq.png);"></div>
+              </div><div class=scrollitem>
+                <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/s249976/images/logoq.png);"></div>
+              </div><div class=scrollitem>
+                <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/p983396/images/logoq.png);"></div>
+              </div><div class=scrollitem>
+                <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/s249990/images/logoq.png);"></div>
+              </div><div class=scrollitem>
+                <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/s259261/images/logoq.png);"></div>
+              </div>
+            </div>
+          </div>
+          <div class=contentrow>
+            <div class=listitem>
+              <div class=title>Title</div>
+              <div class=chevron>
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M15.11 7.14599L19.956 11.999L15.11 16.852C15.0754 16.8844 15.0479 16.9236 15.029 16.9671C15.0102 17.0107 15.0005 17.0576 15.0005 17.105C15.0005 17.1524 15.0102 17.1993 15.029 17.2428C15.0479 17.2863 15.0754 17.3255 15.11 17.358L16.641 18.896C16.7085 18.9623 16.7994 18.9995 16.894 18.9995C16.9886 18.9995 17.0795 18.9623 17.147 18.896L22.26 13.783L23.791 12.252C23.8573 12.1845 23.8945 12.0936 23.8945 11.999C23.8945 11.9044 23.8573 11.8135 23.791 11.746L22.26 10.215L17.168 5.10599C17.1005 5.03967 17.0096 5.0025 16.915 5.0025C16.8204 5.0025 16.7295 5.03967 16.662 5.10599L15.11 6.63999C15.0754 6.67244 15.0479 6.71164 15.029 6.75515C15.0102 6.79866 15.0005 6.84558 15.0005 6.89299C15.0005 6.94041 15.0102 6.98732 15.029 7.03083C15.0479 7.07435 15.0754 7.11354 15.11 7.14599Z" />
+                  </svg>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div id=search>
@@ -481,6 +675,41 @@ jhunter@tunein.com
   </div>
   <audio controls="" loop="" id="meow" style="display:none;" src="./audio/nyancat.mp3" type="audio/mpeg" preload="auto"></audio>
   <script>
+
+    function valuetweaks(){
+      let tweaks = document.getElementsByClassName('valuetweak');
+
+      var vars = ':root {';
+
+      for( var i=0;i<tweaks.length;i++){
+        let t = tweaks[i];
+        let id = t.dataset.id;
+        let v = t.value;
+
+        let p = t.getparent('tweak');
+        let val = p.getElementsByClassName('value')[0];
+
+        if ( val ){
+          val.empty();
+          val.appendChild(document.createTextNode(v));
+        }
+
+        vars += '--' + id + ':' + v + 'px;';
+      }
+
+      vars += '}';
+
+      let oldvars = document.getElementsByClassName('combinedvars');
+
+      oldvars.remove();
+
+      var style = document.createElement('style');
+      style.className = 'combinedvars'; 
+      style.innerHTML = vars;
+      document.getElementsByTagName('head')[0].appendChild(style);
+
+    }
+
     function tabline(e){
       let wrap = this.getparent('tabwrap');
       let line = wrap.getElementsByClassName('tabline')[0];
@@ -526,7 +755,7 @@ jhunter@tunein.com
 
       let meow = document.getElementById('meow');
       if (meow.paused){
-        // meow.play();
+        meow.play();
       } else {
         meow.pause();
       }
@@ -551,6 +780,7 @@ jhunter@tunein.com
     Attach.on('click', '.modalclose', modalclose);
     Attach.on('click', '.np', nowplaying);
     Attach.on('click', '.closenp', closenp);
+    Attach.on('input', '.valuetweak', valuetweaks);
   </script>
 </body>
 </html>
