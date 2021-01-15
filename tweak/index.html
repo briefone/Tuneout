@@ -292,13 +292,14 @@ jhunter@tunein.com
 
     .content {position:absolute;top:88px;left:0;bottom:56px;right:0;overflow-y: scroll;}
 
-    #home .content {top:136px;left:0;bottom:56px;}
+    #home .content {top:136px;}
+    #search .content {top:136px;}
 
     .contentrow {padding:12px 0 var(--rowspacing) 0;}
       .contentrow:first-child {padding-top:var(--firstrowspacing);}
       .contentrow .heading {padding:0 24px var(--contentheadspacing);position: relative;display:flex;justify-content:space-between;}
         .heading .chevron {min-width:24px;min-height:24px;}
-        .heading .chevron svg {fill:var(--ink);}
+        .heading .chevron svg {fill:var(--btndefault);}
           .heading .chevron:hover svg {fill:var(--btnhover);}
           .heading .chevron:active svg {fill:var(--btnpress);}
         .heading.clickable {cursor: pointer;user-select:none;}
@@ -313,7 +314,9 @@ jhunter@tunein.com
         .listitem {display:flex;justify-content: space-between;align-items:center;margin-left:24px;padding:0 24px 0 0;height:48px;border-bottom:1px solid var(--ink2);cursor:pointer;}
           .listitem .title {font-size:20px;font-weight:600;}
           .listitem .chevron {width:24px;height:24px;}
-        
+          .listitem .chevron svg {fill:var(--btndefault);}
+            .listitem .chevron:hover svg {fill:var(--btnhover);}
+            .listitem .chevron:active svg {fill:var(--btnpress);}
 
 
         .thumb {width:104px;height:104px;/*border:1px solid var(--ink2);*/box-sizing: border-box;border-radius:var(--tileradius);overflow:hidden;background-size:cover;background-position:center;background-color: var(--ink3);transition:box-shadow 200ms ease-in-out;    box-shadow: 0 0 0 1px var(--ink2);}
@@ -747,11 +750,15 @@ jhunter@tunein.com
       </div>
 
       <div id=search>
-        search
+        <div class=content>
+          Search
+        </div>
       </div>
 
       <div id=premium>
-        prem
+        <div class=content>
+          Premium
+        </div>
       </div>
 
       <div id=tabbar>
