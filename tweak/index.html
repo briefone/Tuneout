@@ -288,7 +288,7 @@ jhunter@tunein.com
 
       .tabwrap .tabline {height:3px;width:54.86px;background:var(--ink);position:absolute;bottom:0;left:0;transform:translateX(24px);transition: all 200ms ease-in-out;}
 
-    .content {position:absolute;top:136px;left:0;bottom:56px;right:0;overflow-y: scroll;}
+    .content {position:absolute;top:88px;left:0;bottom:56px;right:0;overflow-y: scroll;}
 
     #home .content {top:136px;left:0;bottom:56px;}
 
@@ -306,10 +306,15 @@ jhunter@tunein.com
           .scrollitem .label {padding-top:8px;color:var(--ink);font-size:16px;font-weight:500;white-space:normal;}
 
         .scrollitem.centeritem {text-align:center;}
+
+
+        .listitem {display:flex;justify-content: space-between;align-items:center;margin-left:24px;padding:0 24px 0 0;height:48px;border-bottom:1px solid var(--ink2);cursor:pointer;}
+          .listitem .title {font-size:20px;font-weight:600;}
+          .listitem .chevron {width:24px;height:24px;}
         
 
 
-        .thumb {width:104px;height:104px;border:1px solid var(--ink2);box-sizing: border-box;border-radius:var(--tileradius);overflow:hidden;background-size:cover;background-position:center;background-color: var(--ink3);}
+        .thumb {width:104px;height:104px;/*border:1px solid var(--ink2);*/box-sizing: border-box;border-radius:var(--tileradius);overflow:hidden;background-size:cover;background-position:center;background-color: var(--ink3);transition:box-shadow 200ms ease-in-out;    box-shadow: 0 0 0 1px var(--ink2);}
         .recentthumb {width:72px;height:72px;}
 
         .thumbshadow .thumb {border:none;box-shadow:0 var(--tileshadowy) var(--tileshadowblur) var(--tileshadowspread) rgba(0,0,0,var(--tileshadowalpha));}
@@ -435,7 +440,7 @@ jhunter@tunein.com
         <input type="range" class="valuetweak" min="0" max="48" value="8" step="2" id="tilegap" data-unit=px>
     </div>
     <div class="tweak">
-      <div class="label"><span>Tile Radius</span><div class="value">4</div></div>
+      <div class="label"><span>Tile Corner Radius</span><div class="value">4</div></div>
         <input type="range" class="valuetweak" min="0" max="56" value="4" step="1" id="tileradius" data-unit=px>
     </div>
     <div class="tweak">
@@ -689,7 +694,7 @@ jhunter@tunein.com
       </div>
 
       <div id=library>
-        <div class=contents>
+        <div class=content>
           <div class=contentrow>
             <div class=heading>
               <h4>Recent</h4>
