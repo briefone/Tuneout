@@ -447,7 +447,7 @@ jhunter@tunein.com
         <label><input type="checkbox" id="cb1" class="tweakr" data-class=darkmode><div class="toggle"></div> Dark Mode</label>
       </div>
       <div class="tweak">
-        <label><input type="checkbox" id="cb3" class="tweakr" data-class=inverttabbar><div class="toggle"></div> Tab Bar Match</label>
+        <label><input type="checkbox" id="cb3" class="tweakr" data-class=inverttabbar><div class="toggle"></div> Tab Bar Color Match</label>
       </div>
     </div>
     <div class=tpanel>
@@ -1093,6 +1093,37 @@ jhunter@tunein.com
       document.body.classList.remove('carpage', 'modalview');
     }
 
+    function tabpagescroll(e){
+      
+
+      let y = this.scrollTop;
+      let x = this.scrollLeft;
+
+      console.log('scroll', x, y);
+
+      this.style.top = x +'px';
+
+      let min = Math.max(-60, -y);
+      console.log(min);
+      this.style.top = 136 + min + 'px';
+      
+      let a = Math.min(1- (Math.abs(min) / 60), 1);
+
+      let ht = document.getElementById('hometabs');
+      let nb = document.getElementById('navbar');
+
+      nb.style.transform = ht.style.transform = 'translateY(' + min +'px)';
+
+      nb.style.opacity = a;
+
+      if ( a < 1 ) {
+        nb.style.pointerEvents = 'none';
+      } else {
+        nb.style.pointerEvents = 'all';
+      }
+
+    }
+
     Attach.on('click', '.tabwrap .tab', tabline);
     Attach.on('click', '#tabbar .tab', tabbar);
     Attach.on('click', '.openmodal', modalopen);
@@ -1106,6 +1137,13 @@ jhunter@tunein.com
     
     (function() {
       unhash();
+
+      let tabpages = document.getElementsByClassName('tabpage');
+
+      for(var i=0;i<tabpages.length;i++){
+        let t = tabpages[i];
+        t.addEventListener("scroll", tabpagescroll, {passive: true});
+      }
     })();
   </script>
 </body>
