@@ -266,11 +266,12 @@ jhunter@tunein.com
     #container {position:relative;background:black;border-radius:6px;
       height: calc(100% - 80px);
       top: 40px;
-      left: 40px;
+      left: 50%;
       bottom: 40px;
       width: var(--pagewidth);
       max-width:calc(100% - 280px);
       overflow: hidden;
+      margin-left: calc(var(--pagewidth) / 2 * -1 - 100px);
   }
 
     #nav {position:absolute;top:0;left:0;right:0;z-index:1337;}
@@ -308,7 +309,7 @@ jhunter@tunein.com
     .contentrow {padding:12px 0 var(--rowspacing) 0;}
       .contentrow:first-child {padding-top:var(--firstrowspacing);}
       .contentrow .heading {padding:0 24px var(--contentheadspacing);position: relative;display:flex;justify-content:space-between;}
-        .heading .chevron {min-width:24px;min-height:24px;}
+        .heading .chevron {min-width:24px;min-height:24px;width:24px;height:24px;}
         .heading .chevron svg {fill:var(--btndefault);}
           .heading .chevron:hover svg {fill:var(--btnhover);}
           .heading .chevron:active svg {fill:var(--btnpress);}
@@ -419,7 +420,7 @@ jhunter@tunein.com
     .specialtoggles {display:none;}
     .thumbshadow .ts-toggles {display:block;}
 
-    #tweaks {position: fixed;top:0;right:20px;max-height:calc(100%);width:200px;color:rgba(255, 255, 255, 0.92);z-index:9999999;box-sizing:border-box;overflow-y:scroll;-webkit-overflow-scrolling:touch;}
+    #tweaks {position: fixed;top:0;right:20px;max-height:calc(100%);width:200px;color:rgba(255, 255, 255, 0.92);z-index:9999999;box-sizing:border-box;overflow-y:scroll;-webkit-overflow-scrolling:touch;user-select:none;}
             .tpanel {margin-top:8px;width:100%;padding:8px 8px;border-radius:8px;background:#222;box-sizing:border-box;}
               .tpanel:first-child {margin-top:40px;}
               .tpanel:last-child {margin-bottom:40px;}
@@ -1124,6 +1125,40 @@ jhunter@tunein.com
 
     }
 
+    function pagewidthtweak(initial){
+      let pw = document.getElementById('pagewidth');
+      let w = window.innerWidth - 282;
+
+      pw.max = w;
+
+      if ( initial ){
+        pw.value = w;
+
+        var style = document.createElement('style');
+        style.className = 'combinedvars'; 
+        style.innerHTML = ':root {--pagewidth: ' + w + 'px}';
+        document.getElementsByTagName('head')[0].appendChild(style);
+
+        let p = pw.getparent('tweak');
+        let val = p.getElementsByClassName('value')[0];
+
+        if ( val ){
+          val.empty();
+          val.appendChild(document.createTextNode(w));
+        }
+      }
+    }
+
+    function setuptweaks(){
+      pagewidthtweak(true);
+    }
+
+    function resize(e){
+      pagewidthtweak(false);
+    }
+
+    window.onresize = resize;
+
     Attach.on('click', '.tabwrap .tab', tabline);
     Attach.on('click', '#tabbar .tab', tabbar);
     Attach.on('click', '.openmodal', modalopen);
@@ -1136,6 +1171,8 @@ jhunter@tunein.com
     Attach.on('click', '.exitcarmode', exitcarmode);
     
     (function() {
+      setuptweaks();
+
       unhash();
 
       let tabpages = document.getElementsByClassName('tabpage');
