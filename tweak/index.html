@@ -125,6 +125,8 @@ jhunter@tunein.com
       --circleiconpress: var(--ink1);
 
       --albumshadow: var(--ink11);
+      --albumblur: 150px;
+      --albumalpha: 1;
     }
 
     .darkmode {
@@ -266,8 +268,8 @@ jhunter@tunein.com
 
     input.tweakr {display:none;}
 
-    .tweak {cursor:pointer;padding:8px;user-select:none;}
-        .tweak label {display:block;cursor:pointer;font-size: 14px;}
+    .tweak {cursor:pointer;user-select:none;padding:8px;}
+        .tweak label {display:block;cursor:pointer;font-size: 14px;padding:8px;margin:-8px;}
 
 
     .tweaked {padding: 16px 8px;}
@@ -458,9 +460,9 @@ jhunter@tunein.com
               .modalclose:hover {color:var(--inkhover);}
               .modalclose:active {color:var(--inkpress);}
 
-    #nowplaying {position: absolute;top:0;left:0;right:0;bottom:0;border-top:24px solid var(--statusbar);background:var(--darkui);z-index:1337;transform:translateY(100%);pointer-events: none;transition:all 200ms ease-in-out;color:var(--darkuitext);}
+    #nowplaying {position: absolute;top:0;left:0;right:0;bottom:0;padding-top:24px;background:var(--darkui);z-index:1337;transform:translateY(100%);pointer-events: none;transition:all 200ms ease-in-out;color:var(--darkuitext);}
       .nppage #nowplaying {transform:translateY(0);pointer-events: all;}
-
+            #nowplaying .status {height: 24px;background: rgba(0,0,0,.03);width: 100%;position:absolute;top:0;left:0;right:0;z-index:1337;}
 
     #carmode {position: absolute;top:0;left:0;right:0;bottom:0;background:var(--darkui);border-top:24px solid var(--statusbar);z-index:1337;transform:translateY(100%);pointer-events: none;transition:all 200ms ease-in-out;color:var(--darkuitext);}
       .carpage #carmode {transform:translateY(0);pointer-events: all;}
@@ -473,20 +475,20 @@ jhunter@tunein.com
               .darkui .iconbtn:hover  svg {fill:var(--darkuiiconhover);}
               .darkui .iconbtn:active  svg {fill:var(--darkuiiconpress);}
 
-      #nowplaying .album {padding:8px 0;display:flex;width:100%;align-items: center;justify-content: center;}
-            #nowplaying .album .npalbum {width:80vw;max-width:40vh;height:80vw;max-height:40vh;background-color:rgba(255, 255, 255, 0.05);background-position: center;background-size:cover;background-image:url(./imgs/nyan.gif);}
+      #nowplaying .album {padding:8px 24px;display:flex;width:100%;align-items: center;justify-content: center;max-width:600px;margin:0 auto;box-sizing:border-box;}
+            #nowplaying .album .npalbum {width:100%;height:0;padding-top:100%;background-color:rgba(255, 255, 255, 0.05);background-position: center;background-size:cover;background-image:url(./imgs/nyan.gif);}
 
     .specialtoggles {display:none;}
-    .thumbshadow .ts-toggles {display:block;}
+    .thumbshadow .sub-toggles, .albumblur .sub-toggles {display:block;}
 
     #tweaks {position: fixed;top:0;right:20px;max-height:calc(100%);width:200px;color:rgba(255, 255, 255, 0.92);z-index:9999999;box-sizing:border-box;overflow-y:scroll;-webkit-overflow-scrolling:touch;user-select:none;}
-            .tpanel {margin-top:8px;width:100%;padding:8px 8px;border-radius:12px;background:#222;box-sizing:border-box;}
+            .tpanel {margin-top:8px;width:100%;padding:8px 8px;border-radius:8px;background:#222;box-sizing:border-box;}
               .tpanel:first-child {margin-top:40px;}
               .tpanel:last-child {margin-bottom:40px;}
 
-    .resetbtn {cursor:pointer;display:flex;height:36px;text-align:center;padding:0 12px;align-items:center;justify-content:center;background:rgba(255, 255, 255, 0.1);color:#ff5757;font-size:15px;text-transform:uppercase;font-weight:600;border-radius:6px;transition:all 200ms ease-in-out;}
-    .resetbtn:hover {background-color:rgba(255, 255, 255, 0.15);}
-    .resetbtn:active {background-color:rgba(255, 255, 255, 0.2);}
+    .resetbtn {cursor:pointer;display:flex;height:36px;text-align:center;padding:0 12px;align-items:center;justify-content:center;background:rgba(255, 255, 255, 0.0);color:#ff5757;font-size:15px;text-transform:uppercase;font-weight:600;border-radius:6px;transition:all 200ms ease-in-out;}
+    .resetbtn:hover {background-color:rgba(255, 255, 255, 0.0666);}
+    .resetbtn:active {background-color:rgba(255, 255, 255, 0.1);}
 
 
     .tabpage {display:none;}
@@ -506,7 +508,7 @@ jhunter@tunein.com
 
 
       .minialbum {width:56px;height:100%;min-width:56px;min-height:100%;background:var(--albumshadow);padding:8px;box-sizing:border-box;cursor:pointer;}
-        .minialbum .artwork {background:white;border-radius:4px;width:100%;height:100%;}
+        .minialbum .artwork {background:white;border-radius:4px;width:100%;height:100%;background-position:center;background-size: cover;box-shadow:0 0 6px 0 rgba(0, 0, 0, .25);}
       .miniinfo {width:100%;max-width:calc(100% - 32px - 56px - 40px - 16px);display:flex;flex-direction:column;justify-content: center;padding:0 16px;cursor:pointer;}
             .miniinfo .title {font-weight:600;font-size:15px;white-space:nowrap;text-overflow: ellipsis;overflow: hidden;}
             .miniinfo .meta {font-weight:400;font-size:13px;color:var(--ink5);white-space:nowrap;text-overflow: ellipsis;overflow: hidden;}
@@ -527,6 +529,10 @@ jhunter@tunein.com
         .hidecontent .mainpage {transform:translateX(-40px);pointer-events: none;}
 
 
+    #npblur {position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;pointer-events: none;opacity:0;}
+            .albumblur #npblur {opacity:1;}
+            #blurblur {position:absolute;top:0;left:0;right:0;bottom:0;z-index:2;backdrop-filter: blur(var(--albumblur));}
+            #bluralbum {background-size:cover;background-position:center;position:absolute;top:0;left:0;right:0;bottom:0;z-index:1;opacity:var(--albumalpha);}
 
 
     @media screen and (max-width: 666px) {
@@ -555,10 +561,10 @@ jhunter@tunein.com
         <label><input type="checkbox" id="cb1" class="tweakr" data-class=darkmode><div class="toggle"></div> Dark Mode</label>
       </div>
       <div class="tweak">
-        <label><input type="checkbox" id="cb3" class="tweakr" data-class=inverttabbar><div class="toggle"></div> Tab Bar Color Match</label>
+        <label><input type="checkbox" id="cb3" class="tweakr" data-class=inverttabbar data-uncheck=cb5><div class="toggle"></div> Tab Bar Color Match</label>
       </div>
       <div class="tweak">
-        <label><input type="checkbox" id="cb5" class="tweakr" data-class=inverttabbarplus><div class="toggle"></div> Tab Bar Color + 1</label>
+        <label><input type="checkbox" id="cb5" class="tweakr" data-class=inverttabbarplus data-uncheck=cb3><div class="toggle"></div> Tab Bar Color + 1</label>
       </div>
       <div class="tweak">
         <label><input type="checkbox" id="cb4" class="tweakr" data-class=played><div class="toggle"></div> Mini Player</label>
@@ -566,10 +572,26 @@ jhunter@tunein.com
     </div>
     <div class=tpanel>
       <div class="tweak">
+        <label><input type="checkbox" id="cb6" class="tweakr" data-class=albumblur><div class="toggle"></div> Now Playing BG Blur</label>
+      </div>
+
+      <div class="tgroup specialtoggles sub-toggles">
+        <div class="tweak ">
+          <div class="label"><span>Blur</span><div class="value">150</div></div>
+            <input type="range" class="valuetweak" min="0" max="400" value="150" step="1" id="albumblur" data-unit=px>
+        </div>
+        <div class="tweak">
+          <div class="label"><span>Alpha</span><div class="value">1</div></div>
+            <input type="range" class="valuetweak" min="0" max="1" value="1" step="0.02" id="albumalpha">
+        </div>
+      </div>
+    </div>
+    <div class=tpanel>
+      <div class="tweak">
         <label><input type="checkbox" id="cb2" class="tweakr" data-class=thumbshadow><div class="toggle"></div> Tile Drop Shadow</label>
       </div>
 
-      <div class="tgroup specialtoggles ts-toggles">
+      <div class="tgroup specialtoggles sub-toggles">
         <div class="tweak ">
           <div class="label"><span>Blur</span><div class="value">8</div></div>
             <input type="range" class="valuetweak" min="0" max="20" value="8" step="1" id="tileshadowblur" data-unit=px>
@@ -618,7 +640,7 @@ jhunter@tunein.com
     </div>
 
     <div class=tpanel>
-      <div class=tgroup>
+      <div class=tgroup style="margin:-8px;">
         <div class=resetbtn onclick="reset()">Reset</div>
       </div>
     </div>
@@ -635,6 +657,11 @@ jhunter@tunein.com
     </div>
 
     <div id=nowplaying class=darkui>
+      <div class=status></div>
+      <div id=npblur>
+        <div id=blurblur></div>
+        <div id=bluralbum style="background-image: url('https://cdn-profiles.tunein.com/s249937/images/logoq.png');"></div>
+      </div>
       <div class=topbar>
         <div class="iconbtn closenp invert">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -978,11 +1005,11 @@ jhunter@tunein.com
       <div id=tabbar class=darkui>
         <div id=miniplayer>
           <div class=minialbum>
-            <div class=artwork></div>
+            <div id=miniartwork class=artwork style="background-image:url(https://cdn-profiles.tunein.com/p1349148/images/logoq.png);"></div>
           </div>
           <div class=miniinfo>
-            <div class=title>Title</div>
-            <div class=meta>Meta</div>
+            <div class=title id=minititle>The Joe Rogan Experience Experience</div>
+            <div class=meta id=minimeta>Episode 117 - Week of January 11th - 17th</div>
           </div>
           <div class=minicontrols>
             <div class="play minicontrol circlebtn">
@@ -1074,6 +1101,14 @@ jhunter@tunein.com
         document.documentElement.classList.add(c);
       } else {
         document.documentElement.classList.remove(c);
+      }
+
+      let uncheck = this.dataset.uncheck;
+      if ( uncheck ){
+        let u = document.getElementById(uncheck);
+        if ( u.checked == true){
+          u.click();
+        }
       }
 
 
@@ -1276,21 +1311,28 @@ jhunter@tunein.com
       if ( !this.classList.contains('miniinfo') && !this.classList.contains('minialbum') ){
 
         meow.onloadedmetadata = metaloaded;
+
         if ( meow.src != url ){
           meow.src = url;
         }
 
-
         meow.play();
 
-        let album = window.getComputedStyle(this, null).getPropertyValue('background-image');
+        var album = window.getComputedStyle(this, null).getPropertyValue('background-image');
+        if ( album == 'none'){
+          album = window.getComputedStyle(this.getElementsByClassName('thumb')[0], null).getPropertyValue('background-image')
+        }
 
         console.log(album);
 
         let np = document.getElementById('nowplaying');
         let art = np.getElementsByClassName('npalbum')[0];
+        let blur = document.getElementById('bluralbum');
+        let ma = document.getElementById('miniartwork');
 
         art.style.backgroundImage = album;
+        ma.style.backgroundImage = album;
+        blur.style.backgroundImage = album;
       }
 
 
@@ -1420,6 +1462,51 @@ jhunter@tunein.com
       b.classList.remove('active');
       d.classList.remove('currenttitle');
       f.classList.remove('oldtitle');
+    }
+
+    function getAverageRGB(imgEl) {
+      var blockSize = 5, // only visit every 5 pixels
+          defaultRGB = {r:0,g:0,b:0}, // for non-supporting envs
+          canvas = document.createElement('canvas'),
+          context = canvas.getContext && canvas.getContext('2d'),
+          data, width, height,
+          i = -4,
+          length,
+          rgb = {r:0,g:0,b:0},
+          count = 0;
+
+      if (!context) {
+          return defaultRGB;
+      }
+
+      height = canvas.height = imgEl.naturalHeight || imgEl.offsetHeight || imgEl.height;
+      width = canvas.width = imgEl.naturalWidth || imgEl.offsetWidth || imgEl.width;
+
+      context.drawImage(imgEl, 0, 0);
+
+      try {
+          data = context.getImageData(0, 0, width, height);
+      } catch(e) {
+          /* security error, img on diff domain */
+          return defaultRGB;
+      }
+
+      length = data.data.length;
+
+      while ( (i += blockSize * 4) < length ) {
+          ++count;
+          rgb.r += data.data[i];
+          rgb.g += data.data[i+1];
+          rgb.b += data.data[i+2];
+      }
+
+      // ~~ used to floor values
+      rgb.r = ~~(rgb.r/count);
+      rgb.g = ~~(rgb.g/count);
+      rgb.b = ~~(rgb.b/count);
+
+      return rgb;
+
     }
 
     window.onresize = resize;
