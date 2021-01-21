@@ -1313,10 +1313,10 @@ jhunter@tunein.com
       let a = this.dataset.page;
       let p = this.dataset.parent;
 
-      let b = document.getElementById(a);
-      let c = document.getElementById(p + 'page');
-      let d = document.getElementsByClassName(p + 'title');
-      let f = document.getElementsByClassName(a + 'title');
+      let b = document.getElementById(a + 'page');
+      let c = document.getElementById(p);
+      let d = document.getElementsByClassName(p + 'title')[0];
+      let f = document.getElementsByClassName(a + 'title')[0];
 
       c.classList.add('hidecontent');
       b.classList.add('active');
