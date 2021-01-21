@@ -269,7 +269,7 @@ jhunter@tunein.com
     input.tweakr {display:none;}
 
     .tweak {cursor:pointer;user-select:none;padding:8px;}
-        .tweak label {display:block;cursor:pointer;font-size: 14px;padding:8px;margin:-8px;}
+        .tweak label {display:block;cursor:pointer;font-size: 13px;padding:8px;margin:-8px;}
 
 
     .tweaked {padding: 16px 8px;}
@@ -479,7 +479,7 @@ jhunter@tunein.com
             #nowplaying .album .npalbum {width:100%;height:0;padding-top:100%;background-color:rgba(255, 255, 255, 0.05);background-position: center;background-size:cover;background-image:url(./imgs/nyan.gif);}
 
     .specialtoggles {display:none;}
-    .thumbshadow .sub-toggles, .albumblur .sub-toggles {display:block;}
+    .thumbshadow .ts-toggles, .albumblur .ab-toggles, .albummatch .am-toggles {display:block;}
 
     #tweaks {position: fixed;top:0;right:20px;max-height:calc(100%);width:200px;color:rgba(255, 255, 255, 0.92);z-index:9999999;box-sizing:border-box;overflow-y:scroll;-webkit-overflow-scrolling:touch;user-select:none;}
             .tpanel {margin-top:8px;width:100%;padding:8px 8px;border-radius:8px;background:#222;box-sizing:border-box;}
@@ -534,6 +534,28 @@ jhunter@tunein.com
             #blurblur {position:absolute;top:0;left:0;right:0;bottom:0;z-index:2;backdrop-filter: blur(var(--albumblur));}
             #bluralbum {background-size:cover;background-position:center;position:absolute;top:0;left:0;right:0;bottom:0;z-index:1;opacity:var(--albumalpha);}
 
+    #npmatch {position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;pointer-events: none;opacity:0;}
+      .albummatch #npmatch {opacity:1;}
+
+      .albummatchbg {display:none;position:absolute;top:0;left:0;right:0;bottom:0;}   
+        .vibrantbg #albumvibrant, .mutedbg  #albummuted, .darkvibrantbg #albumdarkvibrant, .lightvibrantbg #albumlightvibrant, .darkmutedbg #albumdarkmuted, .lightmutedbg #albumlightmuted {display:block;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @media screen and (max-width: 666px) {
       #container {
@@ -553,6 +575,7 @@ jhunter@tunein.com
   </style>
   <script src="../js/gator.js"></script>
   <script src="../js/base.js"></script>
+  <script src="../js/vibe.js"></script>
 </head>
 <body>
   <div id=tweaks>
@@ -572,10 +595,35 @@ jhunter@tunein.com
     </div>
     <div class=tpanel>
       <div class="tweak">
-        <label><input type="checkbox" id="cb6" class="tweakr" data-class=albumblur><div class="toggle"></div> Now Playing BG Blur</label>
+        <label><input type="checkbox" id="cb7" class="tweakr" data-class=albummatch data-uncheck=cb6><div class="toggle"></div> Now Playing BG Match</label>
+      </div>
+      <div class="tgroup specialtoggles am-toggles" style="padding-left:16px;">
+        <div class="tweak">
+          <label><input type="checkbox" id="cb8" class="tweakr " data-class=vibrantbg data-uncheck=cb9,cb10,cb11,cb12,cb13><div class="toggle"></div> Vibrant</label>
+        </div>
+        <div class="tweak">
+          <label><input type="checkbox" id="cb9" class="tweakr" data-class=mutedbg data-uncheck=cb8,cb10,cb11,cb12,cb13><div class="toggle"></div> Muted</label>
+        </div>
+        <div class="tweak">
+          <label><input type="checkbox" id="cb10" class="tweakr" data-class=darkvibrantbg data-uncheck=cb8,cb9,cb11,cb12,cb13><div class="toggle"></div> Dark Vibrant</label>
+        </div>
+        <div class="tweak">
+          <label><input type="checkbox" id="cb11" class="tweakr" data-class=lightvibrantbg data-uncheck=cb8,cb9,cb10,cb12,cb13><div class="toggle"></div> Light Vibrant</label>
+        </div>
+        <div class="tweak">
+          <label><input type="checkbox" id="cb12" class="tweakr" data-class=darkmutedbg data-uncheck=cb8,cb9,cb10,cb11,cb13><div class="toggle"></div> Dark Muted</label>
+        </div>
+        <div class="tweak">
+          <label><input type="checkbox" id="cb13" class="tweakr" data-class=lightmutedbg data-uncheck=cb8,cb9,cb10,cb11,cb12><div class="toggle"></div> Light Muted</label>
+        </div>
+      </div>
+    </div>
+    <div class=tpanel>
+      <div class="tweak">
+        <label><input type="checkbox" id="cb6" class="tweakr" data-class=albumblur data-uncheck=cb7><div class="toggle"></div> Now Playing BG Blur</label>
       </div>
 
-      <div class="tgroup specialtoggles sub-toggles">
+      <div class="tgroup specialtoggles ab-toggles">
         <div class="tweak ">
           <div class="label"><span>Blur</span><div class="value">150</div></div>
             <input type="range" class="valuetweak" min="0" max="400" value="150" step="1" id="albumblur" data-unit=px>
@@ -591,7 +639,7 @@ jhunter@tunein.com
         <label><input type="checkbox" id="cb2" class="tweakr" data-class=thumbshadow><div class="toggle"></div> Tile Drop Shadow</label>
       </div>
 
-      <div class="tgroup specialtoggles sub-toggles">
+      <div class="tgroup specialtoggles ts-toggles">
         <div class="tweak ">
           <div class="label"><span>Blur</span><div class="value">8</div></div>
             <input type="range" class="valuetweak" min="0" max="20" value="8" step="1" id="tileshadowblur" data-unit=px>
@@ -662,6 +710,7 @@ jhunter@tunein.com
         <div id=blurblur></div>
         <div id=bluralbum style="background-image: url('https://cdn-profiles.tunein.com/s249937/images/logoq.png');"></div>
       </div>
+      <div id=npmatch></div>
       <div class=topbar>
         <div class="iconbtn closenp invert">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1105,12 +1154,15 @@ jhunter@tunein.com
 
       let uncheck = this.dataset.uncheck;
       if ( uncheck ){
-        let u = document.getElementById(uncheck);
-        if ( u.checked == true){
-          u.click();
+        let uns = uncheck.split(',');
+        for (var i=0;i<uns.length;i++){
+          let un = uns[i];
+          let u = document.getElementById(un);
+          if ( u.checked == true){
+            u.click();
+          }
         }
       }
-
 
       hashtweaks();
     }
@@ -1226,10 +1278,13 @@ jhunter@tunein.com
         let checked = a.checked ? true : false;
         let cb = document.getElementById(id);
 
-        cb.checked = checked;
+        // cb.checked = checked;
 
         if ( checked ){
-          document.documentElement.classList.add(cb.dataset.class);
+          // document.documentElement.classList.add(cb.dataset.class);
+          cb.click();
+        } else {
+          // cb.checked = false;
         }
       }
 
@@ -1333,6 +1388,11 @@ jhunter@tunein.com
         art.style.backgroundImage = album;
         ma.style.backgroundImage = album;
         blur.style.backgroundImage = album;
+
+        let img = album.replace('url(', '').replace(')', '').replace(/"/g,'').replace(/'/g, "").trim();
+
+        // getAverageRGB(img);
+        vibe(img);
       }
 
 
@@ -1410,6 +1470,9 @@ jhunter@tunein.com
 
     function setuptweaks(){
       pagewidthtweak(true);
+
+      document.getElementById('cb8').checked = true;
+      document.documentElement.classList.add('vibrantbg');
     }
 
     function resize(e){
@@ -1464,48 +1527,109 @@ jhunter@tunein.com
       f.classList.remove('oldtitle');
     }
 
-    function getAverageRGB(imgEl) {
-      var blockSize = 5, // only visit every 5 pixels
-          defaultRGB = {r:0,g:0,b:0}, // for non-supporting envs
-          canvas = document.createElement('canvas'),
-          context = canvas.getContext && canvas.getContext('2d'),
-          data, width, height,
-          i = -4,
-          length,
-          rgb = {r:0,g:0,b:0},
-          count = 0;
+    function vibe(url){
+      var img = document.createElement('img');
+      img.crossOrigin = '';
+      img.src = url;
 
-      if (!context) {
-          return defaultRGB;
-      }
+      img.addEventListener('load', function(){
+        var vibrant = new Vibrant(img,
+                                   64, /* amount of colors in initial palette from which the swatches will be generated, defaults to 64 */
+                                    5  /* quality. 0 is highest, but takes way more processing. defaults to 5. */
+                                  );
 
-      height = canvas.height = imgEl.naturalHeight || imgEl.offsetHeight || imgEl.height;
-      width = canvas.width = imgEl.naturalWidth || imgEl.offsetWidth || imgEl.width;
+        var swatches = vibrant.swatches();
 
-      context.drawImage(imgEl, 0, 0);
+        console.log(swatches, swatches.Vibrant);
 
-      try {
-          data = context.getImageData(0, 0, width, height);
-      } catch(e) {
-          /* security error, img on diff domain */
-          return defaultRGB;
-      }
+        let npmatch = document.getElementById('npmatch');
+        // npmatch.style.backgroundColor = swatches.Vibrant.getHex();
+        npmatch.empty();
 
-      length = data.data.length;
+        var lastcolor = 'transparent';
 
-      while ( (i += blockSize * 4) < length ) {
-          ++count;
-          rgb.r += data.data[i];
-          rgb.g += data.data[i+1];
-          rgb.b += data.data[i+2];
-      }
+        for (var swatch in swatches){
+          let s = swatch.toLocaleLowerCase();
+          delete npmatch.dataset[s];
+          let d = document.createElement('div');
+          d.className = 'albummatchbg';
+          d.id = 'album' + s;
 
-      // ~~ used to floor values
-      rgb.r = ~~(rgb.r/count);
-      rgb.g = ~~(rgb.g/count);
-      rgb.b = ~~(rgb.b/count);
+          if (swatches.hasOwnProperty(swatch) && swatches[swatch]){
+            let hex = swatches[swatch].getHex();
+            lastcolor = hex;
+              console.log(swatch, hex);
+              npmatch.dataset[s] = hex;
+          }
 
-      return rgb;
+          d.style.backgroundColor = lastcolor;
+
+          npmatch.appendChild(d);
+        }
+
+        /*
+        * Results into:
+        * Vibrant #7a4426
+        * Muted #7b9eae
+        * DarkVibrant #348945
+        * DarkMuted #141414
+        * LightVibrant #f3ccb4
+        */
+      });
+    }
+
+    function getAverageRGB(url) {
+      var imgEl = document.createElement('img');
+      imgEl.crossOrigin = '';
+      imgEl.src = url;
+
+      imgEl.addEventListener('load', function(){
+        var blockSize = 5, // only visit every 5 pixels
+            defaultRGB = {r:0,g:0,b:0}, // for non-supporting envs
+            canvas = document.createElement('canvas'),
+            context = canvas.getContext && canvas.getContext('2d'),
+            data, width, height,
+            i = -4,
+            length,
+            rgb = {r:0,g:0,b:0},
+            count = 0;
+
+        if (!context) {
+            return defaultRGB;
+        }
+
+        height = canvas.height = imgEl.naturalHeight || imgEl.offsetHeight || imgEl.height;
+        width = canvas.width = imgEl.naturalWidth || imgEl.offsetWidth || imgEl.width;
+
+        context.drawImage(imgEl, 0, 0);
+
+        try {
+            data = context.getImageData(0, 0, width, height);
+        } catch(e) {
+            /* security error, img on diff domain */
+            return defaultRGB;
+        }
+
+        length = data.data.length;
+
+        while ( (i += blockSize * 4) < length ) {
+            ++count;
+            rgb.r += data.data[i];
+            rgb.g += data.data[i+1];
+            rgb.b += data.data[i+2];
+        }
+
+        // ~~ used to floor values
+        rgb.r = ~~(rgb.r/count);
+        rgb.g = ~~(rgb.g/count);
+        rgb.b = ~~(rgb.b/count);
+
+        console.log("average", rgb);
+
+        document.getElementById('npmatch').style.backgroundColor = 'rgb(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ')';
+
+        return rgb;
+     });
 
     }
 
