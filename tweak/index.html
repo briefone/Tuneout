@@ -103,6 +103,10 @@ jhunter@tunein.com
       --darkuiiconhover:var(--ink3);
       --darkuiiconpress: var(--ink5);
 
+      --darkuioutlinebtn: var(--ink1);
+      --darkuioutlinebtnhover: var(--ink3);
+      --darkuioutlinebtnpress: var(--ink3);
+
       --rowspacing: 16px;
 
       --contentheadspacing: 0;
@@ -127,6 +131,9 @@ jhunter@tunein.com
       --albumshadow: var(--ink11);
       --albumblur: 150px;
       --albumalpha: 1;
+
+      --profilebg: var(--ink);
+      --profiletext: var(--ink1);
     }
 
     .darkmode {
@@ -151,6 +158,9 @@ jhunter@tunein.com
       --darkuiiconpress: var(--ink8);
 
       --miniplayerborder: var(--ink9);
+
+      --profilebg: var(--ink2);
+      --profiletext: var(--ink12);
     }
 
     .darkui {
@@ -159,10 +169,16 @@ jhunter@tunein.com
       --circlebtnpress: var(--ink7);
 
       --statusbar:var(--ink11);
+
+      
     }
 
     .darkmode .darkui {
       --statusbar:var(--ink1);
+
+      --darkuioutlinebtn: var(--ink12);
+      --darkuioutlinebtnhover: var(--ink10);
+      --darkuioutlinebtnpress: var(--ink10);
     }
 
     .inverttabbar {
@@ -283,18 +299,21 @@ jhunter@tunein.com
       .tweak input[type=range]:hover {background:rgba(255,255,255,.12);}
       .tweak input[type=range]:active {background:rgba(255,255,255,.15);}
 
-    .btn {min-width:200px;transition:background-color 150ms ease-in-out, border-color 150ms ease-in-out, color 150ms ease-in-out;display:inline-flex;cursor:pointer;border-radius:var(--buttonradius);color:var(--btntext);background:var(--btndefault);font-size:16px;font-weight:600;height:40px;padding:0 16px;align-items: center;justify-content: center;user-select:none;box-sizing:border-box;}
+    .btn {transition:background-color 150ms ease-in-out, border-color 150ms ease-in-out, color 150ms ease-in-out;display:inline-flex;cursor:pointer;border-radius:var(--buttonradius);color:var(--btntext);background:var(--btndefault);font-size:16px;font-weight:600;height:40px;padding:0 16px;align-items: center;justify-content: center;user-select:none;box-sizing:border-box;}
       .btn:hover {background:var(--btnhover);}
-      .pressonly .btn:hover {background:var(--btndefault);}
-      .btn:active, .pressonly .btn:active {background:var(--btnpress);}
+      .btn:active {background:var(--btnpress);}
 
-    .outline .btn {background-color: transparent;border:2px solid var(--btndefault);color: var(--btndefault);padding:0 14px;}
-    .outline .btn:hover {background-color: transparent;border-color:var(--btnhover);color: var(--btnhover);}
-    .pressonly.outline  .btn:hover {background-color: transparent;border-color:var(--btndefault);color: var(--btndefault);}
-    .outline .btn:active, .pressonly.outline .btn:active {background-color: transparent;border-color:var(--btnpress);color: var(--btnpress);}
+    .outlinebtn.btn {background-color: transparent;border:2px solid var(--btndefault);color: var(--btndefault);padding:0 14px;}
+    .outlinebtn.btn:hover {background-color: transparent;border-color:var(--btnhover);color: var(--btnhover);}
+    .outlinebtn.btn:active {background-color: transparent;border-color:var(--btnpress);color: var(--btnpress);}
 
-    .outline.fill .btn:active, .pressonly.outline.fill .btn:active {background-color: var(--btnpress);border-color:var(--btnpress);color: white;}
-      .outline.fill.onink .btn:active, .pressonly.outline.fill.onink .btn:active {color: var(--inkdefault);}
+    .outlinebtn.fill.btn:active {background-color: var(--btnpress);border-color:var(--btnpress);color: white;}
+      .outlinebtn.fill.onink .btn:active {color: var(--inkdefault);}
+
+      .darkui .outlinebtn {border-color:var(--darkuioutlinebtn);color:var(--darkuioutlinebtn);}
+        .darkui .outlinebtn:hover {border-color:var(--darkuioutlinebtnhover);color:var(--darkuioutlinebtnhover);}
+        .darkui .outlinebtn:active {border-color:var(--darkuioutlinebtnpress);background-color:var(--darkuioutlinebtnpress);color:var(--ink);}
+          .darkmode .darkui .outlinebtn:active {color:var(--ink3);}
 
     .darktext .btn {color:var(--ink9);}
       .darktext .btn:hover {color:var(--ink10);}
@@ -367,7 +386,8 @@ jhunter@tunein.com
           .heading .chevron:hover svg {fill:var(--btnhover);}
           .heading .chevron:active svg {fill:var(--btnpress);}
         .heading.clickable {cursor: pointer;user-select:none;}
-      .scrollrow {display:flex;width:100%;align-items:start;padding:8px 0 16px 24px;box-sizing: border-box;overflow-x:auto;white-space: nowrap;gap:var(--tilegap);scroll-padding-right:24px;-webkit-overflow-scrolling:touch; -ms-overflow-style: -ms-autohiding-scrollbar;}
+      .scrollrow {display:flex;width:100%;align-items:start;padding:8px 0 0 24px;box-sizing: border-box;overflow-x:auto;white-space: nowrap;gap:var(--tilegap);scroll-padding-right:24px;-webkit-overflow-scrolling:touch; -ms-overflow-style: -ms-autohiding-scrollbar;}
+        .scrollrow.textless {padding-bottom:16px;}
         .scrollitem {display:inline-flex;cursor:pointer;user-select:none;flex-direction: column;max-width: 104px;}
           .scrollitem:last-child {padding-right:24px}
           .scrollitem .label {padding-top:8px;color:var(--ink);font-size:16px;font-weight:500;white-space:normal;}
@@ -460,6 +480,8 @@ jhunter@tunein.com
               .modalclose:hover {color:var(--inkhover);}
               .modalclose:active {color:var(--inkpress);}
 
+      .modalcontent {position:absolute;top:72px;left:0;right:0;bottom:0;overflow-y:scroll;-webkit-overflow-scrolling:touch;}
+
     #nowplaying {position: absolute;top:0;left:0;right:0;bottom:0;padding-top:24px;background:var(--darkui);z-index:1337;transform:translateY(100%);pointer-events: none;transition:all 200ms ease-in-out;color:var(--darkuitext);}
       .nppage #nowplaying {transform:translateY(0);pointer-events: all;}
             #nowplaying .status {height: 24px;background: rgba(0,0,0,.03);width: 100%;position:absolute;top:0;left:0;right:0;z-index:1337;}
@@ -543,10 +565,14 @@ jhunter@tunein.com
 
 
 
-
-
-
-
+    .profilehero {width:100%;background:var(--profilebg) url('../patterns/dash.svg') no-repeat center / cover;color:var(--profiletext);}
+      .userinfo {display:flex;gap:16px;padding:24px 24px 16px;align-items:center;}
+        .userphoto {width:80px;height:80px;border-radius:50%;background:white url('./imgs/user.jpg') no-repeat center / cover;border:1px solid var(--ink4);box-sizing:border-box;}
+        .userdetails {}
+            .username {font-size:22px;font-weight:600;}
+            .userhandle {font-size:16px;font-weight:400;color:var(--ink6);}
+        .profileactions {display:flex;gap:23px;padding:0 24px 16px;}
+          .profileactions .btn {width:50%;}
 
 
 
@@ -698,6 +724,38 @@ jhunter@tunein.com
       <div class=modalheading>
         <div class=modaltitle>Profile</div><div class=modalclose data-page=profile>Done</div>  
       </div>
+      <div class=modalcontent>
+        <div class="profilehero darkui">
+          <div class=userinfo>
+            <div class=userphoto></div>
+            <div class=userdetails>
+              <div class=username>Lindsay Weir</div>
+              <div class=userhandle>Weird</div>
+            </div>
+          </div>
+          <div class=profileactions>
+            <div class="btn outlinebtn">Edit Profile</div>
+            <div class="btn outlinebtn">Sign Out</div>
+          </div>
+        </div>
+
+        <div class=contentrow style="padding-top:4px;">
+          <div class="listitem " >
+            <div class=title>Settings</div>
+            
+          </div>
+          <div class="listitem ">
+            <div class=title>TuneIn Premium</div>
+           
+          </div>
+          <div class="listitem ">
+            <div class=title>About TuneIn</div>
+          </div>
+          <div class="listitem ">
+            <div class=title>Get Help</div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div id=carmode class=darkui>
@@ -781,7 +839,7 @@ jhunter@tunein.com
             <div class=heading>
               <h4>Recent</h4>
             </div>
-            <div class=scrollrow>
+            <div class="scrollrow textless">
               <div class=scrollitem>
                 <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/s247154/images/logoq.png);" data-url="https://rfcmedia.streamguys1.com/sradulthits.mp3"></div>
               </div><div class=scrollitem>
