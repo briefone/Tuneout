@@ -335,6 +335,7 @@ jhunter@tunein.com
       .tabwrap .tabline {height:3px;width:54.86px;background:var(--ink);position:absolute;bottom:0;left:0;transform:translateX(24px);transition: all 200ms ease-in-out;}
 
     .content {position:absolute;top:88px;left:0;bottom:56px;right:0;overflow-y: scroll;}
+      .played .content {bottom:112px;}
 
     #home .content {top:136px;}
     #search .content {top:136px;}
@@ -384,7 +385,8 @@ jhunter@tunein.com
           #tabbar .tab.current svg {fill:var(--tabcurrent);}
           #tabbar .tab.current {color:var(--tabcurrent);}
 
-    .navtitle {font-size:20px;font-weight:600;display:none;}
+    .navtitle {font-size:20px;font-weight:600;display:none;transition:all 200ms ease-in-out;}
+      .subnavtitle {position: absolute;left:50%;transform:translateX(100px);display:flex;pointer-events:none;opacity:0;}
 
 
     input {outline:none;}
@@ -403,8 +405,8 @@ jhunter@tunein.com
 
     .homepage .hometitle, .librarypage .librarytitle, .searchpage .searchtitle, .premiumpage .premiumtitle {display:flex;}
 
-    .currenttitle {opacity:1;}
-      .oldtitle {opacity:0;}
+    .currenttitle {opacity:1;transform:translateX(-50%);}
+      .oldtitle {opacity:0;transform:translateX(-100px);}
 
     #hometabs, #searchbar {display:none;}
     .homepage #hometabs, .searchpage #searchbar {display:flex;}
@@ -665,17 +667,17 @@ jhunter@tunein.com
             </div>
             <div class=scrollrow>
               <div class=scrollitem>
-                <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/s247154/images/logoq.png);"></div>
+                <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/s247154/images/logoq.png);" data-url="https://rfcmedia.streamguys1.com/sradulthits.mp3"></div>
               </div><div class=scrollitem>
-                <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/p952868/images/logoq.png);"></div>
+                <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/p952868/images/logoq.png);" data-url="http://nyt-injected.simplecastaudio.com/03d8b493-87fc-4bd1-931f-8a8e9b945d8a/episodes/5a933735-0bf5-45d3-a672-6674c5f4ae04/audio/128/default.mp3/default.mp3_d1cb969b1b3fa8a9e1247520d4827d9e_30986106.mp3?aid=rss_feed&awCollectionId=03d8b493-87fc-4bd1-931f-8a8e9b945d8a&awEpisodeId=5a933735-0bf5-45d3-a672-6674c5f4ae04&feed=54nAGcIl&hash_redirect=1&x-total-bytes=30986106&x-ais-classified=download&listeningSessionID=0CD_382_20__975a3a23a61607187de24fcd7591ef179c79eaf2"></div>
               </div><div class=scrollitem>
-                <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/s249976/images/logoq.png);"></div>
+                <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/s249976/images/logoq.png);" data-url="https://rfcmedia.streamguys1.com/newpophits.mp3"></div>
               </div><div class=scrollitem>
-                <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/p983396/images/logoq.png);"></div>
+                <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/p983396/images/logoq.png);" data-url="https://edge2.pod.npr.org/anon.npr-mp3/npr/upfirst/2021/01/20210120_upfirst_uf_new_trump_leaves_wh.mp3/20210120_upfirst_uf_new_trump_leaves_wh.mp3_3c7278103420af376f0a61580cd6c4f6_10079328.mp3?awCollectionId=510318&awEpisodeId=957889681&orgId=1&d=631&p=510318&story=957889681&t=podcast&e=957889681&size=10079307&ft=pod&f=510318&hash_redirect=1&x-total-bytes=10079328&x-ais-classified=download&listeningSessionID=0CD_382_20__8377f9a2f90de7b91b72270f180a608cb13ffedf"></div>
               </div><div class=scrollitem>
-                <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/s249990/images/logoq.png);"></div>
+                <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/s249990/images/logoq.png);" data-url="http://rfcmedia.streamguys1.com/alternativehits.mp3"></div>
               </div><div class=scrollitem>
-                <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/s259261/images/logoq.png);"></div>
+                <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/s259261/images/logoq.png);" data-url="https://rfcmedia.streamguys1.com/specs.mp3"></div>
               </div>
             </div>
           </div>
@@ -689,22 +691,22 @@ jhunter@tunein.com
               </div>
             </div>
             <div class=scrollrow>
-              <div class=scrollitem>
+              <div class="scrollitem np" data-url="https://rfcmedia.streamguys1.com/80hits.mp3">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/s249945/images/logoq.png);"></div>
                 <div class=label>80's Hits</div>
-              </div><div class=scrollitem>
+              </div><div class="scrollitem np" data-url="http://rfcmedia.streamguys1.com/coffeehouse.mp3">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/s304385/images/logoq.png);"></div>
                 <div class=label>Coffee House</div>
-              </div><div class=scrollitem>
+              </div><div class="scrollitem np" data-url="http://rfcmedia.streamguys1.com/softrockhits.mp3">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/s249905/images/logoq.png);"></div>
                 <div class=label>Soft Rock Hits</div>
-              </div><div class=scrollitem>
+              </div><div class="scrollitem np" data-url="http://rfcmedia.streamguys1.com/classical.mp3">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/s250018/images/logoq.png);"></div>
                 <div class=label>Sounds of the Symphony</div>
-              </div><div class=scrollitem>
+              </div><div class="scrollitem np" data-url="http://rfcmedia.streamguys1.com/relaxation.mp3">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/s249937/images/logoq.png);"></div>
                 <div class=label>Relax and Unwind</div>
-              </div><div class=scrollitem>
+              </div><div class="scrollitem np" data-url="http://rfcmedia.streamguys1.com/mixlite.mp3">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/s247158/images/logoq.png);"></div>
                 <div class=label>Mix Lite</div>
               </div>
@@ -720,19 +722,19 @@ jhunter@tunein.com
               </div>
             </div>
             <div class=itemlist>
-              <div class=rowitem>
+              <div class="rowitem np" data-url="https://content.production.cdn.art19.com/validation=1611278481,0e6c4015-fd42-5917-aa06-71debaa0c0a3,-9_GL23d833S4Ai_mJmkeKeM3co/episodes/f36d44a3-0a94-484a-b21d-27f6d1e08b98/0878e148d28a3defac93c0f72a8b9ad0d88a3ea8eef0d9d7eb5883ef88002f694f2624de135f5f0e2e50ed23ac31180cc0880e35b63ea10e2daa70d7d3840c3a/Spark-Allende-V7-BP-Mix.mp3">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p1389549/images/logoq.png);"></div><div class=description>
                   <div class=title>Director Kemp Powers on the creative journey behind Pixar's "Soul."</div>
                   <div class=meta>1/12/2021 - 43:12</div>
                 </div>
               </div>
-              <div class=rowitem>
+              <div class="rowitem np" data-url="https://cdn.simplecast.com/audio/81fc9f37-3af1-4e45-8d96-ad57b71d9f8b/episodes/9cfa0e69-9879-4473-bda7-4a319798237f/audio/158c1018-a5d2-4a3c-9420-34eca8a2bf45/default_tc.mp3?aid=rss_feed&feed=i5UU6Ljx">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p394/images/logoq.png);"></div><div class=description>
                   <div class=title>Covid Fact Check, Aging Cells, News Roundup</div>
                   <div class=meta>Janurary 12, 2021 - 47:01</div>
                 </div>
               </div>
-              <div class=rowitem>
+              <div class="rowitem np" data-url="https://dts.podtrac.com/redirect.mp3/dovetail.prxu.org/357/0a60222c-8e67-4585-a237-09fc01f7cec6/EP2_Leonard_Final_SegA.mp3">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p1389827/images/logoq.png);"></div><div class=description>
                   <div class=title>How to be a Better Human</div>
                   <div class=meta>Janurary 12, 2021 - 33:07</div>
@@ -745,31 +747,31 @@ jhunter@tunein.com
               <h2>Because you listened to Overheard at National Geographic</h2>
             </div>
             <div class=scrollrow>
-              <div class=scrollitem>
-                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p1161882/images/logoq.png);"></div>
-                <div class=label>Conan O’Brien Needs A Friend</div>
-              </div><div class=scrollitem>
+              <div class="scrollitem np" data-url="https://mcdn.podbean.com/mf/web/87pwq4/JREE_-_Episode_117_-_MIXED9sfu2.mp3">
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p1349148/images/logoq.png);"></div>
+                <div class=label>The Joe Rogan Experience Experience</div>
+              </div><div class="scrollitem np" data-url="https://hwcdn.libsyn.com/p/d/c/1/dc12c4c90e42c1f1/WTF_-_EPISODE_1193_DANIEL_LANOIS.mp3?c_id=93699863&cs_id=93699863&destination_id=90823&expiration=1611200696&hwt=1d6ab81bef1606f9e12121b122b58a89">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p351052/images/logoq.png);"></div>
                 <div class=label>WTF with Marc Maron Podcast</div>
-              </div><div class=scrollitem>
+              </div><div class="scrollitem np" data-url="https://play.podtrac.com/npr-381444908/edge1.pod.npr.org/anon.npr-mp3/npr/fa/2021/01/20210120_fa_fapodweds.mp3?awCollectionId=381444908&awEpisodeId=958822647&orgId=1&d=2872&p=381444908&story=958822647&t=podcast&e=958822647&size=45857907&ft=pod&f=381444908">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p17/images/logoq.png);"></div>
                 <div class=label>Fresh Air</div>
-              </div><div class=scrollitem>
+              </div><div class="scrollitem np" data-url="https://traffic.libsyn.com/secure/wakingup/Making_Sense_231_McChrystal_and_Fussell.mp3?dest-id=480596">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p861086/images/logoq.png);"></div>
                 <div class=label>Making Sense with Sam Harris</div>
-              </div><div class=scrollitem>
+              </div><div class="scrollitem np" data-url="https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/chtbl.com/track/8G441/traffic.megaphone.fm/WWO1928993865.mp3">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p1136187/images/logoq.png);"></div>
                 <div class=label>Inside of You with Michael Rosenbaum</div>
-              </div><div class=scrollitem>
+              </div><div class="scrollitem np" data-url="https://www.podtrac.com/pts/redirect.mp3/chtbl.com/track/5899E/traffic.megaphone.fm/HSW7514578250.mp3">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p460956/images/logoq.png);"></div>
                 <div class=label>Here's The Thing with Alec Baldwin</div>
-              </div><div class=scrollitem>
+              </div><div class="scrollitem np" data-url="https://dts.podtrac.com/redirect.mp3/chtbl.com/track/9EE2G/rss.art19.com/episodes/909422a9-5a4e-4a8c-b85f-ce5dcfecc17c.mp3">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p1222436/images/logoq.png);"></div>
                 <div class=label>The Shrink Next Door</div>
-              </div><div class=scrollitem>
+              </div><div class="scrollitem np" data-url="https://chtbl.com/track/479722/traffic.megaphone.fm/CRMD3570909487.mp3">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p946961/images/logoq.png);"></div>
                 <div class=label>Pod Save America</div>
-              </div><div class=scrollitem>
+              </div><div class="scrollitem np" data-url="https://dts.podtrac.com/redirect.mp3/chtbl.com/track/9EE2G/pdst.fm/e/rss.art19.com/episodes/72a99a4c-66f1-4675-9b98-3d3e658b1db6.mp3">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p1220956/images/logoq.png);"></div>
                 <div class=label>Life is Short with Justin Long</div>
               </div>
@@ -780,25 +782,25 @@ jhunter@tunein.com
               <h2>Popular Podcasts in Your Area</h2>
             </div>
             <div class=scrollrow>
-              <div class=scrollitem>
+              <div class="scrollitem np" data-url="http://feedproxy.google.com/~r/NewshourFullProgramPodcast/~5/YA6PMiEQrC4/210120_fullepisode_ID3_1.mp3">
                 <div class=thumb style="background-image:url(https://cdn-radiotime-logos.tunein.com/p47926q.png);"></div>
                 <div class=label>PBS News Hour</div>
-              </div><div class=scrollitem>
+              </div><div class="scrollitem np" data-url="https://dts.podtrac.com/redirect.mp3/chtbl.com/track/6D589D/pdst.fm/e/rss.art19.com/episodes/68574eb6-4b15-4948-9ce1-e7c849122d62.mp3">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p999743/images/logoq.png);"></div>
                 <div class=label>Deadline: White House</div>
-              </div><div class=scrollitem>
+              </div><div class="scrollitem np" data-url="https://dcs.megaphone.fm/HSW8356008250.mp3?key=c5f6e44021685917d301db6d322bc9a7">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p295446/images/logoq.png);"></div>
                 <div class=label>Stuff You Should Know</div>
-              </div><div class=scrollitem>
+              </div><div class="scrollitem np" data-url="https://dts.podtrac.com/redirect.mp3/chtbl.com/track/6D589D/pdst.fm/e/rss.art19.com/episodes/e25a1197-872e-41a2-bdf3-b29990c347ee.mp3">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p921985/images/logoq.png);"></div>
                 <div class=label>The 11th Hour with Brian Williams</div>
-              </div><div class=scrollitem>
+              </div><div class="scrollitem np" data-url="https://play.podtrac.com/npr-344098539/edge1.pod.npr.org/anon.npr-mp3/npr/waitwait/2021/01/20210116_waitwait_wwdtmpodcast210116.mp3?awCollectionId=344098539&awEpisodeId=957558090&orgId=1&d=3003&p=344098539&story=957558090&t=podcast&e=957558090&size=47941656&ft=pod&f=344098539">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p46/images/logoq.png);"></div>
                 <div class=label>Wait Wait... Don't Tell Me! from NPR</div>
-              </div><div class=scrollitem>
+              </div><div class="scrollitem np" data-url="http://pd.npr.org/anon.npr-mp3/npr/news/newscast.mp3">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p212/images/logoq.png);"></div>
                 <div class=label>NPR News Now</div>
-              </div><div class=scrollitem>
+              </div><div class="scrollitem np" data-url="http://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/http/vpid/p094m96n.mp3">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p5/images/logoq.png);"></div>
                 <div class=label>News Hour</div>
               </div>
@@ -984,7 +986,27 @@ jhunter@tunein.com
   </div>
   <audio controls="" loop="" id="meow" style="display:none;" src="./audio/nyancat.mp3" type="audio/mpeg" preload="auto"></audio>
   <script>
+    /* Streams
 
+      https://rfcmedia.streamguys1.com/80hits.mp3
+      http://rfcmedia.streamguys1.com/70hits.mp3
+      https://rfcmedia.streamguys1.com/MusicPulse.mp3
+      https://rfcmedia.streamguys1.com/newpophits.mp3
+
+      //Sports
+      https://dcs.megaphone.fm/ESP7542621336.mp3?key=f5e55a3250c3a7554d9058c289fbc7a3
+
+
+      //News
+      http://tunein.streamguys1.com/bloomberg991?ads.cust_params=gender%253dmale%2526age%253d33%2526partnerId%253dRadioTime%2526ads_partner_alias%253dRadioTime%2526version%253d4.38%2526premium%253dfalse%2526abtest%253d%2526language%253den-US%2526stationId%253ds165740%2526is_ondemand%253dfalse%2526genre_id%253dg24%2526class%253dtalk%25252cspoken%2526is_family%253dfalse%2526is_mature%253dfalse%2526country_region_id%253d227%2526station_language%253denglish%2526programId%253dp806745%2526is_event%253dfalse&url=https%3a%2f%2ftunein.com%2fdesc%2fs165740%2f&description_url=https%3a%2f%2ftunein.com%2fdesc%2fs165740%2f&ads.npa=1&ads.gdfp_req=1&ads.us_privacy=1YNY&ads.ppid=d5469d2886a587f30ff8aa538acda161&aw_0_1st.age=33&aw_0_1st.gender=male&aw_0_1st.playerid=RadioTime&aw_0_1st.skey=1611190015&source=TuneIn&aw_0_1st.premium=false&us_privacy=1YNY&aw_0_1st.platform=tunein
+
+      http://cheddar.streamguys1.com/live-mp3?aw_0_1st.age=33&aw_0_1st.gender=male&aw_0_1st.playerid=RadioTime&aw_0_1st.skey=1611190047&source=TuneIn&aw_0_1st.premium=false&us_privacy=1YNY
+
+      http://streaming314.radionomy.com/foxnews
+
+      https://tunein.streamguys1.com/cnn-new
+
+    */
 
 /*
     // radio  
@@ -1203,12 +1225,14 @@ jhunter@tunein.com
     }
 
     function nowplaying(e){
+      let url = this.dataset.url || './audio/nyancat.mp3';
       document.body.classList.add('nppage', 'modalview');
 
       let meow = document.getElementById('meow');
-      if (meow.paused){
-        meow.play();
+      if ( meow.src != url){
+        meow.src = url;
       }
+      meow.play();
 
       let album = window.getComputedStyle(this, null).getPropertyValue('background-image');
 
@@ -1315,8 +1339,8 @@ jhunter@tunein.com
 
       let b = document.getElementById(a + 'page');
       let c = document.getElementById(p);
-      let d = document.getElementsByClassName(p + 'title')[0];
-      let f = document.getElementsByClassName(a + 'title')[0];
+      let d = document.getElementsByClassName(a + 'title')[0];
+      let f = document.getElementsByClassName(p + 'title')[0];
 
       c.classList.add('hidecontent');
       b.classList.add('active');
@@ -1336,9 +1360,13 @@ jhunter@tunein.com
 
       let b = window.activepage;
       let c = window.activeparent;
+      let d = window.activenav;
+      let f = window.prevnav;
 
       c.classList.remove('hidecontent');
       b.classList.remove('active');
+      d.classList.remove('currenttitle');
+      f.classList.remove('oldtitle');
     }
 
     window.onresize = resize;
