@@ -607,7 +607,27 @@ jhunter@tunein.com
         metadataTypes: ["icy", "ogg"]
       });
 
+      // const icecastReader = new IcecastMetadataReader({icyMetaInt, onStream, onMetadata})
+
       player2.play();
+
+
+      fetch('http://cors.io/?https://rfcmedia.streamguys1.com/softrockhits.mp3', {
+        method: "GET",
+        headers: {
+          "Icy-MetaData": "1",
+        }
+      })
+      .then(async (response) => {
+        // const icecast = new IcecastReadableStream(
+        //   response,
+        //   options // see IcecastMetadataReader
+        // );
+        
+        // await icecast.startReading();
+
+        console.log(response)
+      });
   </script>
 </head>
 <body>
