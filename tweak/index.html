@@ -610,6 +610,19 @@ jhunter@tunein.com
 
       player2.play();
 
+      const options = {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        "Icy-MetaData": "1",
+        "Access-Control-Expose-Headers": "Access-Token, Uid"
+      }
+    }
+    fetch('https://rfcmedia.streamguys1.com/softrockhits.mp3', options)
+    .then(res => console.log(res.headers))
+    .catch(err => console.log(err));
+
+    navigator.serviceWorker.register('../js/ugh.js')
   </script>
 </head>
 <body>
