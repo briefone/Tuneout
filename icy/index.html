@@ -59,6 +59,8 @@
     const onMetadata = (metadata) => {
       metadataEl.innerHTML = `<td><pre>${formatMetadata(metadata)}</pre></td>`;
       onMetadataEnqueue();
+
+      console.log(metadata);
     };
 
     const onMetadataEnqueue = () => {
