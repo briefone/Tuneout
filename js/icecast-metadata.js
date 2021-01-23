@@ -1,17 +1,4 @@
-/**
- * @license
- * @see https://github.com/eshaz/icecast-metadata-js
- * @copyright 2021 Ethan Halsall
- *  This file is part of icecast-metadata-player.
- *
- *  icecast-metadata-player free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Lesser General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  icecast-metadata-player distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. /*! 
+/*! 
  * Copyright 2021 Ethan Halsall
  * https://github.com/eshaz/icecast-metadata-js
  *
