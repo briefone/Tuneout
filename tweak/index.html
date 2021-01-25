@@ -135,6 +135,15 @@ jhunter@tunein.com
 
       --profilebg: var(--ink);
       --profiletext: var(--ink1);
+
+      --nptrack: var(--ink9);
+      --nplive: var(--ink);
+      --nplivetext: var(--ink1);
+      --npbuffer: var(--ink7);
+      --nptimestamp: var(--ink1);
+      --nplength: var(--ink5);
+      --npprogress: var(--ink1);
+      --npextra: var(--ink9);
     }
 
     .darkmode {
@@ -162,6 +171,15 @@ jhunter@tunein.com
 
       --profilebg: var(--ink2);
       --profiletext: var(--ink12);
+
+      --nptrack: var(--ink4);
+      --nplive: var(--ink1);
+      --nplivetext: var(--ink12);
+      --npbuffer: var(--ink6);
+      --nptimestamp: var(--ink12);
+      --nplength: var(--ink7);
+      --npprogress: var(--ink12);
+      --npextra: var(--ink3);
     }
 
     .darkui {
@@ -250,8 +268,8 @@ jhunter@tunein.com
     }
 
     input[type=range]::-webkit-slider-thumb {width: 16px;height: 16px;background: white;display: block;box-shadow: 0 2px 4px rgba(0,0,0,.15);border-radius: 50%;transition: all 150ms ease-in-out;}
-    input[type=range]:hover::-webkit-slider-thumb {box-shadow:0 2px 2px rgba(0,0,0,.2);}
-    input[type=range]:active::-webkit-slider-thumb {box-shadow:0 2px 2px rgba(0,0,0,.3);cursor:-webkit-grabbing;}
+      input[type=range]:hover::-webkit-slider-thumb {box-shadow:0 2px 2px rgba(0,0,0,.2);}
+      input[type=range]:active::-webkit-slider-thumb {box-shadow:0 2px 2px rgba(0,0,0,.3);cursor:-webkit-grabbing;}
     input[type=range]:focus::-webkit-slider-thumb {}
     input[type=range]:hover:focus::-webkit-slider-thumb {}
 
@@ -498,7 +516,7 @@ jhunter@tunein.com
               .darkui .iconbtn:hover  svg {fill:var(--darkuiiconhover);}
               .darkui .iconbtn:active  svg {fill:var(--darkuiiconpress);}
 
-      #nowplaying .album {padding:8px 24px;display:flex;width:100%;align-items: center;justify-content: center;max-width:600px;margin:0 auto;box-sizing:border-box;}
+      #nowplaying .album {padding:8px 24px;display:flex;width:100%;align-items: center;justify-content: center;max-width:33vh;margin:0 auto;box-sizing:border-box;}
             #nowplaying .album .npalbum {width:100%;height:0;padding-top:100%;background-color:rgba(255, 255, 255, 0.05);background-position: center;background-size:cover;background-image:url(./imgs/nyan.gif);}
 
     .specialtoggles {display:none;}
@@ -576,11 +594,40 @@ jhunter@tunein.com
           .profileactions .btn {width:50%;}
 
     
-    .npcontrols {display:flex;align-items:center;justify-content: center;}
+    .npcontrols {display:flex;align-items:center;justify-content: center;height:88px;margin-bottom:24px;}
     .npplay, .nppause {width:72px;height:72px;}
-            .nppause {display:none;}
-            .playing .nppause {display:flex;}
-            .playing .npplay {display:none;}
+      .nppause {display:none;}
+      .playing .nppause {display:flex;}
+      .playing .npplay {display:none;}
+
+    .npinfo {padding:40px 24px 0;}
+      .npstation {font-size:16px;font-weight:500;text-transform:uppercase;}
+      .npmeta {font-size:20px;font-weight:500;padding:2px 0;}
+      .nplist {font-size:16px;font-weight:500;color:var(--ink6);}
+
+    
+    .npscrubber {width:calc(100% - 48px);margin-left:24px;height:48px;position: relative;margin-bottom:24px;}
+      .npscrubber input[type=range] {width:100%;height:48px;position: relative;z-index:88;}
+        .npscrubber input[type=range]::-webkit-slider-thumb {width:8px;height:8px;background: var(--npprogress);display: block;box-shadow:none;border-radius:50%;transition: all 150ms ease-in-out;}
+          .npscrubber input[type=range]:hover::-webkit-slider-thumb {box-shadow:none;}
+          .npscrubber input[type=range]:active::-webkit-slider-thumb {box-shadow:none;cursor:-webkit-grabbing;}
+      
+      .npscrubber .track {position: absolute;top:50%;margin-top:-2px;left:0;right:0;border-radius:2px;height:4px;background:var(--nptrack);z-index:1;pointer-events: none;}
+      .npscrubber .buffer {position: absolute;top:50%;margin-top:-2px;left:0;border-radius:2px;height:4px;background:var(--npbuffer);z-index:2;pointer-events: none;}
+      .npscrubber .progress {position: absolute;top:50%;margin-top:-2px;left:0;border-radius:2px 0 0 2px;min-width:4px;max-width:calc(100% - 4px);height:4px;background:var(--npprogress);z-index:3;pointer-events: none;}
+      .npscrubber .timestamp {position: absolute;top:calc(50% + 8px);left:0;pointer-events: none;color:var(--nptimestamp);font-size:12px;font-weight:600;}
+      .npscrubber .length {position: absolute;top:calc(50% + 8px);right:0;text-align:right;color:var(--nplength);pointer-events: none;font-size:12px;font-weight:600;}
+
+      .livescrub {height:48px;width:100%;position:relative;display:none;}
+            .livescrub .track {position: absolute;top:50%;margin-top:-2px;left:0;right:0;border-radius:2px;height:4px;background:var(--nptrack);z-index:1;pointer-events: none;}
+            .livescrub .livetext {position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);padding:0 148px;background: linear-gradient(90deg, rgba(255,255,255,0) 0%, var(--nplive) 50%, rgba(255,255,255,0) 100%);color:var(--nplivetext);z-index:5;font-size:14px;font-weight:600;}
+
+      .npscrubber.live .scrubbable {display:none}
+      .npscrubber.live .livescrub {display:block;}
+
+
+    .npextras {margin:0 24px;border-radius:4px;background:var(--npextra);}
+
 
 
     @media screen and (max-width: 666px) {
@@ -827,9 +874,19 @@ jhunter@tunein.com
         <div class=npmeta>Meta</div>
         <div class=nplist>list</div>
       </div>
-      <div class=npscrubber>
-        scrub
-        <input type=range id=npscrub  />
+      <div class="npscrubber live" id=npscrubber>
+        <div class=scrubbable>
+          <input type=range id=npscrub />
+          <div class=track id=nptrack></div>
+          <div class=buffer id=npbuffer></div>
+          <div class=progress id=npprogress></div>
+          <div class=timestamp id=nptimestamp>0:00</div>
+          <div class=length id=nplength>11:11</div>
+        </div>
+        <div class=livescrub>
+          <div class=track></div>
+          <div class=livetext>LIVE</div>
+        </div>
       </div>
       <div class=npcontrols>
         <div class="npplay circlebtn">
@@ -1495,23 +1552,70 @@ jhunter@tunein.com
 
         // meow.onloadedmetadata = metaloaded;
 
+        document.getElementById("npbuffer").style.width = 0;
+        document.getElementById("npprogress").style.width = 0;
+
         meow.onloadedmetadata = (event) => {
           console.log('The duration and dimensions ' + 'of the media and tracks are now known. ', meow.duration);
 
           let dur = meow.duration;
 
           if ( dur == Infinity){
+            console.log('infinite');
 
+            document.getElementById('npscrubber').classList.add('live');
             return;
+          } else {
+            document.getElementById('npscrubber').classList.remove('live');
           }
 
           document.getElementById('npscrub').max = dur;
+
+          let len = document.getElementById('nplength');
+          len.empty();
+          len.appendChild(document.createTextNode(formatDuration(dur)));
         };
 
+        meow.onprogress = (event) => {
+          var duration =  meow.duration;
+          if (duration > 0) {
+            for (var i = 0; i < meow.buffered.length; i++) {
+                  if (meow.buffered.start(meow.buffered.length - 1 - i) < meow.currentTime) {
+                      document.getElementById("npbuffer").style.width = (meow.buffered.end(meow.buffered.length - 1 - i) / duration) * 100 + "%";
+                      break;
+                  }
+              }
+          }
+        }
+
         meow.ontimeupdate = (event) => {
+          let dur = meow.duration;
+
+          if ( dur == Infinity){
+            console.log('infinite');
+            return;
+          }
+
+          let time = meow.currentTime;
           console.log(event, 'ontimeupdate ', meow.currentTime);
 
-          document.getElementById('npscrub').value = meow.currentTime;
+          document.getElementById('npscrub').value = time;
+
+          let len = document.getElementById('nptimestamp');
+          len.empty();
+          len.appendChild(document.createTextNode(formatDuration(time)));
+
+          
+
+          let prog = document.getElementById('npprogress');
+          var complete = (time / dur);
+
+          var offset = 4;
+          if ( complete > .5){
+            offset = -4
+          }
+
+          prog.style.width = (complete * prog.parentElement.offsetWidth) + offset + 'px';
         }
 
         if ( meow.src != url ){
@@ -1546,6 +1650,12 @@ jhunter@tunein.com
       document.documentElement.classList.add('played', 'playing');
 
       document.getElementById('cb4').checked = true;
+    }
+
+    function formatDuration(seconds) {
+      let time = new Date(seconds * 1000).toISOString().substr(11, 8);
+      let stamp = time.replace(/^00:/g, '');
+      return stamp;
     }
 
     function carmode(e){
@@ -1851,6 +1961,24 @@ jhunter@tunein.com
       document.documentElement.classList.remove('playing');
     }
 
+    function audioscrub(){
+      let v = this.value;
+      console.log('audio scrub', v);
+
+      let meow = document.getElementById('meow');
+      meow.currentTime = v;
+
+      let prog = document.getElementById('npprogress');
+      var complete = (v / meow.duration);
+
+      var offset = 4;
+      if ( complete > .5){
+        offset = -4
+      }
+
+      prog.style.width = (complete * prog.parentElement.offsetWidth) + offset + 'px';
+    }
+
 
     window.onresize = resize;
 
@@ -1871,6 +1999,7 @@ jhunter@tunein.com
     Attach.on('click', '.navback', navback);
     Attach.on('click', '.npplay', npplay);
     Attach.on('click', '.nppause', nppause);
+    Attach.on('input', '#npscrub', audioscrub);
     
     (function() {
       setuptweaks();
