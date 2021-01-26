@@ -144,6 +144,8 @@ jhunter@tunein.com
       --nplength: var(--ink5);
       --npprogress: var(--ink1);
       --npextra: var(--ink9);
+
+      --albummatch: transparent;
     }
 
     .darkmode {
@@ -181,6 +183,35 @@ jhunter@tunein.com
       --npprogress: var(--ink12);
       --npextra: var(--ink3);
     }
+
+    .vibrantbg {--albummatch:var(--vibrantbg);}
+    .mutedbg {--albummatch:var(--mutedbg);}
+    .darkvibrantbg {--albummatch:var(--darkvibrantbg);}
+    .lightvibrantbg {--albummatch:var(--lightvibrantbg);}
+    .lightmutedbg {--albummatch:var(--lightmutedbg);}
+    .darkmutedbg {--albummatch:var(--darkmutedbg);}
+
+    .albummatch {
+      --nptrack: rgba(255, 255, 255, 0.25);
+      --npbuffer: rgba(255, 255, 255, 0.25);
+      --npextra: rgba(255, 255, 255, 0.25);
+      --nplive: rgba(0, 0, 0, 0.35);
+    }
+
+    .albummatch {
+      --nplive: var(--albummatch);
+    }
+
+    .albumblur {
+      --nptrack: rgba(255, 255, 255, 0.25);
+      --npbuffer: rgba(255, 255, 255, 0.25);
+      --npextra: rgba(255, 255, 255, 0.25);
+      --nplive: rgba(0, 0, 0, 0.35);
+
+      --nptrack: linear-gradient(90deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 46%,rgba(255,255,255,0) 54%, rgba(255,255,255,0.25) 100%);
+    }
+
+    .albumblur .livescrub .livefade {display:none}
 
     .darkui {
       --circlebtn: var(--ink9);
@@ -575,7 +606,7 @@ jhunter@tunein.com
             #blurblur {position:absolute;top:0;left:0;right:0;bottom:0;z-index:2;backdrop-filter: blur(var(--albumblur));}
             #bluralbum {background-size:cover;background-position:center;position:absolute;top:0;left:0;right:0;bottom:0;z-index:1;opacity:var(--albumalpha);}
 
-    #npmatch {position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;pointer-events: none;opacity:0;}
+    #npmatch {position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;pointer-events: none;opacity:0;background-color:var(--albummatch);}
       .albummatch #npmatch {opacity:1;}
 
       .albummatchbg {display:none;position:absolute;top:0;left:0;right:0;bottom:0;}   
@@ -618,9 +649,11 @@ jhunter@tunein.com
       .npscrubber .timestamp {position: absolute;top:calc(50% + 8px);left:0;pointer-events: none;color:var(--nptimestamp);font-size:12px;font-weight:600;}
       .npscrubber .length {position: absolute;top:calc(50% + 8px);right:0;text-align:right;color:var(--nplength);pointer-events: none;font-size:12px;font-weight:600;}
 
-      .livescrub {height:48px;width:100%;position:relative;display:none;}
+      .livescrub {height:48px;width:100%;position:relative;display:none;transform: translateZ(0);}
             .livescrub .track {position: absolute;top:50%;margin-top:-2px;left:0;right:0;border-radius:2px;height:4px;background:var(--nptrack);z-index:1;pointer-events: none;}
-            .livescrub .livetext {position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);padding:0 148px;background: linear-gradient(90deg, rgba(255,255,255,0) 0%, var(--nplive) 50%, rgba(255,255,255,0) 100%);color:var(--nplivetext);z-index:5;font-size:14px;font-weight:600;}
+            .livescrub .livetext {position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);padding:0 148px;color:var(--nplivetext);z-index:5;font-size:14px;font-weight:600;line-height:20px;z-index: 2;}
+
+              .livescrub .livefade {height:4px;width:100%;max-width:460px;left:50%;position:absolute;display:block;top:50%;transform:translate(-50%, -50%);background: linear-gradient(90deg, rgba(255,255,255,0) 0%, var(--nplive) 50%, rgba(255,255,255,0) 100%);z-index:1;}
 
       .npscrubber.live .scrubbable {display:none}
       .npscrubber.live .livescrub {display:block;}
@@ -885,6 +918,7 @@ jhunter@tunein.com
         </div>
         <div class=livescrub>
           <div class=track></div>
+          <div class=livefade></div>
           <div class=livetext>LIVE</div>
         </div>
       </div>
@@ -1860,29 +1894,48 @@ jhunter@tunein.com
 
           let swatches = vibrant.swatches();
 
-          let npmatch = document.getElementById('npmatch');
-          npmatch.empty();
+          // let npmatch = document.getElementById('npmatch');
+          // npmatch.empty();
 
           var lastcolor = 'transparent';
 
+          let style = document.createElement('style');
+          style.className = 'albummatchcss'; 
+          
+          var css = ':root {';
+
           for (var swatch in swatches){
             let s = swatch.toLocaleLowerCase();
-            delete npmatch.dataset[s];
-            let d = document.createElement('div');
-            d.className = 'albummatchbg';
-            d.id = 'album' + s;
+            // delete npmatch.dataset[s];
+            // let d = document.createElement('div');
+            // d.className = 'albummatchbg';
+            // d.id = 'album' + s;
 
             if (swatches.hasOwnProperty(swatch) && swatches[swatch]){
               let hex = swatches[swatch].getHex();
               lastcolor = hex;
                 console.log(swatch, hex);
-                npmatch.dataset[s] = hex;
+            //     npmatch.dataset[s] = hex;
+
+              css += '--' + s + 'bg:' + hex + ';'
+            } else {
+              css += '--' + s + 'bg:' + lastcolor + ';'
             }
 
-            d.style.backgroundColor = lastcolor;
+            // d.style.backgroundColor = lastcolor;
 
-            npmatch.appendChild(d);
+            // npmatch.appendChild(d);
+
+
           }
+
+          css += '}';
+          style.innerHTML = css;
+
+          let oldvars = document.getElementsByClassName(style.className);
+          oldvars.remove();
+
+          document.getElementsByTagName('head')[0].appendChild(style);
         });
       })
     }
