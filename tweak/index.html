@@ -147,6 +147,11 @@ jhunter@tunein.com
 
       --albummatch: transparent;
       --nptextcolor: white;
+
+      --morepanel: var(--ink1);
+      --moreitem: var(--ink);
+      --moreitemhover: var(--ink2);
+      --moreitempress: var(--ink3);
     }
 
     .darkmode {
@@ -207,6 +212,12 @@ jhunter@tunein.com
       --nplive: var(--albummatch);
     }
 
+    .albummatch .nplist {
+      color:var(--nptextcolor);
+      opacity:0.57;
+    }
+    .albummatch .nplist .svgicon {background-color:var(--nptextcolor);.opacity:0.57;}
+
     .albumblur {
       --nptrack: rgba(255, 255, 255, 0.25);
       --npbuffer: rgba(255, 255, 255, 0.25);
@@ -225,7 +236,10 @@ jhunter@tunein.com
 
       --statusbar:var(--ink11);
 
-      
+      --morepanel: var(--ink10);
+      --moreitem: var(--ink1);
+      --moreitemhover: var(--ink9);
+      --moreitempress: var(--ink8);
     }
 
     .darkmode .darkui {
@@ -234,6 +248,11 @@ jhunter@tunein.com
       --darkuioutlinebtn: var(--ink12);
       --darkuioutlinebtnhover: var(--ink10);
       --darkuioutlinebtnpress: var(--ink10);
+
+      --morepanel: var(--ink1);
+      --moreitem: var(--ink12);
+      --moreitemhover: var(--ink2);
+      --moreitempress: var(--ink3);
     }
 
     .inverttabbar {
@@ -318,6 +337,15 @@ jhunter@tunein.com
     label {
       user-select: none;
     }
+
+    .svgicon {background-color:var(--ink);-webkit-mask-size: cover;mask-size: cover;width:24px;height:24px;display:inline-block;vertical-align: middle;}
+
+    .invert .svgicon {background-color: var(--ink1);}
+
+      .fav {-webkit-mask: url(../icons/Favorites.svg);mask: url(../icons/Favorites.svg);}
+      .unfav {-webkit-mask: url(../icons/unfav.svg);mask: url(../icons/unfav.svg);}
+      .playlistadd {-webkit-mask: url(../icons/playlistadd.svg);mask: url(../icons/playlistadd.svg);}
+      .chev {-webkit-mask: url('../icons/Chevron-Thin-Right(RightAligned).svg');mask: url('../icons/Chevron-Thin-Right(RightAligned).svg');}
 
     .toggle {width:38px;height:22px;border-radius:30px;position:relative;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(0, 0, 0, 0.02);cursor:pointer;transition:background 150ms ease-in-out;display: inline-block;margin-right:8px;vertical-align: middle;}
         .toggle::after {content:'';position:absolute;top:3px;left:3px;width:16px;height:16px;background:white;display:block;box-shadow:0 2px 4px rgba(0,0,0,.15);border-radius:50%;transition:transform 150ms ease-in-out;}
@@ -411,9 +439,17 @@ jhunter@tunein.com
       .iconbtn:hover svg {fill:var(--inkhover);}
       .iconbtn:active svg {fill:var(--inkpress);}
 
+      .iconbtn .svgicon {background-color:var(--inkdefault);width:24px;height:24px;transition:backgroundcolor 200ms ease-in-out;}
+      .iconbtn:hover .svgicon {background-color:var(--inkhover);}
+      .iconbtn:active .svgicon {background-color:var(--inkpress);}
+
       .iconbtn.invert svg {fill:var(--ink1);}
         .iconbtn.invert:hover svg {fill:var(--ink4);}
         .iconbtn.invert:active svg {fill:var(--ink5);}
+
+      .iconbtn.invert .svgicon {background-color:var(--ink1);}
+        .iconbtn.invert:hover .svgicon {background-color:var(--ink4);}
+        .iconbtn.invert:active .svgicon {background-color:var(--ink5);}
 
     .navlogo {height:44px;display:flex;align-items: center;justify-content: center;pointer-events: none;}
       .navlogo svg {fill:var(--inkdefault);height:32px;}
@@ -440,6 +476,11 @@ jhunter@tunein.com
         .heading .chevron svg {fill:var(--btndefault);}
           .heading .chevron:hover svg {fill:var(--btnhover);}
           .heading .chevron:active svg {fill:var(--btnpress);}
+
+        .heading .chevron .svgicon {background-color:var(--btndefault);}
+          .heading .chevron:hover .svgicon {background-color:var(--btnhover);}
+          .heading .chevron:active .svgicon {background-color:var(--btnpress);}
+
         .heading.clickable {cursor: pointer;user-select:none;}
       .scrollrow {display:flex;width:100%;align-items:start;padding:8px 0 0 24px;box-sizing: border-box;overflow-x:auto;white-space: nowrap;gap:var(--tilegap);scroll-padding-right:24px;-webkit-overflow-scrolling:touch; -ms-overflow-style: -ms-autohiding-scrollbar;}
         .scrollrow.textless {padding-bottom:16px;}
@@ -459,6 +500,11 @@ jhunter@tunein.com
           .listitem .chevron svg {fill:var(--btndefault);}
             .listitem .chevron:hover svg {fill:var(--btnhover);}
             .listitem .chevron:active svg {fill:var(--btnpress);}
+
+          .listitem .chevron .svgicon {background-color:var(--btndefault);}
+            .listitem .chevron:hover .svgicon {background-color:var(--btnhover);}
+            .listitem .chevron:active .svgicon {background-color:var(--btnpress);}
+
           .listitem .rowcount {min-width:24px;padding:1px 8px 0;box-sizing:border-box;height:24px;color:var(--ink);background:var(--ink2);font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center;border-radius:12px;margin-right: 8px;}
 
         .thumb {width:104px;height:104px;/*border:1px solid var(--ink2);*/box-sizing: border-box;border-radius:var(--tileradius);overflow:hidden;background-size:cover;background-position:center;background-color: var(--ink3);transition:box-shadow 200ms ease-in-out, transform 200ms ease-in-out;    box-shadow: 0 0 0 1px var(--ink2);}
@@ -542,6 +588,7 @@ jhunter@tunein.com
             #nowplaying .status {height: 24px;background: rgba(0,0,0,.03);width: 100%;position:absolute;top:0;left:0;right:0;z-index:1337;}
 
             #nowplaying .iconbtn svg {fill:var(--nptextcolor);}
+            #nowplaying .iconbtn .svgicon {background-color:var(--nptextcolor);}
 
     #carmode {position: absolute;top:0;left:0;right:0;bottom:0;background:var(--darkui);border-top:24px solid var(--statusbar);z-index:1337;transform:translateY(100%);pointer-events: none;transition:all 200ms ease-in-out;color:var(--darkuitext);}
       .carpage #carmode {transform:translateY(0);pointer-events: all;}
@@ -549,10 +596,18 @@ jhunter@tunein.com
       .topbar {padding:8px 14px;display: flex;justify-content: space-between;}
       .rightactions {}
 
+            .unfav, .removefav .fav {display:none;}
+            .removefav .unfav {display:block;}
+
       .darkui {color:var(--darkuitext);}
             .darkui .iconbtn  svg {fill:var(--darkuiicon);}
+            .darkui .iconbtn  .svgicon {background-color:var(--darkuiicon);}
+
               .darkui .iconbtn:hover  svg {fill:var(--darkuiiconhover);}
               .darkui .iconbtn:active  svg {fill:var(--darkuiiconpress);}
+
+              .darkui .iconbtn:hover  .svgicon {background-color:var(--darkuiiconhover);}
+              .darkui .iconbtn:active  .svgicon {background-color:var(--darkuiiconpress);}
 
       #nowplaying .album {padding:8px 24px;display:flex;width:100%;align-items: center;justify-content: center;max-width:33vh;margin:0 auto;box-sizing:border-box;}
             #nowplaying .album .npalbum {width:100%;height:0;padding-top:100%;background-color:rgba(255, 255, 255, 0.05);background-position: center;background-size:cover;background-image:url(./imgs/nyan.gif);}
@@ -575,11 +630,14 @@ jhunter@tunein.com
 
     .circlebtn {width:48px;height:48px;display:inline-flex;align-items: center;justify-content: center;background:var(--circlebtn);border-radius:50%;cursor: pointer;transition:background-color 200ms ease-in-out;}
       .circlebtn svg {width:calc(100% * 0.75);height:calc(100% * 0.75);fill:var(--circleicon);transition:fill 200ms ease-in-out;}      
+        .circlebtn .svgicon {width:calc(100% * 0.75);height:calc(100% * 0.75);background-color:var(--circleicon);transition:background-color 200ms ease-in-out;} 
       
       .circlebtn:hover {background-color:var(--circlebtnhover);}
         .circlebtn:hover svg {fill:var(--circleiconhover);}
+        .circlebtn:hover .svgicon {background-color:var(--circleiconhover);}
       .circlebtn:active {background-color:var(--circlebtnpress);}
         .circlebtn:active svg {fill:var(--circleiconpress);}
+        .circlebtn:active .svgicon {background-color:var(--circleiconpress);}
 
 
     #miniplayer {position:absolute;top:calc(-100% - 1px);left:0;right:0;height:56px;border-bottom:1px solid var(--miniplayerborder);background:var(--tabbar);display:none;color:var(--miniplayertext);user-select:none;}
@@ -641,7 +699,8 @@ jhunter@tunein.com
     .npinfo {padding:40px 24px 0;}
       .npstation {font-size:16px;font-weight:500;text-transform:uppercase;}
       .npmeta {font-size:20px;font-weight:500;padding:2px 0;}
-      .nplist {font-size:16px;font-weight:500;color:var(--ink6);}
+      .nplist {font-size:16px;font-weight:500;color:var(--ink6);cursor:pointer;}
+            .nplist .svgicon {background-color:var(--ink6);}
 
     
     .npscrubber {width:calc(100% - 48px);margin-left:24px;height:48px;position: relative;margin-bottom:24px;}
@@ -668,6 +727,22 @@ jhunter@tunein.com
 
     .npextras {margin:0 24px;border-radius:4px;background:var(--npextra);}
 
+            .cardstation {}
+              .stationrow {display:flex;gap:12px;align-items: center;padding:16px;}
+                .stationrow .img {width:52px;height:52px;box-sizing: border-box;    border-radius: var(--tileradius);    overflow: hidden;    background-size: cover;    background-position: center;    background-color: var(--ink4);transition: box-shadow 200ms ease-in-out, transform 200ms ease-in-out;box-shadow: 0 0 0 1px var(--ink2);}
+                  .stationname {font-size:18px;font-weight:600;}
+                  .stationmeta {font-size:16px;font-weight:500;}
+                .stationdetails {padding:0 16px 16px;font-size:16px;font-weight:500;}
+
+    .morepanel {position: absolute;top:0;left:0;right:0;bottom:0;z-index:1337;pointer-events:none;}
+            .more .morepanel {pointer-events: all;}
+      .morepanel .overlay {position: absolute;top:0;left:0;right:0;bottom:0;z-index:1;background:rgba(0,0,0,.65);transition:opacity 200ms ease-in-out;opacity:0;}
+      .morepanel .panel {background:var(--morepanel);color:var(--moreitem);border-radius:12px 12px  0 0;position:absolute;left:0;bottom:0;right:0;padding:12px 0;z-index:1;transition:transform 200ms ease-in-out;transform:translateY(100%);}
+        .morepanel .panelitem {padding:0 24px;display:flex;align-items: center;height:48px;font-size:20px;font-weight:500;justify-content: space-between;cursor:pointer;transition:background-color 200ms ease-in-out;}
+            .morepanel .panelitem:hover {background:var(--moreitemhover);}
+            .morepanel .panelitem:active {background:var(--moreitempress);}
+            .more .morepanel .overlay {opacity:1;}
+            .more .morepanel .panel {transform:translateY(0);}
 
 
     @media screen and (max-width: 666px) {
@@ -873,6 +948,18 @@ jhunter@tunein.com
     </div>
 
     <div id=nowplaying class=darkui>
+      <div class=morepanel>
+        <div class=overlay></div>
+        <div class=panel>
+          <div class=panelitem>Add to Playlist</div>
+          <div class=panelitem>Share</div>
+          <div class=panelitem>Choose Stream</div>
+          <div class=panelitem>Need Help?</div>
+          <div class=panelitem>Clock Display</div>
+          <div class=panelitem>Set Alarm</div>
+          <div class=panelitem>Sleep Timer</div>
+        </div>
+      </div>
       <div class=status></div>
       <div id=npblur>
         <div id=blurblur></div>
@@ -896,9 +983,8 @@ jhunter@tunein.com
               <path d="M12.043 14.151C12.1106 14.1506 12.1774 14.1654 12.2385 14.1943C12.2996 14.2232 12.3534 14.2655 12.396 14.318L17.578 19.923C17.6293 19.9879 17.6614 20.0659 17.6706 20.1481C17.6798 20.2303 17.6657 20.3134 17.63 20.388C17.5924 20.462 17.5353 20.5243 17.4647 20.568C17.3942 20.6118 17.313 20.6353 17.23 20.636H6.861C6.77801 20.6353 6.69681 20.6118 6.62627 20.568C6.55573 20.5243 6.49856 20.462 6.461 20.388C6.42422 20.3137 6.40957 20.2303 6.41879 20.1479C6.428 20.0654 6.46071 19.9874 6.513 19.923L11.695 14.318C11.737 14.2661 11.79 14.2242 11.8502 14.1953C11.9104 14.1664 11.9762 14.1513 12.043 14.151ZM5.705 5.702C7.37442 3.99603 9.65316 3.02308 12.0399 2.9972C14.4267 2.97132 16.726 3.89463 18.432 5.564C19.2595 6.40849 19.9125 7.40775 20.3537 8.5047C20.7949 9.60165 21.0156 10.7748 21.0033 11.9571C20.9909 13.1393 20.7457 14.3076 20.2817 15.3951C19.8177 16.4826 19.144 17.468 18.299 18.295L17.536 17.532C19.0348 16.0648 19.8896 14.0624 19.9123 11.9651C19.935 9.86775 19.1237 7.8473 17.657 6.348C16.1406 4.93556 14.1353 4.16666 12.0633 4.20319C9.99137 4.23971 8.01441 5.07883 6.54875 6.54384C5.0831 8.00885 4.24311 9.98543 4.20566 12.0574C4.16822 14.1293 4.93624 16.135 6.348 17.652L5.568 18.432C4.7409 17.5873 4.08832 16.5879 3.64756 15.4909C3.2068 14.3939 2.98649 13.2208 2.99921 12.0386C3.01193 10.8565 3.25744 9.68838 3.72171 8.60112C4.18598 7.51387 4.85991 6.52873 5.705 5.702ZM7.535 7.441C8.11696 6.83547 8.81386 6.35211 9.5849 6.0192C10.3559 5.6863 11.1857 5.51053 12.0255 5.5022C12.8653 5.49386 13.6983 5.65313 14.4758 5.97067C15.2533 6.28821 15.9596 6.75765 16.5535 7.35151C17.1474 7.94537 17.6168 8.65172 17.9343 9.42922C18.2519 10.2067 18.4111 11.0397 18.4028 11.8795C18.3945 12.7194 18.2187 13.5491 17.8858 14.3201C17.5529 15.0911 17.0695 15.788 16.464 16.37L15.701 15.607C16.2161 15.1278 16.6293 14.5498 16.916 13.9073C17.2027 13.2649 17.3571 12.5713 17.3697 11.8679C17.3824 11.1645 17.2533 10.4658 16.9899 9.8134C16.7266 9.16105 16.3345 8.56845 15.837 8.07099C15.3396 7.57354 14.747 7.18143 14.0946 6.91809C13.4422 6.65474 12.7435 6.52556 12.0401 6.53826C11.3367 6.55095 10.6431 6.70526 10.0007 6.99197C9.35825 7.27869 8.78018 7.69192 8.301 8.207C7.29799 9.18879 6.726 10.5288 6.71081 11.9322C6.69562 13.3357 7.23848 14.6877 8.22 15.691L7.44 16.471C6.25569 15.2613 5.60038 13.6307 5.6182 11.9378C5.63601 10.245 6.3255 8.62854 7.535 7.444V7.441ZM9.299 9.302C9.65357 8.94743 10.0745 8.66617 10.5378 8.47428C11.001 8.28239 11.4976 8.18362 11.999 8.18362C12.5004 8.18362 12.997 8.28239 13.4602 8.47428C13.9235 8.66617 14.3444 8.94743 14.699 9.302C15.0536 9.65657 15.3348 10.0775 15.5267 10.5408C15.7186 11.004 15.8174 11.5006 15.8174 12.002C15.8174 12.5034 15.7186 13 15.5267 13.4632C15.3348 13.9265 15.0536 14.3474 14.699 14.702L13.936 13.939C14.3087 13.5499 14.5583 13.0594 14.6534 12.5291C14.7486 11.9987 14.6851 11.4521 14.4709 10.9577C14.2567 10.4633 13.9013 10.0431 13.4493 9.74979C12.9974 9.45649 12.4689 9.30312 11.9301 9.3089C11.3913 9.31469 10.8662 9.47937 10.4206 9.78231C9.97502 10.0853 9.62877 10.513 9.42523 11.0119C9.2217 11.5108 9.16995 12.0586 9.27646 12.5868C9.38298 13.115 9.64302 13.6 10.024 13.981L9.244 14.761C8.8889 14.3991 8.60861 13.9707 8.41917 13.5004C8.22973 13.0301 8.13485 12.5271 8.13996 12.0201C8.14506 11.5131 8.25006 11.0121 8.44894 10.5457C8.64782 10.0793 8.93668 9.65668 9.299 9.302Z" />
             </svg>
           </div><div class="iconbtn npfav invert">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M7.96416 4.5275C7.4172 4.52654 6.87564 4.63576 6.37181 4.84866C5.86798 5.06156 5.4122 5.37377 5.03166 5.76667C4.15534 6.69554 3.66722 7.92425 3.66722 9.20125C3.66722 10.4783 4.15534 11.707 5.03166 12.6358L11.675 19.5525C11.7615 19.6387 11.8787 19.6871 12.0008 19.6871C12.123 19.6871 12.2401 19.6387 12.3267 19.5525L18.97 12.6358C19.8463 11.707 20.3344 10.4783 20.3344 9.20125C20.3344 7.92425 19.8463 6.69554 18.97 5.76667C18.5921 5.36904 18.1372 5.05243 17.6331 4.83608C17.1289 4.61973 16.5861 4.50816 16.0375 4.50816C15.4889 4.50816 14.9461 4.61973 14.4419 4.83608C13.9378 5.05243 13.4829 5.36904 13.105 5.76667L12 6.94333L10.8958 5.76667C10.5184 5.36805 10.0639 5.05024 9.55997 4.8325C9.05604 4.61477 8.51313 4.50165 7.96416 4.5" />
-            </svg>              
+            <div class="fav svgicon"></div>
+            <div class="unfav svgicon"></div>          
           </div><div class="iconbtn npmore invert">
             <svg viewBox="0 0 24 24"  xmlns="http://www.w3.org/2000/svg">
               <path d="M6.27084 10.0903C6.64854 10.0903 7.01777 10.2023 7.33182 10.4121C7.64587 10.622 7.89065 10.9202 8.03519 11.2692C8.17973 11.6181 8.21755 12.0021 8.14386 12.3726C8.07018 12.743 7.88829 13.0833 7.62121 13.3504C7.35413 13.6175 7.01385 13.7993 6.6434 13.873C6.27296 13.9467 5.88897 13.9089 5.54002 13.7643C5.19106 13.6198 4.8928 13.375 4.68296 13.061C4.47312 12.7469 4.36111 12.3777 4.36111 12C4.36111 11.4935 4.56232 11.0078 4.92046 10.6496C5.2786 10.2915 5.76435 10.0903 6.27084 10.0903ZM12 10.0903C12.3777 10.0903 12.7469 10.2023 13.061 10.4121C13.375 10.622 13.6198 10.9202 13.7644 11.2692C13.9089 11.6181 13.9467 12.0021 13.873 12.3726C13.7993 12.743 13.6175 13.0833 13.3504 13.3504C13.0833 13.6175 12.743 13.7993 12.3726 13.873C12.0021 13.9467 11.6181 13.9089 11.2692 13.7643C10.9202 13.6198 10.622 13.375 10.4121 13.061C10.2023 12.7469 10.0903 12.3777 10.0903 12C10.0903 11.4935 10.2915 11.0078 10.6496 10.6496C11.0078 10.2915 11.4935 10.0903 12 10.0903ZM17.7292 10.0903C18.1069 10.0903 18.4761 10.2023 18.7902 10.4121C19.1042 10.622 19.349 10.9202 19.4935 11.2692C19.6381 11.6181 19.6759 12.0021 19.6022 12.3726C19.5285 12.743 19.3466 13.0833 19.0795 13.3504C18.8125 13.6175 18.4722 13.7993 18.1017 13.873C17.7313 13.9467 17.3473 13.9089 16.9984 13.7643C16.6494 13.6198 16.3511 13.375 16.1413 13.061C15.9315 12.7469 15.8194 12.3777 15.8194 12C15.8194 11.4935 16.0206 11.0078 16.3788 10.6496C16.7369 10.2915 17.2227 10.0903 17.7292 10.0903Z" />
@@ -912,7 +998,7 @@ jhunter@tunein.com
       <div class=npinfo>
         <div class=npstation>Station</div>
         <div class=npmeta>Meta</div>
-        <div class=nplist>list</div>
+        <div class=nplist><div class="svgicon playlistadd"></div> Add to Playlist</div>
       </div>
       <div class="npscrubber live" id=npscrubber>
         <div class=scrubbable>
@@ -951,8 +1037,8 @@ jhunter@tunein.com
             </div>
           </div>
           <div class=stationdetails>
-            details
-            </div>
+            MSNBC is the premier destination for breaking news and in-depth analysis through commentary and informed perspectives from...
+          </div>
         </div>
 
       </div>
@@ -1047,9 +1133,7 @@ jhunter@tunein.com
             <div class="heading clickable">
               <h2>Your New Episodes</h2>
               <div class=chevron>
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M15.11 7.14599L19.956 11.999L15.11 16.852C15.0754 16.8844 15.0479 16.9236 15.029 16.9671C15.0102 17.0107 15.0005 17.0576 15.0005 17.105C15.0005 17.1524 15.0102 17.1993 15.029 17.2428C15.0479 17.2863 15.0754 17.3255 15.11 17.358L16.641 18.896C16.7085 18.9623 16.7994 18.9995 16.894 18.9995C16.9886 18.9995 17.0795 18.9623 17.147 18.896L22.26 13.783L23.791 12.252C23.8573 12.1845 23.8945 12.0936 23.8945 11.999C23.8945 11.9044 23.8573 11.8135 23.791 11.746L22.26 10.215L17.168 5.10599C17.1005 5.03967 17.0096 5.0025 16.915 5.0025C16.8204 5.0025 16.7295 5.03967 16.662 5.10599L15.11 6.63999C15.0754 6.67244 15.0479 6.71164 15.029 6.75515C15.0102 6.79866 15.0005 6.84558 15.0005 6.89299C15.0005 6.94041 15.0102 6.98732 15.029 7.03083C15.0479 7.07435 15.0754 7.11354 15.11 7.14599Z" />
-                  </svg>
+                <div class="svgicon chev"></div>
               </div>
             </div>
             <div class=itemlist>
@@ -2062,6 +2146,26 @@ jhunter@tunein.com
       prog.style.width = (complete * prog.parentElement.offsetWidth) + offset + 'px';
     }
 
+    function npmore(){
+      let np = this.getparent('nowplaying');
+      np.classList.add('more');
+    }
+
+    function nomore(){
+      let np = this.getparent('nowplaying');
+      np.classList.remove('more');
+    }
+
+    function panelitem(e){
+      nomore.call(this, e);
+
+      console.log('panel item')
+    }
+
+    function npfav(){
+      this.classList.toggle('removefav');
+    }
+
 
     window.onresize = resize;
 
@@ -2083,6 +2187,10 @@ jhunter@tunein.com
     Attach.on('click', '.npplay', npplay);
     Attach.on('click', '.nppause', nppause);
     Attach.on('input', '#npscrub', audioscrub);
+    Attach.on('click', '.npmore', npmore);
+    Attach.on('click', '.morepanel .overlay', nomore);
+    Attach.on('click', '.morepanel .panelitem', panelitem);
+    Attach.on('click', '.npfav', npfav);
     
     (function() {
       setuptweaks();
