@@ -146,6 +146,7 @@ jhunter@tunein.com
       --npextra: var(--ink9);
 
       --albummatch: transparent;
+      --nptextcolor: white;
     }
 
     .darkmode {
@@ -191,14 +192,18 @@ jhunter@tunein.com
     .lightmutedbg {--albummatch:var(--lightmutedbg);}
     .darkmutedbg {--albummatch:var(--darkmutedbg);}
 
+
+    .albummatch.vibrantbg {--nptextcolor:var(--vibranttext);}
+    .albummatch.mutedbg {--nptextcolor:var(--mutedtext);}
+    .albummatch.darkvibrantbg {--nptextcolor:var(--darkvibranttext);}
+    .albummatch.lightvibrantbg {--nptextcolor:var(--lightvibranttext);}
+    .albummatch.lightmutedbg {--nptextcolor:var(--lightmutedtext);}
+    .albummatch.darkmutedbg {--nptextcolor:var(--darkmutedtext);}
+
     .albummatch {
       --nptrack: rgba(255, 255, 255, 0.25);
       --npbuffer: rgba(255, 255, 255, 0.25);
       --npextra: rgba(255, 255, 255, 0.25);
-      --nplive: rgba(0, 0, 0, 0.35);
-    }
-
-    .albummatch {
       --nplive: var(--albummatch);
     }
 
@@ -532,9 +537,11 @@ jhunter@tunein.com
 
       .modalcontent {position:absolute;top:72px;left:0;right:0;bottom:0;overflow-y:scroll;-webkit-overflow-scrolling:touch;}
 
-    #nowplaying {position: absolute;top:0;left:0;right:0;bottom:0;padding-top:24px;background:var(--darkui);z-index:1337;transform:translateY(100%);pointer-events: none;transition:all 200ms ease-in-out;color:var(--darkuitext);}
+    #nowplaying {position: absolute;top:0;left:0;right:0;bottom:0;padding-top:24px;background:var(--darkui);z-index:1337;transform:translateY(100%);pointer-events: none;transition:all 200ms ease-in-out;color:var(--nptextcolor);}
       .nppage #nowplaying {transform:translateY(0);pointer-events: all;}
             #nowplaying .status {height: 24px;background: rgba(0,0,0,.03);width: 100%;position:absolute;top:0;left:0;right:0;z-index:1337;}
+
+            #nowplaying .iconbtn svg {fill:var(--nptextcolor);}
 
     #carmode {position: absolute;top:0;left:0;right:0;bottom:0;background:var(--darkui);border-top:24px solid var(--statusbar);z-index:1337;transform:translateY(100%);pointer-events: none;transition:all 200ms ease-in-out;color:var(--darkuitext);}
       .carpage #carmode {transform:translateY(0);pointer-events: all;}
@@ -651,7 +658,7 @@ jhunter@tunein.com
 
       .livescrub {height:48px;width:100%;position:relative;display:none;transform: translateZ(0);}
             .livescrub .track {position: absolute;top:50%;margin-top:-2px;left:0;right:0;border-radius:2px;height:4px;background:var(--nptrack);z-index:1;pointer-events: none;}
-            .livescrub .livetext {position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);padding:0 148px;color:var(--nplivetext);z-index:5;font-size:14px;font-weight:600;line-height:20px;z-index: 2;}
+            .livescrub .livetext {position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);padding:0 148px;color:var(--nptextcolor);z-index:5;font-size:14px;font-weight:600;line-height:20px;z-index: 2;}
 
               .livescrub .livefade {height:4px;width:100%;max-width:460px;left:50%;position:absolute;display:block;top:50%;transform:translate(-50%, -50%);background: linear-gradient(90deg, rgba(255,255,255,0) 0%, var(--nplive) 50%, rgba(255,255,255,0) 100%);z-index:1;}
 
@@ -935,7 +942,19 @@ jhunter@tunein.com
         </div>
       </div>
       <div class=npextras>
-        extras
+        <div class=cardstation>
+          <div class=stationrow>
+            <div class=img></div>
+            <div class=details>
+              <div class=stationname>Station Name</div>
+              <div class=stationmeta>New York, NY</div>
+            </div>
+          </div>
+          <div class=stationdetails>
+            details
+            </div>
+        </div>
+
       </div>
     </div>
     <div id=mainwrap>
@@ -1898,6 +1917,7 @@ jhunter@tunein.com
           // npmatch.empty();
 
           var lastcolor = 'transparent';
+          var lasttext = 'white';
 
           let style = document.createElement('style');
           style.className = 'albummatchcss'; 
@@ -1917,9 +1937,19 @@ jhunter@tunein.com
                 console.log(swatch, hex);
             //     npmatch.dataset[s] = hex;
 
+            var textcolor = 'white';
+
+            if ( contrastr(hex, '#ffffff') < 3 ){
+              textcolor = 'black';
+            }
+
+            lasttext = textcolor;
+
               css += '--' + s + 'bg:' + hex + ';'
+              css += '--' + s + 'text:' + textcolor + ';'
             } else {
               css += '--' + s + 'bg:' + lastcolor + ';'
+              css += '--' + s + 'text:' + lasttext + ';'
             }
 
             // d.style.backgroundColor = lastcolor;
