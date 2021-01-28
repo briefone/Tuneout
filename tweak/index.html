@@ -738,7 +738,7 @@ jhunter@tunein.com
     .npinfo {padding:40px 24px 0;}
       .npstation {font-size:16px;font-weight:500;text-transform:uppercase;}
       .npmeta {font-size:20px;font-weight:500;padding:2px 0;}
-      .nplist {font-size:16px;font-weight:500;color:var(--ink6);cursor:pointer;}
+      .nplist {font-size:16px;font-weight:500;color:var(--ink6);cursor:pointer;user-select:none;}
             .nplist .svgicon {background-color:var(--ink6);}
 
     
@@ -802,6 +802,7 @@ jhunter@tunein.com
   <script src="../js/gator.js"></script>
   <script src="../js/base.js"></script>
   <script src="../js/vibe.js"></script>
+  <script src="../js/albumart.js"></script>
 </head>
 <body>
   <div id=tweaks>
@@ -1488,6 +1489,32 @@ jhunter@tunein.com
 
 */
 
+
+
+
+    function updatetrack(json){
+      if ( !json || json.streamtitle == false ){
+        console.warn('no track title');
+        return;
+      }
+
+      let title = json.streamtitle;
+
+      albumArt( title, ( error, response ) => {
+        console.log( response )
+        if ( error || response.indexOf('http') < 0 ){
+          return;
+        }
+        document.getElementsByClassName('npalbum')[0].style.backgroundImage = 'url(' + response + ')';
+
+        vibe(response);
+      });
+
+      let meta = document.getElementsByClassName('npmeta')[0];
+      meta.empty();
+      meta.appendChild(document.createTextNode(title));
+    }
+
     function tweakr(e){
       let c = this.dataset.class;
       if ( this.checked){
@@ -1732,6 +1759,11 @@ jhunter@tunein.com
     function nowplaying(e){
       let url = this.dataset.url || './audio/nyancat.mp3';
       document.body.classList.add('nppage', 'modalview');
+
+      var s = document.createElement( 'script' );
+      s.className = 'icyscript';
+      s.setAttribute('src', 'https://noiseee.com/icy?url=' + url );
+      document.body.appendChild( s );
 
       let meow = document.getElementById('meow');
 
