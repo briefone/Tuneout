@@ -527,6 +527,7 @@ jhunter@tunein.com
       .scrollrow {display:flex;width:100%;align-items:start;padding:8px 0 0 24px;box-sizing: border-box;overflow-x:auto;white-space: nowrap;gap:var(--tilegap);scroll-padding-right:24px;-webkit-overflow-scrolling:touch; -ms-overflow-style: -ms-autohiding-scrollbar;}
         .scrollrow.textless {padding-bottom:16px;}
         .scrollitem {display:inline-flex;cursor:pointer;user-select:none;flex-direction: column;max-width: 104px;}
+          .scrollitem.banner {max-width:208px;}
           .scrollitem:last-child {padding-right:24px}
           .scrollitem .label {padding-top:8px;color:var(--ink);font-size:16px;font-weight:500;white-space:normal;}
 
@@ -549,8 +550,11 @@ jhunter@tunein.com
 
           .listitem .rowcount {min-width:24px;padding:1px 8px 0;box-sizing:border-box;height:24px;color:var(--ink);background:var(--ink2);font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center;border-radius:12px;margin-right: 8px;}
 
-        .thumb {width:104px;height:104px;/*border:1px solid var(--ink2);*/box-sizing: border-box;border-radius:var(--tileradius);overflow:hidden;background-size:cover;background-position:center;background-color: var(--ink3);transition:box-shadow 200ms ease-in-out, transform 200ms ease-in-out;    box-shadow: 0 0 0 1px var(--ink2);}
-        .recentthumb {width:72px;height:72px;}
+          .simplelist .listitem .title {font-size:18px;font-weight:500;}
+
+        .thumb {width:104px;height:104px;/*border:1px solid var(--ink2);*/box-sizing: border-box;border-radius:var(--tileradius);overflow:hidden;background-size:cover;background-position:center;background-color: white;transition:box-shadow 200ms ease-in-out, transform 200ms ease-in-out;    box-shadow: 0 0 0 1px var(--ink2);}
+          .recentthumb {width:72px;height:72px;}
+          .banner .thumb {width:208px;}
 
         .thumb:hover {box-shadow:0 var(--tileshadowy) var(--tileshadowblur) var(--tileshadowspread) rgba(0,0,0,var(--tileshadowalpha))}
 
@@ -674,7 +678,7 @@ jhunter@tunein.com
 
 
     .tabpage {display:none;}
-      .tabhome .pagehome, .tabradio .pageradio, .tabsports .pagesports, .tabnews .pagenews, .tabmusic .pagemusic, .tabpodcast .pagepodcast, .tabtalk .pagetalk, .tabbylocation .pagelocation, .tabbylanguage .pagelanguage {display:block;}
+      .tabhome .pagehome, .tabradio .pageradio, .tabsports .pagesports, .tabnews .pagenews, .tabmusic .pagemusic, .tabpodcast .pagepodcast, .tabtalk .pagetalk, .tabbylocation .pagebylocation, .tabbylanguage .pagebylanguage {display:block;}
 
     .circlebtn {width:48px;height:48px;display:inline-flex;align-items: center;justify-content: center;background:var(--circlebtn);border-radius:50%;cursor: pointer;transition:background-color 200ms ease-in-out;}
       .circlebtn svg {width:calc(100% * 0.75);height:calc(100% * 0.75);fill:var(--circleicon);transition:fill 200ms ease-in-out;}      
@@ -1123,7 +1127,7 @@ jhunter@tunein.com
         </div>
         <div id=hometabs class="tabwrap touchscroll">
           <div class=tabline></div>
-          <div class=tab data-page=home>For You</div><div class=tab data-page=radio>Local Radio</div><div class=tab data-page=sports>Sports</div><div class=tab  data-page=news>News</div><div class=tab data-page=music>Music</div><div class=tab data-page=podcast>Podcast</div><div class=tab data-page=talk>Talk</div><div class=tab data-page=bylocation>By Location</div><div class=tab data-page=bylanguage>By Language</div>
+          <div class=tab data-page=home>For You</div><div class=tab data-page=radio>Local Radio</div><div class=tab data-page=sports>Sports</div><div class=tab data-page=news>News & Talk</div><div class=tab data-page=music>Music</div><div class=tab data-page=podcast>Podcast</div><div class=tab data-page=bylocation>By Location</div><div class=tab data-page=bylanguage>By Language</div>
         </div>
         <div id=searchbar>
           <div class="inputfield search">
@@ -1375,25 +1379,183 @@ jhunter@tunein.com
           </div>
         </div>
         <div class="tabpage content touchscroll pagesports">
-          sports
+          <div class=contentrow>
+            <div class=heading>
+              <h2>Nonstop Sports Talk</h2>
+            </div>
+            <div class="scrollrow textless">
+              <div class=scrollitem>
+                <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/s25876/images/logoq.jpg);" data-url="http://live.wostreaming.net/direct/espn-networkmp3-48?source=TuneIn&gdpr=0&us_privacy=1YNY&c_yob=1988&c_gender=m&aw_0_1st.age=33&aw_0_1st.gender=male&aw_0_1st.playerid=RadioTime&aw_0_1st.skey=1611870423&aw_0_1st.premium=false&aw_0_1st.lotamesegments=%3ball%3b"></div>
+              </div><div class=scrollitem>
+                <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/s27533/images/logoq.png);" data-url="http://18103.live.streamtheworld.com/WBZFMAAC_SC?DIST=TuneIn&TGT=TuneIn&maxServers=2&tdtok=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImZTeXA4In0.eyJpc3MiOiJ0aXNydiIsInN1YiI6IjI0Njk1NTE3MiIsImlhdCI6MTYxMTg3MDQ2MiwidGQtcmVnIjpmYWxzZX0.rW5PSiDSIPpAGJZOEprg-ybNXfOFbCW5MmObB44L8c0&gdpr=0&us_privacy=1YNY&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTYxMTg3MDQ2MiwiaXNzIjoidGlzcnYifQ.QS6-iF8Mcr4Qu4_044Tr4jTNHdobnhq78ydPqmZEVnM"></div>
+              </div><div class=scrollitem>
+                <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/s34231/images/logoq.png);" data-url="http://17843.live.streamtheworld.com/KNBRAMIHR_SC?DIST=TuneIn&TGT=TuneIn&maxServers=2&tdtok=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImZTeXA4In0.eyJpc3MiOiJ0aXNydiIsInN1YiI6IjI0Njk1NTE3MiIsImlhdCI6MTYxMTg3MDQ4OCwidGQtcmVnIjpmYWxzZX0.XgPONQ6scl3pXk-BUupFrHnhne7JrYkYNyy3mUTMgX4&gdpr=0&us_privacy=1YNY&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImdlbmRlciI6Im0iLCJhZ2UiOiIzMyIsImlhdCI6MTYxMTg3MDQ4OCwiaXNzIjoidGlzcnYifQ.venTG5a5wEbfeveMwrQFPGI4A_etxm04knYxgnbo7Vs"></div>
+              </div><div class=scrollitem>
+                <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/s27965/images/logoq.png);" data-url="http://playerservices.streamtheworld.com/api/livestream-redirect/WCNNAM.mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&tdtok=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImZTeXA4In0.eyJpc3MiOiJ0aXNydiIsInN1YiI6IjI0Njk1NTE3MiIsImlhdCI6MTYxMTg3MDUxNSwidGQtcmVnIjpmYWxzZX0.RMwKBkZFxuobP0kp2ngDDnx5pXnZ_uKG-8VwKtM-Bbs&gdpr=0&us_privacy=1YNY&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTYxMTg3MDUxNSwiaXNzIjoidGlzcnYifQ.xlyGn1wU5pF_jheYpENn-PXc7Omz6Iy55q_wu1yBYjg"></div>
+              </div><div class=scrollitem>
+                <div class="thumb recentthumb np" style="background-image:url(https://cdn-radiotime-logos.tunein.com/s31210q.png);" data-url="https://rogers-hls.leanstream.co/rogers/tor590.stream/icy?environment=tunein&args=tunein_01"></div>
+              </div><div class=scrollitem>
+                <div class="thumb recentthumb np" style="background-image:url(https://cdn-radiotime-logos.tunein.com/s28826q.png);" data-url="http://14983.live.streamtheworld.com/WFNZAMAAC_SC?DIST=TuneIn&TGT=TuneIn&maxServers=2&tdtok=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImZTeXA4In0.eyJpc3MiOiJ0aXNydiIsInN1YiI6IjI0Njk1NTE3MiIsImlhdCI6MTYxMTg3MDU2NywidGQtcmVnIjpmYWxzZX0.tFGw7NthFrCVjRwFUNVjnhsR6Ey1u08dLjr4Rni59cM&gdpr=0&us_privacy=1YNY&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTYxMTg3MDU2NywiaXNzIjoidGlzcnYifQ.UnSYRvS5VfgDAnxK-KSVMqunhCHSTclBhMBMa9G11bk"></div>
+              </div>
+            </div>
+          </div>
+          <div class=contentrow>
+            <div class="heading ">
+              <h2>Hot Takes and Sports Debates</h2>
+            </div>
+            <div class=scrollrow>
+              <div class="scrollitem np" data-url="https://www.podtrac.com/pts/redirect.mp3/traffic.megaphone.fm/ESP7382530192.mp3">
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p328690/images/logoq.png);"></div>
+                <div class=label>First Take</div>
+              </div><div class="scrollitem np" data-url="https://chtbl.com/track/42D75/traffic.megaphone.fm/CAD4176198765.mp3">
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p999944/images/logoq.jpg);"></div>
+                <div class=label>Skip and Shannon: Undisputed</div>
+              </div><div class="scrollitem np" data-url="https://www.podtrac.com/pts/redirect.mp3/chtbl.com/track/5899E/traffic.megaphone.fm/HSW2068399348.mp3">
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p37037/images/logoq.jpg);"></div>
+                <div class=label>The Herd with Colin Cowherd</div>
+              </div><div class="scrollitem np" data-url="https://traffic.megaphone.fm/LBE9535750745.mp3">
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p182499/images/logoq.png);"></div>
+                <div class=label>The Dan Le Batard Show with Stugotz</div>
+              </div><div class="scrollitem np" data-url="https://www.podtrac.com/pts/redirect.mp3/traffic.megaphone.fm/ESP6874194511.mp3">
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p553750/images/logoq.png);"></div>
+                <div class=label>Jalen & Jacoby</div>
+              </div><div class="scrollitem np" data-url="https://dts.podtrac.com/redirect.mp3/landmark-dynamic.barstoolsports.com/pardon-my-take/40619/pmt-1-27-21-v2-condensed-corrected.fd520522.96.mp3?v=eyJicmFuZCI6bnVsbCwic2hvdyI6MTIsImxhbmciOiJlbi11cyIsImNhdGVnb3J5IjpbIlNwb3J0cyIsIkZvb3RiYWxsIl0sImV4cGxpY2l0Ijp0cnVlLCJlcGlzb2RlIjo0MDYxOSwiZHVyYXRpb24iOiIwMTo0MzoxNSIsInB1Yl9kYXRlIjoiMjAyMS0wMS0yN1QwNTo1Mzo0MS4wMDBaIn0%3D">
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p839333/images/logoq.png);"></div>
+                <div class=label>Pardon My Take</div>
+              </div>
+            </div>
+          </div>
+          <div class=contentrow>
+            <div class="heading ">
+              <h2>The Biggest Voices in Sports
+              </h2>
+            </div>
+            <div class=scrollrow>
+              <div class="scrollitem np banner" data-url="http://live.wostreaming.net/direct/espn-networkmp3-48?source=TuneIn&gdpr=0&us_privacy=1YNY&c_yob=1988&c_gender=m&aw_0_1st.age=33&aw_0_1st.gender=male&aw_0_1st.playerid=RadioTime&aw_0_1st.skey=1611869990&aw_0_1st.premium=false&aw_0_1st.lotamesegments=%3ball%3b">
+                <div class="thumb " style="background-image:url(https://cdn-profiles.tunein.com/a38481/images/brickg.jpg);"></div>
+              </div><div class="scrollitem np banner" data-url="https://injector.simplecastaudio.com/49112a7c-4734-46b6-8b6d-dc75390d9e5f/episodes/adb72102-6983-404f-be1d-70e6d935baf0/audio/128/default.mp3?aid=rss_feed&awCollectionId=49112a7c-4734-46b6-8b6d-dc75390d9e5f&awEpisodeId=adb72102-6983-404f-be1d-70e6d935baf0&feed=vOUZwJSO">
+                <div class="thumb " style="background-image:url(https://cdn-profiles.tunein.com/a40135/images/brickg.jpg);"></div>
+              </div><div class="scrollitem np banner" data-url="https://chtbl.com/track/42D75/traffic.megaphone.fm/CAD4176198765.mp3">
+                <div class="thumb " style="background-image:url(https://cdn-profiles.tunein.com/a39854/images/brickg.jpg);"></div>
+              </div><div class="scrollitem np banner" data-url="https://dts.podtrac.com/redirect.mp3/landmark-dynamic.barstoolsports.com/dave-portnoy-show/40584/bsrfinalmix.c74ce7e0.96.mp3?v=eyJicmFuZCI6bnVsbCwic2hvdyI6MiwibGFuZyI6ImVuLXVzIiwiY2F0ZWdvcnkiOlsiQ29tZWR5Il0sImV4cGxpY2l0Ijp0cnVlLCJlcGlzb2RlIjo0MDU4NCwiZHVyYXRpb24iOiIwMzowMjozMCIsInB1Yl9kYXRlIjoiMjAyMS0wMS0yNVQwODoxNTowMC4wMDBaIn0%3D">
+                <div class="thumb " style="background-image:url(https://cdn-profiles.tunein.com/c100001803/images/brickg.jpg);"></div>
+              </div><div class="scrollitem np banner" data-url="https://traffic.megaphone.fm/GLT6025344642.mp3">
+                <div class="thumb " style="background-image:url(https://cdn-profiles.tunein.com/a39849/images/brickg.jpg);"></div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="tabpage content touchscroll pagenews">
           news
         </div>
         <div class="tabpage content touchscroll pagemusic">
-          music
+          <div class=contentrow>
+            <div class="heading ">
+              <h2>Most Popular Stations</h2>
+            </div>
+            <div class=scrollrow>
+              <div class="scrollitem np" data-url="https://rfcmedia.streamguys1.com/80hits.mp3" data-radio=true>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/s249945/images/logoq.png);"></div>
+                <div class=label>80's Hits</div>
+              </div><div class="scrollitem np" data-url="https://rfcmedia.streamguys1.com/coffeehouse.mp3" data-radio=true>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/s304385/images/logoq.png);"></div>
+                <div class=label>Coffee House</div>
+              </div><div class="scrollitem np" data-url="https://rfcmedia.streamguys1.com/softrockhits.mp3" data-radio=true>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/s249905/images/logoq.png);"></div>
+                <div class=label>Soft Rock Hits</div>
+              </div><div class="scrollitem np" data-url="https://rfcmedia.streamguys1.com/classical.mp3" data-radio=true>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/s250018/images/logoq.png);"></div>
+                <div class=label>Sounds of the Symphony</div>
+              </div><div class="scrollitem np" data-url="https://rfcmedia.streamguys1.com/relaxation.mp3" data-radio=true>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/s249937/images/logoq.png);"></div>
+                <div class=label>Relax and Unwind</div>
+              </div><div class="scrollitem np" data-url="https://rfcmedia.streamguys1.com/mixlite.mp3" data-radio=true>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/s247158/images/logoq.png);"></div>
+                <div class=label>Mix Lite</div>
+              </div>
+            </div>
+          </div>
+          <div class=contentrow>
+            <div class="heading ">
+              <h2>Throwback Hits</h2>
+            </div>
+            <div class=scrollrow>
+              <div class="scrollitem np banner" data-url="https://rfcmedia.streamguys1.com/classichitspremium.mp3" data-radio=true>
+                <div class="thumb " style="background-image:url(https://cdn-profiles.tunein.com/s306872/images/brickg.jpg);"></div>
+              </div><div class="scrollitem np banner" data-url="https://rfcmedia.streamguys1.com/70hits.mp3" data-radio=true>
+                <div class="thumb " style="background-image:url(https://cdn-profiles.tunein.com/s249944/images/brickg.jpg);"></div>
+              </div><div class="scrollitem np banner" data-url="https://rfcmedia.streamguys1.com/80hits.mp3" data-radio=true>
+                <div class="thumb " style="background-image:url(https://cdn-profiles.tunein.com/s249945/images/brickg.jpg);"></div>
+              </div><div class="scrollitem np banner" data-url="https://rfcmedia.streamguys1.com/sraltrockhits.mp3" data-radio=true>
+                <div class="thumb " style="background-image:url(https://cdn-profiles.tunein.com/s249946/images/brickg.jpg);"></div>
+              </div><div class="scrollitem np banner" data-url="https://rfcmedia.streamguys1.com/newpophitspremium.mp3" data-radio=true>
+                <div class="thumb " style="background-image:url(https://cdn-profiles.tunein.com/s249947/images/brickg.jpg);"></div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="tabpage content touchscroll pagepodcast">
           podcast
         </div>
-        <div class="tabpage content touchscroll pagetalk">
-          talk
+        <div class="tabpage content touchscroll pagebylocation">
+          <div class=contentrow>
+            <div class="heading ">
+              <h2 style="padding-bottom:6px;">Regions</h2>
+            </div>
+            <div class=simplelist>
+              <div class="listitem ">
+                <div class=title>Africa</div>
+                <div class=chevron>
+                  <div class="svgicon chev"></div>
+                </div>
+              </div>
+              <div class="listitem ">
+                <div class=title>Asia</div>
+                <div class=chevron>
+                  <div class="svgicon chev"></div>
+                </div>
+              </div>
+              <div class="listitem ">
+                <div class=title>Australasia</div>
+                <div class=chevron>
+                  <div class="svgicon chev"></div>
+                </div>
+              </div>
+              <div class="listitem ">
+                <div class=title>Central America</div>
+                <div class=chevron>
+                  <div class="svgicon chev"></div>
+                </div>
+              </div>
+              <div class="listitem ">
+                <div class=title>Europe</div>
+                <div class=chevron>
+                  <div class="svgicon chev"></div>
+                </div>
+              </div>
+              <div class="listitem ">
+                <div class=title>North America</div>
+                <div class=chevron>
+                  <div class="svgicon chev"></div>
+                </div>
+              </div>
+              <div class="listitem ">
+                <div class=title>South America</div>
+                <div class=chevron>
+                  <div class="svgicon chev"></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="tabpage content touchscroll pagelocation">
-          location
-        </div>
-        <div class="tabpage content touchscroll pagelanguage">
-          language
+        <div class="tabpage content touchscroll pagebylanguage">
+          <div class=contentrow>
+            <div class="heading ">
+              <h2 style="padding-bottom:6px;">Languages</h2>
+            </div>
+            <div class=simplelist id=languages>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1785,12 +1947,16 @@ jhunter@tunein.com
       let page = this.dataset.page;
       let home = document.getElementById('home');
 
-      // if ( home.classList.contains('tab' + page)){
+       
+
+      if ( home.classList.contains('tab' + page)){
         let tp = document.getElementsByClassName('page' + page)[0];
         tp.scroll({top: 0, behavior: 'smooth'});
-      // } else {
-        home.className = 'tab' + page;      
-      // }
+      } else {
+        let op = document.getElementsByClassName(home.className.replace('tab','page'))[0];
+        op.scroll({top: 0});
+      }
+        home.className = 'tab' + page;
     }
 
     function tabbar(e){
@@ -2350,6 +2516,31 @@ jhunter@tunein.com
       this.classList.toggle('removefav');
     }
 
+    function generatelanguages(){
+      let lang = document.getElementById('languages');
+      let llist = ["Aboriginal","Afrikaans","Akan","Albanian","Arabic","Armenian","Azeri","Bashkir","Basque","Belarusian","Bengali","Berber","Bosnian","Bulgarian","Cantonese","Catalan","Chichewa","Chinese","Croatian","Czech","Danish","Dari","Dhivehi","Dutch","English","Estonian","Faroese","Fijian","Finnish","Flemish","French","Gaelic","Galician","German","Greek","Gujarati","Haitian","Hausa","Hawaiian","Hebrew","Hindi","Hungarian","Icelandic","Indonesian","Irish","Italian","Japanese","Kannada","Kashmiri","Kazakh","Khmer","Korean","Kurdish","Kyrgyz","Lao","Latvian","Lithuanian","Macedonian","Malay","Malayalam","Maltese","Mongolian","Multilingual","Myanmar (Burmese)","Ndebele","Nepali","Norwegian","Norwegian Bokmal","Papiamentu","Pashto","Persian","Polish","Portuguese","Punjabi","Romanian","Romansch","Russian","Sami","Serbian","Shona","Sindhi","Sinhala","Slovak","Slovenian","Spanish","Swahili","Swedish","Tagalog","Tamil","Tatar","Telugu","Thai","Tibetan","Turkish","Turkmen","Ukrainian","Urdu","Uyghur","Uzbek","Vietnamese","Welsh","Yoruba"];
+
+      llist.forEach(function (item, index) {
+        let li = document.createElement('div');
+        let t = document.createElement('div');
+        let c = document.createElement('div');
+        let s = document.createElement('div');
+
+        li.className = 'listitem';
+        t.className = 'title';
+        c.className = 'chevron';
+        s.className = 'svgicon chev';
+
+        t.appendChild(document.createTextNode(item));
+        c.appendChild(s);
+
+        li.appendChild(t);
+        li.appendChild(c);
+
+        lang.appendChild(li);
+      });
+    }
+
 
     window.onresize = resize;
 
@@ -2377,6 +2568,7 @@ jhunter@tunein.com
     Attach.on('click', '.npfav', npfav);
     
     (function() {
+      generatelanguages();
       setuptweaks();
 
       unhash();
