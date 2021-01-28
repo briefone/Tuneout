@@ -1500,7 +1500,9 @@ jhunter@tunein.com
 
       let title = json.streamtitle;
 
-      albumArt( title, ( error, response ) => {
+      let ugh = title.split('-');
+
+      albumArt( ugh[0], ( error, response ) => {
         console.log( response )
         if ( error || response.indexOf('http') < 0 ){
           return;

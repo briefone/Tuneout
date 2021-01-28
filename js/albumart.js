@@ -78,7 +78,7 @@ const albumArt = async ( artist, options, cb ) => {
         )
         .then(
             json => {
-                console.log(json, "-------json");
+                console.log(json, "______albumjson");
                 if ( typeof ( json.error ) !== 'undefined' ) {
                     // Error
                     return Promise.reject( new Error( `JSON - ${json.error} ${json.message}` ) )
@@ -90,7 +90,7 @@ const albumArt = async ( artist, options, cb ) => {
                 }
 
                 // Select image size
-                const images = json[method + 's'].items[0].album.images
+                var images = json[method + 's'].items[0].album.images
 
                 let smallest = images[0]
                 let largest = images[0]
