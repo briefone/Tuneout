@@ -259,7 +259,8 @@ jhunter@tunein.com
     .albummatch.lightmutedbg, .albummatch.lightmutedbg .darkui {--nptextcolor:var(--lightmutedtext);--nptrack:var(--lightmutedtrack);}
     .albummatch.darkmutedbg, .albummatch.darkmutedbg .darkui {--nptextcolor:var(--darkmutedtext);--nptrack:var(--darkmutedtrack);}
 
-    .albummatch .darkui {--moreitemhover:rgba(255,255,255,.1);--moreitempress:rgba(255,255,255,.2);}
+    .albummatch .darkui {--moreitemhover:rgba(255,255,255,.1);--moreitempress:rgba(255,255,255,.2);--circlebtn: var(--nptrack);--moreitem:var(--nptextcolor);
+      --morepanel:var(--albummatch);}
 
     .albummatch {
       --nptrack: rgba(255, 255, 255, 0.25);
@@ -269,7 +270,15 @@ jhunter@tunein.com
 
       --moreitem:var(--nptextcolor);
       --morepanel:var(--albummatch);
+      --circlebtn: var(--nptrack);
+      --npprogress: var(--nptextcolor);
+      --nptimestamp: var(--nptextcolor);
+      --npbuffer: var(--nptrack);
+      --circleicon: var(--nptextcolor);
+      --nplength: var(--nptextcolor);
     }
+
+    .albummatch .npscrubber .length {opacity:0.57;}
 
     .albummatch.albummatch2 {
       --tabbar: var(--albummatch);
@@ -649,7 +658,7 @@ jhunter@tunein.com
               .darkui .iconbtn:active  .svgicon {background-color:var(--darkuiiconpress);}
 
       #nowplaying .album {padding:8px 24px;display:flex;width:100%;align-items: center;justify-content: center;max-width:33vh;margin:0 auto;box-sizing:border-box;}
-            #nowplaying .album .npalbum {width:100%;height:0;padding-top:100%;background-color:rgba(255, 255, 255, 0.05);background-position: center;background-size:cover;background-image:url(./imgs/nyan.gif);}
+            #nowplaying .album .npalbum {width:100%;height:0;padding-top:100%;background-color:rgba(255, 255, 255, 0.05);background-position: center;background-size:cover;background-image:url(./imgs/nyan.gif);border-radius: 2px;}
 
     .specialtoggles {display:none;}
     .thumbshadow .ts-toggles, .albumblur .ab-toggles, .albummatch .am-toggles {display:block;}
@@ -1769,6 +1778,7 @@ jhunter@tunein.com
       document.body.classList.add('nppage', 'modalview');
 
       if (this.dataset.radio ){
+        document.getElementsByClassName('icyscript').remove();
         var s = document.createElement( 'script' );
         s.className = 'icyscript';
         s.setAttribute('src', 'https://noiseee.com/icy?url=' + url );
