@@ -267,20 +267,22 @@ jhunter@tunein.com
       --npextra: rgba(255, 255, 255, 0.25);
       --nplive: var(--albummatch);
 
+      --moreitem:var(--nptextcolor);
+      --morepanel:var(--albummatch);
+    }
+
+    .albummatch.albummatch2 {
       --tabbar: var(--albummatch);
       --miniplayertext: var(--nptextcolor);
       --miniplayerborder: rgba(0,0,0,.1);
       --tabcurrent: var(--nptextcolor);
       --tabcolor:var(--nptextcolor);
-
-      --moreitem:var(--nptextcolor);
-      --morepanel:var(--albummatch);
       --albumshadow:var(--nptrack);
     }
 
-    .albummatch .miniinfo .meta {color:var(--nptextcolor);opacity:0.57;}
-    .albummatch #tabbar .tab {opacity: 0.57;}
-    .albummatch #tabbar .tab.current {opacity: 1;}
+    .albummatch.albummatch2 .miniinfo .meta {color:var(--nptextcolor);opacity:0.57;}
+    .albummatch.albummatch2 #tabbar .tab {opacity: 0.57;}
+    .albummatch.albummatch2 #tabbar .tab.current {opacity: 1;}
 
     .albummatch .nplist {
       color:var(--nptextcolor);
@@ -840,7 +842,11 @@ jhunter@tunein.com
         <div class="tweak">
           <label><input type="checkbox" id="cb13" class="tweakr" data-class=lightmutedbg data-uncheck=cb8,cb9,cb10,cb11,cb12><div class="toggle"></div> Light Muted</label>
         </div>
+      
+      <div class="tweak">
+        <label><input type="checkbox" id="cb14" class="tweakr" data-class=albummatch2><div class="toggle"></div> Tab Bar BG Match</label>
       </div>
+    </div>
     </div>
     <div class=tpanel>
       <div class="tweak">
@@ -1728,6 +1734,9 @@ jhunter@tunein.com
       document.body.classList.add('nppage', 'modalview');
 
       let meow = document.getElementById('meow');
+
+      document.getElementsByClassName('npcontent')[0].scroll({top:0, behavior: 'smooth'});
+
       if ( !this.classList.contains('miniinfo') && !this.classList.contains('minialbum') ){
 
         // meow.onloadedmetadata = metaloaded;
