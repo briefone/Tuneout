@@ -811,22 +811,27 @@ jhunter@tunein.com
       .inmask {position:absolute;top:0;left:44px;width:28px;height:36px;overflow:hidden;}
         .tunelogo {position:absolute;top:8px;left:0;padding:2px 0;width:46px;text-align:center;box-sizing: border-box;border:2px solid var(--ink);border-radius:1.75px;transition:all 200ms ease-in-out;}
         .inlogo {position:absolute;top:0;left:0;width:28px;padding:4px 0;text-align:center;border-radius:1.75px;box-sizing: border-box;background:var(--ink);color:var(--ink1);transition:transform 200ms ease-in-out, opacity 200ms 200ms ease-in-out;}
-        .premiumlogo {opacity:0;position: absolute;transition:all 200ms ease-in-out;padding:4px 0;text-align:center;box-shadow:inset  0 0 0 2px var(--ink);border-radius:1.75px;top:4px;left:0;transform: translateX(44px);width:2px;overflow:hidden;color:var(--ink);height:24px;box-sizing: border-box;}
-          .premiumlogo .ptext {transform:translateY(0);transition:all 200ms ease-in-out;opacity:1;display:flex;align-items: center;justify-content: center;position:absolute;top:0;left:0;right:0;bottom:0;}
+        .premiumlogo {opacity:0;position: absolute;transition:width 200ms ease-in-out, transform 200ms ease-in-out;padding:4px 0;text-align:center;box-shadow:inset  0 0 0 2px var(--ink);border-radius:1.75px;top:4px;left:0;transform: translateX(44px);width:2px;overflow:hidden;color:var(--ink);height:24px;box-sizing: border-box;}
+          .premiumlogo .ptext {display:flex;align-items: center;justify-content: center;position:absolute;top:0;left:0;right:0;bottom:0;}
 
-        .ani1 #logologo .tunelogo {transform: translateY(-4px) translateX(0);}
-        .ani1 #logologo .inlogo {transform: translateY(4px) translateX(0);}
+        .compresslogo .ani1 #logologo .tunelogo {transform: translateY(-4px) translateX(0);}
+        .compresslogo .ani1 #logologo .inlogo {transform: translateY(4px) translateX(0);}
 
-        .ani2 #logologo .tunelogo {transform: translateY(-4px) translateX(48px);}
-        .ani2 #logologo .inlogo {transform: translateY(4px) translateX(-28px);}
+        .compresslogo .ani2 #logologo .tunelogo {transform: translateY(-4px) translateX(48px);}
+        .compresslogo .ani2 #logologo .inlogo {transform: translateY(4px) translateX(-28px);}
 
-        .ani2 #logologo .premiumlogo {opacity:1;}
+        .compresslogo .ani2 #logologo .premiumlogo {opacity:1;}
 
-        .ani3 #logologo .premiumlogo {opacity:1;transform: translateX(-3px);width: 74px;}
+        .compresslogo .ani3 #logologo .premiumlogo {transform: translateX(0);width: 72px;}
 
-        .ani4 #logologo .premiumlogo {}
-        .ani4 #logologo .premiumlogo .ptext {transform:translateY(0);opacity:1;}
+        .fliplogo .tunewrap  {width:72px;transition: transform 200ms ease-in-out;}
+        .fliplogo .pwrap {transform:rotateY(-90deg);width:72px;transition: transform 200ms ease-in-out;}
+        .fliplogo .premiumlogo {width:72px;transform:none;}
 
+        .fliplogo .ani1 .tunewrap {transform:rotateY(90deg);}
+        .fliplogo .ani1 .premiumlogo {opacity:1;}
+        .fliplogo .ani2 .pwrap {transform:rotateY(0deg);}
+        
 
     @media screen and (max-width: 666px) {
       #container {
@@ -884,6 +889,14 @@ jhunter@tunein.com
   <div id=tweaks>
     <div class=tpanel>
       <div class=tweakbtn onclick="animatelogo()">Animate Logo</div>
+      <div class="tgroup">
+        <div class="tweak">
+          <label><input type="checkbox" id="cb15" class="tweakr unclick" data-class=compresslogo data-uncheck=cb16><div class="toggle"></div> Compress</label>
+        </div>
+        <div class="tweak">
+          <label><input type="checkbox" id="cb16" class="tweakr unclick" data-class=fliplogo data-uncheck=cb15><div class="toggle"></div> Spin</label>
+        </div>
+      </div>
     </div>
     <div class=tpanel>
       <div class="tweak">
@@ -1183,15 +1196,19 @@ jhunter@tunein.com
             </svg>
           </div><div class="navlogo hometitle navtitle">
             <div id=logologo>
-              <div class=tunemask>
-                <div class=tunelogo>Tune</div>
+              <div class=tunewrap>
+                <div class=tunemask>
+                  <div class=tunelogo>Tune</div>
+                </div>
+                <div class=inmask>
+                  <div class=inlogo>In</div>
+                </div>
               </div>
-              <div class=inmask>
-                <div class=inlogo>In</div>
-              </div>
-              <div class=premiumlogo>
-                <div class=ptext>
-                  Premium
+              <div class=pwrap>
+                <div class=premiumlogo>
+                  <div class=ptext>
+                    Premium
+                  </div>
                 </div>
               </div>
             </div>
@@ -2463,6 +2480,9 @@ jhunter@tunein.com
 
       document.getElementById('cb8').checked = true;
       document.documentElement.classList.add('vibrantbg');
+
+      document.getElementById('cb15').checked = true;
+      document.documentElement.classList.add('compresslogo');
     }
 
     function resize(e){
@@ -2759,7 +2779,7 @@ jhunter@tunein.com
     Attach.on('click', '.np', nowplaying);
     Attach.on('click', '.closenp', closenp);
     Attach.on('input', '.valuetweak', valuetweaks);
-    Attach.on('change', '.tweakr', tweakr);carmode
+    Attach.on('change', '.tweakr', tweakr);
     Attach.on('click', '.carmode', carmode);
     Attach.on('click', '.exitcarmode', exitcarmode);
     Attach.on('click', '#miniplayer .miniinfo, #miniplayer .minialbum', nowplaying);
