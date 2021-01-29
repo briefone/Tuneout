@@ -156,6 +156,9 @@ jhunter@tunein.com
       --moreitem: var(--ink);
       --moreitemhover: var(--ink2);
       --moreitempress: var(--ink3);
+
+      --navbg:rgba(255,255,255,0.5);
+      --navborder:rgba(0,0,0,.05);
     }
 
     .darkmode {
@@ -171,6 +174,9 @@ jhunter@tunein.com
       --ink10:#EBEBEF;
       --ink11:#F4F4F6;
       --ink12:#ffffff;
+
+      --navbg:rgba(11, 14, 35,0.5);
+      --navborder:rgba(255,255,255,.05);
 
       --darkui: var(--ink1);
       --darkuitext: var(--ink12);
@@ -262,13 +268,13 @@ jhunter@tunein.com
     .albummatch.lightmutedbg, .albummatch.lightmutedbg .darkui {--nptextcolor:var(--lightmutedtext);--nptrack:var(--lightmutedtrack);}
     .albummatch.darkmutedbg, .albummatch.darkmutedbg .darkui {--nptextcolor:var(--darkmutedtext);--nptrack:var(--darkmutedtrack);}
 
-    .albummatch .darkui {--moreitemhover:rgba(255,255,255,.1);--moreitempress:rgba(255,255,255,.2);--circlebtn: var(--nptrack);--moreitem:var(--nptextcolor);
+    .albummatch #nowplaying.darkui {--moreitemhover:rgba(255,255,255,.1);--moreitempress:rgba(255,255,255,.2);--circlebtn: var(--nptrack);--moreitem:var(--nptextcolor);
       --morepanel:var(--albummatch);}
 
-    .albummatch {
-      --nptrack: rgba(255, 255, 255, 0.25);
-      --npbuffer: rgba(255, 255, 255, 0.25);
-      --npextra: rgba(255, 255, 255, 0.25);
+    .albummatch #nowplaying, .albummatch2 #tabbar {
+      
+   
+      --npextra: var(--nptrack);
       --nplive: var(--albummatch);
 
       --moreitem:var(--nptextcolor);
@@ -311,12 +317,12 @@ jhunter@tunein.com
     .albumblur .nplist .svgicon {background-color:white;opacity:0.57;}
 
     .albumblur {
-      --nptrack: rgba(255, 255, 255, 0.25);
-      --npbuffer: rgba(255, 255, 255, 0.25);
-      --npextra: rgba(255, 255, 255, 0.25);
+      --nptrack: rgba(255, 255, 255, 0.15);
+      --npbuffer: rgba(255, 255, 255, 0.15);
+      --npextra: rgba(255, 255, 255, 0.15);
       --nplive: rgba(0, 0, 0, 0.35);
 
-      --nptrack: linear-gradient(90deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 46%,rgba(255,255,255,0) 54%, rgba(255,255,255,0.25) 100%);
+      --nptrack: linear-gradient(90deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 46%,rgba(255,255,255,0) 54%, rgba(255,255,255,0.15) 100%);
     }
 
     .albumblur .livescrub .livefade {display:none}
@@ -472,7 +478,7 @@ jhunter@tunein.com
       margin-top: calc(var(--pageheight) / 2 * -1);
   }
 
-    #nav {position:absolute;top:0;left:0;right:0;z-index:1337;}
+    #nav {position:absolute;top:0;left:0;right:0;z-index:1337;backdrop-filter: blur(40px);background-color:var(--navbg);}
 
     #statusbar {height:24px;background:rgba(0,0,0,.03);width:100%;}
 
@@ -502,7 +508,7 @@ jhunter@tunein.com
       .navlogo svg {fill:var(--inkdefault);height:32px;display:none;}
 
 
-    .tabwrap {display:flex;position:relative;width:100%;align-items:center;padding: 0 0 0 24px;box-sizing: border-box;height:48px;overflow-x:scroll;white-space: nowrap;border-bottom:1px solid var(--ink2);gap: 43px;scroll-padding-right:24px;}
+    .tabwrap {display:flex;position:relative;width:100%;align-items:center;padding: 0 0 0 24px;box-sizing: border-box;height:48px;overflow-x:scroll;white-space: nowrap;border-bottom:1px solid var(--navborder);gap: 43px;scroll-padding-right:24px;}
       .tabwrap .tab {display:inline-flex;height:100%;padding:0 0;font-size:18px;font-weight:600;align-items: center;justify-content: center;cursor:pointer;user-select:none;}
         .tabwrap .tab:hover {color:var(--inkhover);}
         .tabwrap .tab:active {color:var(--inkpress);}
@@ -510,10 +516,10 @@ jhunter@tunein.com
 
       .tabwrap .tabline {height:3px;width:54.86px;background:var(--ink);position:absolute;bottom:0;left:0;transform:translateX(24px);transition: all 200ms ease-in-out;}
 
-    .content {position:absolute;top:88px;left:0;bottom:56px;right:0;overflow-y: scroll;}
+    .content {position:absolute;top:0;left:0;bottom:56px;right:0;overflow-y: scroll;}
       .played .content {bottom:112px;}
 
-    #home .content {top:136px;}
+    #home .content {padding-top:136px;}
     #search .content {top:136px;}
 
     .contentrow {padding:12px 0 var(--rowspacing) 0;}
@@ -722,10 +728,10 @@ jhunter@tunein.com
       .btnrow {padding:36px 24px 24px;}
             .btnrow .btn {width:100%;}
 
-      .slidepage {position: absolute;top:0;left:0;right:0;bottom:0;transform:translateX(100%);overflow-y:scroll;transition:transform 200ms ease-in-out;background:var(--ink1);pointer-events: none;}
+      .slidepage {position: absolute;top:0;left:0;right:0;bottom:0;transform:translateX(100%);overflow-y:scroll;transition:transform 200ms ease-in-out;background:var(--ink1);pointer-events: none;padding-top:88px;}
             .slidepage.active {transform:translateX(0);pointer-events: all;}
 
-      .mainpage {transition: transform 200ms ease-in-out;}
+      .mainpage {transition: transform 200ms ease-in-out;padding-top:88px;}
         .hidecontent .mainpage {transform:translateX(-40px);pointer-events: none;}
 
 
@@ -1332,7 +1338,7 @@ jhunter@tunein.com
                   <div class=meta>1/12/2021 - 43:12</div>
                 </div>
               </div>
-              <div class="rowitem np" data-station="Sci Fri" data-url="https://cdn.simplecast.com/audio/81fc9f37-3af1-4e45-8d96-ad57b71d9f8b/episodes/9cfa0e69-9879-4473-bda7-4a319798237f/audio/158c1018-a5d2-4a3c-9420-34eca8a2bf45/default_tc.mp3?aid=rss_feed&feed=i5UU6Ljx">
+              <div class="rowitem np" data-station="Science Fridays" data-url="https://cdn.simplecast.com/audio/81fc9f37-3af1-4e45-8d96-ad57b71d9f8b/episodes/9cfa0e69-9879-4473-bda7-4a319798237f/audio/158c1018-a5d2-4a3c-9420-34eca8a2bf45/default_tc.mp3?aid=rss_feed&feed=i5UU6Ljx">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p394/images/logoq.png);"></div><div class=description>
                   <div class=title>Covid Fact Check, Aging Cells, News Roundup</div>
                   <div class=meta>Janurary 12, 2021 - 47:01</div>
@@ -1853,7 +1859,7 @@ jhunter@tunein.com
               </div>
               <div class="listitem openpage" data-page=favorites data-parent=library id=favoritesrow>
                 <div class=title>Favorites</div>
-                <div class=rowcount>16</div>
+                <div class=rowcount>10</div>
                 <div class=chevron>
                   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M15.11 7.14599L19.956 11.999L15.11 16.852C15.0754 16.8844 15.0479 16.9236 15.029 16.9671C15.0102 17.0107 15.0005 17.0576 15.0005 17.105C15.0005 17.1524 15.0102 17.1993 15.029 17.2428C15.0479 17.2863 15.0754 17.3255 15.11 17.358L16.641 18.896C16.7085 18.9623 16.7994 18.9995 16.894 18.9995C16.9886 18.9995 17.0795 18.9623 17.147 18.896L22.26 13.783L23.791 12.252C23.8573 12.1845 23.8945 12.0936 23.8945 11.999C23.8945 11.9044 23.8573 11.8135 23.791 11.746L22.26 10.215L17.168 5.10599C17.1005 5.03967 17.0096 5.0025 16.915 5.0025C16.8204 5.0025 16.7295 5.03967 16.662 5.10599L15.11 6.63999C15.0754 6.67244 15.0479 6.71164 15.029 6.75515C15.0102 6.79866 15.0005 6.84558 15.0005 6.89299C15.0005 6.94041 15.0102 6.98732 15.029 7.03083C15.0479 7.07435 15.0754 7.11354 15.11 7.14599Z" />
@@ -1879,7 +1885,67 @@ jhunter@tunein.com
             playlist
           </div>
           <div id=favoritespage class="slidepage">
-            favorites
+            <div class=contentrow>
+              <div class="heading">
+                <h2>Stations</h2>
+              </div>
+              <div class=itemlist>
+                <div class="rowitem np" data-station="PBS News Hour" data-url="https://feedproxy.google.com/~r/NewshourFullProgramPodcast/~5/YA6PMiEQrC4/210120_fullepisode_ID3_1.mp3">
+                  <div class=thumb style="background-image:url(https://cdn-radiotime-logos.tunein.com/p47926q.png);"></div><div class=description>
+                  <div class=title>PBS News Hour</div>
+                  <div class=meta>News</div></div>
+                </div><div class="rowitem np" data-station="Deadline: White House" data-url="https://dts.podtrac.com/redirect.mp3/chtbl.com/track/6D589D/pdst.fm/e/rss.art19.com/episodes/68574eb6-4b15-4948-9ce1-e7c849122d62.mp3">
+                  <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p999743/images/logoq.png);"></div><div class=description>
+                  <div class=title>Deadline: White House</div>
+                  <div class=meta>News</div></div>
+                </div><div class="rowitem np" data-station="Stuff You Should Know" data-url="https://dcs.megaphone.fm/HSW8356008250.mp3?key=c5f6e44021685917d301db6d322bc9a7">
+                  <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p295446/images/logoq.png);"></div><div class=description>
+                  <div class=title>Stuff You Should Know</div>
+                  <div class=meta>Learn</div></div>
+                </div><div class="rowitem np" data-station="The 11th Hour with Brian Williams" data-url="https://dts.podtrac.com/redirect.mp3/chtbl.com/track/6D589D/pdst.fm/e/rss.art19.com/episodes/e25a1197-872e-41a2-bdf3-b29990c347ee.mp3">
+                  <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p921985/images/logoq.png);"></div><div class=description>
+                  <div class=title>The 11th Hour with Brian Williams</div>
+                  <div class=meta>News</div></div>
+                </div><div class="rowitem np" data-station="Wait Wait... Don't Tell Me! from NPR" data-url="https://play.podtrac.com/npr-344098539/edge1.pod.npr.org/anon.npr-mp3/npr/waitwait/2021/01/20210116_waitwait_wwdtmpodcast210116.mp3?awCollectionId=344098539&awEpisodeId=957558090&orgId=1&d=3003&p=344098539&story=957558090&t=podcast&e=957558090&size=47941656&ft=pod&f=344098539">
+                  <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p46/images/logoq.png);"></div><div class=description>
+                  <div class=title>Wait Wait... Don't Tell Me! from NPR</div>
+                  <div class=meta>Talk News</div></div>
+                </div><div class="rowitem np" data-station="NPR News Now" data-url="https://pd.npr.org/anon.npr-mp3/npr/news/newscast.mp3">
+                  <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p212/images/logoq.png);"></div><div class=description>
+                  <div class=title>NPR News Now</div>
+                  <div class=meta>News</div></div>
+                </div><div class="rowitem np" data-station="News Hour" data-url="https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/http/vpid/p094m96n.mp3">
+                  <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p5/images/logoq.png);"></div><div class=description>
+                  <div class=title>News Hour</div>
+                  <div class=meta>News</div></div>
+                </div>
+              </div>
+            </div>
+            <div class=contentrow>
+              <div class="heading">
+                <h2>Podcast</h2>
+              </div>
+              <div class=itemlist>
+                <div class="rowitem np" data-station="Spark & Fire" data-url="https://dts.podtrac.com/redirect.mp3/chtbl.com/track/E341G/rss.art19.com/episodes/a6161f5f-7a2d-45ef-8130-108652ee1e98.mp3">
+                  <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p1389549/images/logoq.png);"></div><div class=description>
+                    <div class=title>Director Kemp Powers on the creative journey behind Pixar's "Soul."</div>
+                    <div class=meta>1/12/2021 - 43:12</div>
+                  </div>
+                </div>
+                <div class="rowitem np" data-station="Science Fridays" data-url="https://cdn.simplecast.com/audio/81fc9f37-3af1-4e45-8d96-ad57b71d9f8b/episodes/9cfa0e69-9879-4473-bda7-4a319798237f/audio/158c1018-a5d2-4a3c-9420-34eca8a2bf45/default_tc.mp3?aid=rss_feed&feed=i5UU6Ljx">
+                  <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p394/images/logoq.png);"></div><div class=description>
+                    <div class=title>Covid Fact Check, Aging Cells, News Roundup</div>
+                    <div class=meta>Janurary 12, 2021 - 47:01</div>
+                  </div>
+                </div>
+                <div class="rowitem np" data-station="How to be a Better Human" data-url="https://dts.podtrac.com/redirect.mp3/dovetail.prxu.org/357/0a60222c-8e67-4585-a237-09fc01f7cec6/EP2_Leonard_Final_SegA.mp3">
+                  <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p1389827/images/logoq.png);"></div><div class=description>
+                    <div class=title>How to be a Better Human</div>
+                    <div class=meta>Janurary 12, 2021 - 33:07</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div id=downloadspage class="slidepage">
             downloads
@@ -2206,8 +2272,6 @@ jhunter@tunein.com
       let page = this.dataset.page;
       let home = document.getElementById('home');
 
-       
-
       if ( home.classList.contains('tab' + page)){
         let tp = document.getElementsByClassName('page' + page)[0];
         tp.scroll({top: 0, behavior: 'smooth'});
@@ -2219,12 +2283,26 @@ jhunter@tunein.com
     }
 
     function tabbar(e){
+      let page = this.dataset.page;
+
+      if ( this.classList.contains('current') && this.dataset.page == 'home'){
+        let tp = document.getElementsByClassName('pagehome')[0];
+        tp.scroll({top: 0, behavior: 'smooth'});
+      } else  {
+        let tp = document.getElementsByClassName('pagehome')[0];
+        tp.scroll({top: 0});
+      }
+
+      if ( this.classList.contains('current')){
+        return;
+      }
+
       let bar = this.getparent('tabbar');
       let current = bar.getElementsByClassName('tab current');
       current.removeclass('current');
       this.classList.add('current');
 
-      let page = this.dataset.page;
+      
 
       console.log(page);
 
@@ -2244,12 +2322,12 @@ jhunter@tunein.com
       let nb = document.getElementById('navbar');
       let ph = document.getElementsByClassName('pagehome')[0];
 
-      ph.style.top = '136px';
+      document.getElementById('nav').style.height = '88px';
       nb.style.transform = ht.style.transform = 'translateY(0)';
 
       nb.style.opacity = 1;
       nb.style.pointerEvents = 'all';
-      
+        
     }
 
     function modalopen(e){
@@ -2436,7 +2514,9 @@ jhunter@tunein.com
 
       let min = Math.max(-60, -y);
       console.log(min);
-      this.style.top = 136 + min + 'px';
+      //this.style.top = 136 + min + 'px';
+
+      let nav = document.getElementById('nav');
       
       let a = Math.min(1- (Math.abs(min) / 60), 1);
 
@@ -2446,6 +2526,8 @@ jhunter@tunein.com
       nb.style.transform = ht.style.transform = 'translateY(' + min +'px)';
 
       nb.style.opacity = a;
+
+      nav.style.maxHeight = 136 + min + 'px';
 
       if ( a < 1 ) {
         nb.style.pointerEvents = 'none';
@@ -2645,11 +2727,11 @@ jhunter@tunein.com
             //     npmatch.dataset[s] = hex;
 
               var textcolor = 'white';
-              var trackcolor = 'rgba(255,255,255,0.2)';
+              var trackcolor = 'rgba(255,255,255,0.15)';
 
               if ( contrastr(hex, '#ffffff') < 3 ){
                 textcolor = 'black';
-                trackcolor = 'rgba(0,0,0,0.2)';
+                trackcolor = 'rgba(0,0,0,0.15)';
               }
 
               lasttext = textcolor;
