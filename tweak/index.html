@@ -806,7 +806,7 @@ jhunter@tunein.com
 
 
 
-      #logologo {font:700 14.5px pressura, sans-serif;color:var(--ink);position:absolute;top:50%;left:50%;text-transform:uppercase;margin: -16px 0 0 -37px;width:74px;height:32px;perspective:300px;}
+      #logologo {font:700 14.5px pressura, sans-serif;color:var(--ink);position:absolute;top:50%;left:50%;text-transform:uppercase;margin:-16px 0 0 -36px;width:72px;height:32px;perspective:350px;}
       .tunemask {width:46px;height:36px;overflow:hidden;position:absolute;top:0;left:0;}
       .inmask {position:absolute;top:0;left:44px;width:28px;height:36px;overflow:hidden;}
         .tunelogo {position:absolute;top:8px;left:0;padding:2px 0;width:46px;text-align:center;box-sizing: border-box;border:2px solid var(--ink);border-radius:1.75px;transition:all 200ms ease-in-out;}
@@ -824,9 +824,9 @@ jhunter@tunein.com
 
         .compresslogo .ani3 #logologo .premiumlogo {transform: translateX(0);width: 72px;}
 
-        .fliplogo .tunewrap  {width:72px;transition: transform 200ms ease-in-out;}
-        .fliplogo .pwrap {transform:rotateY(-90deg);width:72px;transition: transform 200ms ease-in-out;}
-        .fliplogo .premiumlogo {width:72px;transform:none;}
+        .fliplogo .tunewrap  {width:72px;transition: transform 200ms ease-in-out;backface-visibility: hidden;}
+        .fliplogo .pwrap {transform:rotateY(-90deg);width:72px;transition: transform 200ms ease-in-out;backface-visibility: hidden;}
+        .fliplogo .premiumlogo {width:72px;transform:none;backface-visibility: hidden;}
 
         .fliplogo .ani1 .tunewrap {transform:rotateY(90deg);}
         .fliplogo .ani1 .premiumlogo {opacity:1;}
