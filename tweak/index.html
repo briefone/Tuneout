@@ -806,7 +806,7 @@ jhunter@tunein.com
 
 
 
-      #logologo {font:700 14.5px pressura, sans-serif;color:var(--ink);position:absolute;top:50%;left:50%;text-transform:uppercase;margin: -16px 0 0 -36px;}
+      #logologo {font:700 14.5px pressura, sans-serif;color:var(--ink);position:absolute;top:50%;left:50%;text-transform:uppercase;margin: -16px 0 0 -37px;width:74px;height:32px;perspective:300px;}
       .tunemask {width:46px;height:36px;overflow:hidden;position:absolute;top:0;left:0;}
       .inmask {position:absolute;top:0;left:44px;width:28px;height:36px;overflow:hidden;}
         .tunelogo {position:absolute;top:8px;left:0;padding:2px 0;width:46px;text-align:center;box-sizing: border-box;border:2px solid var(--ink);border-radius:1.75px;transition:all 200ms ease-in-out;}
@@ -831,6 +831,9 @@ jhunter@tunein.com
         .fliplogo .ani1 .tunewrap {transform:rotateY(90deg);}
         .fliplogo .ani1 .premiumlogo {opacity:1;}
         .fliplogo .ani2 .pwrap {transform:rotateY(0deg);}
+        .fliplogo .ani2 .tunewrap {transform:rotateY(-90deg);transition:none;}
+        .fliplogo .ani3 .pwrap {transform:rotateY(90deg);}
+        .fliplogo .ani4 .tunewrap {transform:rotateY(0);transition:transform 200ms ease-in-out;}
         
 
     @media screen and (max-width: 666px) {
@@ -856,31 +859,49 @@ jhunter@tunein.com
   <script>
     function animatelogo(){
       let time = 250;
-      if ( !document.body.classList.contains('ani1') ){
-        document.body.classList.add('ani1');
 
-        setTimeout(function(){
-          document.body.classList.add('ani2');
-          setTimeout(function(){
-            document.body.classList.add('ani3');
-            setTimeout(function(){
-              document.body.classList.add('ani4');
+      if ( document.documentElement.classList.contains('compresslogo') ){
+        if ( !document.body.classList.contains('ani1') ){
+          document.body.classList.add('ani1');
 
-              setTimeout(animatelogo, 777);
-            }, 125);
-          }, time);
-        }, time);
-      } else {
-        document.body.classList.remove('ani4');
-        setTimeout(function(){
-          document.body.classList.remove('ani3');
           setTimeout(function(){
-            document.body.classList.remove('ani2');
+            document.body.classList.add('ani2');
             setTimeout(function(){
-              document.body.classList.remove('ani1');
+              document.body.classList.add('ani3');
+              setTimeout(function(){
+                document.body.classList.add('ani4');
+
+                setTimeout(animatelogo, 777);
+              }, 125);
             }, time);
           }, time);
-        }, 125);
+        } else {
+          document.body.classList.remove('ani4');
+          setTimeout(function(){
+            document.body.classList.remove('ani3');
+            setTimeout(function(){
+              document.body.classList.remove('ani2');
+              setTimeout(function(){
+                document.body.classList.remove('ani1');
+              }, time);
+            }, time);
+          }, 125);
+        }
+      } else if (document.documentElement.classList.contains('fliplogo')){
+        document.body.classList.add('ani1');
+
+          setTimeout(function(){
+            document.body.classList.add('ani2');
+            setTimeout(function(){
+              document.body.classList.add('ani3');
+              setTimeout(function(){
+                document.body.classList.add('ani4');
+                setTimeout(function(){
+                document.body.classList.remove('ani4', 'ani3', 'ani2', 'ani1');
+                }, time);
+              }, time);
+            }, 600);
+          }, time);
       }
     }
   </script>
@@ -891,7 +912,7 @@ jhunter@tunein.com
       <div class=tweakbtn onclick="animatelogo()">Animate Logo</div>
       <div class="tgroup">
         <div class="tweak">
-          <label><input type="checkbox" id="cb15" class="tweakr unclick" data-class=compresslogo data-uncheck=cb16><div class="toggle"></div> Compress</label>
+          <label><input type="checkbox" id="cb15" class="tweakr unclick" data-class=compresslogo data-uncheck=cb16><div class="toggle"></div> Squash</label>
         </div>
         <div class="tweak">
           <label><input type="checkbox" id="cb16" class="tweakr unclick" data-class=fliplogo data-uncheck=cb15><div class="toggle"></div> Spin</label>
