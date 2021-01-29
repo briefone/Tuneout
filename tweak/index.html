@@ -385,6 +385,8 @@ jhunter@tunein.com
       .unfav {-webkit-mask: url(../icons/unfav.svg);mask: url(../icons/unfav.svg);}
       .playlistadd {-webkit-mask: url(../icons/playlistadd.svg);mask: url(../icons/playlistadd.svg);}
       .chev {-webkit-mask: url('../icons/Chevron-Thin-Right(RightAligned).svg');mask: url('../icons/Chevron-Thin-Right(RightAligned).svg');}
+      .rewind {-webkit-mask: url('../icons/BackBuffer-Large.svg');mask: url('../icons/BackBuffer-Large.svg');}
+      .forward {-webkit-mask: url('../icons/ForwardBuffer-Large.svg');mask: url('../icons/ForwardBuffer-Large.svg');}
 
     .toggle {width:38px;height:22px;border-radius:30px;position:relative;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(0, 0, 0, 0.02);cursor:pointer;transition:background 150ms ease-in-out;display: inline-block;margin-right:8px;vertical-align: middle;}
         .toggle::after {content:'';position:absolute;top:3px;left:3px;width:16px;height:16px;background:white;display:block;box-shadow:0 2px 4px rgba(0,0,0,.15);border-radius:50%;transition:transform 150ms ease-in-out;}
@@ -751,11 +753,13 @@ jhunter@tunein.com
           .profileactions .btn {width:50%;}
 
     
-    .npcontrols {display:flex;align-items:center;justify-content: center;height:88px;margin-bottom:24px;}
+    .npcontrols {display:flex;align-items:center;justify-content: center;height:88px;margin-bottom:24px;gap:16px}
     .npplay, .nppause {width:72px;height:72px;}
       .nppause {display:none;}
       .playing .nppause {display:flex;}
       .playing .npplay {display:none;}
+
+      .npcontrols .medium {width:56px;height:56px;}
 
     .npinfo {padding:40px 24px 0;}
       .npstation {font-size:16px;font-weight:500;text-transform:uppercase;}
@@ -782,8 +786,10 @@ jhunter@tunein.com
 
               .livescrub .livefade {height:4px;width:100%;max-width:460px;left:50%;position:absolute;display:block;top:50%;transform:translate(-50%, -50%);background: linear-gradient(90deg, rgba(255,255,255,0) 0%, var(--nplive) 50%, rgba(255,255,255,0) 100%);z-index:1;}
 
-      .npscrubber.live .scrubbable {display:none}
-      .npscrubber.live .livescrub {display:block;}
+      .live .scrubbable {display:none}
+      .live .livescrub {display:block;}
+
+      .live .npforward30, .live .nprewind30 {display:none;} 
 
 
     .npextras {margin:0 24px;border-radius:6px;background:var(--npextra);}
@@ -1101,7 +1107,7 @@ jhunter@tunein.com
       </div>
     </div>
 
-    <div id=carmode class=darkui>
+    <div id=carmode class="live darkui">
       <div class="btn exitcarmode">Exit</div>
     </div>
 
@@ -1159,7 +1165,7 @@ jhunter@tunein.com
           <div class=npmeta>Meta</div>
           <div class=nplist><div class="svgicon playlistadd"></div> Add to Playlist</div>
         </div>
-        <div class="npscrubber live" id=npscrubber>
+        <div class="npscrubber" id=npscrubber>
           <div class=scrubbable>
             <input type=range id=npscrub />
             <div class=track id=nptrack></div>
@@ -1175,6 +1181,9 @@ jhunter@tunein.com
           </div>
         </div>
         <div class=npcontrols>
+          <div class="nprewind30 circlebtn medium">
+            <div class="svgicon rewind"></div>
+          </div>
           <div class="npplay circlebtn">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M8 18.4701C8.00043 18.5908 8.03462 18.709 8.09872 18.8112C8.16281 18.9135 8.25424 18.9958 8.36267 19.0488C8.47195 19.0999 8.5932 19.12 8.71314 19.1069C8.83309 19.0937 8.94709 19.0478 9.04267 18.9741L17.2333 12.5048C17.3096 12.4446 17.3713 12.368 17.4137 12.2806C17.4561 12.1931 17.4781 12.0973 17.4781 12.0001C17.4781 11.903 17.4561 11.8071 17.4137 11.7197C17.3713 11.6323 17.3096 11.5556 17.2333 11.4954L9.04267 5.02744C8.94782 4.95268 8.83387 4.9061 8.71382 4.893C8.59377 4.87991 8.47246 4.90084 8.36373 4.95339C8.255 5.00595 8.16324 5.08802 8.09893 5.19023C8.03461 5.29244 8.00033 5.41068 8 5.53144V18.4701Z" />
@@ -1184,6 +1193,9 @@ jhunter@tunein.com
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M16.8893 4.88933C17.0071 4.88933 17.12 4.93611 17.2033 5.01937C17.2865 5.10264 17.3333 5.21557 17.3333 5.33333V18.6667C17.3333 18.7844 17.2865 18.8974 17.2033 18.9806C17.12 19.0639 17.0071 19.1107 16.8893 19.1107H14.2227C14.1642 19.1108 14.1064 19.0995 14.0523 19.0772C13.9983 19.055 13.9492 19.0223 13.9078 18.9811C13.8665 18.9398 13.8336 18.8908 13.8112 18.8369C13.7889 18.7829 13.7773 18.7251 13.7773 18.6667V5.33333C13.7773 5.21557 13.8241 5.10264 13.9074 5.01937C13.9906 4.93611 14.1036 4.88933 14.2213 4.88933H16.8893ZM9.77866 4.88933C9.89641 4.88933 10.0093 4.93611 10.0926 5.01937C10.1759 5.10264 10.2227 5.21557 10.2227 5.33333V18.6667C10.2227 18.7844 10.1759 18.8974 10.0926 18.9806C10.0093 19.0639 9.89641 19.1107 9.77866 19.1107H7.11199C7.05357 19.1108 6.99569 19.0995 6.94167 19.0772C6.88765 19.055 6.83854 19.0223 6.79717 18.9811C6.7558 18.9398 6.72298 18.8908 6.70058 18.8369C6.67818 18.7829 6.66666 18.7251 6.66666 18.6667V5.33333C6.66666 5.21557 6.71343 5.10264 6.7967 5.01937C6.87997 4.93611 6.9929 4.88933 7.11066 4.88933H9.77866Z" />
             </svg>  
+          </div>
+          <div class="npforward30 circlebtn medium">
+            <div class="svgicon forward"></div>
           </div>
         </div>
         <div class=npextras>
@@ -2292,10 +2304,10 @@ jhunter@tunein.com
           if ( dur == Infinity){
             console.log('infinite');
 
-            document.getElementById('npscrubber').classList.add('live');
+            document.getElementById('nowplaying').classList.add('live');
             return;
           } else {
-            document.getElementById('npscrubber').classList.remove('live');
+            document.getElementById('nowplaying').classList.remove('live');
           }
 
           document.getElementById('npscrub').max = dur;
@@ -2791,8 +2803,16 @@ jhunter@tunein.com
       });
     }
 
+    function npforward30(){
+      let a = document.getElementById('meow');
+      a.currentTime += 30;
+    }
 
-    window.onresize = resize;
+    function nprewind30(){
+      let a = document.getElementById('meow');
+      a.currentTime -= 30;
+    }
+    
 
     Attach.on('click', '.tabwrap .tab', tabline);
     Attach.on('click', '#tabbar .tab', tabbar);
@@ -2815,9 +2835,12 @@ jhunter@tunein.com
     Attach.on('click', '.npmore', npmore);
     Attach.on('click', '.morepanel .overlay', nomore);
     Attach.on('click', '.morepanel .panelitem', panelitem);
-    Attach.on('click', '.npfav', npfav);
+    Attach.on('click', '.npfav', npfav); 
+    Attach.on('click', '.npforward30', npforward30);
+    Attach.on('click', '.nprewind30', nprewind30); 
     
     (function() {
+      window.onresize = resize;
       generatelanguages();
       setuptweaks();
 
