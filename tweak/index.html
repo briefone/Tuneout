@@ -770,9 +770,13 @@ jhunter@tunein.com
     .npinfo {padding:40px 24px 0;}
       .npstation {font-size:16px;font-weight:500;text-transform:uppercase;}
       .npmeta {font-size:20px;font-weight:500;padding:2px 0;}
-      .nplist {font-size:16px;font-weight:500;color:var(--ink6);cursor:pointer;user-select:none;}
+      .nplist {font-size:16px;font-weight:500;color:var(--ink6);cursor:pointer;user-select:none;display:inline-block;transition:color 200ms ease-in-out;}
             .nplist .svgicon {background-color:var(--ink6);}
 
+        .nplist:hover {color:var(--ink5);}
+          .nplist:hover .svgicon {background-color:var(--ink5);}
+        .nplist:active {color:var(--ink4);}
+          .nplist:active .svgicon {background-color:var(--ink4);}
     
     .npscrubber {width:calc(100% - 48px);margin-left:24px;height:48px;position: relative;margin-bottom:24px;}
       .npscrubber input[type=range] {width:100%;height:48px;position: relative;z-index:88;}
@@ -1621,7 +1625,7 @@ jhunter@tunein.com
             </div>
             <div class=scrollrow>
               <div class="scrollitem np" data-station="" data-url="https://www.podtrac.com/pts/redirect.mp3/traffic.megaphone.fm/ESP7382530192.mp3">
-                <div class=thumb style="background-image:url(https://streams.kqed.org/kqedradio);"></div>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/s34804/images/logoq.png);"></div>
                 <div class=label>KQED</div>
               </div><div class="scrollitem np" data-station="" data-url="http://20803.live.streamtheworld.com/KGOAM_SC?DIST=TuneIn&TGT=TuneIn&maxServers=2&tdtok=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImZTeXA4In0.eyJpc3MiOiJ0aXNydiIsInN1YiI6IjI0Njk1NTE3MiIsImlhdCI6MTYxMTg3NDk2OSwidGQtcmVnIjpmYWxzZX0.6iafxk8UyvgGCwZq8Es_2JG6JNR9d9XBCR5K10d3R0A&gdpr=0&us_privacy=1YNY&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImdlbmRlciI6Im0iLCJhZ2UiOiIzMyIsImlhdCI6MTYxMTg3NDk2OSwiaXNzIjoidGlzcnYifQ.L-U7JtpZejJQanG8OFQhlHdYeBue2ScFFkAgU151Nzw">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/s32870/images/logoq.png);"></div>
@@ -1701,15 +1705,15 @@ jhunter@tunein.com
               <h2>Throwback Hits</h2>
             </div>
             <div class=scrollrow>
-              <div class="scrollitem np banner" data-station="" data-url="https://rfcmedia.streamguys1.com/classichitspremium.mp3" data-radio=true>
+              <div class="scrollitem np banner" data-station="60's Hits" data-url="https://rfcmedia.streamguys1.com/classichitspremium.mp3" data-radio=true>
                 <div class="thumb " style="background-image:url(https://cdn-profiles.tunein.com/s306872/images/brickg.jpg);"></div>
-              </div><div class="scrollitem np banner" data-station="" data-url="https://rfcmedia.streamguys1.com/70hits.mp3" data-radio=true>
+              </div><div class="scrollitem np banner" data-station="70's Hits" data-url="https://rfcmedia.streamguys1.com/70hits.mp3" data-radio=true>
                 <div class="thumb " style="background-image:url(https://cdn-profiles.tunein.com/s249944/images/brickg.jpg);"></div>
-              </div><div class="scrollitem np banner" data-station="" data-url="https://rfcmedia.streamguys1.com/80hits.mp3" data-radio=true>
+              </div><div class="scrollitem np banner" data-station="80's Hits" data-url="https://rfcmedia.streamguys1.com/80hits.mp3" data-radio=true>
                 <div class="thumb " style="background-image:url(https://cdn-profiles.tunein.com/s249945/images/brickg.jpg);"></div>
-              </div><div class="scrollitem np banner" data-station="" data-url="https://rfcmedia.streamguys1.com/sraltrockhits.mp3" data-radio=true>
+              </div><div class="scrollitem np banner" data-station="90's Hits" data-url="https://rfcmedia.streamguys1.com/sraltrockhits.mp3" data-radio=true>
                 <div class="thumb " style="background-image:url(https://cdn-profiles.tunein.com/s249946/images/brickg.jpg);"></div>
-              </div><div class="scrollitem np banner" data-station="" data-url="https://rfcmedia.streamguys1.com/newpophitspremium.mp3" data-radio=true>
+              </div><div class="scrollitem np banner" data-station="00's Hits" data-url="https://rfcmedia.streamguys1.com/newpophitspremium.mp3" data-radio=true>
                 <div class="thumb " style="background-image:url(https://cdn-profiles.tunein.com/s249947/images/brickg.jpg);"></div>
               </div>
             </div>
