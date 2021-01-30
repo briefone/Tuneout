@@ -806,7 +806,7 @@ jhunter@tunein.com
 
             .cardstation {}
               .stationrow {display:flex;gap:12px;align-items: center;padding:16px;}
-                .stationrow .img {width:52px;height:52px;box-sizing: border-box;    border-radius: var(--tileradius);    overflow: hidden;    background-size: cover;    background-position: center;    background-color: var(--ink4);transition: box-shadow 200ms ease-in-out, transform 200ms ease-in-out;box-shadow: 0 0 0 1px var(--ink2);}
+                .stationrow .img {width:52px;height:52px;box-sizing: border-box;    border-radius: var(--tileradius);    overflow: hidden;    background-size: cover;    background-position: center;    background-color: var(--ink4);transition: box-shadow 200ms ease-in-out, transform 200ms ease-in-out;}
                   .stationname {font-size:18px;font-weight:600;}
                   .stationmeta {font-size:16px;font-weight:500;}
                 .stationdetails {padding:0 16px 16px;font-size:16px;font-weight:500;}
@@ -826,8 +826,8 @@ jhunter@tunein.com
       #logologo {font:700 14.5px pressura, sans-serif;color:var(--ink);position:absolute;top:50%;left:50%;text-transform:uppercase;margin:-16px 0 0 -36px;width:72px;height:32px;perspective:350px;}
       .tunemask {width:46px;height:36px;overflow:hidden;position:absolute;top:0;left:0;}
       .inmask {position:absolute;top:0;left:44px;width:28px;height:36px;overflow:hidden;}
-        .tunelogo {position:absolute;top:8px;left:0;padding:2px 0;width:46px;text-align:center;box-sizing: border-box;border:2px solid var(--ink);border-radius:1.75px;transition:all 200ms ease-in-out;}
-        .inlogo {position:absolute;top:0;left:0;width:28px;padding:4px 0;text-align:center;border-radius:1.75px;box-sizing: border-box;background:var(--ink);color:var(--ink1);transition:transform 200ms ease-in-out, opacity 200ms 200ms ease-in-out;}
+        .tunelogo {position:absolute;top:8px;left:0;padding:2px 0;width:46px;text-align:center;box-sizing: border-box;border:2px solid var(--ink);border-radius:1.75px;transition:transform 200ms ease-in-out;}
+        .inlogo {position:absolute;top:0;left:0;width:28px;padding:4px 0;text-align:center;border-radius:1.75px;box-sizing: border-box;background:var(--ink);color:var(--ink1);transition:transform 200ms ease-in-out;}
         .premiumlogo {opacity:0;position: absolute;transition:width 200ms ease-in-out, transform 200ms ease-in-out;padding:4px 0;text-align:center;box-shadow:inset  0 0 0 2px var(--ink);border-radius:1.75px;top:4px;left:0;transform: translateX(44px);width:2px;overflow:hidden;color:var(--ink);height:24px;box-sizing: border-box;}
           .premiumlogo .ptext {display:flex;align-items: center;justify-content: center;position:absolute;top:0;left:0;right:0;bottom:0;}
 
@@ -1117,11 +1117,11 @@ jhunter@tunein.com
       </div>
     </div>
 
-    <div id=carmode class="live darkui">
+    <div id=carmode class=" darkui">
       <div class="btn exitcarmode">Exit</div>
     </div>
 
-    <div id=nowplaying class=darkui>
+    <div id=nowplaying class="live darkui">
       <div class=morepanel>
         <div class=overlay></div>
         <div class=panel>
@@ -1211,9 +1211,9 @@ jhunter@tunein.com
         <div class=npextras>
           <div class=cardstation>
             <div class=stationrow>
-              <div class=img></div>
+              <div class="img extraimg"></div>
               <div class=details>
-                <div class=stationname>Station Name</div>
+                <div class="stationname extrastation">Station Name</div>
                 <div class=stationmeta>New York, NY</div>
               </div>
             </div>
@@ -1569,7 +1569,7 @@ jhunter@tunein.com
             <div class="heading ">
               <h2>The Biggest Voices in Sports</h2>
             </div>
-            <div class=scrollrow>
+            <div class="scrollrow textless">
               <div class="scrollitem np banner" data-station="" data-url="http://live.wostreaming.net/direct/espn-networkmp3-48?source=TuneIn&gdpr=0&us_privacy=1YNY&c_yob=1988&c_gender=m&aw_0_1st.age=33&aw_0_1st.gender=male&aw_0_1st.playerid=RadioTime&aw_0_1st.skey=1611869990&aw_0_1st.premium=false&aw_0_1st.lotamesegments=%3ball%3b">
                 <div class="thumb " style="background-image:url(https://cdn-profiles.tunein.com/a38481/images/brickg.jpg);"></div>
               </div><div class="scrollitem np banner" data-station="" data-url="https://injector.simplecastaudio.com/49112a7c-4734-46b6-8b6d-dc75390d9e5f/episodes/adb72102-6983-404f-be1d-70e6d935baf0/audio/128/default.mp3?aid=rss_feed&awCollectionId=49112a7c-4734-46b6-8b6d-dc75390d9e5f&awEpisodeId=adb72102-6983-404f-be1d-70e6d935baf0&feed=vOUZwJSO">
@@ -1609,7 +1609,7 @@ jhunter@tunein.com
             <div class="heading ">
               <h2>Featured News Coverage</h2>
             </div>
-            <div class=scrollrow>
+            <div class="scrollrow textless">
               <div class="scrollitem np banner" data-station="" data-url="https://dts.podtrac.com/redirect.mp3/dovetail.prxu.org/241/467eac26-8e93-442b-bc6d-6cf890f2f95d/KCRW_left_right_center_president_biden_calls_for_unity_will_he_get_it_210122_1of3.mp3">
                 <div class="thumb " style="background-image:url(https://cdn-profiles.tunein.com/c100004357/images/brickg.jpg);"></div>
               </div><div class="scrollitem np banner" data-station="" data-url="https://www.podtrac.com/pts/redirect.mp3/traffic.megaphone.fm/ESP5917378794.mp3">
@@ -1704,7 +1704,7 @@ jhunter@tunein.com
             <div class="heading ">
               <h2>Throwback Hits</h2>
             </div>
-            <div class=scrollrow>
+            <div class="scrollrow textless">
               <div class="scrollitem np banner" data-station="60's Hits" data-url="https://rfcmedia.streamguys1.com/classichitspremium.mp3" data-radio=true>
                 <div class="thumb " style="background-image:url(https://cdn-profiles.tunein.com/s306872/images/brickg.jpg);"></div>
               </div><div class="scrollitem np banner" data-station="70's Hits" data-url="https://rfcmedia.streamguys1.com/70hits.mp3" data-radio=true>
@@ -2369,6 +2369,10 @@ jhunter@tunein.com
       npstation.empty();
       npstation.appendChild(document.createTextNode(station));
 
+      let es = document.getElementsByClassName('extrastation')[0];
+      es.empty();
+      es.appendChild(document.createTextNode(station));
+
       if (this.dataset.radio ){
         document.getElementsByClassName('icyscript').remove();
         var s = document.createElement( 'script' );
@@ -2473,9 +2477,12 @@ jhunter@tunein.com
         let blur = document.getElementById('bluralbum');
         let ma = document.getElementById('miniartwork');
 
+        let ei = np.getElementsByClassName('extraimg')[0];
+
         art.style.backgroundImage = album;
         ma.style.backgroundImage = album;
         blur.style.backgroundImage = album;
+        ei.style.backgroundImage = album;
 
         let img = album.replace('url(', '').replace(')', '').replace(/"/g,'').replace(/'/g, "").trim();
 
