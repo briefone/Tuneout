@@ -662,7 +662,8 @@ jhunter@tunein.com
             .unfav, .removefav .fav {display:none;}
             .removefav .unfav {display:block;}
 
-      .npcontent {overflow-y: scroll;position:absolute;top:0;left:0;right:0;bottom:0;padding:88px 0 24px;}
+      .npcontent {overflow-y: scroll;position:absolute;top:0;left:0;right:0;bottom:0;padding:88px 0 24px;display: flex;flex-direction: column;}
+        .npcolumn {width:100%;}
 
       .darkui {color:var(--darkuitext);}
             .darkui .iconbtn  svg {fill:var(--darkuiicon);}
@@ -852,6 +853,9 @@ jhunter@tunein.com
         .fliplogo .ani3 .pwrap {transform:rotateY(90deg);}
         .fliplogo .ani4 .tunewrap {transform:rotateY(0);transition:transform 200ms ease-in-out;}
         
+    
+    .split .npcontent {flex-direction:row;}
+    
 
     @media screen and (max-width: 666px) {
       #container {
@@ -867,6 +871,8 @@ jhunter@tunein.com
           margin-top:0;
       }
     }
+
+
   </style>
   <script src="../js/gator.js"></script>
   <script src="../js/base.js"></script>
@@ -1044,7 +1050,7 @@ jhunter@tunein.com
     <div class=tpanel>
       <div class="tweak">
         <div class="label"><span>Page Width</span><div class="value">1444</div></div>
-          <input type="range" class="valuetweak" min="360" max="1444" value="1444" step="5" id="pagewidth" data-unit=px>
+          <input type="range" class="valuetweak" min="360" max="1444" value="1444" step="5" id="pagewidth" oninput="breakpoint()" data-unit=px>
       </div>
       <div class="tweak">
         <div class="label"><span>Page Height</span><div class="value">1444</div></div>
@@ -1167,61 +1173,65 @@ jhunter@tunein.com
         </div>
       </div>
       <div class=npcontent>
-        <div class=album>
-          <div class=npalbum></div>
+        <div class=npcolumn>
+          <div class=album>
+            <div class=npalbum></div>
+          </div>
+          <div class=npinfo>
+            <div class=npstation>Station</div>
+            <div class=npmeta>Meta</div>
+            <div class=nplist><div class="svgicon playlistadd"></div> Add to Playlist</div>
+          </div>
+          <div class="npscrubber" id=npscrubber>
+            <div class=scrubbable>
+              <input type=range id=npscrub />
+              <div class=track id=nptrack></div>
+              <div class=buffer id=npbuffer></div>
+              <div class=progress id=npprogress></div>
+              <div class=timestamp id=nptimestamp>0:00</div>
+              <div class=length id=nplength>11:11</div>
+            </div>
+            <div class=livescrub>
+              <div class=track></div>
+              <div class=livefade></div>
+              <div class=livetext>LIVE</div>
+            </div>
+          </div>
+          <div class=npcontrols>
+            <div class="nprewind30 circlebtn medium">
+              <div class="svgicon rewind"></div>
+            </div>
+            <div class="npplay circlebtn">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 18.4701C8.00043 18.5908 8.03462 18.709 8.09872 18.8112C8.16281 18.9135 8.25424 18.9958 8.36267 19.0488C8.47195 19.0999 8.5932 19.12 8.71314 19.1069C8.83309 19.0937 8.94709 19.0478 9.04267 18.9741L17.2333 12.5048C17.3096 12.4446 17.3713 12.368 17.4137 12.2806C17.4561 12.1931 17.4781 12.0973 17.4781 12.0001C17.4781 11.903 17.4561 11.8071 17.4137 11.7197C17.3713 11.6323 17.3096 11.5556 17.2333 11.4954L9.04267 5.02744C8.94782 4.95268 8.83387 4.9061 8.71382 4.893C8.59377 4.87991 8.47246 4.90084 8.36373 4.95339C8.255 5.00595 8.16324 5.08802 8.09893 5.19023C8.03461 5.29244 8.00033 5.41068 8 5.53144V18.4701Z" />
+              </svg>                        
+            </div>
+            <div class="nppause circlebtn">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16.8893 4.88933C17.0071 4.88933 17.12 4.93611 17.2033 5.01937C17.2865 5.10264 17.3333 5.21557 17.3333 5.33333V18.6667C17.3333 18.7844 17.2865 18.8974 17.2033 18.9806C17.12 19.0639 17.0071 19.1107 16.8893 19.1107H14.2227C14.1642 19.1108 14.1064 19.0995 14.0523 19.0772C13.9983 19.055 13.9492 19.0223 13.9078 18.9811C13.8665 18.9398 13.8336 18.8908 13.8112 18.8369C13.7889 18.7829 13.7773 18.7251 13.7773 18.6667V5.33333C13.7773 5.21557 13.8241 5.10264 13.9074 5.01937C13.9906 4.93611 14.1036 4.88933 14.2213 4.88933H16.8893ZM9.77866 4.88933C9.89641 4.88933 10.0093 4.93611 10.0926 5.01937C10.1759 5.10264 10.2227 5.21557 10.2227 5.33333V18.6667C10.2227 18.7844 10.1759 18.8974 10.0926 18.9806C10.0093 19.0639 9.89641 19.1107 9.77866 19.1107H7.11199C7.05357 19.1108 6.99569 19.0995 6.94167 19.0772C6.88765 19.055 6.83854 19.0223 6.79717 18.9811C6.7558 18.9398 6.72298 18.8908 6.70058 18.8369C6.67818 18.7829 6.66666 18.7251 6.66666 18.6667V5.33333C6.66666 5.21557 6.71343 5.10264 6.7967 5.01937C6.87997 4.93611 6.9929 4.88933 7.11066 4.88933H9.77866Z" />
+              </svg>  
+            </div>
+            <div class="npforward30 circlebtn medium">
+              <div class="svgicon forward"></div>
+            </div>
+          </div>
         </div>
-        <div class=npinfo>
-          <div class=npstation>Station</div>
-          <div class=npmeta>Meta</div>
-          <div class=nplist><div class="svgicon playlistadd"></div> Add to Playlist</div>
-        </div>
-        <div class="npscrubber" id=npscrubber>
-          <div class=scrubbable>
-            <input type=range id=npscrub />
-            <div class=track id=nptrack></div>
-            <div class=buffer id=npbuffer></div>
-            <div class=progress id=npprogress></div>
-            <div class=timestamp id=nptimestamp>0:00</div>
-            <div class=length id=nplength>11:11</div>
-          </div>
-          <div class=livescrub>
-            <div class=track></div>
-            <div class=livefade></div>
-            <div class=livetext>LIVE</div>
-          </div>
-        </div>
-        <div class=npcontrols>
-          <div class="nprewind30 circlebtn medium">
-            <div class="svgicon rewind"></div>
-          </div>
-          <div class="npplay circlebtn">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8 18.4701C8.00043 18.5908 8.03462 18.709 8.09872 18.8112C8.16281 18.9135 8.25424 18.9958 8.36267 19.0488C8.47195 19.0999 8.5932 19.12 8.71314 19.1069C8.83309 19.0937 8.94709 19.0478 9.04267 18.9741L17.2333 12.5048C17.3096 12.4446 17.3713 12.368 17.4137 12.2806C17.4561 12.1931 17.4781 12.0973 17.4781 12.0001C17.4781 11.903 17.4561 11.8071 17.4137 11.7197C17.3713 11.6323 17.3096 11.5556 17.2333 11.4954L9.04267 5.02744C8.94782 4.95268 8.83387 4.9061 8.71382 4.893C8.59377 4.87991 8.47246 4.90084 8.36373 4.95339C8.255 5.00595 8.16324 5.08802 8.09893 5.19023C8.03461 5.29244 8.00033 5.41068 8 5.53144V18.4701Z" />
-            </svg>                        
-          </div>
-          <div class="nppause circlebtn">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M16.8893 4.88933C17.0071 4.88933 17.12 4.93611 17.2033 5.01937C17.2865 5.10264 17.3333 5.21557 17.3333 5.33333V18.6667C17.3333 18.7844 17.2865 18.8974 17.2033 18.9806C17.12 19.0639 17.0071 19.1107 16.8893 19.1107H14.2227C14.1642 19.1108 14.1064 19.0995 14.0523 19.0772C13.9983 19.055 13.9492 19.0223 13.9078 18.9811C13.8665 18.9398 13.8336 18.8908 13.8112 18.8369C13.7889 18.7829 13.7773 18.7251 13.7773 18.6667V5.33333C13.7773 5.21557 13.8241 5.10264 13.9074 5.01937C13.9906 4.93611 14.1036 4.88933 14.2213 4.88933H16.8893ZM9.77866 4.88933C9.89641 4.88933 10.0093 4.93611 10.0926 5.01937C10.1759 5.10264 10.2227 5.21557 10.2227 5.33333V18.6667C10.2227 18.7844 10.1759 18.8974 10.0926 18.9806C10.0093 19.0639 9.89641 19.1107 9.77866 19.1107H7.11199C7.05357 19.1108 6.99569 19.0995 6.94167 19.0772C6.88765 19.055 6.83854 19.0223 6.79717 18.9811C6.7558 18.9398 6.72298 18.8908 6.70058 18.8369C6.67818 18.7829 6.66666 18.7251 6.66666 18.6667V5.33333C6.66666 5.21557 6.71343 5.10264 6.7967 5.01937C6.87997 4.93611 6.9929 4.88933 7.11066 4.88933H9.77866Z" />
-            </svg>  
-          </div>
-          <div class="npforward30 circlebtn medium">
-            <div class="svgicon forward"></div>
-          </div>
-        </div>
-        <div class=npextras>
-          <div class=cardstation>
-            <div class=stationrow>
-              <div class="img extraimg"></div>
-              <div class=details>
-                <div class="stationname extrastation">Station Name</div>
-                <div class=stationmeta>New York, NY</div>
+        <div class=npcolumn>
+          <div class=npextras>
+            <div class=cardstation>
+              <div class=stationrow>
+                <div class="img extraimg"></div>
+                <div class=details>
+                  <div class="stationname extrastation">Station Name</div>
+                  <div class=stationmeta>New York, NY</div>
+                </div>
+              </div>
+              <div class=stationdetails>
+                MSNBC is the premier destination for breaking news and in-depth analysis through commentary and informed perspectives from...
               </div>
             </div>
-            <div class=stationdetails>
-              MSNBC is the premier destination for breaking news and in-depth analysis through commentary and informed perspectives from...
-            </div>
-          </div>
 
+          </div>
         </div>
       </div>
     </div>
@@ -2063,7 +2073,15 @@ jhunter@tunein.com
 */
 
 
-
+    function breakpoint(){
+      console.log('break');
+      let c = document.getElementById('container');
+      if ( c.offsetWidth > 999 ){
+        document.body.classList.add('split');
+      } else {
+        document.body.classList.remove('split');
+      }
+    }
 
     function updatetrack(json){
       if ( !json || json.streamtitle == false ){
