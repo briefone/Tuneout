@@ -170,7 +170,6 @@ jhunter@tunein.com
       --moreitemhover: var(--ink2);
       --moreitempress: var(--ink3);
 
-      --navbg:rgba(255,255,255,0.5);
       --navborder:rgba(0,0,0,.05);
     }
 
@@ -188,7 +187,6 @@ jhunter@tunein.com
       --ink2:var(--ui11);
       --ink1:var(--ui12);
 
-      --navbg:rgba(11, 14, 35,0.5);
       --navborder:rgba(255,255,255,.05);
 
       --darkui: var(--ink1);
@@ -498,6 +496,7 @@ jhunter@tunein.com
   }
 
     #nav {position:absolute;top:0;left:0;right:0;z-index:1337;backdrop-filter: blur(40px);}
+      #nav .colorlay {position:absolute;top:0;left:0;right:0;bottom:0;background:var(--background);opacity:0.5;z-index:-1;}
 
     #statusbar {height:24px;background:rgba(0,0,0,.03);width:100%;}
 
@@ -1245,6 +1244,7 @@ jhunter@tunein.com
     </div>
     <div id=mainwrap>
       <div id=nav>
+        <div class=colorlay></div>
         <div id=statusbar></div>
         <div id=navbar class=bar>
           <div class="iconbtn navback">
@@ -2041,7 +2041,6 @@ jhunter@tunein.com
 
 
     function breakpoint(){
-      console.log('break');
       let c = document.getElementById('container');
       if ( c.offsetWidth > 999 ){
         document.body.classList.add('split');
@@ -2283,8 +2282,6 @@ jhunter@tunein.com
       }
 
       let data = {sliders:tweaks1, checkboxs: tweaks2, palettes: paltweaks, hueshift: document.getElementById('hueshift').value};
-
-      console.log(data);
 
       let string = JSON.stringify(data);
       let a64 = btoa(string);
@@ -3115,13 +3112,15 @@ jhunter@tunein.com
     Attach.on('input', '.huetweak', hueshift);
     
     pagesizetweak(true);
-    
+
     (function() {
       window.onresize = resize;
       generatelanguages();
       setuptweaks();
 
       unhash();
+
+      breakpoint();
 
       vibe('./imgs/nyan.gif');
 
