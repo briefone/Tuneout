@@ -92,6 +92,16 @@ Object.defineProperty(Object.prototype, "offset", {
     enumerable : false
 });
 
+function componentToHex(c) {
+let hex = c.toString(16);
+return hex.length == 1 ? "0" + hex : hex;
+}
+  
+function rgb2hex(rgb) {
+    console.log('rgb2hex', rgb);
+    return "#" + componentToHex(Number(rgb[0])) + componentToHex(Number(rgb[1])) + componentToHex(Number(rgb[2]));
+}
+
 function toDecimal(num, fixed) {
     var re = new RegExp('^-?\\d+(?:\.\\d{0,' + (fixed || -1) + '})?');
     return num.toString().match(re)[0];

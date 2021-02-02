@@ -485,13 +485,13 @@ jhunter@tunein.com
       top: 50%;
       left: 50%;
       width: var(--pagewidth);
-      max-width:calc(100% - 280px);
+      max-width:calc(100% - 276px);
       overflow: hidden;
-      margin-left: calc(var(--pagewidth) / 2 * -1 - 100px);
+      margin-left: calc(var(--pagewidth) / 2 * -1 - 112px);
       margin-top: calc(var(--pageheight) / 2 * -1);
   }
 
-    #nav {position:absolute;top:0;left:0;right:0;z-index:1337;backdrop-filter: blur(40px);background-color:var(--navbg);}
+    #nav {position:absolute;top:0;left:0;right:0;z-index:1337;backdrop-filter: blur(40px);}
 
     #statusbar {height:24px;background:rgba(0,0,0,.03);width:100%;}
 
@@ -694,8 +694,8 @@ jhunter@tunein.com
     .specialtoggles {display:none;}
     .thumbshadow .ts-toggles, .albumblur .ab-toggles, .albummatch .am-toggles {display:block;}
 
-    #tweaks {position: fixed;top:0;right:20px;max-height:calc(100%);width:200px;color:rgba(255, 255, 255, 0.92);z-index:9999999;box-sizing:border-box;overflow-y:scroll;-webkit-overflow-scrolling:touch;user-select:none;}
-            .tpanel {margin-top:8px;width:100%;padding:8px 8px;border-radius:8px;background:#222;box-sizing:border-box;}
+    #tweaks {position: fixed;top:0;right:20px;max-height:calc(100%);width:204px;color:rgba(255, 255, 255, 0.92);z-index:9999999;box-sizing:border-box;overflow-y:scroll;-webkit-overflow-scrolling:touch;user-select:none;}
+            .tpanel {margin-top:8px;width:100%;padding:6px;border-radius:8px;background:#222;box-sizing:border-box;}
               .tpanel:first-child {margin-top:40px;}
               .tpanel:last-child {margin-bottom:40px;}
 
@@ -880,6 +880,18 @@ jhunter@tunein.com
         
     
     .split .npcontent {flex-direction:row;}
+
+    .colorpalette {display:flex;gap:0;flex-wrap:wrap;}
+      .palette {width:32px;height:32px;border-radius: 0;cursor:pointer;user-select:none;transition:transform 200ms ease-in-out;position:relative;}
+      .palette:nth-child(1) {border-radius:4px 0 0 0;}
+      .palette:nth-child(6) {border-radius:0 4px 0 0;}
+      .palette:nth-child(7) {border-radius:0 0 0 4px;}
+      .palette:nth-child(12) {border-radius:0 0 4px 0;}
+
+        .palette:hover {transform:Scale(1.04);z-index:3;}
+
+
+    #colorpicker {pointer-events:none;opacity:0;position: absolute;top:0;left:0;}
     
 
     @media screen and (max-width: 666px) {
@@ -903,70 +915,32 @@ jhunter@tunein.com
   <script src="../js/base.js"></script>
   <script src="../js/vibe.js"></script>
   <script src="../js/albumart.js"></script>
-
-  <script>
-    function animatelogo(){
-      let time = 250;
-
-      if ( document.documentElement.classList.contains('compresslogo') ){
-        if ( !document.body.classList.contains('ani1') ){
-          document.body.classList.add('ani1');
-
-          setTimeout(function(){
-            document.body.classList.add('ani2');
-            setTimeout(function(){
-              document.body.classList.add('ani3');
-              setTimeout(function(){
-                document.body.classList.add('ani4');
-
-                setTimeout(animatelogo, 777);
-              }, 125);
-            }, time);
-          }, time);
-        } else {
-          document.body.classList.remove('ani4');
-          setTimeout(function(){
-            document.body.classList.remove('ani3');
-            setTimeout(function(){
-              document.body.classList.remove('ani2');
-              setTimeout(function(){
-                document.body.classList.remove('ani1');
-              }, time);
-            }, time);
-          }, 125);
-        }
-      } else if (document.documentElement.classList.contains('fliplogo', 'spinlogo')){
-        document.body.classList.add('ani1');
-
-          setTimeout(function(){
-            document.body.classList.add('ani2');
-            setTimeout(function(){
-              document.body.classList.add('ani3');
-              setTimeout(function(){
-                document.body.classList.add('ani4');
-                setTimeout(function(){
-                document.body.classList.remove('ani4', 'ani3', 'ani2', 'ani1');
-                }, time);
-              }, time);
-            }, 600);
-          }, time);
-      }
-    }
-  </script>
 </head>
 <body>
+  <input type="color" id=colorpicker />
   <div id=tweaks>
+    <div class=tpanel>
+      <div class=colorpalette>
+        <div class=palette style="background-color:var(--ui1);" data-ui=1></div><div class=palette style="background-color:var(--ui2);" data-ui=2></div><div class=palette style="background-color:var(--ui3);" data-ui=3></div><div class=palette style="background-color:var(--ui4);" data-ui=4></div><div class=palette style="background-color:var(--ui5);" data-ui=5></div><div class=palette style="background-color:var(--ui6);" data-ui=6></div><div class=palette style="background-color:var(--ui7);" data-ui=7></div><div class=palette style="background-color:var(--ui8);" data-ui=8></div><div class=palette style="background-color:var(--ui9);" data-ui=9></div><div class=palette style="background-color:var(--ui10);" data-ui=10></div><div class=palette style="background-color:var(--ui11);" data-ui=11></div><div class=palette style="background-color:var(--ui12);" data-ui=12></div>
+      </div>
+
+      <div class=hueshift>
+        <div class="tweak">
+        <div class="label"><span>Hue Shift</span><div class="value">232</div></div>
+          <input type="range" class="huetweak" min="0" max="360" value="232" step="1" id="hueshift">
+      </div></div>
+    </div>
     <div class=tpanel>
       <div class=tweakbtn onclick="animatelogo()">Animate Logo</div>
       <div class="tgroup">
         <div class="tweak">
-          <label><input type="checkbox" id="cb15" class="tweakr unclick" data-class=compresslogo data-uncheck=cb16><div class="toggle"></div> Squash</label>
+          <label><input type="checkbox" id="cb15" class="tweakr unclick" data-class=compresslogo data-uncheck=cb16,cb17><div class="toggle"></div> Squash</label>
         </div>
         <div class="tweak">
-          <label><input type="checkbox" id="cb16" class="tweakr unclick" data-class=fliplogo data-uncheck=cb15><div class="toggle"></div> Flip</label>
+          <label><input type="checkbox" id="cb16" class="tweakr unclick" data-class=fliplogo data-uncheck=cb17,cb15><div class="toggle"></div> Flip</label>
         </div>
         <div class="tweak">
-          <label><input type="checkbox" id="cb17" class="tweakr unclick" data-class=spinlogo data-uncheck=cb17><div class="toggle"></div> Spin</label>
+          <label><input type="checkbox" id="cb17" class="tweakr unclick" data-class=spinlogo data-uncheck=cb16,cb15><div class="toggle"></div> Spin</label>
         </div>
       </div>
     </div>
@@ -1086,8 +1060,8 @@ jhunter@tunein.com
       </div>
     </div>
 
-    <div class=tpanel>
-      <div class=tgroup style="margin:-8px;">
+    <div class=tpanel style="padding:0;">
+      <div class=tgroup>
         <div class=resetbtn onclick="reset()">Reset</div>
       </div>
     </div>
@@ -2070,6 +2044,97 @@ jhunter@tunein.com
       }
     }
 
+    function animatelogo(){
+      let time = 250;
+
+      if ( document.documentElement.classList.contains('compresslogo') ){
+        if ( !document.body.classList.contains('ani1') ){
+          document.body.classList.add('ani1');
+
+          setTimeout(function(){
+            document.body.classList.add('ani2');
+            setTimeout(function(){
+              document.body.classList.add('ani3');
+              setTimeout(function(){
+                document.body.classList.add('ani4');
+
+                setTimeout(animatelogo, 777);
+              }, 125);
+            }, time);
+          }, time);
+        } else {
+          document.body.classList.remove('ani4');
+          setTimeout(function(){
+            document.body.classList.remove('ani3');
+            setTimeout(function(){
+              document.body.classList.remove('ani2');
+              setTimeout(function(){
+                document.body.classList.remove('ani1');
+              }, time);
+            }, time);
+          }, 125);
+        }
+      } else if (document.documentElement.classList.contains('fliplogo', 'spinlogo')){
+        document.body.classList.add('ani1');
+
+          setTimeout(function(){
+            document.body.classList.add('ani2');
+            setTimeout(function(){
+              document.body.classList.add('ani3');
+              setTimeout(function(){
+                document.body.classList.add('ani4');
+                setTimeout(function(){
+                document.body.classList.remove('ani4', 'ani3', 'ani2', 'ani1');
+                }, time);
+              }, time);
+            }, 600);
+          }, time);
+      }
+    }
+
+    function editswatch(e){
+      var a = this;
+      let cp = document.getElementById('colorpicker');
+      let ui = this.dataset.ui;
+      let color = window.getComputedStyle(this, null).getPropertyValue('background-color')
+
+      cp.oninput = function(e){
+        console.log(this.value);
+        let v = this.value.replace('#', '');
+
+        var style = document.createElement('style');
+        style.className = 'ui' + ui;
+        var css = ':root {--ui' + ui +': ' + this.value + ';}';
+        style.innerHTML = css;
+
+        a.dataset.value = this.value;
+
+        let oldvars = document.getElementsByClassName('ui' + ui);
+        oldvars.remove();
+
+        document.getElementsByTagName('head')[0].appendChild(style);
+      }
+
+      let off = this.offset();
+
+      cp.style.top = off.y + off.h+ 'px';
+      cp.style.left = off.x + 'px';
+      cp.value = toHex(color);
+
+      cp.offsetLeft;
+      cp.click();
+    }
+
+    function toHex(x){
+      if(x.indexOf('#') >= 0 ){
+        return x;
+      } else if ( x.indexOf('rgb') >= 0){
+        var rgb = x.replace(/[^\d.,-]/g, '');
+        rgb = rgb.split(',');
+        return rgb2hex(rgb);
+      }
+    }
+
     function updatetrack(json){
       if ( !json || json.streamtitle == false ){
         console.warn('no track title');
@@ -2926,6 +2991,39 @@ jhunter@tunein.com
       let a = document.getElementById('meow');
       a.currentTime -= 30;
     }
+
+    function hueshift(){
+      let v = this.value;
+      var style = document.createElement('style');
+      style.className = 'hueshiftcss';
+      var css = `html {
+        --ui12: hsl(` + this.value + `, 52%, 9%);
+        --ui11: hsl(` + this.value + `, 43%, 13%);
+        --ui10: hsl(` + this.value + `, 36%, 17%);
+        --ui9: hsl(` + this.value + `, 22%, 25%);
+        --ui8: hsl(` + this.value + `, 15%, 34%);
+        --ui7: hsl(` + this.value + `, 10%, 42%);
+        --ui6: hsl(` + this.value + `, 9%, 58%);
+        --ui5: hsl(` + this.value + `, 13%, 80%);
+        --ui4: hsl(` + this.value + `, 14%, 89%);
+        --ui3: hsl(` + this.value + `, 13%, 93%);
+        --ui2: hsl(` + this.value + `, 9%, 96%);
+        --ui1: hsl(` + this.value + `, 0%, 100%);
+      }`;
+      style.innerHTML = css;
+
+      let p = this.getparent('tweak');
+      let val = p.getElementsByClassName('value')[0];
+
+      if ( val ){
+        val.empty();
+        val.appendChild(document.createTextNode(v));
+      }
+
+      let oldvars = document.getElementsByClassName('hueshiftcss');
+        oldvars.remove();
+      document.head.appendChild(style);
+    }
     
 
     Attach.on('click', '.tabwrap .tab', tabline);
@@ -2952,6 +3050,8 @@ jhunter@tunein.com
     Attach.on('click', '.npfav', npfav); 
     Attach.on('click', '.npforward30', npforward30);
     Attach.on('click', '.nprewind30', nprewind30); 
+    Attach.on('click', '.palette', editswatch);
+    Attach.on('input', '.huetweak', hueshift);
     
     (function() {
       window.onresize = resize;
