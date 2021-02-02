@@ -481,14 +481,20 @@ jhunter@tunein.com
 
 
     #container {position:relative;background:black;border-radius:6px;
-      height: var(--pageheight);
+
+      height:calc(100% - 80px);
+      width:calc(100% - 282px);
+      margin-left: calc(-50vw + 29px);
+      margin-top: calc(-50vh + 40px);
+
+      /*height: var(--pageheight);*/
       top: 50%;
       left: 50%;
-      width: var(--pagewidth);
+      /*width: var(--pagewidth);*/
       max-width:calc(100% - 276px);
       overflow: hidden;
-      margin-left: calc(var(--pagewidth) / 2 * -1 - 112px);
-      margin-top: calc(var(--pageheight) / 2 * -1);
+      /*margin-left: calc(var(--pagewidth) / 2 * -1 - 112px);
+      margin-top: calc(var(--pageheight) / 2 * -1);*/
   }
 
     #nav {position:absolute;top:0;left:0;right:0;z-index:1337;backdrop-filter: blur(40px);}
@@ -921,7 +927,7 @@ jhunter@tunein.com
   <div id=tweaks>
     <div class=tpanel>
       <div class=colorpalette>
-        <div class=palette style="background-color:var(--ui1);" data-ui=1></div><div class=palette style="background-color:var(--ui2);" data-ui=2></div><div class=palette style="background-color:var(--ui3);" data-ui=3></div><div class=palette style="background-color:var(--ui4);" data-ui=4></div><div class=palette style="background-color:var(--ui5);" data-ui=5></div><div class=palette style="background-color:var(--ui6);" data-ui=6></div><div class=palette style="background-color:var(--ui7);" data-ui=7></div><div class=palette style="background-color:var(--ui8);" data-ui=8></div><div class=palette style="background-color:var(--ui9);" data-ui=9></div><div class=palette style="background-color:var(--ui10);" data-ui=10></div><div class=palette style="background-color:var(--ui11);" data-ui=11></div><div class=palette style="background-color:var(--ui12);" data-ui=12></div>
+        <div class=palette style="background-color:var(--ui1);" data-ui=1 id=ui1></div><div class=palette style="background-color:var(--ui2);" data-ui=2 id=ui2></div><div class=palette style="background-color:var(--ui3);" data-ui=3 id=ui3></div><div class=palette style="background-color:var(--ui4);" data-ui=4 id=ui4></div><div class=palette style="background-color:var(--ui5);" data-ui=5 id=ui5></div><div class=palette style="background-color:var(--ui6);" data-ui=6 id=ui6></div><div class=palette style="background-color:var(--ui7);" data-ui=7 id=ui7></div><div class=palette style="background-color:var(--ui8);" data-ui=8 id=ui8></div><div class=palette style="background-color:var(--ui9);" data-ui=9 id=ui9></div><div class=palette style="background-color:var(--ui10);" data-ui=10 id=ui10></div><div class=palette style="background-color:var(--ui11);" data-ui=11 id=ui11></div><div class=palette style="background-color:var(--ui12);" data-ui=12 id=ui12></div>
       </div>
 
       <div class=hueshift>
@@ -2113,6 +2119,8 @@ jhunter@tunein.com
         oldvars.remove();
 
         document.getElementsByTagName('head')[0].appendChild(style);
+
+        hashtweaks();
       }
 
       let off = this.offset();
@@ -2262,8 +2270,19 @@ jhunter@tunein.com
 
         tweaks2.push(j);
       }
+      
+      var paltweaks = [];
+      let pal = document.getElementsByClassName('palette');
+      for(var i=0;i<pal.length;i++){
+        let t = pal[i];
+        let v = t.dataset.value || false;
+        if( v ){
+          let j = {id: t.id, value: v};
+          paltweaks.push(j);
+        }        
+      }
 
-      let data = {sliders:tweaks1, checkboxs: tweaks2};
+      let data = {sliders:tweaks1, checkboxs: tweaks2, palettes: paltweaks, hueshift: document.getElementById('hueshift').value};
 
       console.log(data);
 
@@ -2325,6 +2344,34 @@ jhunter@tunein.com
           val.empty();
           val.appendChild(document.createTextNode(v));
         }
+      }
+
+      for(var i=0;i<json.palettes.length;i++){
+        let a = json.palettes[i];
+        let id = a.id;
+        let v = a.value;
+        let s = document.getElementById(id);
+
+        var style = document.createElement('style');
+        style.className = id;
+        var css = ':root {--' + id +': ' + v + ';}';
+        style.innerHTML = css;
+
+        s.dataset.value = v;
+
+        let oldvars = document.getElementsByClassName(id);
+        oldvars.remove();
+
+        document.getElementsByTagName('head')[0].appendChild(style);
+      }
+
+      
+      let ht = Number(json.hueshift);
+      if ( ht != 232 ){
+        let s = document.getElementById('hueshift');
+        s.value = ht;
+
+        hueshift.call(s, {}, true);
       }
 
       valuetweaks();
@@ -2672,9 +2719,19 @@ jhunter@tunein.com
       } else {
         css += '--pageheight: ' + document.getElementById('container').offsetHeight + 'px;';
       }
+
+      
       
       if ( hv || wv ){
         css += '}';
+
+        if ( initial ){
+          css += `#container {height: var(--pageheight);
+          width: var(--pagewidth);
+          margin-left: calc(var(--pagewidth) / 2 * -1 - 112px);
+          margin-top: calc(var(--pageheight) / 2 * -1);}`;
+        }
+
         style.innerHTML = css;
 
         let oldvars = document.getElementsByClassName(style.className);
@@ -2992,7 +3049,7 @@ jhunter@tunein.com
       a.currentTime -= 30;
     }
 
-    function hueshift(){
+    function hueshift(e, x){
       let v = this.value;
       var style = document.createElement('style');
       style.className = 'hueshiftcss';
@@ -3021,8 +3078,12 @@ jhunter@tunein.com
       }
 
       let oldvars = document.getElementsByClassName('hueshiftcss');
-        oldvars.remove();
+      oldvars.remove();
       document.head.appendChild(style);
+
+      if (!x) {
+        hashtweaks();
+      }
     }
     
 
@@ -3052,6 +3113,8 @@ jhunter@tunein.com
     Attach.on('click', '.nprewind30', nprewind30); 
     Attach.on('click', '.palette', editswatch);
     Attach.on('input', '.huetweak', hueshift);
+    
+    pagesizetweak(true);
     
     (function() {
       window.onresize = resize;
