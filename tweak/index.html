@@ -19,6 +19,7 @@ jhunter@tunein.com
 <!doctype html>
 <html>
 <head>
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
   <meta name="google" content="notranslate">
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
@@ -381,6 +382,7 @@ jhunter@tunein.com
     input[type=range]::-webkit-slider-thumb {width: 16px;height: 16px;background: white;display: block;box-shadow: 0 2px 4px rgba(0,0,0,.15);border-radius: 50%;transition: all 150ms ease-in-out;}
       input[type=range]:hover::-webkit-slider-thumb {box-shadow:0 2px 2px rgba(0,0,0,.2);}
       input[type=range]:active::-webkit-slider-thumb {box-shadow:0 2px 2px rgba(0,0,0,.3);cursor:-webkit-grabbing;}
+        input[type=range]:focus::-webkit-slider-thumb {box-shadow:0 2px 2px rgba(0,0,0,.3);cursor:-webkit-grabbing;}
     input[type=range]:focus::-webkit-slider-thumb {}
     input[type=range]:hover:focus::-webkit-slider-thumb {}
 
@@ -886,7 +888,7 @@ jhunter@tunein.com
     
     .split .npcontent {flex-direction:row;}
 
-    .colorpalette {display:flex;gap:0;flex-wrap:wrap;}
+    .colorpalette {display:flex;gap:0;flex-wrap:wrap;padding-bottom:4px;}
       .palette {width:32px;height:32px;border-radius: 0;cursor:pointer;user-select:none;transition:transform 200ms ease-in-out;position:relative;}
       .palette:nth-child(1) {border-radius:4px 0 0 0;}
       .palette:nth-child(6) {border-radius:0 4px 0 0;}
@@ -3114,6 +3116,7 @@ jhunter@tunein.com
     pagesizetweak(true);
 
     (function() {
+      
       window.onresize = resize;
       generatelanguages();
       setuptweaks();
@@ -3129,6 +3132,10 @@ jhunter@tunein.com
       for(var i=0;i<tabpages.length;i++){
         let t = tabpages[i];
         t.addEventListener("scroll", tabpagescroll, {passive: true});
+      }
+
+      if ( /firefox/i.test(navigator.userAgent) ){
+        alert('Not optimized for Firefox, try Chrome.');
       }
     })();
   </script>
