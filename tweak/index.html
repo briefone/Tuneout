@@ -855,16 +855,28 @@ jhunter@tunein.com
 
         .compresslogo .ani3 #logologo .premiumlogo {transform: translateX(0);width: 72px;}
 
-        .fliplogo .tunewrap  {width:72px;transition: transform 200ms ease-in-out;backface-visibility: hidden;}
-        .fliplogo .pwrap {transform:rotateY(-90deg);width:72px;transition: transform 200ms ease-in-out;backface-visibility: hidden;}
+        .fliplogo .tunewrap  {width:72px;height:32px;transition: transform 200ms ease-in-out;backface-visibility: hidden;}
+        .fliplogo .pwrap {transform:rotateX(-90deg);height:32px;width:72px;transition: transform 200ms ease-in-out;backface-visibility: hidden;position: absolute;top:0;left:0;}
         .fliplogo .premiumlogo {width:72px;transform:none;backface-visibility: hidden;}
 
-        .fliplogo .ani1 .tunewrap {transform:rotateY(90deg);}
+        .fliplogo .ani1 .tunewrap {transform:rotateX(90deg);}
         .fliplogo .ani1 .premiumlogo {opacity:1;}
-        .fliplogo .ani2 .pwrap {transform:rotateY(0deg);}
-        .fliplogo .ani2 .tunewrap {transform:rotateY(-90deg);transition:none;}
-        .fliplogo .ani3 .pwrap {transform:rotateY(90deg);}
-        .fliplogo .ani4 .tunewrap {transform:rotateY(0);transition:transform 200ms ease-in-out;}
+        .fliplogo .ani2 .pwrap {transform:rotateX(0deg);}
+        .fliplogo .ani2 .tunewrap {transform:rotateX(-90deg);transition:none;}
+        .fliplogo .ani3 .pwrap {transform:rotateX(90deg);}
+        .fliplogo .ani4 .tunewrap {transform:rotateX(0);transition:transform 200ms ease-in-out;}
+
+
+        .spinlogo .tunewrap  {width:72px;transition: transform 200ms ease-in-out;backface-visibility: hidden;}
+        .spinlogo .pwrap {transform:rotateY(-90deg);width:72px;transition: transform 200ms ease-in-out;backface-visibility: hidden;}
+        .spinlogo .premiumlogo {width:72px;transform:none;backface-visibility: hidden;}
+
+        .spinlogo .ani1 .tunewrap {transform:rotateY(90deg);}
+        .spinlogo .ani1 .premiumlogo {opacity:1;}
+        .spinlogo .ani2 .pwrap {transform:rotateY(0deg);}
+        .spinlogo .ani2 .tunewrap {transform:rotateY(-90deg);transition:none;}
+        .spinlogo .ani3 .pwrap {transform:rotateY(90deg);}
+        .spinlogo .ani4 .tunewrap {transform:rotateY(0);transition:transform 200ms ease-in-out;}
         
     
     .split .npcontent {flex-direction:row;}
@@ -923,7 +935,7 @@ jhunter@tunein.com
             }, time);
           }, 125);
         }
-      } else if (document.documentElement.classList.contains('fliplogo')){
+      } else if (document.documentElement.classList.contains('fliplogo', 'spinlogo')){
         document.body.classList.add('ani1');
 
           setTimeout(function(){
@@ -951,7 +963,10 @@ jhunter@tunein.com
           <label><input type="checkbox" id="cb15" class="tweakr unclick" data-class=compresslogo data-uncheck=cb16><div class="toggle"></div> Squash</label>
         </div>
         <div class="tweak">
-          <label><input type="checkbox" id="cb16" class="tweakr unclick" data-class=fliplogo data-uncheck=cb15><div class="toggle"></div> Spin</label>
+          <label><input type="checkbox" id="cb16" class="tweakr unclick" data-class=fliplogo data-uncheck=cb15><div class="toggle"></div> Flip</label>
+        </div>
+        <div class="tweak">
+          <label><input type="checkbox" id="cb17" class="tweakr unclick" data-class=spinlogo data-uncheck=cb17><div class="toggle"></div> Spin</label>
         </div>
       </div>
     </div>
@@ -2043,47 +2058,6 @@ jhunter@tunein.com
   </div>
   <audio controls="" loop="" id="meow" style="display:none;" src="./audio/nyancat.mp3" type="audio/mpeg" preload="auto"></audio>
   <script>
-    /* Streams
-
-      https://rfcmedia.streamguys1.com/80hits.mp3
-      http://rfcmedia.streamguys1.com/70hitspremium.mp3
-      https://rfcmedia.streamguys1.com/MusicPulse.mp3
-      https://rfcmedia.streamguys1.com/newpophits.mp3
-
-      //Sports
-      https://dcs.megaphone.fm/ESP7542621336.mp3?key=f5e55a3250c3a7554d9058c289fbc7a3
-
-
-      //News
-      http://tunein.streamguys1.com/bloomberg991?ads.cust_params=gender%253dmale%2526age%253d33%2526partnerId%253dRadioTime%2526ads_partner_alias%253dRadioTime%2526version%253d4.38%2526premium%253dfalse%2526abtest%253d%2526language%253den-US%2526stationId%253ds165740%2526is_ondemand%253dfalse%2526genre_id%253dg24%2526class%253dtalk%25252cspoken%2526is_family%253dfalse%2526is_mature%253dfalse%2526country_region_id%253d227%2526station_language%253denglish%2526programId%253dp806745%2526is_event%253dfalse&url=https%3a%2f%2ftunein.com%2fdesc%2fs165740%2f&description_url=https%3a%2f%2ftunein.com%2fdesc%2fs165740%2f&ads.npa=1&ads.gdfp_req=1&ads.us_privacy=1YNY&ads.ppid=d5469d2886a587f30ff8aa538acda161&aw_0_1st.age=33&aw_0_1st.gender=male&aw_0_1st.playerid=RadioTime&aw_0_1st.skey=1611190015&source=TuneIn&aw_0_1st.premium=false&us_privacy=1YNY&aw_0_1st.platform=tunein
-
-      http://cheddar.streamguys1.com/live-mp3?aw_0_1st.age=33&aw_0_1st.gender=male&aw_0_1st.playerid=RadioTime&aw_0_1st.skey=1611190047&source=TuneIn&aw_0_1st.premium=false&us_privacy=1YNY
-
-      http://streaming314.radionomy.com/foxnews
-
-      https://tunein.streamguys1.com/cnn-new
-
-    */
-
-/*
-    // radio  
-    https://cdn-profiles.tunein.com/s249944/images/logoq.png
-    https://cdn-profiles.tunein.com/s249942/images/logoq.png?t=2
-
-
-    //news show
-    https://cdn-profiles.tunein.com/p54878/images/logoq.png?t=151077
-
-
-    //news
-    https://cdn-profiles.tunein.com/s309330/images/logoq.png?t=159049
-    https://cdn-profiles.tunein.com/s20407/images/logoq.png?t=1
-    https://cdn-profiles.tunein.com/s297990/images/logoq.jpg
-
-    //Radio
-    https://cdn-profiles.tunein.com/s34804/images/logoq.png?t=158759
-
-*/
 
 
     function breakpoint(){
