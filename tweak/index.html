@@ -84,6 +84,8 @@ jhunter@tunein.com
       --ink:var(--ink10);
       --inklight:var(--ink9);
 
+      --premium: var(--gold3);
+
       --inkdefault:var(--ink10);
       --inkhover:var(--ink9);
       --inkpress:var(--ink8);
@@ -499,6 +501,7 @@ jhunter@tunein.com
 
     #nav {position:absolute;top:0;left:0;right:0;z-index:1337;backdrop-filter: blur(40px);}
       #nav .colorlay {position:absolute;top:0;left:0;right:0;bottom:0;background:var(--background);opacity:0.5;z-index:-1;}
+        .premiumpage #nav .colorlay {background:var(--premium);}
 
     #statusbar {height:24px;background:rgba(0,0,0,.03);width:100%;}
 
@@ -634,7 +637,7 @@ jhunter@tunein.com
     .homepage #home, .librarypage #library, .searchpage #search, .premiumpage #premium {display:block;}
 
 
-    .premiumpage #nav {background-color:var(--gold3);}
+    .premiumpage #nav {background-color:var(--premium);}
 
     .itemlist {display:flex;flex-direction: column;gap:var(--tilegap);margin-bottom:8px;}
       .rowitem {display:flex;padding:0 24px 0;box-sizing:border-box;gap:12px;cursor:pointer;user-select: none;}
@@ -1857,17 +1860,17 @@ jhunter@tunein.com
               </div>
               <div class="scrollrow textless">
                 <div class=scrollitem>
-                  <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/s247154/images/logoq.png);"></div>
+                  <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/s247154/images/logoq.png);" data-station="Adult Hits"  data-url="https://rfcmedia.streamguys1.com/sradulthits.mp3" data-radio=true></div>
                 </div><div class=scrollitem>
-                  <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/p952868/images/logoq.png);"></div>
+                  <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/p952868/images/logoq.png);" data-station="The Daily"  data-url="https://nyt-injected.simplecastaudio.com/03d8b493-87fc-4bd1-931f-8a8e9b945d8a/episodes/5a933735-0bf5-45d3-a672-6674c5f4ae04/audio/128/default.mp3/default.mp3_d1cb969b1b3fa8a9e1247520d4827d9e_30986106.mp3?aid=rss_feed&awCollectionId=03d8b493-87fc-4bd1-931f-8a8e9b945d8a&awEpisodeId=5a933735-0bf5-45d3-a672-6674c5f4ae04&feed=54nAGcIl&hash_redirect=1&x-total-bytes=30986106&x-ais-classified=download&listeningSessionID=0CD_382_20__975a3a23a61607187de24fcd7591ef179c79eaf2"></div>
                 </div><div class=scrollitem>
-                  <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/s249976/images/logoq.png);"></div>
+                  <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/s249976/images/logoq.png);" data-station="Pop Hits"  data-url="https://rfcmedia.streamguys1.com/newpophitspremium.mp3" data-radio=true></div>
                 </div><div class=scrollitem>
-                  <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/p983396/images/logoq.png);"></div>
+                  <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/p983396/images/logoq.png);" data-station="Up First"  data-url="https://edge2.pod.npr.org/anon.npr-mp3/npr/upfirst/2021/01/20210120_upfirst_uf_new_trump_leaves_wh.mp3/20210120_upfirst_uf_new_trump_leaves_wh.mp3_3c7278103420af376f0a61580cd6c4f6_10079328.mp3?awCollectionId=510318&awEpisodeId=957889681&orgId=1&d=631&p=510318&story=957889681&t=podcast&e=957889681&size=10079307&ft=pod&f=510318&hash_redirect=1&x-total-bytes=10079328&x-ais-classified=download&listeningSessionID=0CD_382_20__8377f9a2f90de7b91b72270f180a608cb13ffedf"></div>
                 </div><div class=scrollitem>
-                  <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/s249990/images/logoq.png);"></div>
+                  <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/s249990/images/logoq.png);" data-station="Alt Hits"  data-url="https://rfcmedia.streamguys1.com/alternativehitspremium.mp3" data-radio=true></div>
                 </div><div class=scrollitem>
-                  <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/s259261/images/logoq.png);"></div>
+                  <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/s259261/images/logoq.png);" data-station="Soul Groove"  data-url="https://rfcmedia.streamguys1.com/specs.mp3" data-radio=true></div>
                 </div>
               </div>
             </div>
