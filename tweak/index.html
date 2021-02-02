@@ -34,18 +34,31 @@ jhunter@tunein.com
     @font-face{font-family:'pressura';src:url("../fonts/GT-Pressura-Ti-Bold.otf") format("opentype");font-weight:700;font-style:normal}
     
     html {
-      --ink12: #0B0E23; 
-      --ink11:#131730; 
-      --ink10:#1C203C;
-      --ink9:#33374F;
-      --ink8:#4A4D64;
-      --ink7:#606376;
-      --ink6:#8A8D9E;
-      --ink5:#C6C8D3;
-      --ink4:#DEDFE6;
-      --ink3:#EBEBEF;
-      --ink2:#F4F4F6;
-      --ink1:#ffffff;
+      --ui12: #0B0E23; 
+      --ui11:#131730; 
+      --ui10:#1C203C;
+      --ui9:#33374F;
+      --ui8:#4A4D64;
+      --ui7:#606376;
+      --ui6:#8A8D9E;
+      --ui5:#C6C8D3;
+      --ui4:#DEDFE6;
+      --ui3:#EBEBEF;
+      --ui2:#F4F4F6;
+      --ui1:#ffffff;
+
+      --ink12: var(--ui12); 
+      --ink11:var(--ui11); 
+      --ink10:var(--ui10);
+      --ink9:var(--ui9);
+      --ink8:var(--ui8);
+      --ink7:var(--ui7);
+      --ink6:var(--ui6);
+      --ink5:var(--ui5);
+      --ink4:var(--ui4);
+      --ink3:var(--ui3);
+      --ink2:var(--ui2);
+      --ink1:var(--ui1);
       
       --tsharp4:#0FA49B;
       --tsharp3:#14D8CC;
@@ -162,18 +175,18 @@ jhunter@tunein.com
     }
 
     .darkmode {
-      --ink1: #0B0E23; 
-      --ink2:#131730; 
-      --ink3:#1C203C;
-      --ink4:#33374F;
-      --ink5:#4A4D64;
-      --ink6:#606376;
-      --ink7:#8A8D9E;
-      --ink8:#C6C8D3;
-      --ink9:#DEDFE6;
-      --ink10:#EBEBEF;
-      --ink11:#F4F4F6;
-      --ink12:#ffffff;
+      --ink12: var(--ui1); 
+      --ink11:var(--ui2); 
+      --ink10:var(--ui3);
+      --ink9:var(--ui4);
+      --ink8:var(--ui5);
+      --ink7:var(--ui6);
+      --ink6:var(--ui7);
+      --ink5:var(--ui8);
+      --ink4:var(--ui9);
+      --ink3:var(--ui10);
+      --ink2:var(--ui11);
+      --ink1:var(--ui12);
 
       --navbg:rgba(11, 14, 35,0.5);
       --navborder:rgba(255,255,255,.05);
