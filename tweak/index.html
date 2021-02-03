@@ -542,8 +542,10 @@ jhunter@tunein.com
 
       .tabwrap .tabline {height:3px;width:54.86px;background:var(--ink);position:absolute;bottom:0;left:0;transform:translateX(24px);transition: all 200ms ease-in-out;}
 
-    .content {position:absolute;top:0;left:0;bottom:56px;right:0;overflow-y: scroll;}
-      .played .content {bottom:112px;}
+    .content {position:absolute;top:0;left:0;bottom:0;right:0;overflow-y: scroll;padding-bottom:56px;}
+      
+      .played .content {padding-bottom:112px;}
+      .played .slidepage {padding-bottom:112px;}
 
     #home .content {padding-top:136px;}
     #search .content {top:136px;}
@@ -604,11 +606,14 @@ jhunter@tunein.com
 
         .thumb.circle {border-radius:50%;background-color:var(--ink);border:none;}
 
-      #tabbar {position:absolute;left:0;bottom:0;right:0;height:56px;background:var(--tabbar);color:var(--tabcolor);display: flex;justify-content: space-around;}
+      #tabbar {position:absolute;left:0;bottom:0;right:0;height:56px;background:transparent;backdrop-filter:blur(40px);color:var(--tabcolor);display: flex;justify-content: space-around;}
         #tabbar .tab {display:flex;align-items: center;justify-content: center;flex-direction: column;width:88px;height:100%;font-size:15px;font-weight:500;cursor:pointer;user-select:none;}
           #tabbar .tab svg {fill:var(--tabcolor);width:24px;height:24px;}
           #tabbar .tab.current svg {fill:var(--tabcurrent);}
           #tabbar .tab.current {color:var(--tabcurrent);}
+
+          #tabbar .colorlay {position:absolute;top:0;left:0;right:0;bottom:0;background:var(--tabbar);opacity:0.975;z-index:-1;}
+          .albummatch.albummatch2 #tabbar .colorlay {background:var(--albummatch);}
 
     .navtitle {font-size:20px;font-weight:600;display:none;transition:all 200ms ease-in-out;}
       .subnavtitle {position: absolute;left:50%;transform:translateX(100px);display:flex;pointer-events:none;opacity:0;}
@@ -761,7 +766,7 @@ jhunter@tunein.com
       .btnrow {padding:36px 24px 24px;}
             .btnrow .btn {width:100%;}
 
-      .slidepage {position: absolute;top:0;left:0;right:0;bottom:0;transform:translateX(100%);overflow-y:scroll;transition:transform 200ms ease-in-out;background:var(--ink1);pointer-events: none;padding-top:88px;}
+      .slidepage {position: absolute;top:0;left:0;right:0;bottom:0;transform:translateX(100%);overflow-y:scroll;transition:transform 200ms ease-in-out;background:var(--ink1);pointer-events: none;padding-top:88px;padding-bottom:56px;}
             .slidepage.active {transform:translateX(0);pointer-events: all;}
 
       .mainpage {transition: transform 200ms ease-in-out;padding-top:88px;}
@@ -910,7 +915,7 @@ jhunter@tunein.com
         .palette:hover {transform:Scale(1.04);z-index:3;}
 
 
-        .palette .pb {font-size:10px;font-weight:500;position:absolute;bottom:2px;right:4px;mix-blend-mode: lighten;line-height:10px;}
+        .palette .pb {font-size:10px;font-weight:500;position:absolute;bottom:2px;right:4px;mix-blend-mode: lighten;line-height:10px;color: var(--tsharp3);}
 
 
     #colorpicker {pointer-events:none;opacity:0;position: absolute;top:0;left:0;}
@@ -1967,7 +1972,7 @@ jhunter@tunein.com
               </div>
 
               <div class=btnrow>
-                <div class="btn">Custom URL</div>
+                <div class="btn">Add a Station URL</div>
               </div>
             </div>
           </div>
@@ -2056,6 +2061,7 @@ jhunter@tunein.com
       </div>
 
       <div id=tabbar class=darkui>
+        <div class=colorlay></div>
         <div id=miniplayer>
           <div class=minialbum>
             <div id=miniartwork class=artwork style="background-image:url(https://cdn-profiles.tunein.com/p1349148/images/logoq.png);"></div>
@@ -2659,8 +2665,6 @@ jhunter@tunein.com
           let dur = meow.duration;
 
           if ( dur == Infinity){
-            console.log('infinite');
-
             document.getElementById('nowplaying').classList.add('live');
             return;
           } else {
@@ -2690,7 +2694,7 @@ jhunter@tunein.com
           let dur = meow.duration;
 
           if ( dur == Infinity){
-            console.warn('infinite');
+            meow.ontimeupdate = null;
             return;
           }
 
