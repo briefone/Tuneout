@@ -534,7 +534,7 @@ jhunter@tunein.com
       .navlogo svg {fill:var(--inkdefault);height:32px;display:none;}
 
 
-    .tabwrap {display:flex;position:relative;width:100%;align-items:center;padding: 0 0 0 24px;box-sizing: border-box;height:48px;overflow-x:scroll;white-space: nowrap;border-bottom:1px solid var(--navborder);gap: 43px;scroll-padding-right:24px;}
+    .tabwrap {display:flex;position:relative;width:100%;align-items:center;padding: 0 0 0 24px;box-sizing: border-box;height:48px;overflow-x:scroll;white-space: nowrap;border-bottom:1px solid var(--navborder);gap: 38px;scroll-padding-right:24px;}
       .tabwrap .tab {display:inline-flex;height:100%;padding:0 0;font-size:18px;font-weight:600;align-items: center;justify-content: center;cursor:pointer;user-select:none;}
         .tabwrap .tab:hover {color:var(--inkhover);}
         .tabwrap .tab:active {color:var(--inkpress);}
@@ -940,8 +940,20 @@ jhunter@tunein.com
 
       <div class=hueshift>
         <div class="tweak">
-        <div class="label"><span>Hue Shift</span><div class="value">232</div></div>
+          <div class="label"><span>Hue Shift</span><div class="value">232</div></div>
           <input type="range" class="huetweak" min="0" max="360" value="232" step="1" id="hueshift">
+        </div>
+      </div>
+      <div class=satboost>
+        <div class="tweak">
+          <div class="label"><span>Saturation Boost</span><div class="value">0</div></div>
+          <input type="range" class="sattweak" min="-1" max="4" value="0" step="0.01" id="satboost">
+        </div>
+      </div>
+      <div class=lumboost>
+        <div class="tweak">
+          <div class="label"><span>Lightness Boost</span><div class="value">0</div></div>
+          <input type="range" class="lumtweak" min="-2" max="2" value="0" step="0.01" id="lumboost">
         </div>
       </div>
       <div class=tgroup>
@@ -949,7 +961,7 @@ jhunter@tunein.com
       </div>
     </div>
     <div class=tpanel>
-      <div class=tweakbtn onclick="animatelogo()">Animate Logo</div>
+      <div class=tweakbtn onclick="animatelogo()" style="margin-bottom:4px;">Animate Logo</div>
       <div class="tgroup">
         <div class="tweak">
           <label><input type="checkbox" id="cb15" class="tweakr unclick" data-class=compresslogo data-uncheck=cb16,cb17><div class="toggle"></div> Squash</label>
@@ -2074,10 +2086,14 @@ jhunter@tunein.com
       }
 
       let hs = document.getElementById('hueshift');
+      let sb = document.getElementById('satboost');
+      let lb = document.getElementById('lumboost');
 
       hs.value = 232;
+      sb.value = 0;
+      lb.value = 0;
 
-      hueshift.call(hs, {}, true);
+      colorshift.call(hs, {}, true);
 
       hashtweaks();
     }
@@ -2325,7 +2341,7 @@ jhunter@tunein.com
         }        
       }
 
-      let data = {sliders:tweaks1, checkboxs: tweaks2, palettes: paltweaks, hueshift: document.getElementById('hueshift').value};
+      let data = {sliders:tweaks1, checkboxs: tweaks2, palettes: paltweaks, hueshift: document.getElementById('hueshift').value, satboost: document.getElementById('satboost').value, lumboost: document.getElementById('lumboost').value};
 
       let string = JSON.stringify(data);
       let a64 = btoa(string);
@@ -2408,11 +2424,18 @@ jhunter@tunein.com
 
       
       let ht = Number(json.hueshift);
-      if ( ht != 232 ){
-        let s = document.getElementById('hueshift');
-        s.value = ht;
+      let sb = Number(json.satboost);
+      let lb = Number(json.lumboost);
 
-        hueshift.call(s, {}, true);
+      if ( ht != 232 || sb != 0 || lb != 0 ){
+        let h = document.getElementById('hueshift');
+        let s = document.getElementById('satboost');
+        let l = document.getElementById('lumboost');
+        h.value = ht;
+        s.value = sb;
+        l.value = lb;
+
+        colorshift.call(s, {}, true);
       }
 
       valuetweaks();
@@ -3087,43 +3110,66 @@ jhunter@tunein.com
       a.currentTime -= 30;
     }
 
-    function hueshift(e, x){
+    function colorshift(e, x){
       let v = this.value;
+      let hs = document.getElementById('hueshift');
+      let h = Number(hs.value);
+      let sb = document.getElementById('satboost');
+      let s = Number(sb.value) + 1;
+      let lb = document.getElementById('lumboost');
+      let l = Number(lb.value);
       var style = document.createElement('style');
-      style.className = 'hueshiftcss';
-      var css = `html {
-        --ui12: hsl(` + this.value + `, 52%, 9%);
-        --ui11: hsl(` + this.value + `, 43%, 13%);
-        --ui10: hsl(` + this.value + `, 36%, 17%);
-        --ui9: hsl(` + this.value + `, 22%, 25%);
-        --ui8: hsl(` + this.value + `, 15%, 34%);
-        --ui7: hsl(` + this.value + `, 10%, 42%);
-        --ui6: hsl(` + this.value + `, 9%, 58%);
-        --ui5: hsl(` + this.value + `, 13%, 80%);
-        --ui4: hsl(` + this.value + `, 14%, 89%);
-        --ui3: hsl(` + this.value + `, 13%, 93%);
-        --ui2: hsl(` + this.value + `, 9%, 96%);
-        --ui1: hsl(` + this.value + `, 0%, 100%);
+      let cssname = 'colorshiftcss'
+      style.className = cssname;
+      let css = `html {
+        --ui12: hsl(` + h + ','+ Math.min(Math.max(s * 52, 0), 100) + '%,' + Math.min(Math.max((l/1 + 1) * 9, 0), 100) + `%);
+        --ui11: hsl(` + h + ','+ Math.min(Math.max(s * 43, 0), 100) + '%,' + Math.min(Math.max((l/1.1 + 1) * 13, 0), 100) + `%);
+        --ui10: hsl(` + h + ','+ Math.min(Math.max(s * 36, 0), 100) + '%,' + Math.min(Math.max((l/1.3 + 1) * 17, 0), 100) + `%);
+        --ui9: hsl(` + h + ','+ Math.min(Math.max(s * 22, 0), 100) + '%,' + Math.min(Math.max((l/1.4 + 1) * 25, 0), 100) + `%);
+        --ui8: hsl(` + h + ','+ Math.min(Math.max(s * 15, 0), 100) + '%,' + Math.min(Math.max((l/1.5 + 1) * 34, 0), 100) + `%);
+        --ui7: hsl(` + h + ','+ Math.min(Math.max(s * 10, 0), 100) + '%,' + Math.min(Math.max((l/2 + 1) * 42, 0), 100) + `%);
+        --ui6: hsl(` + h + ','+ Math.min(Math.max(s * 9, 0), 100) + '%,' + Math.min(Math.max((l/3 + 1) * 58, 0), 100) + `%);
+        --ui5: hsl(` + h + ','+ Math.min(Math.max(s * 13, 0), 100) + '%,' + Math.min(Math.max((l/8 + 1) * 80, 0), 100) + `%);
+        --ui4: hsl(` + h + ','+ Math.min(Math.max(s * 14, 0), 100) + '%,' + Math.min(Math.max((l/14 + 1) * 89, 0), 100) + `%);
+        --ui3: hsl(` + h + ','+ Math.min(Math.max(s * 13, 0), 100) + '%,' + Math.min(Math.max((l/24 + 1) * 93, 0), 100) + `%);
+        --ui2: hsl(` + h + ','+ Math.min(Math.max(s * 9, 0), 100) + '%,' + Math.min(Math.max((l/32 + 1) * 96, 0), 100) + `%);
+        --ui1: hsl(` + h + ','+ Math.min(Math.max(s * 0, 0), 100) + '%,' + Math.min(Math.max((l/40 + 1) * 100, 0), 100) + `%);
       }`;
+
       style.innerHTML = css;
 
-      let p = this.getparent('tweak');
-      let val = p.getElementsByClassName('value')[0];
+      var p = hs.getparent('tweak');
+      var val = p.getElementsByClassName('value')[0];
 
       if ( val ){
         val.empty();
-        val.appendChild(document.createTextNode(v));
+        val.appendChild(document.createTextNode(h));
       }
 
-      let oldvars = document.getElementsByClassName('hueshiftcss');
+      p = sb.getparent('tweak');
+      val = p.getElementsByClassName('value')[0];
+
+      if ( val ){
+        val.empty();
+        val.appendChild(document.createTextNode(Math.round((s-1) * 100) / 100));
+      }
+
+      p = lb.getparent('tweak');
+      val = p.getElementsByClassName('value')[0];
+
+      if ( val ){
+        val.empty();
+        val.appendChild(document.createTextNode(Math.round((l) * 100) / 100));
+      }
+
+      let oldvars = document.getElementsByClassName(cssname);
       oldvars.remove();
       document.head.appendChild(style);
 
       if (!x) {
         hashtweaks();
       }
-    }
-    
+    }    
 
     Attach.on('click', '.tabwrap .tab', tabline);
     Attach.on('click', '#tabbar .tab', tabbar);
@@ -3150,7 +3196,10 @@ jhunter@tunein.com
     Attach.on('click', '.npforward30', npforward30);
     Attach.on('click', '.nprewind30', nprewind30); 
     Attach.on('click', '.palette', editswatch);
-    Attach.on('input', '.huetweak', hueshift);
+    Attach.on('input', '#hueshift', colorshift);
+    Attach.on('input', '#satboost', colorshift);
+    Attach.on('input', '#lumboost', colorshift);
+    
     
     pagesizetweak(true);
 
