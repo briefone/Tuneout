@@ -683,6 +683,11 @@ jhunter@tunein.com
         width: calc(100% - 0.7px);
         box-sizing: border-box;
       }
+
+      .topbar .colorlay {position:absolute;top:0;left:0;right:0;bottom:0;background:var(--darkui);opacity:0.5;z-index:-1;}
+        .albummatch .topbar .colorlay {background:var(--albummatch);}
+        .albumblur .topbar .colorlay {background:transparent;}
+
       .rightactions {}
 
             .unfav, .removefav .fav {display:none;}
@@ -905,6 +910,9 @@ jhunter@tunein.com
         .palette:hover {transform:Scale(1.04);z-index:3;}
 
 
+        .palette .pb {font-size:10px;font-weight:500;position:absolute;bottom:2px;right:4px;mix-blend-mode: lighten;line-height:10px;}
+
+
     #colorpicker {pointer-events:none;opacity:0;position: absolute;top:0;left:0;}
     
 
@@ -964,7 +972,7 @@ jhunter@tunein.com
   <div id=tweaks>
     <div class=tpanel>
       <div class=colorpalette>
-        <div class=palette style="background-color:var(--ui1);" data-ui=1 id=ui1></div><div class=palette style="background-color:var(--ui2);" data-ui=2 id=ui2></div><div class=palette style="background-color:var(--ui3);" data-ui=3 id=ui3></div><div class=palette style="background-color:var(--ui4);" data-ui=4 id=ui4></div><div class=palette style="background-color:var(--ui5);" data-ui=5 id=ui5></div><div class=palette style="background-color:var(--ui6);" data-ui=6 id=ui6></div><div class=palette style="background-color:var(--ui7);" data-ui=7 id=ui7></div><div class=palette style="background-color:var(--ui8);" data-ui=8 id=ui8></div><div class=palette style="background-color:var(--ui9);" data-ui=9 id=ui9></div><div class=palette style="background-color:var(--ui10);" data-ui=10 id=ui10></div><div class=palette style="background-color:var(--ui11);" data-ui=11 id=ui11></div><div class=palette style="background-color:var(--ui12);" data-ui=12 id=ui12></div>
+        <div class=palette style="background-color:var(--ui1);" data-ui=1 id=ui1></div><div class=palette style="background-color:var(--ui2);" data-ui=2 id=ui2></div><div class=palette style="background-color:var(--ui3);" data-ui=3 id=ui3></div><div class=palette style="background-color:var(--ui4);" data-ui=4 id=ui4></div><div class=palette style="background-color:var(--ui5);" data-ui=5 id=ui5></div><div class=palette style="background-color:var(--ui6);" data-ui=6 id=ui6></div><div class=palette style="background-color:var(--ui7);" data-ui=7 id=ui7></div><div class=palette style="background-color:var(--ui8);" data-ui=8 id=ui8></div><div class=palette style="background-color:var(--ui9);" data-ui=9 id=ui9></div><div class=palette style="background-color:var(--ui10);" data-ui=10 id=ui10><div class=pb>B</div></div><div class=palette style="background-color:var(--ui11);" data-ui=11 id=ui11></div><div class=palette style="background-color:var(--ui12);" data-ui=12 id=ui12></div>
       </div>
 
       <div class=hueshift>
@@ -1213,6 +1221,7 @@ jhunter@tunein.com
       </div>
       <div id=npmatch></div>
       <div class=topbar>
+        <div class=colorlay></div>
         <div class="iconbtn closenp invert">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M18.933 6.15599L12 13.079L5.067 6.15599C5.02033 6.10729 4.96429 6.06854 4.90225 6.04206C4.84021 6.01559 4.77346 6.00194 4.706 6.00194C4.63855 6.00194 4.57179 6.01559 4.50975 6.04206C4.44771 6.06854 4.39167 6.10729 4.345 6.15599L2.145 8.34299C2.05058 8.43943 1.9977 8.56903 1.9977 8.70399C1.9977 8.83896 2.05058 8.96856 2.145 9.06499L9.445 16.365L11.632 18.552C11.7284 18.6464 11.858 18.6993 11.993 18.6993C12.128 18.6993 12.2576 18.6464 12.354 18.552L14.541 16.365L21.841 9.09199C21.9354 8.99556 21.9883 8.86596 21.9883 8.73099C21.9883 8.59603 21.9354 8.46643 21.841 8.36999L19.641 6.15199C19.5943 6.10329 19.5383 6.06454 19.4763 6.03806C19.4142 6.01159 19.3475 5.99794 19.28 5.99794C19.2125 5.99794 19.1458 6.01159 19.0838 6.03806C19.0217 6.06454 18.9657 6.10329 18.919 6.15199L18.933 6.15599Z" />
@@ -2098,8 +2107,14 @@ jhunter@tunein.com
   <audio controls="" loop="" id="meow" style="display:none;" src="./audio/nyancat.mp3" type="audio/mpeg" preload="auto"></audio>
   <script>
     function defaultsizes(x,y){
-      document.getElementById('pagewidth').value = x;
-      document.getElementById('pageheight').value = y;
+      let w = document.getElementById('pagewidth');
+      let h = document.getElementById('pageheight');
+
+      w.value = x;
+      h.value = y;
+      w.classList.add('modified');
+      h.classList.add('modified');
+
       valuetweaks();
 
       breakpoint();
@@ -2287,7 +2302,10 @@ jhunter@tunein.com
       hashtweaks();
     }
 
-    function valuetweaks(){
+    function valuetweaks(e){
+      if (!!e){
+        this.classList.add('modified');
+      }
       let tweaks = document.getElementsByClassName('valuetweak');
 
       var vars = ':root {';
@@ -2347,6 +2365,9 @@ jhunter@tunein.com
       let vt  = document.getElementsByClassName('valuetweak');
       for(var i=0;i<vt.length;i++){
         let t= vt[i];
+        if ( !t.classList.contains('modified')){
+          continue;
+        }
 
         let j = {value:t.value, id: t.id};
 
@@ -2356,6 +2377,9 @@ jhunter@tunein.com
       let tr  = document.getElementsByClassName('tweakr');
       for(var i=0;i<tr.length;i++){
         let t = tr[i];
+        if ( !t.checked ){
+          continue;
+        }
         let j = {checked: t.checked, id: t.id};
 
         tweaks2.push(j);
@@ -2372,7 +2396,23 @@ jhunter@tunein.com
         }        
       }
 
-      let data = {sliders:tweaks1, checkboxs: tweaks2, palettes: paltweaks, hueshift: document.getElementById('hueshift').value, satboost: document.getElementById('satboost').value, lumboost: document.getElementById('lumboost').value};
+      let lb = document.getElementById('lumboost').value;
+      let sb = document.getElementById('satboost').value;
+      let hs = document.getElementById('hueshift').value;
+
+      let data = {sliders:tweaks1, checkboxs: tweaks2, palettes: paltweaks};
+
+      if ( hs != 232){
+        data.hueshift = hs;
+      }
+
+      if ( sb != 0){
+        data.satboost = sb;
+      }
+
+      if ( lb != 0){
+        data.lumboost = lb;
+      }
 
       let string = JSON.stringify(data);
       let a64 = btoa(string);
@@ -2424,6 +2464,8 @@ jhunter@tunein.com
         let v = a.value || 0;
         let s = document.getElementById(id);
 
+        s.classList.add('modified');
+
         s.value = v;
 
         let p = s.getparent('tweak');
@@ -2455,9 +2497,9 @@ jhunter@tunein.com
       }
 
       
-      let ht = Number(json.hueshift);
-      let sb = Number(json.satboost);
-      let lb = Number(json.lumboost);
+      let ht = Number(json.hueshift || 232);
+      let sb = Number(json.satboost || 0);
+      let lb = Number(json.lumboost || 0);
 
       if ( ht != 232 || sb != 0 || lb != 0 ){
         let h = document.getElementById('hueshift');
