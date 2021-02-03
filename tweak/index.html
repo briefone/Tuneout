@@ -444,6 +444,9 @@ jhunter@tunein.com
       .tweak input[type=range]:hover {background:rgba(255,255,255,.12);}
       .tweak input[type=range]:active {background:rgba(255,255,255,.15);}
 
+    .btnstack .tweakbtn {margin-bottom:6px;}
+      .btnstack .tweakbtn:last-child {margin-bottom:0;}
+
     .btn {transition:background-color 150ms ease-in-out, border-color 150ms ease-in-out, color 150ms ease-in-out;display:inline-flex;cursor:pointer;border-radius:var(--buttonradius);color:var(--btntext);background:var(--btndefault);font-size:16px;font-weight:600;height:40px;padding:0 16px;align-items: center;justify-content: center;user-select:none;box-sizing:border-box;}
       .btn:hover {background:var(--btnhover);}
       .btn:active {background:var(--btnpress);}
@@ -713,9 +716,10 @@ jhunter@tunein.com
     .resetbtn:hover {background-color:rgba(255, 255, 255, 0.0666);}
     .resetbtn:active {background-color:rgba(255, 255, 255, 0.1);}
 
-    .tweakbtn {cursor:pointer;display:flex;height:36px;text-align:center;padding:0 12px;align-items:center;justify-content:center;background:rgba(255, 255, 255, 0.05);color:#fff;font-size:15px;font-weight:500;border-radius:6px;transition:all 200ms ease-in-out;}
+    .tweakbtn {cursor:pointer;display:flex;height:32px;text-align:center;padding:0 12px;align-items:center;justify-content:center;background:rgba(255, 255, 255, 0.05);color:#fff;font-size:14px;font-weight:600;border-radius:6px;transition:all 200ms ease-in-out;text-transform:uppercase;letter-spacing: 0.2px;}
     .tweakbtn:hover {background-color:rgba(255, 255, 255, 0.1);}
     .tweakbtn:active {background-color:rgba(255, 255, 255, 0.12);}
+      .resetcolors {color:#ff5757;}
 
 
     .tabpage {display:none;}
@@ -938,7 +942,11 @@ jhunter@tunein.com
         <div class="tweak">
         <div class="label"><span>Hue Shift</span><div class="value">232</div></div>
           <input type="range" class="huetweak" min="0" max="360" value="232" step="1" id="hueshift">
-      </div></div>
+        </div>
+      </div>
+      <div class=tgroup>
+        <div class="tweakbtn resetcolors" onclick="resetcolors()">Reset Colors</div>
+      </div>
     </div>
     <div class=tpanel>
       <div class=tweakbtn onclick="animatelogo()">Animate Logo</div>
@@ -1062,17 +1070,22 @@ jhunter@tunein.com
     <div class=tpanel>
       <div class="tweak">
         <div class="label"><span>Page Width</span><div class="value">1444</div></div>
-          <input type="range" class="valuetweak" min="360" max="1444" value="1444" step="5" id="pagewidth" oninput="breakpoint()" data-unit=px>
+          <input type="range" class="valuetweak" min="360" max="1444" value="1444" step="1" id="pagewidth" oninput="breakpoint()" data-unit=px>
       </div>
       <div class="tweak">
         <div class="label"><span>Page Height</span><div class="value">1444</div></div>
-          <input type="range" class="valuetweak" min="360" max="1444" value="1444" step="5" id="pageheight" data-unit=px>
+          <input type="range" class="valuetweak" min="360" max="1444" value="1444" step="1" id="pageheight" data-unit=px>
+      </div>
+      <div class=btnstack>
+        <div class="tweakbtn iphonesize" onclick="defaultsizes(390,844)">iPhone</div>
+        <div class="tweakbtn ipadsize" onclick="defaultsizes(1024,768)">iPad</div>
+        <div class="tweakbtn pixel" onclick="defaultsizes(360,780)">Pixel</div>
       </div>
     </div>
 
     <div class=tpanel style="padding:0;">
       <div class=tgroup>
-        <div class=resetbtn onclick="reset()">Reset</div>
+        <div class=resetbtn onclick="reset()">Reset All Tweaks</div>
       </div>
     </div>
   </div>
@@ -2043,7 +2056,31 @@ jhunter@tunein.com
   </div>
   <audio controls="" loop="" id="meow" style="display:none;" src="./audio/nyancat.mp3" type="audio/mpeg" preload="auto"></audio>
   <script>
+    function defaultsizes(x,y){
+      document.getElementById('pagewidth').value = x;
+      document.getElementById('pageheight').value = y;
+      valuetweaks();
+    }
 
+    function resetcolors(){
+      let oldui = document.getElementsByClassName('uicolorscss');
+      oldui.remove();
+
+      let p = document.getElementsByClassName('palette');
+
+      for(var i=0;i<p.length;i++){
+        let pal = p[i];
+        delete pal.dataset.value;
+      }
+
+      let hs = document.getElementById('hueshift');
+
+      hs.value = 232;
+
+      hueshift.call(hs, {}, true);
+
+      hashtweaks();
+    }
 
     function breakpoint(){
       let c = document.getElementById('container');
@@ -2113,7 +2150,7 @@ jhunter@tunein.com
         let v = this.value.replace('#', '');
 
         var style = document.createElement('style');
-        style.className = 'ui' + ui;
+        style.className = 'uicolorscss ui' + ui;
         var css = ':root {--ui' + ui +': ' + this.value + ';}';
         style.innerHTML = css;
 
@@ -2355,7 +2392,7 @@ jhunter@tunein.com
         let s = document.getElementById(id);
 
         var style = document.createElement('style');
-        style.className = id;
+        style.className = 'uicolorscss ' + id;
         var css = ':root {--' + id +': ' + v + ';}';
         style.innerHTML = css;
 
@@ -2554,12 +2591,11 @@ jhunter@tunein.com
           let dur = meow.duration;
 
           if ( dur == Infinity){
-            console.log('infinite');
+            console.warn('infinite');
             return;
           }
 
           let time = meow.currentTime;
-          console.log(event, 'ontimeupdate ', meow.currentTime);
 
           document.getElementById('npscrub').value = time;
 
