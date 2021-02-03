@@ -1070,11 +1070,11 @@ jhunter@tunein.com
     <div class=tpanel>
       <div class="tweak">
         <div class="label"><span>Page Width</span><div class="value">1444</div></div>
-          <input type="range" class="valuetweak" min="360" max="1444" value="1444" step="1" id="pagewidth" oninput="breakpoint()" data-unit=px>
+          <input type="range" class="valuetweak" min="280" max="1444" value="1444" step="1" id="pagewidth" oninput="breakpoint()" data-unit=px>
       </div>
       <div class="tweak">
         <div class="label"><span>Page Height</span><div class="value">1444</div></div>
-          <input type="range" class="valuetweak" min="360" max="1444" value="1444" step="1" id="pageheight" data-unit=px>
+          <input type="range" class="valuetweak" min="280" max="1444" value="1444" step="1" id="pageheight" data-unit=px>
       </div>
       <div class=btnstack>
         <div class="tweakbtn iphonesize" onclick="defaultsizes(390,844)">iPhone</div>
@@ -2121,7 +2121,9 @@ jhunter@tunein.com
             }, time);
           }, 125);
         }
-      } else if (document.documentElement.classList.contains('fliplogo', 'spinlogo')){
+      } else if (document.documentElement.classList.contains('fliplogo') || document.documentElement.classList.contains('spinlogo')){
+
+        console.log('ughhh')
         document.body.classList.add('ani1');
 
           setTimeout(function(){
