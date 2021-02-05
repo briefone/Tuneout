@@ -880,14 +880,19 @@ jhunter@tunein.com
                 .stationdetails {padding:0 16px 16px;font-size:16px;font-weight:500;}
 
     .morepanel {position: absolute;top:0;left:0;right:0;bottom:0;z-index:999999999999;pointer-events:none;}
-            .more .morepanel {pointer-events: all;}
+            .openmenu.morepanel {pointer-events: all;}
       .morepanel .overlay {position: absolute;top:0;left:0;right:0;bottom:0;z-index:1;background:rgba(0,0,0,.65);transition:opacity 200ms ease-in-out;opacity:0;}
       .morepanel .panel {background:var(--morepanel);color:var(--moreitem);border-radius:12px 12px  0 0;position:absolute;left:0;bottom:0;right:0;padding:12px 0;z-index:1;transition:transform 200ms ease-in-out;transform:translateY(100%);}
         .morepanel .panelitem {padding:0 24px;display:flex;align-items: center;height:48px;font-size:20px;font-weight:500;justify-content: space-between;cursor:pointer;user-select:none;}
             .morepanel .panelitem:hover {background:var(--moreitemhover);}
             .morepanel .panelitem:active {background:var(--moreitempress);transition:background-color 200ms ease-in-out;}
-            .more .morepanel .overlay {opacity:1;}
-            .more .morepanel .panel {transform:translateY(0);}
+            .openmenu.morepanel .overlay {opacity:1;}
+            .openmenu.morepanel .panel {transform:translateY(0);}
+
+
+            .droid .morepanel .panel {border-radius:0;}
+
+            
 
 
 
@@ -950,17 +955,12 @@ jhunter@tunein.com
 
     #colorpicker {pointer-events:none;opacity:0;position: absolute;top:0;left:0;}
 
-      .superaddtopanel {}
-        .superpanel .superaddtopanel {pointer-events: all;}
-        .superpanel .superaddtopanel .overlay {opacity:1;}
-            .superpanel .superaddtopanel .panel {transform:translateY(0);}
 
-
-      .emptystate {display:flex;flex-direction: column;align-items: center;margin-bottom:32px;}
+      .emptystate {display:flex;flex-direction: column;align-items: center;}
         .emptystate .ill {width:180px;height:180px;background:var(--ink4);border-radius:50%;margin-bottom:24px;}
         .emptystate .message {font-size:16px;color:var(--ink9);padding:0 24px;box-sizing: border-box;text-align:center;}
 
-      .createplaylistbtn {padding:0 24px 12px;box-sizing: border-box;text-align:center;}
+      .createplaylistbtn {padding:32px 24px 12px;box-sizing: border-box;text-align:center;}
         .createplaylistbtn .btn {width:100%;max-width:420px;}
 
 
@@ -976,7 +976,12 @@ jhunter@tunein.com
         .collage .v2 {grid-column-start: 2;grid-row-start: 1;grid-row-end:3;}
         .collage .h1 {grid-column-start: 1;grid-row-start: 1;grid-column-end:3;}
         .collage .h2 {grid-column-start: 1;grid-row-start: 2;grid-column-end:3;}
-        .collage .f1 {grid-column-start: 1;grid-row-start: 12;grid-column-end:3;grid-row-end:3;}
+        .collage .f1 {grid-column-start: 1;grid-row-start: 1;grid-column-end:3;grid-row-end:3;}
+
+      .panelwrap {padding:4px 24px 8px;}
+        .panelwrap h2 {margin-bottom:8px;}
+        input.setplaylistname {background:var(--ink3);width:100%;height:40px;font-size:22px;font-weight:500;text-align:center;margin-bottom:16px;}
+        .saveplaylist {width:100%;}
     
 
     @media screen and (max-width: 666px) {
@@ -1062,7 +1067,7 @@ jhunter@tunein.com
     </div>
     <div class=tpanel>
       <div class="tweak">
-        <label><input type="checkbox" id="cb18" class="tweakr " data-class=droid><div class="toggle"></div> Android</label>
+        <label><input type="checkbox" id="cb18" class="tweakr " data-class=droid><div class="toggle"></div> Android (kind of)</label>
       </div>
     </div>
     <div class=tpanel>
@@ -1275,24 +1280,41 @@ jhunter@tunein.com
       <div class="btn exitcarmode">Exit</div>
     </div>
 
-    <div class="morepanel superaddtopanel">
+    <div class="morepanel add2listmenu">
       <div class=overlay></div>
       <div class=panel>
-        <div class="panelitem panellist">Add to Playlist</div>
+        
+        <div class="panelitem menubtn focus panelcreateplaylist" data-focus="setplaylistname" data-type="createplaylist">Create Playlist</div>
+      </div>
+    </div>
+
+    <div class="morepanel playlistmore">
+      <div class=overlay></div>
+      <div class=panel>
+        <div class="panelitem addplaylist">Add Playlist</div>
+        <div class=panelitem>Duplicate</div>
         <div class=panelitem>Share</div>
-        <div class=panelitem>Choose Stream</div>
-        <div class=panelitem>Need Help?</div>
-        <div class=panelitem>Clock Display</div>
-        <div class=panelitem>Set Alarm</div>
-        <div class=panelitem>Sleep Timer</div>
+        <div class=panelitem>Hide</div>
+      </div>
+    </div>
+
+    
+    <div class="morepanel createplaylist">
+      <div class=overlay></div>
+      <div class=panel>
+        <div class=panelwrap>
+          <h2>Name Your Playlist</h2>
+          <input type=text class=setplaylistname placeholder="Playlist #3453" />
+          <div class="btn saveplaylist">Create</div>
+        </div>
       </div>
     </div>
 
     <div id=nowplaying class="live darkui">
-      <div class=morepanel>
+      <div class="morepanel npmoremenu">
         <div class=overlay></div>
         <div class=panel>
-          <div class="panelitem panellist">Add to Playlist</div>
+          <div class="panelitem menubtn" data-type="add2listmenu">Add to Playlist</div>
           <div class=panelitem>Share</div>
           <div class=panelitem>Choose Stream</div>
           <div class=panelitem>Need Help?</div>
@@ -1327,7 +1349,7 @@ jhunter@tunein.com
           </div><div class="iconbtn npfav invert">
             <div class="fav svgicon"></div>
             <div class="unfav svgicon"></div>          
-          </div><div class="iconbtn npmore invert">
+          </div><div class="iconbtn npmore invert menubtn" data-type=npmoremenu>
             <svg viewBox="0 0 24 24"  xmlns="http://www.w3.org/2000/svg">
               <path d="M6.27084 10.0903C6.64854 10.0903 7.01777 10.2023 7.33182 10.4121C7.64587 10.622 7.89065 10.9202 8.03519 11.2692C8.17973 11.6181 8.21755 12.0021 8.14386 12.3726C8.07018 12.743 7.88829 13.0833 7.62121 13.3504C7.35413 13.6175 7.01385 13.7993 6.6434 13.873C6.27296 13.9467 5.88897 13.9089 5.54002 13.7643C5.19106 13.6198 4.8928 13.375 4.68296 13.061C4.47312 12.7469 4.36111 12.3777 4.36111 12C4.36111 11.4935 4.56232 11.0078 4.92046 10.6496C5.2786 10.2915 5.76435 10.0903 6.27084 10.0903ZM12 10.0903C12.3777 10.0903 12.7469 10.2023 13.061 10.4121C13.375 10.622 13.6198 10.9202 13.7644 11.2692C13.9089 11.6181 13.9467 12.0021 13.873 12.3726C13.7993 12.743 13.6175 13.0833 13.3504 13.3504C13.0833 13.6175 12.743 13.7993 12.3726 13.873C12.0021 13.9467 11.6181 13.9089 11.2692 13.7643C10.9202 13.6198 10.622 13.375 10.4121 13.061C10.2023 12.7469 10.0903 12.3777 10.0903 12C10.0903 11.4935 10.2915 11.0078 10.6496 10.6496C11.0078 10.2915 11.4935 10.0903 12 10.0903ZM17.7292 10.0903C18.1069 10.0903 18.4761 10.2023 18.7902 10.4121C19.1042 10.622 19.349 10.9202 19.4935 11.2692C19.6381 11.6181 19.6759 12.0021 19.6022 12.3726C19.5285 12.743 19.3466 13.0833 19.0795 13.3504C18.8125 13.6175 18.4722 13.7993 18.1017 13.873C17.7313 13.9467 17.3473 13.9089 16.9984 13.7643C16.6494 13.6198 16.3511 13.375 16.1413 13.061C15.9315 12.7469 15.8194 12.3777 15.8194 12C15.8194 11.4935 16.0206 11.0078 16.3788 10.6496C16.7369 10.2915 17.2227 10.0903 17.7292 10.0903Z" />
             </svg>
@@ -1342,7 +1364,7 @@ jhunter@tunein.com
           <div class=npinfo>
             <div class=npstation>Station</div>
             <div class=npmeta>Meta</div>
-            <div class=nplist><div class="svgicon playlistadd"></div> Add to Playlist</div>
+            <div class="nplist menubtn" data-type=add2listmenu><div class="svgicon playlistadd"></div> Add to Playlist</div>
           </div>
           <div class="npscrubber" id=npscrubber>
             <div class=scrubbable>
@@ -2027,7 +2049,7 @@ jhunter@tunein.com
             <div class=contentrow style="padding-top:4px;">
               <div class="listitem openpage" data-page=playlist data-parent=library id=playlistrow>
                 <div class=title>Playlist</div>
-                <div class=rowcount>0</div>
+                <div class="rowcount playlistcount">0</div>
                 <div class=chevron>
                   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M15.11 7.14599L19.956 11.999L15.11 16.852C15.0754 16.8844 15.0479 16.9236 15.029 16.9671C15.0102 17.0107 15.0005 17.0576 15.0005 17.105C15.0005 17.1524 15.0102 17.1993 15.029 17.2428C15.0479 17.2863 15.0754 17.3255 15.11 17.358L16.641 18.896C16.7085 18.9623 16.7994 18.9995 16.894 18.9995C16.9886 18.9995 17.0795 18.9623 17.147 18.896L22.26 13.783L23.791 12.252C23.8573 12.1845 23.8945 12.0936 23.8945 11.999C23.8945 11.9044 23.8573 11.8135 23.791 11.746L22.26 10.215L17.168 5.10599C17.1005 5.03967 17.0096 5.0025 16.915 5.0025C16.8204 5.0025 16.7295 5.03967 16.662 5.10599L15.11 6.63999C15.0754 6.67244 15.0479 6.71164 15.029 6.75515C15.0102 6.79866 15.0005 6.84558 15.0005 6.89299C15.0005 6.94041 15.0102 6.98732 15.029 7.03083C15.0479 7.07435 15.0754 7.11354 15.11 7.14599Z" />
@@ -2059,14 +2081,14 @@ jhunter@tunein.com
             </div>
           </div>
           <div id=playlistpage class="slidepage">
-            
             <div class=contentrow>
-              <div class=emptystate>
+              <div class="playlistcontent itemrowlist"></div>
+              <div class="emptystate playlistemptystate">
                 <div class=ill></div>
                 <div class=message>You don't currently have any playlist, <br>create one below.</div>
               </div>
               <div class=createplaylistbtn>
-                <div class=btn>Create a Playlist</div>
+                <div class="btn menubtn focus" data-focus=setplaylistname data-type=createplaylist>Create a Playlist</div>
               </div>
             </div>
 
@@ -2090,7 +2112,7 @@ jhunter@tunein.com
                         <div class=bgcircle></div>
                         <div class="svgicon playicon"></div>
                       </div>
-                      <div class="iconbtn ">
+                      <div class="iconbtn menubtn" data-type=playlistmore>
                         <div class="svgicon moreicon"></div>
                       </div>
                     </div>
@@ -2112,7 +2134,7 @@ jhunter@tunein.com
                         <div class=bgcircle></div>
                         <div class="svgicon playicon"></div>
                       </div>
-                      <div class="iconbtn ">
+                      <div class="iconbtn menubtn" data-type=playlistmore>
                         <div class="svgicon moreicon"></div>
                       </div>
                     </div>
@@ -2134,7 +2156,7 @@ jhunter@tunein.com
                         <div class=bgcircle></div>
                         <div class="svgicon playicon"></div>
                       </div>
-                      <div class="iconbtn ">
+                      <div class="iconbtn menubtn" data-type=playlistmore>
                         <div class="svgicon moreicon"></div>
                       </div>
                     </div>
@@ -2157,7 +2179,7 @@ jhunter@tunein.com
                         <div class=bgcircle></div>
                         <div class="svgicon playicon"></div>
                       </div>
-                      <div class="iconbtn ">
+                      <div class="iconbtn menubtn" data-type=playlistmore>
                         <div class="svgicon moreicon"></div>
                       </div>
                     </div>
@@ -2179,7 +2201,7 @@ jhunter@tunein.com
                         <div class=bgcircle></div>
                         <div class="svgicon playicon"></div>
                       </div>
-                      <div class="iconbtn ">
+                      <div class="iconbtn menubtn" data-type=playlistmore>
                         <div class="svgicon moreicon"></div>
                       </div>
                     </div>
@@ -2319,6 +2341,27 @@ jhunter@tunein.com
               <path d="M4.43087 12.1552V11.3819C4.43087 11.3616 4.43469 11.3415 4.44212 11.3227C4.44954 11.304 4.46042 11.2869 4.47414 11.2726C4.48786 11.2582 4.50415 11.2468 4.52207 11.2391C4.54 11.2313 4.55921 11.2273 4.57861 11.2273H7.60621C7.64539 11.2273 7.68297 11.2436 7.71068 11.2726C7.73839 11.3016 7.75395 11.3409 7.75395 11.3819V12.1552C7.75395 12.1962 7.73839 12.2355 7.71068 12.2645C7.68297 12.2935 7.64539 12.3098 7.60621 12.3098H6.68296C6.67311 12.3092 6.66327 12.3109 6.65406 12.3145C6.64486 12.3182 6.6365 12.3239 6.62953 12.3312C6.62256 12.3385 6.61714 12.3472 6.61362 12.3569C6.61009 12.3665 6.60855 12.3768 6.60908 12.3871V16.4828C6.60864 16.5237 6.59293 16.5627 6.56532 16.5916C6.53771 16.6205 6.50039 16.6369 6.46134 16.6374H5.72291C5.68386 16.6369 5.64654 16.6205 5.61893 16.5916C5.59132 16.5627 5.57561 16.5237 5.57517 16.4828V12.3865C5.5757 12.3762 5.57416 12.3659 5.57063 12.3563C5.56711 12.3466 5.56169 12.3379 5.55472 12.3306C5.54775 12.3233 5.53939 12.3176 5.53019 12.3139C5.52098 12.3103 5.51114 12.3086 5.5013 12.3092H4.57833C4.53929 12.3091 4.50187 12.2929 4.47424 12.264C4.44661 12.2352 4.43102 12.196 4.43087 12.1552ZM23.9997 4.0796V16.0569C23.9997 16.1331 23.9854 16.2085 23.9575 16.2789C23.9296 16.3493 23.8887 16.4132 23.8372 16.4671C23.7857 16.5209 23.7245 16.5636 23.6572 16.5926C23.5899 16.6217 23.5178 16.6366 23.445 16.6365H12.5539V19.9195C12.5539 20.0732 12.4955 20.2206 12.3917 20.3293C12.2878 20.438 12.1469 20.4991 12 20.4991H0.553894C0.407141 20.4991 0.266385 20.4382 0.162534 20.3297C0.0586833 20.2212 0.000226705 20.074 0 19.9204L0 7.9431C0 7.78938 0.0583566 7.64196 0.162232 7.53326C0.266107 7.42457 0.406992 7.3635 0.553894 7.3635H11.4461V4.0805C11.446 4.00431 11.4602 3.92884 11.488 3.85842C11.5158 3.78799 11.5566 3.72399 11.608 3.67008C11.6595 3.61616 11.7206 3.57339 11.7878 3.5442C11.8551 3.51502 11.9272 3.5 12 3.5H23.445C23.5919 3.5 23.7328 3.56106 23.8366 3.66976C23.9405 3.77846 23.9989 3.92588 23.9989 4.0796H23.9997ZM11.4461 8.5227H1.19991C1.17541 8.5227 1.1519 8.53289 1.13457 8.55102C1.11724 8.56916 1.1075 8.59375 1.1075 8.6194V19.2444C1.1075 19.27 1.11724 19.2946 1.13457 19.3128C1.1519 19.3309 1.17541 19.3411 1.19991 19.3411H11.3537C11.3782 19.3411 11.4017 19.3309 11.419 19.3128C11.4364 19.2946 11.4461 19.27 11.4461 19.2444V8.5227ZM19.163 11.8842C19.163 11.8432 19.1474 11.8039 19.1197 11.7749C19.092 11.7459 19.0544 11.7296 19.0152 11.7296H18.3878C18.3779 11.7302 18.3681 11.7285 18.3589 11.7249C18.3497 11.7212 18.3413 11.7155 18.3343 11.7082C18.3274 11.7009 18.3219 11.6922 18.3184 11.6825C18.3149 11.6729 18.3133 11.6626 18.3139 11.6523V8.4842C18.3133 8.4739 18.3149 8.4636 18.3184 8.45397C18.3219 8.44434 18.3274 8.43559 18.3343 8.4283C18.3413 8.421 18.3497 8.41533 18.3589 8.41164C18.3681 8.40796 18.3779 8.40634 18.3878 8.4069H18.9414C18.9608 8.4069 18.98 8.4029 18.9979 8.39513C19.0158 8.38736 19.0321 8.37597 19.0458 8.36162C19.0596 8.34726 19.0704 8.33022 19.0779 8.31146C19.0853 8.29271 19.0891 8.2726 19.0891 8.2523V7.5181C19.0891 7.4978 19.0853 7.47769 19.0779 7.45894C19.0704 7.44018 19.0596 7.42314 19.0458 7.40878C19.0321 7.39443 19.0158 7.38304 18.9979 7.37527C18.98 7.3675 18.9608 7.3635 18.9414 7.3635H16.6522C16.6328 7.3635 16.6136 7.3675 16.5957 7.37527C16.5777 7.38304 16.5614 7.39443 16.5477 7.40878C16.534 7.42314 16.5231 7.44018 16.5157 7.45894C16.5083 7.47769 16.5045 7.4978 16.5045 7.5181V8.2523C16.5045 8.2726 16.5083 8.29271 16.5157 8.31146C16.5231 8.33022 16.534 8.34726 16.5477 8.36162C16.5614 8.37597 16.5777 8.38736 16.5957 8.39513C16.6136 8.4029 16.6328 8.4069 16.6522 8.4069H17.2061C17.2159 8.40634 17.2258 8.40796 17.235 8.41164C17.2442 8.41533 17.2526 8.421 17.2595 8.4283C17.2665 8.43559 17.2719 8.44434 17.2754 8.45397C17.279 8.4636 17.2805 8.4739 17.28 8.4842V11.6523C17.2805 11.6626 17.279 11.6729 17.2754 11.6825C17.2719 11.6922 17.2665 11.7009 17.2595 11.7082C17.2526 11.7155 17.2442 11.7212 17.235 11.7249C17.2258 11.7285 17.2159 11.7302 17.2061 11.7296H16.5786C16.5394 11.7296 16.5019 11.7459 16.4741 11.7749C16.4464 11.8039 16.4309 11.8432 16.4309 11.8842V12.6184C16.4313 12.6593 16.447 12.6983 16.4746 12.7272C16.5022 12.7561 16.5396 12.7725 16.5786 12.773H19.0155C19.0546 12.7725 19.0919 12.7561 19.1195 12.7272C19.1471 12.6983 19.1628 12.6593 19.1633 12.6184L19.163 11.8842Z" />
             </svg>
             <div class=label>Premium</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id=templates style="display:none;">
+    <div class="listrowitem pl" id=playlistrowitem>
+      <div class="collage">
+        <div class="f1" ></div>
+      </div><div class="rowcontent">
+        <div class="description">
+          <div class="title"></div>
+          <div class="meta">0 Items</div>
+        </div>
+        <div class="actions">
+          <div class="iconbtn ">
+            <div class="bgcircle"></div>
+            <div class="svgicon playicon"></div>
+          </div>
+          <div class="iconbtn menubtn" data-type="playlistmore">
+            <div class="svgicon moreicon"></div>
           </div>
         </div>
       </div>
@@ -3348,18 +3391,13 @@ jhunter@tunein.com
     }
 
     function npmore(){
-      let np = this.getparent('nowplaying');
-      np.classList.add('more');
+      let np = document.getElementsByClassName('npmore')[0];
+      np.classList.add('openmenu');
     }
 
     function nomore(){
-      let np = this.getparent('nowplaying');
-
-      if ( np ){
-        np.classList.remove('more');
-      } else {
-        document.body.classList.remove('superpanel');
-      }
+      let t = this.getparent('morepanel');
+      t.classList.remove('openmenu');
     }
 
     function panelitem(e){
@@ -3470,8 +3508,60 @@ jhunter@tunein.com
 
     function addtolist(e){
       console.log('list');
+      let s = document.getElementsByClassName('superaddtopanel')[0];
+      s.classList.add('openmenu');
+    }
 
-      document.body.classList.add('superpanel');
+    function menubtn(e){
+      let t = this.dataset.type;
+
+      document.getElementsByClassName(t)[0].classList.add('openmenu');
+    }
+
+    function focuson(e){
+      let f = this.dataset.focus;
+
+      setTimeout(function(){document.getElementsByClassName(f)[0].focus();}, 200);
+    }
+
+    function saveplaylist(e){
+      nomore.call(this, e);
+      let input = document.getElementsByClassName('setplaylistname')[0];
+      let name = input.value || 'Playlist #' + Playlist.length + 1;
+      input.value = '';
+
+      Playlist.push(name);
+
+
+      document.getElementsByClassName('playlistemptystate')[0].style.display = 'none';
+
+      let pl = document.getElementsByClassName('playlistcontent')[0];
+
+      let pr = document.getElementById('playlistrowitem').cloneNode(true);
+      pr.removeAttribute('id');
+      
+      let t = pr.getElementsByClassName('title')[0];
+      t.appendChild(document.createTextNode(name));
+
+
+      pl.appendChild(pr);
+
+      let pc = document.getElementsByClassName('panelcreateplaylist')[0];
+      
+      let i = document.createElement('div');
+      i.className = 'panelitem addtothisplaylist';
+      i.dataset.playlist = name;
+      i.appendChild(document.createTextNode(name));
+
+      pc.parentElement.insertBefore(i, pc);
+
+      let c = document.getElementsByClassName('playlistcount')[0];
+      c.empty();
+      c.appendChild(document.createTextNode(Playlist.length))
+    }
+
+    function addtothisplaylist(e){
+      console.log(this.dataset.playlist);
     }
 
     Attach.on('click', '.tabwrap .tab', tabline);
@@ -3502,13 +3592,15 @@ jhunter@tunein.com
     Attach.on('input', '#hueshift', colorshift);
     Attach.on('input', '#satboost', colorshift);
     Attach.on('input', '#lumboost', colorshift);
-    Attach.on('click', '.nplist, .panellist', addtolist);
-    
+    Attach.on('click', '.menubtn', menubtn);
+    Attach.on('click', '.saveplaylist', saveplaylist);
+    Attach.on('click', '.focus', focuson);
+    Attach.on('click', '.addtothisplaylist', addtothisplaylist);
     
     pagesizetweak(true);
 
     (function() {
-      
+      window.Playlist = [];
       window.onresize = resize;
       generatelanguages();
       setuptweaks();
