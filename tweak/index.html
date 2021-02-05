@@ -409,6 +409,7 @@ jhunter@tunein.com
       .rewind {-webkit-mask: url('../icons/BackBuffer-Large.svg');mask: url('../icons/BackBuffer-Large.svg');}
       .forward {-webkit-mask: url('../icons/ForwardBuffer-Large.svg');mask: url('../icons/ForwardBuffer-Large.svg');}
       .moreicon {-webkit-mask: url('../icons/More-Small(Horizontal).svg');mask: url('../icons/More-Small(Horizontal).svg');}
+        .droid .moreicon {-webkit-mask: url('../icons/More-Regular(Vertical).svg');mask: url('../icons/More-Regular(Vertical).svg');width:22px !important;height:22px !important;}
       .playicon {-webkit-mask: url('../icons/Play.svg');mask: url('../icons/Play.svg');}
 
     .toggle {width:38px;height:22px;border-radius:30px;position:relative;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(0, 0, 0, 0.02);cursor:pointer;transition:background 150ms ease-in-out;display: inline-block;margin-right:8px;vertical-align: middle;}
@@ -528,6 +529,8 @@ jhunter@tunein.com
       #nav .colorlay {position:absolute;top:0;left:0;right:0;bottom:0;background:var(--background);opacity:0.5;z-index:-1;}
         .premiumpage #nav .colorlay {background:var(--premium);}
 
+        .droid #nav .colorlay {opacity:1;}
+
     #statusbar {height:24px;background:rgba(0,0,0,.03);width:100%;}
 
     .bar {display:flex;width:100%;align-items:center;justify-content: space-between;padding: 0 14px;box-sizing: border-box;height:64px;position: relative;}
@@ -590,6 +593,7 @@ jhunter@tunein.com
 
         .listitem {display:flex;justify-content: space-between;align-items:center;padding:0 24px 0;height:48px;cursor:pointer;user-select:none;position: relative;}
           .listitem::after {content:'';display:block;position:absolute;bottom:0;left:24px;right:0;height:1px;background:var(--ink2);}
+            .droid .listitem::after {left:0;}
           .listitem:hover {background:var(--ink2);}
           .listitem:active {background:var(--ink3);}
           .listitem .title {font-size:20px;font-weight:600;width:calc(100% - 48px);}
@@ -629,6 +633,8 @@ jhunter@tunein.com
           #tabbar .colorlay {position:absolute;top:0;left:0;right:0;bottom:0;background:var(--tabbar);opacity:0.975;z-index:-1;}
           .albummatch.albummatch2 #tabbar .colorlay {background:var(--albummatch);}
 
+            .droid #tabbar .colorlay {opacity:1;}
+
           .played #tabbar {height:113px;}
 
           #tabbar .tabs {display:flex;height:56px;justify-content: space-around;}
@@ -644,7 +650,8 @@ jhunter@tunein.com
 
     .inputfield {display:inline-block;width:100%;}
     .search input {background:var(--ink3);color:var(--textcolor);height:36px;width:100%;}
-      .droid .search input {background:transparent;border-bottom:2px solid var(--ink);border-radius:0;padding-left:0;text-indent:0;}
+      .droid .search input {background:transparent;border-bottom:2px solid var(--ink);border-radius:0;padding-left:0;text-indent:0;transition:border-color 200ms ease-in-out;}
+      .droid .search input:focus {border-color:var(--tsharp3);}
 
     #searchbar {padding:0 24px 8px;}
       .search {}
@@ -693,6 +700,7 @@ jhunter@tunein.com
     .modalview #mainwrap {transform:scale(.92) translateY(20px);border-radius:12px;opacity:0.9;}
 
     .modal {position: absolute;top:32px;left:0;right:0;bottom:0;background:var(--background);z-index:1337;border-radius:8px 8px 0 0;transform:translateY(100%);pointer-events: none;transition:all 200ms ease-in-out;}
+      .droid .modal {top:0;border-radius: 0;}
             .profilepage #profilemodal {transform:translateY(0);pointer-events: all;}
 
       .modalheading {position:absolute;top:0;left:0;right:0;height:72px;box-shadow:inset 0 -1px var(--ink2);}
@@ -724,6 +732,7 @@ jhunter@tunein.com
         .albumblur .topbar .colorlay {background:transparent;}
 
       .rightactions {}
+        .droid .npairplay {display:none;}
 
             .unfav, .removefav .fav {display:none;}
             .removefav .unfav {display:block;}
@@ -970,7 +979,7 @@ jhunter@tunein.com
         grid-gap: 2px;
       } 
 
-      .collage > div {background-position: center;background-repeat: none;background-size: cover;background-color:var(--ink2);}
+      .collage > div {background-position: center;background-repeat: no-repeat;background-size: cover;background-color:var(--ink2);}
         .collage .g1 {}
         .collage .v1 {grid-column-start: 1;grid-row-start: 1;grid-row-end:3;}
         .collage .v2 {grid-column-start: 2;grid-row-start: 1;grid-row-end:3;}
@@ -1291,8 +1300,16 @@ jhunter@tunein.com
     <div class="morepanel playlistmore">
       <div class=overlay></div>
       <div class=panel>
-        <div class="panelitem addplaylist">Add Playlist</div>
         <div class=panelitem>Duplicate</div>
+        <div class=panelitem>Share</div>
+        <div class=panelitem>Hide</div>
+      </div>
+    </div>
+
+    <div class="morepanel playlistautomore">
+      <div class=overlay></div>
+      <div class=panel>
+        <div class="panelitem addplaylist">Add Playlist</div>
         <div class=panelitem>Share</div>
         <div class=panelitem>Hide</div>
       </div>
@@ -2088,7 +2105,7 @@ jhunter@tunein.com
                 <div class=message>You don't currently have any playlist, <br>create one below.</div>
               </div>
               <div class=createplaylistbtn>
-                <div class="btn menubtn focus" data-focus=setplaylistname data-type=createplaylist>Create a Playlist</div>
+                <div class="btn menubtn focus setplaceholder" data-focus=setplaylistname data-type=createplaylist>Create a Playlist</div>
               </div>
             </div>
 
@@ -2097,7 +2114,7 @@ jhunter@tunein.com
                 <h2 style="margin-bottom:2px;">Playlist You Might Like</h2>
               </div>
               <div class=itemrowlist>
-                <div class="listrowitem pl">
+                <div class="listrowitem pl" id=autoplaylist1>
                   <div class=collage>
                     <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/s20407/images/logoq.png);"></div>
                     <div class=v2 style="background-image:url(https://cdn-profiles.tunein.com/p952868/images/logoq.png);background-position-x: left;"></div>
@@ -2112,13 +2129,13 @@ jhunter@tunein.com
                         <div class=bgcircle></div>
                         <div class="svgicon playicon"></div>
                       </div>
-                      <div class="iconbtn menubtn" data-type=playlistmore>
+                      <div class="iconbtn menubtn autoplaylist" data-type=playlistautomore>
                         <div class="svgicon moreicon"></div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="listrowitem pl">
+                <div class="listrowitem pl" id=autoplaylist2>
                   <div class=collage>
                     <div class=h2 style="background-image:url(https://cdn-profiles.tunein.com/s306872/images/brickg.jpg);"></div>
                     <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/s249994/images/logoq.jpg)"></div>
@@ -2134,13 +2151,13 @@ jhunter@tunein.com
                         <div class=bgcircle></div>
                         <div class="svgicon playicon"></div>
                       </div>
-                      <div class="iconbtn menubtn" data-type=playlistmore>
+                      <div class="iconbtn menubtn autoplaylist" data-type=playlistautomore>
                         <div class="svgicon moreicon"></div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="listrowitem pl">
+                <div class="listrowitem pl" id=autoplaylist3>
                   <div class=collage>
                     <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/p1118976/images/logoq.png);"></div>
                     <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/p1391247/images/logoq.png);"></div>
@@ -2156,13 +2173,13 @@ jhunter@tunein.com
                         <div class=bgcircle></div>
                         <div class="svgicon playicon"></div>
                       </div>
-                      <div class="iconbtn menubtn" data-type=playlistmore>
+                      <div class="iconbtn menubtn autoplaylist" data-type=playlistautomore>
                         <div class="svgicon moreicon"></div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="listrowitem pl">
+                <div class="listrowitem pl" id=autoplaylist4>
                   <div class=collage>
                     <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/p1124593/images/logoq.jpg)"></div>
                     <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/p921816/images/logoq.png)"></div>
@@ -2179,13 +2196,13 @@ jhunter@tunein.com
                         <div class=bgcircle></div>
                         <div class="svgicon playicon"></div>
                       </div>
-                      <div class="iconbtn menubtn" data-type=playlistmore>
+                      <div class="iconbtn menubtn autoplaylist" data-type=playlistautomore>
                         <div class="svgicon moreicon"></div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="listrowitem pl">
+                <div class="listrowitem pl"  id=autoplaylist5>
                   <div class=collage>
                     <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/s249976/images/logoq.png)"></div>
                     <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/s247154/images/logoq.png)"></div>
@@ -2201,7 +2218,7 @@ jhunter@tunein.com
                         <div class=bgcircle></div>
                         <div class="svgicon playicon"></div>
                       </div>
-                      <div class="iconbtn menubtn" data-type=playlistmore>
+                      <div class="iconbtn menubtn autoplaylist" data-type=playlistautomore>
                         <div class="svgicon moreicon"></div>
                       </div>
                     </div>
@@ -3527,11 +3544,10 @@ jhunter@tunein.com
     function saveplaylist(e){
       nomore.call(this, e);
       let input = document.getElementsByClassName('setplaylistname')[0];
-      let name = input.value || 'Playlist #' + Playlist.length + 1;
+      let name = input.value || 'Playlist #' + (Playlist.length + 1);
       input.value = '';
 
       Playlist.push(name);
-
 
       document.getElementsByClassName('playlistemptystate')[0].style.display = 'none';
 
@@ -3562,6 +3578,38 @@ jhunter@tunein.com
 
     function addtothisplaylist(e){
       console.log(this.dataset.playlist);
+    }
+
+    function setplaceholder(){
+      let input = document.getElementsByClassName('setplaylistname')[0];
+      input.placeholder = 'Playlist #' + (Playlist.length + 1);
+    }
+
+    function autoplaylist(){
+      let p = this.getparent('listrowitem');
+      let id = p.id;
+
+      document.getElementsByClassName('addplaylist')[0].dataset.id = id;
+    }
+
+    function addautoplaylist(){
+      let id = this.dataset.id;
+      console.log(id);
+      let a = document.getElementById(id);
+      let c = a.cloneNode(true);
+      c.removeAttribute('id');
+
+      document.getElementsByClassName('playlistemptystate')[0].style.display = 'none';
+      document.getElementsByClassName('playlistcontent')[0].appendChild(c);
+
+      
+      Playlist.push(a.getElementsByClassName('title').innerText);
+
+      a.style.display = 'none';
+
+      let pc = document.getElementsByClassName('playlistcount')[0];
+      pc.empty();
+      pc.appendChild(document.createTextNode(Playlist.length))
     }
 
     Attach.on('click', '.tabwrap .tab', tabline);
@@ -3596,6 +3644,9 @@ jhunter@tunein.com
     Attach.on('click', '.saveplaylist', saveplaylist);
     Attach.on('click', '.focus', focuson);
     Attach.on('click', '.addtothisplaylist', addtothisplaylist);
+    Attach.on('click', '.setplaceholder', setplaceholder);
+    Attach.on('click', '.autoplaylist', autoplaylist);
+    Attach.on('click', '.addplaylist', addautoplaylist);
     
     pagesizetweak(true);
 
