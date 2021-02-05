@@ -624,14 +624,14 @@ jhunter@tunein.com
 
         .thumb:hover {box-shadow:0 var(--tileshadowy) var(--tileshadowblur) var(--tileshadowspread) rgba(0,0,0,var(--tileshadowalpha))}
 
-        .thumbshadow .thumb {border:none;box-shadow:0 var(--tileshadowy) var(--tileshadowblur) var(--tileshadowspread) rgba(0,0,0,var(--tileshadowalpha));}
+        .thumbshadow .thumb, .thumbshadow .npalbum {border:none;box-shadow:0 var(--tileshadowy) var(--tileshadowblur) var(--tileshadowspread) rgba(0,0,0,var(--tileshadowalpha));}
 
           .thumbshadow .thumb:hover {transform:scale(1.02);}
           .thumbshadow .thumb:active {transform:scale(0.98);}
 
         .thumb.circle {border-radius:50%;background-color:var(--ink);border:none;}
 
-      #tabbar {position:absolute;left:0;bottom:0;right:0;height:56px;background:transparent;backdrop-filter:blur(40px);color:var(--tabcolor);display: flex;justify-content: space-around;flex-direction: column;}
+      #tabbar {position:absolute;left:0;bottom:0;right:0;height:56px;background:transparent;backdrop-filter:blur(40px);color:var(--tabcolor);display: flex;justify-content: space-around;flex-direction: column;z-index:99999;}
         #tabbar .tab {display:flex;align-items: center;justify-content: center;flex-direction: column;width:88px;height:100%;font-size:15px;font-weight:500;cursor:pointer;user-select:none;transition:color 200ms ease-in-out;}
           #tabbar .tab svg {fill:var(--tabcolor);width:24px;height:24px;transition:fill 200ms ease-in-out;}
 
@@ -652,7 +652,7 @@ jhunter@tunein.com
 
           #tabbar .tabs {display:flex;height:56px;justify-content: space-around;}
 
-    .navtitle {font-size:20px;font-weight:600;display:none;transition:all 200ms ease-in-out;}
+    .navtitle {font-size:20px;font-weight:600;display:none;transition:all 200ms ease-in-out;white-space:nowrap;}
       .subnavtitle {position: absolute;left:50%;transform:translateX(100px);display:flex;pointer-events:none;opacity:0;}
 
 
@@ -764,7 +764,7 @@ jhunter@tunein.com
               .darkui .iconbtn:active  .svgicon {background-color:var(--darkuiiconpress);}
 
       #nowplaying .album {padding:8px 24px;display:flex;width:100%;align-items: center;justify-content: center;max-width:33vh;margin:0 auto;box-sizing:border-box;}
-            #nowplaying .album .npalbum {width:100%;height:0;padding-top:100%;background-color:rgba(255, 255, 255, 0.05);background-position: center;background-size:cover;background-image:url(./imgs/nyan.gif);border-radius: 2px;}
+            #nowplaying .album .npalbum {width:100%;height:0;padding-top:100%;background-color:rgba(255, 255, 255, 0.05);background-position: center;background-size:cover;background-image:url(./imgs/nyan.gif);border-radius: var(--tileradius);}
 
     .specialtoggles {display:none;}
     .thumbshadow .ts-toggles, .albumblur .ab-toggles, .albummatch .am-toggles {display:block;}
@@ -821,8 +821,12 @@ jhunter@tunein.com
       .slidepage {position: absolute;top:0;left:0;right:0;bottom:0;transform:translateX(100%);overflow-y:scroll;transition:transform 200ms ease-in-out;background:var(--ink1);pointer-events: none;padding-top:88px;padding-bottom:56px;}
             .slidepage.active {transform:translateX(0);pointer-events: all;}
 
+            .hidecontent.active {transform:translateX(-40px);pointer-events: none;}
+
       .mainpage {transition: transform 200ms ease-in-out;padding-top:88px;}
         .hidecontent .mainpage {transform:translateX(-40px);pointer-events: none;}
+
+        
 
 
     #npblur {position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;pointer-events: none;opacity:0;}
@@ -832,6 +836,8 @@ jhunter@tunein.com
 
     #npmatch {position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;pointer-events: none;opacity:0;background-color:var(--albummatch);}
       .albummatch #npmatch {opacity:1;}
+
+      .applemusic #npmatch::after {content:'';position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;background:linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 50%, rgba(0,0,0,0.33) 100%);}
 
       .albummatchbg {display:none;position:absolute;top:0;left:0;right:0;bottom:0;}   
         .vibrantbg #albumvibrant, .mutedbg  #albummuted, .darkvibrantbg #albumdarkvibrant, .lightvibrantbg #albumlightvibrant, .darkmutedbg #albumdarkmuted, .lightmutedbg #albumlightmuted {display:block;}
@@ -1002,8 +1008,11 @@ jhunter@tunein.com
 
       .panelwrap {padding:4px 24px 8px;}
         .panelwrap h2 {margin-bottom:8px;}
-        input.setplaylistname {background:var(--ink3);width:100%;height:40px;font-size:22px;font-weight:500;text-align:center;margin-bottom:16px;}
+        input.setplaylistname {background:var(--ink3);width:100%;height:40px;font-size:22px;font-weight:500;text-align:center;margin-bottom:16px;text-indent: 0;}
         .saveplaylist {width:100%;}
+
+      .toast {height:48px;padding:0 16px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:var(--tsharp3);color:black;position:absolute;z-index:999999999999999999;transition:transform 200ms ease-in-out;bottom:20px;right:20px;transform:translateY(calc(100% + 20px));box-shadow:0 4px 8px rgba(0,0,0,0.1);font-size:16px;font-weight:600;}
+        .toast.pop {transform:translateY(0);}
     
 
     @media screen and (max-width: 666px) {
@@ -1146,6 +1155,9 @@ jhunter@tunein.com
       
       <div class="tweak" style="margin-left:-16px;">
         <label><input type="checkbox" id="cb14" class="tweakr" data-class=albummatch2><div class="toggle"></div> Tab Bar BG Match</label>
+      </div>
+      <div class="tweak" style="margin-left:-16px;">
+        <label><input type="checkbox" id="c20" class="tweakr" data-class=applemusic><div class="toggle"></div> Apple Music like</label>
       </div>
     </div>
     </div>
@@ -1306,7 +1318,7 @@ jhunter@tunein.com
       <div class=overlay></div>
       <div class=panel>
         
-        <div class="panelitem menubtn focus panelcreateplaylist" data-focus="setplaylistname" data-type="createplaylist">Create Playlist</div>
+        <div class="panelitem menubtn focus panelcreateplaylist setplaceholder" data-focus="setplaylistname" data-type="createplaylist">Create Playlist</div>
       </div>
     </div>
 
@@ -1315,7 +1327,7 @@ jhunter@tunein.com
       <div class=panel>
         <div class=panelitem>Duplicate</div>
         <div class=panelitem>Share</div>
-        <div class=panelitem>Hide</div>
+        <div class=panelitem>Something</div>
       </div>
     </div>
 
@@ -1324,7 +1336,7 @@ jhunter@tunein.com
       <div class=panel>
         <div class="panelitem addplaylist">Add Playlist</div>
         <div class=panelitem>Share</div>
-        <div class=panelitem>Hide</div>
+        <div class="panelitem hideplaylist">Hide</div>
       </div>
     </div>
 
@@ -2077,7 +2089,7 @@ jhunter@tunein.com
               </div>
             </div>
             <div class=contentrow style="padding-top:4px;">
-              <div class="listitem openpage" data-page=playlist data-parent=library id=playlistrow>
+              <div class="listitem openpage" data-page=playlist data-title="Playlists" data-parent=library id=playlistrow>
                 <div class=title>Playlist</div>
                 <div class="rowcount playlistcount">0</div>
                 <div class=chevron>
@@ -2086,7 +2098,7 @@ jhunter@tunein.com
                     </svg>
                 </div>
               </div>
-              <div class="listitem openpage" data-page=favorites data-parent=library id=favoritesrow>
+              <div class="listitem openpage" data-page=favorites data-title=Favorites data-parent=library id=favoritesrow>
                 <div class=title>Favorites</div>
                 <div class=rowcount>10</div>
                 <div class=chevron>
@@ -2095,7 +2107,7 @@ jhunter@tunein.com
                     </svg>
                 </div>
               </div>
-              <div class="listitem openpage" data-page=downloads data-parent=library id=downloadsrow>
+              <div class="listitem openpage" data-page=downloads data-title=Downloads data-parent=library id=downloadsrow>
                 <div class=title>Downloads</div>
                 <div class=rowcount>3</div>
                 <div class=chevron>
@@ -2110,6 +2122,7 @@ jhunter@tunein.com
               </div>
             </div>
           </div>
+          
           <div id=playlistpage class="slidepage">
             <div class=contentrow>
               <div class="playlistcontent itemrowlist"></div>
@@ -2138,7 +2151,7 @@ jhunter@tunein.com
                       <div class=meta>5 Items</div>
                     </div>
                     <div class=actions>
-                      <div class="iconbtn ">
+                      <div class="iconbtn playplaylist">
                         <div class=bgcircle></div>
                         <div class="svgicon playicon"></div>
                       </div>
@@ -2160,7 +2173,7 @@ jhunter@tunein.com
                       <div class=meta>12 Items</div>
                     </div>
                     <div class=actions>
-                      <div class="iconbtn ">
+                      <div class="iconbtn playplaylist">
                         <div class=bgcircle></div>
                         <div class="svgicon playicon"></div>
                       </div>
@@ -2182,7 +2195,7 @@ jhunter@tunein.com
                       <div class=meta>8 Items</div>
                     </div>
                     <div class=actions>
-                      <div class="iconbtn ">
+                      <div class="iconbtn playplaylist">
                         <div class=bgcircle></div>
                         <div class="svgicon playicon"></div>
                       </div>
@@ -2205,7 +2218,7 @@ jhunter@tunein.com
                       <div class=meta>5 Items</div>
                     </div>
                     <div class=actions>
-                      <div class="iconbtn ">
+                      <div class="iconbtn playplaylist">
                         <div class=bgcircle></div>
                         <div class="svgicon playicon"></div>
                       </div>
@@ -2227,7 +2240,7 @@ jhunter@tunein.com
                       <div class=meta>22 Items</div>
                     </div>
                     <div class=actions>
-                      <div class="iconbtn ">
+                      <div class="iconbtn playplaylist">
                         <div class=bgcircle></div>
                         <div class="svgicon playicon"></div>
                       </div>
@@ -2239,6 +2252,12 @@ jhunter@tunein.com
                 </div>
               </div>
             </div>
+          </div>
+          <div id=playlistdetailpage class=slidepage>
+            details playlist
+            <div class=hero>hero</div>
+            <div class=editcontrols>edit</div>
+            <div class="btn addtoplaylist">Add to Playlist</div>
           </div>
           <div id=favoritespage class="slidepage">
             <div class=contentrow>
@@ -2916,6 +2935,7 @@ jhunter@tunein.com
       let npstation = document.getElementsByClassName('npstation')[0];
       npstation.empty();
       npstation.appendChild(document.createTextNode(station));
+      npstation.dataset.name = station;
 
       let es = document.getElementsByClassName('extrastation')[0];
       es.empty();
@@ -3198,14 +3218,26 @@ jhunter@tunein.com
       meow.pause();
     }
 
+    function plpage(e){
+
+      this.dataset.page = 'playlistdetail';
+      this.dataset.parent = 'playlistpage';
+      this.dataset.title = this.getElementsByClassName('title')[0].innerText;
+
+      document.body.classList.add('subsubpageactive');
+
+      openpage.call(this, e);
+    }
+
     function openpage(e){
       let a = this.dataset.page;
       let p = this.dataset.parent;
+      let t = this.dataset.title;
 
       let pagetitle = document.createElement('div')
-      pagetitle.className = 'navlogo navtitle subnavtitle';
+      pagetitle.className = 'navlogo navtitle subnavtitle ' + a +'pagetitle';
 
-      pagetitle.appendChild(document.createTextNode(a.capitalize()));
+      pagetitle.appendChild(document.createTextNode(t));
 
       let bar = document.getElementById('navbar');
       bar.appendChild(pagetitle);
@@ -3214,7 +3246,7 @@ jhunter@tunein.com
       let c = document.getElementById(p);
       // let d = document.getElementsByClassName(a + 'title')[0];
       let f = document.getElementsByClassName(p + 'title')[0];
-
+      
       c.classList.add('hidecontent');
       b.classList.add('active');
       // d.classList.add('currenttitle');
@@ -3233,12 +3265,19 @@ jhunter@tunein.com
     }
 
     function navback(e){
-      document.body.classList.remove('subpageactive');
+      if ( document.body.classList.contains('subsubpageactive') ){
+        document.body.classList.remove('subsubpageactive')
+      } else {
+        document.body.classList.remove('subpageactive');
+      }
 
-      let b = window.activepage;
-      let c = window.activeparent;
-      let d = window.activenav;
-      let f = window.prevnav;
+      let b = document.getElementsByClassName('slidepage active');//window.activepage;
+      let c = b[b.length-2] || document.getElementsByClassName('hidecontent')[0];
+      var d = document.getElementsByClassName('currenttitle');//window.activenav;
+      var f = document.getElementsByClassName('oldtitle');//.prevnav;
+      f = f[f.length-1];
+      d = d[d.length-1];
+      b = b[b.length-1];
 
       d.addEventListener('transitionend', removethis);
 
@@ -3543,8 +3582,11 @@ jhunter@tunein.com
     }
 
     function menubtn(e){
+      e.preventDefault();
+      e.stopPropagation();
       let t = this.dataset.type;
 
+      document.getElementsByClassName('openmenu').removeclass('openmenu');
       document.getElementsByClassName(t)[0].classList.add('openmenu');
     }
 
@@ -3568,6 +3610,8 @@ jhunter@tunein.com
 
       let pr = document.getElementById('playlistrowitem').cloneNode(true);
       pr.removeAttribute('id');
+
+      pr.id = name.replace(/\W/g, '');
       
       let t = pr.getElementsByClassName('title')[0];
       t.appendChild(document.createTextNode(name));
@@ -3586,11 +3630,51 @@ jhunter@tunein.com
 
       let c = document.getElementsByClassName('playlistcount')[0];
       c.empty();
-      c.appendChild(document.createTextNode(Playlist.length))
+      c.appendChild(document.createTextNode(Playlist.length));
+
+      if ( !document.body.classList.contains('nppage')){
+        pr.click();
+      } else {
+        pr.dataset.playlist = name;
+        addtothisplaylist.call(pr, e);
+      }
     }
 
     function addtothisplaylist(e){
+      let pl = this.dataset.playlist;
       console.log(this.dataset.playlist);
+
+      let np = document.getElementById('nowplaying');
+      let station = np.getElementsByClassName('npstation')[0].dataset.name;
+      let img =  window.getComputedStyle(np.getElementsByClassName('extraimg')[0], null).getPropertyValue('background-image');
+
+      if ( !Lists[pl] ){
+        Lists[pl] = [];
+      }
+      
+      Lists[pl].push({station: station,  img: img});
+      
+      console.log(Lists);
+
+      toast('Added to Playlist - ' + pl);
+    }
+
+    function toast(x){
+      let  t = document.createElement('div');
+      t.className = 'toast';
+      t.appendChild(document.createTextNode(x));
+
+      document.getElementById('container').appendChild(t);
+
+      t.offsetLeft;
+
+      t.classList.add('pop');
+      setTimeout(function(){
+        t.classList.remove('pop');
+        setTimeout(function(){
+          t.remove();
+        }, 300)
+      }, 2222);
     }
 
     function setplaceholder(){
@@ -3602,7 +3686,8 @@ jhunter@tunein.com
       let p = this.getparent('listrowitem');
       let id = p.id;
 
-      document.getElementsByClassName('addplaylist')[0].dataset.id = id;
+      document.getElementsByClassName('addplaylist')[0].dataset.id = document.getElementsByClassName('hideplaylist')[0].dataset.id = id;
+
     }
 
     function addautoplaylist(){
@@ -3625,6 +3710,24 @@ jhunter@tunein.com
       pc.appendChild(document.createTextNode(Playlist.length))
     }
 
+    function playplaylist(e){
+      e.stopPropagation();
+
+    }
+
+    function hideplaylist(e){
+      let id = this.dataset.id;
+      let a = document.getElementById(id);
+      a.style.display = 'none';
+    }
+
+    Attach.on('click', '.saveplaylist', saveplaylist);
+    Attach.on('click', '.focus', focuson);
+    Attach.on('click', '.addtothisplaylist', addtothisplaylist);
+    Attach.on('click', '.setplaceholder', setplaceholder);
+    Attach.on('click', '.autoplaylist', autoplaylist);
+    Attach.on('click', '.playplaylist', playplaylist);
+    Attach.on('click', '.menubtn', menubtn);
     Attach.on('click', '.tabwrap .tab', tabline);
     Attach.on('click', '#tabbar .tab', tabbar);
     Attach.on('click', '.openmodal', modalopen);
@@ -3639,6 +3742,7 @@ jhunter@tunein.com
     Attach.on('click', '#miniplayer .play', miniplay);
     Attach.on('click', '#miniplayer .pause', minipause);
     Attach.on('click', '.openpage', openpage);
+    Attach.on('click', '.pl', plpage);
     Attach.on('click', '.navback', navback);
     Attach.on('click', '.npplay', npplay);
     Attach.on('click', '.nppause', nppause);
@@ -3653,18 +3757,17 @@ jhunter@tunein.com
     Attach.on('input', '#hueshift', colorshift);
     Attach.on('input', '#satboost', colorshift);
     Attach.on('input', '#lumboost', colorshift);
-    Attach.on('click', '.menubtn', menubtn);
-    Attach.on('click', '.saveplaylist', saveplaylist);
-    Attach.on('click', '.focus', focuson);
-    Attach.on('click', '.addtothisplaylist', addtothisplaylist);
-    Attach.on('click', '.setplaceholder', setplaceholder);
-    Attach.on('click', '.autoplaylist', autoplaylist);
+    
+   
+    
     Attach.on('click', '.addplaylist', addautoplaylist);
+    Attach.on('click', '.hideplaylist', hideplaylist);
     
     pagesizetweak(true);
 
     (function() {
       window.Playlist = [];
+      window.Lists = {}
       window.onresize = resize;
       generatelanguages();
       setuptweaks();
