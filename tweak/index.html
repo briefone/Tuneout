@@ -137,6 +137,9 @@ jhunter@tunein.com
       --tabbar: var(--ink);
       --tabcurrent: var(--ink1);
       --tabcolor:var(--ink6);
+      --tabhover:var(--ink5);
+      --tabpress:var(--ink4);
+
 
       --miniplayerborder: var(--ink12);
       --miniplayertext: var(--ink1);
@@ -243,6 +246,8 @@ jhunter@tunein.com
     .inverttabbar {
       --tabbar: var(--ink1);
       --tabcurrent: var(--ink);
+      --tabhover:var(--ink7);
+      --tabpress:var(--ink8);
 
       --miniplayerborder: var(--ink2);
       --miniplayertext: var(--ink12);
@@ -253,6 +258,8 @@ jhunter@tunein.com
     .inverttabbarplus {
       --tabbar: var(--ink2);
       --tabcurrent: var(--ink);
+      --tabhover:var(--ink7);
+      --tabpress:var(--ink8);
 
       --miniplayerborder: var(--ink3);
       --miniplayertext: var(--ink12);
@@ -625,9 +632,15 @@ jhunter@tunein.com
         .thumb.circle {border-radius:50%;background-color:var(--ink);border:none;}
 
       #tabbar {position:absolute;left:0;bottom:0;right:0;height:56px;background:transparent;backdrop-filter:blur(40px);color:var(--tabcolor);display: flex;justify-content: space-around;flex-direction: column;}
-        #tabbar .tab {display:flex;align-items: center;justify-content: center;flex-direction: column;width:88px;height:100%;font-size:15px;font-weight:500;cursor:pointer;user-select:none;}
-          #tabbar .tab svg {fill:var(--tabcolor);width:24px;height:24px;}
-          #tabbar .tab.current svg {fill:var(--tabcurrent);}
+        #tabbar .tab {display:flex;align-items: center;justify-content: center;flex-direction: column;width:88px;height:100%;font-size:15px;font-weight:500;cursor:pointer;user-select:none;transition:color 200ms ease-in-out;}
+          #tabbar .tab svg {fill:var(--tabcolor);width:24px;height:24px;transition:fill 200ms ease-in-out;}
+
+          #tabbar .tab:hover {color:var(--tabhover);}
+            #tabbar .tab:hover svg {fill:var(--tabhover);}
+          #tabbar .tab:active {color:var(--tabpress);}
+            #tabbar .tab:active svg {fill:var(--tabpress);}
+
+            #tabbar .tab.current svg {fill:var(--tabcurrent);}
           #tabbar .tab.current {color:var(--tabcurrent);}
 
           #tabbar .colorlay {position:absolute;top:0;left:0;right:0;bottom:0;background:var(--tabbar);opacity:0.975;z-index:-1;}
