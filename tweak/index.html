@@ -863,7 +863,7 @@ jhunter@tunein.com
 
       .npcontrols .medium {width:56px;height:56px;}
 
-    .npinfo {padding:40px 24px 0;}
+    .npinfo {padding:40px 24px 0;position: relative;}
       .npstation {font-size:16px;font-weight:500;text-transform:uppercase;}
       .npmeta {font-size:20px;font-weight:500;padding:2px 0;}
       .nplist {font-size:16px;font-weight:500;color:var(--ink6);cursor:pointer;user-select:none;display:inline-block;transition:color 200ms ease-in-out;}
@@ -1352,7 +1352,75 @@ jhunter@tunein.com
       </div>
     </div>
 
+    <style>
+      .toggleinput {cursor:pointer;}
+      .toggleinput input {display:none;}
+      .btn.quietbtn {background:transparent;}
+      .btn.quietbtn:hover {background:var(--ink2);}
+      .btn.quietbtn:active {background:var(--ink3);}
+
+        .darkui .btn.quietbtn:hover {background:var(--ink9);}
+        .darkui .btn.quietbtn:active {background:var(--ink8);}
+
+      .pillbtn {height:36px;padding:0 16px;border-radius:18px;}
+
+        .npspeedbtn {position:absolute;top:44px;right:24px;height:32px;font-size:14px;padding:0 14px;}
+
+
+      .panel.steppanel {padding:24px;}
+
+      .steppanel .toggleinput {margin:8px 0;display:block;}
+      .steppanel .btn {display:flex;width:100%;margin-top: 4px;}
+      .steppedinput {width:100%;position:relative;margin-top:20px;}
+        .steppedinput input {width:calc(100% + 12px);position: relative;z-index:4;display:block;height:40px;margin:0 -6px}
+      .steppedinput .steptrack {position:absolute;top:50%;left:2px;right:2px;height:4px;background:var(--ink9);margin-top:-2px;pointer-events: none;}
+        .steptrack .stepdot {position:absolute;top:50%;height:4px;width:4px;margin-left:-2px;margin-top:-2px;background:var(--ink7);border-radius:50%;}
+
+        .steptrack .stepdot:first-child .label {left:0;transform:none;}
+        .steptrack .stepdot:last-child .label {left:auto;right:0;transform:none;}
+
+          .stepdot .label {position:absolute;left:50%;top:-28px;transform:translateX(-50%);}
+
+        .panel h5 {font-size:12px;text-transform:uppercase;color:var(--ink6);font-weight:500;margin-bottom:8px;}
+
+    </style>
+
     <div id=nowplaying class="live darkui">
+      <div class="morepanel npspeed">
+        <div class=overlay></div>
+        <div class="panel steppanel">
+          <h5>Audio Speed</h5>
+          <div class=steppedinput>
+            <input type=range min=0.5 max=3.5 step=0.5 value=1 id=playbackspeed />
+            <div class=steptrack>
+              <div class=stepdot style="left:0%">
+                <div class=label>0.5</div>
+              </div>
+              <div class=stepdot style="left:calc(1/6 * 100%);">
+                <div class=label>1.0</div>
+              </div>
+              <div class=stepdot style="left:calc(2/6 * 100%);">
+                <div class=label>1.5</div>
+              </div>
+              <div class=stepdot style="left:calc(3/6 * 100%)">
+                <div class=label>2.0</div>
+              </div>
+              <div class=stepdot style="left:calc(4/6 * 100%)">
+                <div class=label>2.5</div>
+              </div>
+              <div class=stepdot style="left:calc(5/6 * 100%)">
+                <div class=label>3.0</div>
+              </div>
+              <div class=stepdot style="left:100%">
+                <div class=label>3.5</div>
+              </div>
+            </div>
+          </div>
+          <label class=toggleinput><input type="checkbox" id="speedcheckbox"><div class="toggle"></div> Apply to all podcasts</label>
+          <div class="btn savenpspeed">Done</div>
+          <div class="btn quietbtn cancelnpspeed">Cancel</div>
+        </div>
+      </div>
       <div class="morepanel npmoremenu">
         <div class=overlay></div>
         <div class=panel>
@@ -1407,6 +1475,7 @@ jhunter@tunein.com
             <div class=npstation>Station</div>
             <div class=npmeta>Meta</div>
             <div class="nplist menubtn" data-type=add2listmenu><div class="svgicon playlistadd"></div> Add to Playlist</div>
+            <div class="pillbtn btn menubtn npspeedbtn" data-type=npspeed>1.0x</div>
           </div>
           <div class="npscrubber" id=npscrubber>
             <div class=scrubbable>
@@ -2418,6 +2487,10 @@ jhunter@tunein.com
   </div>
   <audio controls="" loop="" id="meow" style="display:none;" src="./audio/nyancat.mp3" type="audio/mpeg" preload="auto"></audio>
   <script>
+    function playbackspeed(e){
+      document.getElementById('meow').playbackRate = this.value;
+    }
+
     function defaultsizes(x,y){
       let w = document.getElementById('pagewidth');
       let h = document.getElementById('pageheight');
@@ -3721,6 +3794,29 @@ jhunter@tunein.com
       a.style.display = 'none';
     }
 
+    function savenpspeed(e){
+      let r = document.getElementById('playbackspeed');
+
+      if ( document.getElementById('speedcheckbox').checked ){
+        window.pbs = r.value;
+      }
+
+      let btn = document.getElementsByClassName('npspeedbtn')[0];
+      btn.empty();
+      btn.appendChild(document.createTextNode(r.value + 'x'));
+
+      nomore.call(this, e);
+    }
+
+    function cancelnpspeed(e){
+      let r = document.getElementById('playbackspeed');
+      r.value = window.pbs;
+
+      document.getElementById('meow').playbackRate = window.pbs;
+
+      nomore.call(this, e);
+    }
+
     Attach.on('click', '.saveplaylist', saveplaylist);
     Attach.on('click', '.focus', focuson);
     Attach.on('click', '.addtothisplaylist', addtothisplaylist);
@@ -3757,11 +3853,11 @@ jhunter@tunein.com
     Attach.on('input', '#hueshift', colorshift);
     Attach.on('input', '#satboost', colorshift);
     Attach.on('input', '#lumboost', colorshift);
-    
-   
-    
+    Attach.on('input', '#playbackspeed', playbackspeed);
     Attach.on('click', '.addplaylist', addautoplaylist);
     Attach.on('click', '.hideplaylist', hideplaylist);
+    Attach.on('click', '.savenpspeed', savenpspeed);
+    Attach.on('click', '.cancelnpspeed', cancelnpspeed);
     
     pagesizetweak(true);
 
@@ -3769,6 +3865,7 @@ jhunter@tunein.com
       window.Playlist = [];
       window.Lists = {}
       window.onresize = resize;
+      window.pbs = 1;
       generatelanguages();
       setuptweaks();
 
