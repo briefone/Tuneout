@@ -863,7 +863,10 @@ jhunter@tunein.com
 
       .npcontrols .medium {width:56px;height:56px;}
 
-    .npinfo {padding:40px 24px 0;position: relative;}
+    .npinfo {padding:40px 80px 0 24px;position: relative;}
+      .live .npinfo {padding-right:24px;}
+      .live .npspeedbtn {display:none;}
+
       .npstation {font-size:16px;font-weight:500;text-transform:uppercase;}
       .npmeta {font-size:20px;font-weight:500;padding:2px 0;}
       .nplist {font-size:16px;font-weight:500;color:var(--ink6);cursor:pointer;user-select:none;display:inline-block;transition:color 200ms ease-in-out;}
@@ -1128,6 +1131,9 @@ jhunter@tunein.com
       <div class="tweak">
         <label><input type="checkbox" id="cb4" class="tweakr" data-class=played><div class="toggle"></div> Mini Player</label>
       </div>
+      <div class="tweak">
+        <label><input type="checkbox" id="cb21" class="tweakr" data-class=speedtap><div class="toggle"></div> Tap Speed Change</label>
+      </div>
     </div>
     <div class=tpanel>
       <div class="tweak">
@@ -1359,18 +1365,18 @@ jhunter@tunein.com
       .btn.quietbtn:hover {background:var(--ink2);}
       .btn.quietbtn:active {background:var(--ink3);}
 
-        .darkui .btn.quietbtn:hover {background:var(--ink9);}
-        .darkui .btn.quietbtn:active {background:var(--ink8);}
+        .darkui .btn.quietbtn:hover {color:var(--ink4);background:transparent;}
+        .darkui .btn.quietbtn:active {color:var(--ink6);background:transparent;}
 
       .pillbtn {height:36px;padding:0 16px;border-radius:18px;}
 
-        .npspeedbtn {position:absolute;top:44px;right:24px;height:32px;font-size:14px;padding:0 14px;}
+        .npspeedbtn {position:absolute;top:44px;right:24px;height:32px;font-size:14px;padding:0 14px;font-variant-numeric: tabular-nums;}
 
 
-      .panel.steppanel {padding:24px;}
+      .panel.steppanel {padding:24px 24px 8px;}
 
-      .steppanel .toggleinput {margin:8px 0;display:block;}
-      .steppanel .btn {display:flex;width:100%;margin-top: 4px;}
+      .steppanel .toggleinput {margin:12px 0 ;display:block;}
+      .steppanel .btn {display:flex;width:100%;margin-top: 8px;}
       .steppedinput {width:100%;position:relative;margin-top:20px;}
         .steppedinput input {width:calc(100% + 12px);position: relative;z-index:4;display:block;height:40px;margin:0 -6px}
       .steppedinput .steptrack {position:absolute;top:50%;left:2px;right:2px;height:4px;background:var(--ink9);margin-top:-2px;pointer-events: none;}
@@ -1379,7 +1385,7 @@ jhunter@tunein.com
         .steptrack .stepdot:first-child .label {left:0;transform:none;}
         .steptrack .stepdot:last-child .label {left:auto;right:0;transform:none;}
 
-          .stepdot .label {position:absolute;left:50%;top:-28px;transform:translateX(-50%);}
+          .stepdot .label {position:absolute;left:50%;top:-28px;transform:translateX(-50%);font-weight: 500;}
 
         .panel h5 {font-size:12px;text-transform:uppercase;color:var(--ink6);font-weight:500;margin-bottom:8px;}
 
@@ -1475,7 +1481,7 @@ jhunter@tunein.com
             <div class=npstation>Station</div>
             <div class=npmeta>Meta</div>
             <div class="nplist menubtn" data-type=add2listmenu><div class="svgicon playlistadd"></div> Add to Playlist</div>
-            <div class="pillbtn btn menubtn npspeedbtn" data-type=npspeed>1.0x</div>
+            <div class="pillbtn btn npspeedbtn" data-type=npspeed>1.0x</div>
           </div>
           <div class="npscrubber" id=npscrubber>
             <div class=scrubbable>
@@ -3046,9 +3052,19 @@ jhunter@tunein.com
 
           if ( dur == Infinity){
             document.getElementById('nowplaying').classList.add('live');
+            meow.playbackRate = 1;
             return;
           } else {
             document.getElementById('nowplaying').classList.remove('live');
+            meow.playbackRate = window.pbs;
+
+            let nps = document.getElementsByClassName('npspeedbtn')[0];
+            nps.empty();
+            nps.appendChild(document.createTextNode(Number(window.pbs).toFixed(1) + 'x'));
+
+            let s = document.getElementById('playbackspeed');
+            s.value = window.pbs;
+            s.dataset.pbs = window.pbs;
           }
 
           document.getElementById('npscrub').max = dur;
@@ -3803,18 +3819,43 @@ jhunter@tunein.com
 
       let btn = document.getElementsByClassName('npspeedbtn')[0];
       btn.empty();
-      btn.appendChild(document.createTextNode(r.value + 'x'));
+      btn.appendChild(document.createTextNode(Number(r.value).toFixed(1) + 'x'));
+
+      r.dataset.pbs = r.value;
 
       nomore.call(this, e);
     }
 
     function cancelnpspeed(e){
       let r = document.getElementById('playbackspeed');
-      r.value = window.pbs;
+      r.value = r.dataset.pbs || window.pbs;
 
-      document.getElementById('meow').playbackRate = window.pbs;
+      document.getElementById('meow').playbackRate = r.value;
 
       nomore.call(this, e);
+    }
+
+    function npspeed(e){
+      if ( !document.documentElement.classList.contains('speedtap') ){
+        menubtn.call(this, e);
+      } else {
+        let pbs = document.getElementById('playbackspeed');
+        var v = Number(pbs.value);
+        let meow = document.getElementById('meow');
+
+        v += 0.5;
+
+        if ( v > 3.5 ){
+          v = 0.5;
+        }
+
+        meow.playbackRate = v;
+
+        pbs.value = v;
+
+        this.empty();
+        this.appendChild(document.createTextNode(v.toFixed(1) + 'x'));
+      }
     }
 
     Attach.on('click', '.saveplaylist', saveplaylist);
@@ -3858,6 +3899,7 @@ jhunter@tunein.com
     Attach.on('click', '.hideplaylist', hideplaylist);
     Attach.on('click', '.savenpspeed', savenpspeed);
     Attach.on('click', '.cancelnpspeed', cancelnpspeed);
+    Attach.on('click', '.npspeedbtn', npspeed);
     
     pagesizetweak(true);
 
