@@ -1380,7 +1380,8 @@ jhunter@tunein.com
       .steppedinput {width:100%;position:relative;margin-top:20px;}
         .steppedinput input {width:calc(100% + 12px);position: relative;z-index:4;display:block;height:40px;margin:0 -6px}
       .steppedinput .steptrack {position:absolute;top:50%;left:2px;right:2px;height:4px;background:var(--ink9);margin-top:-2px;pointer-events: none;}
-        .steptrack .stepdot {position:absolute;top:50%;height:4px;width:4px;margin-left:-2px;margin-top:-2px;background:var(--ink7);border-radius:50%;}
+        .steptrack .stepdot {position:absolute;top:50%;height:4px;width:4px;margin-left:-2px;margin-top:-2px;background:var(--ink7);border-radius:50%;color:var(--ink1);}
+        .steptrack .stepdot.selected {color:var(--tsharp3)}
 
         .steptrack .stepdot:first-child .label {left:0;transform:none;}
         .steptrack .stepdot:last-child .label {left:auto;right:0;transform:none;}
@@ -1402,7 +1403,7 @@ jhunter@tunein.com
               <div class=stepdot style="left:0%">
                 <div class=label>0.5</div>
               </div>
-              <div class=stepdot style="left:calc(1/6 * 100%);">
+              <div class="stepdot selected" style="left:calc(1/6 * 100%);">
                 <div class=label>1.0</div>
               </div>
               <div class=stepdot style="left:calc(2/6 * 100%);">
@@ -1597,7 +1598,7 @@ jhunter@tunein.com
               <div class=scrollitem>
                 <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/s247154/images/logoq.png);" data-station="Adult Hits"  data-url="https://rfcmedia.streamguys1.com/sradulthits.mp3" data-radio=true></div>
               </div><div class=scrollitem>
-                <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/p952868/images/logoq.png);" data-station="The Daily"  data-url="https://nyt-injected.simplecastaudio.com/03d8b493-87fc-4bd1-931f-8a8e9b945d8a/episodes/5a933735-0bf5-45d3-a672-6674c5f4ae04/audio/128/default.mp3/default.mp3_d1cb969b1b3fa8a9e1247520d4827d9e_30986106.mp3?aid=rss_feed&awCollectionId=03d8b493-87fc-4bd1-931f-8a8e9b945d8a&awEpisodeId=5a933735-0bf5-45d3-a672-6674c5f4ae04&feed=54nAGcIl&hash_redirect=1&x-total-bytes=30986106&x-ais-classified=download&listeningSessionID=0CD_382_20__975a3a23a61607187de24fcd7591ef179c79eaf2"></div>
+                <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/p952868/images/logoq.png);" data-station="The Daily"  data-url="https://dts.podtrac.com/redirect.mp3/chtbl.com/track/8DB4DB/pdst.fm/e/nyt.simplecastaudio.com/03d8b493-87fc-4bd1-931f-8a8e9b945d8a/episodes/2456bb9b-b94e-4da5-a167-8b5f6a1a45a4/audio/128/default.mp3?aid=rss_feed&awCollectionId=03d8b493-87fc-4bd1-931f-8a8e9b945d8a&awEpisodeId=2456bb9b-b94e-4da5-a167-8b5f6a1a45a4&feed=54nAGcIl"></div>
               </div><div class=scrollitem>
                 <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/s249976/images/logoq.png);" data-station="Pop Hits"  data-url="https://rfcmedia.streamguys1.com/newpophitspremium.mp3" data-radio=true></div>
               </div><div class=scrollitem>
@@ -2151,7 +2152,7 @@ jhunter@tunein.com
                 <div class=scrollitem>
                   <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/s247154/images/logoq.png);" data-station="Adult Hits"  data-url="https://rfcmedia.streamguys1.com/sradulthits.mp3" data-radio=true></div>
                 </div><div class=scrollitem>
-                  <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/p952868/images/logoq.png);" data-station="The Daily"  data-url="https://nyt-injected.simplecastaudio.com/03d8b493-87fc-4bd1-931f-8a8e9b945d8a/episodes/5a933735-0bf5-45d3-a672-6674c5f4ae04/audio/128/default.mp3/default.mp3_d1cb969b1b3fa8a9e1247520d4827d9e_30986106.mp3?aid=rss_feed&awCollectionId=03d8b493-87fc-4bd1-931f-8a8e9b945d8a&awEpisodeId=5a933735-0bf5-45d3-a672-6674c5f4ae04&feed=54nAGcIl&hash_redirect=1&x-total-bytes=30986106&x-ais-classified=download&listeningSessionID=0CD_382_20__975a3a23a61607187de24fcd7591ef179c79eaf2"></div>
+                  <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/p952868/images/logoq.png);" data-station="The Daily"  data-url="https://dts.podtrac.com/redirect.mp3/chtbl.com/track/8DB4DB/pdst.fm/e/nyt.simplecastaudio.com/03d8b493-87fc-4bd1-931f-8a8e9b945d8a/episodes/2456bb9b-b94e-4da5-a167-8b5f6a1a45a4/audio/128/default.mp3?aid=rss_feed&awCollectionId=03d8b493-87fc-4bd1-931f-8a8e9b945d8a&awEpisodeId=2456bb9b-b94e-4da5-a167-8b5f6a1a45a4&feed=54nAGcIl"></div>
                 </div><div class=scrollitem>
                   <div class="thumb recentthumb np" style="background-image:url(https://cdn-profiles.tunein.com/s249976/images/logoq.png);" data-station="Pop Hits"  data-url="https://rfcmedia.streamguys1.com/newpophitspremium.mp3" data-radio=true></div>
                 </div><div class=scrollitem>
@@ -2494,7 +2495,13 @@ jhunter@tunein.com
   <audio controls="" loop="" id="meow" style="display:none;" src="./audio/nyancat.mp3" type="audio/mpeg" preload="auto"></audio>
   <script>
     function playbackspeed(e){
-      document.getElementById('meow').playbackRate = this.value;
+      let v = this.value;
+      document.getElementById('meow').playbackRate = v;
+
+      let step = v / 0.5 - 1;
+
+      document.getElementsByClassName('stepdot selected').removeclass('selected');
+      document.getElementsByClassName('stepdot')[step].classList.add('selected');
     }
 
     function defaultsizes(x,y){
@@ -3065,6 +3072,9 @@ jhunter@tunein.com
             let s = document.getElementById('playbackspeed');
             s.value = window.pbs;
             s.dataset.pbs = window.pbs;
+
+            document.getElementsByClassName('stepdot selected').removeclass('selected');
+            document.getElementsByClassName('stepdot')[window.pbs/0.5 - 1].classList.add('selected');
           }
 
           document.getElementById('npscrub').max = dur;
@@ -3830,6 +3840,9 @@ jhunter@tunein.com
       let r = document.getElementById('playbackspeed');
       r.value = r.dataset.pbs || window.pbs;
 
+      document.getElementsByClassName('stepdot selected').removeclass('selected');
+      document.getElementsByClassName('stepdot')[(window.pbs / 0.5 - 1)].classList.add('selected');
+
       document.getElementById('meow').playbackRate = r.value;
 
       nomore.call(this, e);
@@ -3852,6 +3865,9 @@ jhunter@tunein.com
         meow.playbackRate = v;
 
         pbs.value = v;
+
+        document.getElementsByClassName('stepdot selected').removeclass('selected');
+        document.getElementsByClassName('stepdot')[(v/0.5 - 1)].classList.add('selected');
 
         this.empty();
         this.appendChild(document.createTextNode(v.toFixed(1) + 'x'));
