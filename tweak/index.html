@@ -3810,6 +3810,7 @@ jhunter@tunein.com
       document.getElementsByClassName('playlistemptystate')[0].style.display = 'none';
       document.getElementsByClassName('playlistcontent')[0].appendChild(c);
 
+      c.getElementsByClassName('menubtn autoplaylist')[0].dataset.type = 'playlistmore';
       
       Playlist.push(a.getElementsByClassName('title').innerText);
 
