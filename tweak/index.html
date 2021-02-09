@@ -547,11 +547,13 @@ jhunter@tunein.com
 
    
 
-    .navlogo {height:44px;width:72px;display:flex;align-items: center;justify-content: center;pointer-events: none;}
+    .navlogo {height:44px;display:block;align-items: center;justify-content: center;pointer-events: none;}
       .navlogo svg {fill:var(--inkdefault);height:32px;display:none;}
 
-      .droid .navlogo {margin-left:4px;}
-      .droid #logologo {left:24px;margin-left:0;}
+      .droid .navlogo {left:10px;transform:none;margin:0;line-height:46px;position: relative;}
+      .droid #logologo {left:0;margin-left:0;}
+
+      .droid .subnavtitle {left:52px;position:absolute;}
       
 
     .carmode {}
@@ -574,7 +576,7 @@ jhunter@tunein.com
     #home .content {padding-top:136px;}
     #search .content {top:136px;}
 
-    .contentrow {padding:12px 0 var(--rowspacing) 0;}
+    .contentrow {padding:12px 0 var(--rowspacing) 0;width:100%;}
       .contentrow:first-child {padding-top:var(--firstrowspacing);}
       .contentrow .heading {padding:0 24px var(--contentheadspacing);position: relative;display:flex;justify-content:space-between;}
         .heading .chevron {min-width:24px;min-height:24px;width:24px;height:24px;}
@@ -652,8 +654,8 @@ jhunter@tunein.com
 
           #tabbar .tabs {display:flex;height:56px;justify-content: space-around;}
 
-    .navtitle {font-size:20px;font-weight:600;display:none;transition:all 200ms ease-in-out;white-space:nowrap;}
-      .subnavtitle {position: absolute;left:50%;transform:translateX(100px);display:flex;pointer-events:none;opacity:0;}
+    .navtitle {font-size:20px;font-weight:600;display:none;transition:all 200ms ease-in-out;white-space:nowrap;line-height:44px;transform:translateX(0);}
+      .subnavtitle {position: absolute;left:50%;transform:translateX(100px);display:block;pointer-events:none;opacity:0;}
 
 
     input {outline:none;}
@@ -672,7 +674,7 @@ jhunter@tunein.com
 
 
 
-    .homepage .hometitle, .librarypage .librarytitle, .searchpage .searchtitle, .premiumpage .premiumtitle {display:flex;}
+    .homepage .hometitle, .librarypage .librarytitle, .searchpage .searchtitle, .premiumpage .premiumtitle {display:block;}
 
     .currenttitle {opacity:1;transform:translateX(-50%);}
       .oldtitle {opacity:0;transform:translateX(-100px);}
@@ -973,6 +975,11 @@ jhunter@tunein.com
     
     .split .npcontent {flex-direction:row;}
 
+    .split .slidepage {display:flex;}
+    .split .contentrow {overflow-y: auto;}
+    .split .splitcolumn {flex-direction:row;width:50%;}
+
+
     .colorpalette {display:flex;gap:0;flex-wrap:wrap;padding-bottom:4px;}
       .palette {width:32px;height:32px;border-radius: 0;cursor:pointer;user-select:none;transition:transform 200ms ease-in-out;position:relative;}
       .palette:nth-child(1) {border-radius:4px 0 0 0;}
@@ -1247,9 +1254,9 @@ jhunter@tunein.com
           <input type="range" class="valuetweak" min="280" max="1444" value="1444" step="1" id="pageheight" data-unit=px>
       </div>
       <div class=btnstack>
-        <div class="tweakbtn iphonesize" onclick="defaultsizes(390,844)">iPhone</div>
-        <div class="tweakbtn ipadsize" onclick="defaultsizes(1024,768)">iPad</div>
-        <div class="tweakbtn pixel" onclick="defaultsizes(360,780)">Pixel</div>
+        <div class="tweakbtn iphonesize" onclick="defaultsizes(390,844);">iPhone</div>
+        <div class="tweakbtn ipadsize" onclick="defaultsizes(1024,768);">iPad</div>
+        <div class="tweakbtn pixel" onclick="defaultsizes(360,780, true);">Pixel</div>
       </div>
     </div>
 
@@ -2202,128 +2209,131 @@ jhunter@tunein.com
           </div>
           
           <div id=playlistpage class="slidepage">
-            <div class=contentrow>
-              <div class="playlistcontent itemrowlist"></div>
-              <div class="emptystate playlistemptystate">
-                <div class=ill></div>
-                <div class=message>You don't currently have any playlist, <br>create one below.</div>
-              </div>
-              <div class=createplaylistbtn>
-                <div class="btn menubtn focus setplaceholder" data-focus=setplaylistname data-type=createplaylist>Create a Playlist</div>
+            <div class=splitcolumn>
+              <div class=contentrow>
+                <div class="playlistcontent itemrowlist"></div>
+                <div class="emptystate playlistemptystate">
+                  <div class=ill></div>
+                  <div class=message>You don't currently have any playlist, <br>create one below.</div>
+                </div>
+                <div class=createplaylistbtn>
+                  <div class="btn menubtn focus setplaceholder" data-focus=setplaylistname data-type=createplaylist>Create a Playlist</div>
+                </div>
               </div>
             </div>
-
-            <div class=contentrow>
-              <div class="heading">
-                <h2 style="margin-bottom:2px;">Playlist You Might Like</h2>
-              </div>
-              <div class=itemrowlist>
-                <div class="listrowitem pl" id=autoplaylist1>
-                  <div class=collage>
-                    <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/s20407/images/logoq.png);"></div>
-                    <div class=v2 style="background-image:url(https://cdn-profiles.tunein.com/p952868/images/logoq.png);background-position-x: left;"></div>
-                    <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/s28047/images/logoq.png);"></div>
-                  </div><div class=rowcontent>
-                    <div class=description>
-                      <div class=title>Latest News Briefing</div>
-                      <div class=meta>5 Items</div>
-                    </div>
-                    <div class=actions>
-                      <div class="iconbtn playplaylist">
-                        <div class=bgcircle></div>
-                        <div class="svgicon playicon"></div>
-                      </div>
-                      <div class="iconbtn menubtn autoplaylist" data-type=playlistautomore>
-                        <div class="svgicon moreicon"></div>
-                      </div>
-                    </div>
-                  </div>
+            <div class=splitcolumn>
+              <div class=contentrow>
+                <div class="heading">
+                  <h2 style="margin-bottom:2px;">Playlist You Might Like</h2>
                 </div>
-                <div class="listrowitem pl" id=autoplaylist2>
-                  <div class=collage>
-                    <div class=h2 style="background-image:url(https://cdn-profiles.tunein.com/s306872/images/brickg.jpg);"></div>
-                    <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/s249994/images/logoq.jpg)"></div>
-                    <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/s248539/images/logoq.png)"></div>
-                  </div>
-                  <div class=rowcontent>
-                    <div class=description>
-                      <div class=title>Rock n Roll</div>
-                      <div class=meta>12 Items</div>
-                    </div>
-                    <div class=actions>
-                      <div class="iconbtn playplaylist">
-                        <div class=bgcircle></div>
-                        <div class="svgicon playicon"></div>
+                <div class=itemrowlist>
+                  <div class="listrowitem pl" id=autoplaylist1>
+                    <div class=collage>
+                      <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/s20407/images/logoq.png);"></div>
+                      <div class=v2 style="background-image:url(https://cdn-profiles.tunein.com/p952868/images/logoq.png);background-position-x: left;"></div>
+                      <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/s28047/images/logoq.png);"></div>
+                    </div><div class=rowcontent>
+                      <div class=description>
+                        <div class=title>Latest News Briefing</div>
+                        <div class=meta>5 Items</div>
                       </div>
-                      <div class="iconbtn menubtn autoplaylist" data-type=playlistautomore>
-                        <div class="svgicon moreicon"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="listrowitem pl" id=autoplaylist3>
-                  <div class=collage>
-                    <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/p1118976/images/logoq.png);"></div>
-                    <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/p1391247/images/logoq.png);"></div>
-                    <div class=h1 style="background-image:url(https://cdn-profiles.tunein.com/c100002314/images/brickg.jpg);"></div>
-                  </div>
-                  <div class=rowcontent>
-                    <div class=description>
-                      <div class=title>Wake Up Mix</div>
-                      <div class=meta>8 Items</div>
-                    </div>
-                    <div class=actions>
-                      <div class="iconbtn playplaylist">
-                        <div class=bgcircle></div>
-                        <div class="svgicon playicon"></div>
-                      </div>
-                      <div class="iconbtn menubtn autoplaylist" data-type=playlistautomore>
-                        <div class="svgicon moreicon"></div>
+                      <div class=actions>
+                        <div class="iconbtn playplaylist">
+                          <div class=bgcircle></div>
+                          <div class="svgicon playicon"></div>
+                        </div>
+                        <div class="iconbtn menubtn autoplaylist" data-type=playlistautomore>
+                          <div class="svgicon moreicon"></div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="listrowitem pl" id=autoplaylist4>
-                  <div class=collage>
-                    <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/p1124593/images/logoq.jpg)"></div>
-                    <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/p921816/images/logoq.png)"></div>
-                    <div class=g1 style="background-image:url(https://cdn-radiotime-logos.tunein.com/p352076q.png)"></div>
-                    <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/p1136361/images/logoq.png)"></div>
-                  </div>
-                  <div class=rowcontent>
-                    <div class=description>
-                      <div class=title>Chris Hayes</div>
-                      <div class=meta>5 Items</div>
+                  <div class="listrowitem pl" id=autoplaylist2>
+                    <div class=collage>
+                      <div class=h2 style="background-image:url(https://cdn-profiles.tunein.com/s306872/images/brickg.jpg);"></div>
+                      <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/s249994/images/logoq.jpg)"></div>
+                      <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/s248539/images/logoq.png)"></div>
                     </div>
-                    <div class=actions>
-                      <div class="iconbtn playplaylist">
-                        <div class=bgcircle></div>
-                        <div class="svgicon playicon"></div>
+                    <div class=rowcontent>
+                      <div class=description>
+                        <div class=title>Rock n Roll</div>
+                        <div class=meta>12 Items</div>
                       </div>
-                      <div class="iconbtn menubtn autoplaylist" data-type=playlistautomore>
-                        <div class="svgicon moreicon"></div>
+                      <div class=actions>
+                        <div class="iconbtn playplaylist">
+                          <div class=bgcircle></div>
+                          <div class="svgicon playicon"></div>
+                        </div>
+                        <div class="iconbtn menubtn autoplaylist" data-type=playlistautomore>
+                          <div class="svgicon moreicon"></div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="listrowitem pl"  id=autoplaylist5>
-                  <div class=collage>
-                    <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/s249976/images/logoq.png)"></div>
-                    <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/s247154/images/logoq.png)"></div>
-                    <div class=v1 style="background-image:url(https://cdn-profiles.tunein.com/p1017356/images/logoq.png)"></div>
-                  </div>
-                  <div class=rowcontent>
-                    <div class=description>
-                      <div class=title>Dance Party</div>
-                      <div class=meta>22 Items</div>
+                  <div class="listrowitem pl" id=autoplaylist3>
+                    <div class=collage>
+                      <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/p1118976/images/logoq.png);"></div>
+                      <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/p1391247/images/logoq.png);"></div>
+                      <div class=h1 style="background-image:url(https://cdn-profiles.tunein.com/c100002314/images/brickg.jpg);"></div>
                     </div>
-                    <div class=actions>
-                      <div class="iconbtn playplaylist">
-                        <div class=bgcircle></div>
-                        <div class="svgicon playicon"></div>
+                    <div class=rowcontent>
+                      <div class=description>
+                        <div class=title>Wake Up Mix</div>
+                        <div class=meta>8 Items</div>
                       </div>
-                      <div class="iconbtn menubtn autoplaylist" data-type=playlistautomore>
-                        <div class="svgicon moreicon"></div>
+                      <div class=actions>
+                        <div class="iconbtn playplaylist">
+                          <div class=bgcircle></div>
+                          <div class="svgicon playicon"></div>
+                        </div>
+                        <div class="iconbtn menubtn autoplaylist" data-type=playlistautomore>
+                          <div class="svgicon moreicon"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="listrowitem pl" id=autoplaylist4>
+                    <div class=collage>
+                      <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/p1124593/images/logoq.jpg)"></div>
+                      <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/p921816/images/logoq.png)"></div>
+                      <div class=g1 style="background-image:url(https://cdn-radiotime-logos.tunein.com/p352076q.png)"></div>
+                      <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/p1136361/images/logoq.png)"></div>
+                    </div>
+                    <div class=rowcontent>
+                      <div class=description>
+                        <div class=title>Chris Hayes</div>
+                        <div class=meta>5 Items</div>
+                      </div>
+                      <div class=actions>
+                        <div class="iconbtn playplaylist">
+                          <div class=bgcircle></div>
+                          <div class="svgicon playicon"></div>
+                        </div>
+                        <div class="iconbtn menubtn autoplaylist" data-type=playlistautomore>
+                          <div class="svgicon moreicon"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="listrowitem pl"  id=autoplaylist5>
+                    <div class=collage>
+                      <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/s249976/images/logoq.png)"></div>
+                      <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/s247154/images/logoq.png)"></div>
+                      <div class=v1 style="background-image:url(https://cdn-profiles.tunein.com/p1017356/images/logoq.png)"></div>
+                    </div>
+                    <div class=rowcontent>
+                      <div class=description>
+                        <div class=title>Dance Party</div>
+                        <div class=meta>22 Items</div>
+                      </div>
+                      <div class=actions>
+                        <div class="iconbtn playplaylist">
+                          <div class=bgcircle></div>
+                          <div class="svgicon playicon"></div>
+                        </div>
+                        <div class="iconbtn menubtn autoplaylist" data-type=playlistautomore>
+                          <div class="svgicon moreicon"></div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -2506,7 +2516,7 @@ jhunter@tunein.com
       document.getElementsByClassName('stepdot')[step].classList.add('selected');
     }
 
-    function defaultsizes(x,y){
+    function defaultsizes(x,y, droid){
       let w = document.getElementById('pagewidth');
       let h = document.getElementById('pageheight');
 
@@ -2518,6 +2528,17 @@ jhunter@tunein.com
       valuetweaks();
 
       breakpoint();
+
+      let d = document.getElementById('cb18');
+      if ( droid ){
+        if ( !d.checked ){
+          d.click();
+        }
+      } else {
+        if ( d.checked ){
+          d.click();
+        }
+      }
     }
 
     function resetcolors(){
