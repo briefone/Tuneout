@@ -501,7 +501,7 @@ jhunter@tunein.com
         .iconbtn:hover svg {fill:var(--inkhover);}
         .iconbtn:active svg {fill:var(--inkpress);}
 
-      .iconbtn .bgcircle {width:24px;height:24px;position:absolute;top:50%;left:50%;margin:-12px 0 0 -12px;background-color:var(--ink2);border-radius:50%;}
+      .iconbtn .bgcircle {width:28px;height:28px;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);background-color:var(--ink2);border-radius:50%;}
 
       .iconbtn .svgicon {background-color:var(--inkdefault);width:24px;height:24px;}
       .iconbtn:hover .svgicon {background-color:var(--inkhover);}
@@ -877,7 +877,7 @@ jhunter@tunein.com
 
       .npstation {font-size:16px;font-weight:500;text-transform:uppercase;}
       .npmeta {font-size:20px;font-weight:500;padding:2px 0;}
-      .nplist {font-size:16px;font-weight:500;color:var(--ink6);cursor:pointer;user-select:none;display:inline-flex;transition:color 200ms ease-in-out;gap:6px;align-items: center;justify-content: center;}
+      .nplist {font-size:16px;font-weight:600;color:var(--ink6);cursor:pointer;user-select:none;display:inline-flex;transition:color 200ms ease-in-out;gap:6px;align-items: center;justify-content: center;padding:2px 8px;margin-left:-8px;border-radius:3px;}
             .nplist .svgicon {background-color:var(--ink6);}
 
         .nplist:hover {color:var(--ink5);}
@@ -1005,7 +1005,7 @@ jhunter@tunein.com
 
       .emptystate {display:flex;flex-direction: column;align-items: center;}
         .emptystate .ill {width:180px;height:180px;background:var(--ink4);border-radius:50%;margin-bottom:24px;}
-        .emptystate .message {font-size:16px;color:var(--ink9);padding:0 24px;box-sizing: border-box;text-align:center;}
+        .emptystate .message {font-size:16px;color:var(--ink9);padding:0 24px;box-sizing: border-box;text-align:center;font-weight: 500;}
 
       .createplaylistbtn {padding:32px 24px 12px;box-sizing: border-box;text-align:center;}
         .createplaylistbtn .btn {width:100%;max-width:420px;}
@@ -1503,7 +1503,7 @@ jhunter@tunein.com
           <div class=npinfo>
             <div class=npstation>Station</div>
             <div class=npmeta>Meta</div>
-            <div class="nplist menubtn" data-type=add2listmenu><div class="svgicon playlistadd"></div><div class=nplistlabel>Add to Playlist</div></div>
+            <div class="nplist menubtn aink" data-type=add2listmenu><div class="svgicon playlistadd"></div><div class=nplistlabel>Add to Playlist</div></div>
             <div class="pillbtn btn npspeedbtn aink" data-type=npspeed>1.0x</div>
           </div>
           <div class="npscrubber" id=npscrubber>
@@ -4007,6 +4007,54 @@ jhunter@tunein.com
         this.appendChild(document.createTextNode(v.toFixed(1) + 'x'));
       }
     }
+
+    function redline(e){
+          //if ( !this.classList.contains('on') ){
+              if ( window.PRISM ){
+                  PRISM.eject();
+                  return;
+              }
+            
+          //}
+
+          var fancy = document.getElementById('fancyredline');
+          if ( fancy ) { fancy.style.display = 'none'; }
+          localStorage.fancyredline = true;
+
+          var old = document.getElementById('specism');
+          if ( old ){
+            old.parentNode.removeChild(old);
+          }
+
+          var script = document.createElement('script');
+          script.src = '../prism/inject.js';
+          script.id = 'specism';
+          console.log('on')
+
+          script.onload = function(){
+            var isChromium = window.chrome,
+                vendorName = window.navigator.vendor,
+                isOpera = window.navigator.userAgent.indexOf("OPR") > -1;
+
+            if ( isChromium == null || isChromium == undefined || vendorName !== "Google Inc." || isOpera == true ){
+               return;
+            }
+
+            var panel  = document.getElementsByClassName('PRISMscroll')[0];
+            if ( !panel ){
+              return;
+            }
+            panel.innerHTML += '<div class=sub style="text-align:center;padding-top:8px;padding-bottom:8px;"><button onclick="extension()">Get the Chrome Extension</button></div>';
+
+          }
+
+          document.body.appendChild(script);
+        }
+
+        function extension(){
+          var win = window.open('https://chrome.google.com/webstore/detail/prism-redline-tool/hkbhjllliedcceblibllaodamehmbfgm?hl=en-US', '_blank');
+          win.focus();
+        }
 
     Attach.on('click', '.saveplaylist', saveplaylist);
     Attach.on('click', '.focus', focuson);
