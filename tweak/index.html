@@ -1035,7 +1035,7 @@ jhunter@tunein.com
     .aink {position:relative;}
     
     .wrapple {position:absolute;top:0;left:0;right:0;bottom:0;overflow:hidden;pointer-events:none;z-index:0;}
-      .ripple {background:rgba(150,150,150,.125);position: absolute;border-radius:50%;z-index:1;transform:scale(0);}
+      .ripple {background:rgba(125,125,125,.125);position: absolute;border-radius:50%;z-index:1;transform:scale(0);}
     
 
     @media screen and (max-width: 666px) {
@@ -1502,7 +1502,7 @@ jhunter@tunein.com
             <div class=npstation>Station</div>
             <div class=npmeta>Meta</div>
             <div class="nplist menubtn" data-type=add2listmenu><div class="svgicon playlistadd"></div><div class=nplistlabel>Add to Playlist</div></div>
-            <div class="pillbtn btn npspeedbtn" data-type=npspeed>1.0x</div>
+            <div class="pillbtn btn npspeedbtn aink" data-type=npspeed>1.0x</div>
           </div>
           <div class="npscrubber" id=npscrubber>
             <div class=scrubbable>
@@ -3019,7 +3019,7 @@ jhunter@tunein.com
           }
 
           this.removeEventListener('transitionend', done);
-          // this.getparent('wrapple').remove(); //.parentNode.removeChild(this);
+          this.getparent('wrapple').remove(); //.parentNode.removeChild(this);
       }
 
       function notanimating(e){
