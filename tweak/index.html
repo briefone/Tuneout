@@ -1044,16 +1044,16 @@ jhunter@tunein.com
 
     @media screen and (max-width: 666px) {
       #container {
-          border-radius: 0;
-          height:100%;
-          top: 0;
-          left: 0;
-          bottom: 0;
-          width: 100%;
-          max-width: none;
-          overflow: hidden;
-          margin-left: 0;
-          margin-top:0;
+          border-radius: 0 !important;
+          height:100% !important;
+          top: 0 !important;
+          left: 0 !important;
+          bottom: 0 !important;
+          width: 100% !important;
+          max-width: none !important;
+          overflow: hidden !important;
+          margin-left: 0 !important;
+          margin-top:0 !important;
       }
     }
 
@@ -3411,12 +3411,12 @@ jhunter@tunein.com
       if ( hv || wv ){
         css += '}';
 
-        if ( initial ){
-          css += `#container {height: var(--pageheight);
+        //if ( initial ){
+          css += ` #container {height: var(--pageheight);
           width: var(--pagewidth);
           margin-left: calc(var(--pagewidth) / 2 * -1 - 112px);
           margin-top: calc(var(--pageheight) / 2 * -1);}`;
-        }
+        //}
 
         style.innerHTML = css;
 
