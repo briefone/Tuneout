@@ -461,6 +461,8 @@ jhunter@tunein.com
       .btn:hover {background:var(--btnhover);}
       .btn:active {background:var(--btnpress);}
 
+      .droid .aink.btn:active {background:var(--btnhover);}
+
     .outlinebtn.btn {background-color: transparent;border:2px solid var(--btndefault);color: var(--btndefault);padding:0 14px;}
     .outlinebtn.btn:hover {background-color: transparent;border-color:var(--btnhover);color: var(--btnhover);}
     .outlinebtn.btn:active {background-color: transparent;border-color:var(--btnpress);color: var(--btnpress);}
@@ -560,8 +562,8 @@ jhunter@tunein.com
       .droid .carmode {position:absolute;right:64px}
 
 
-    .tabwrap {display:flex;position:relative;width:100%;align-items:center;padding: 0 0 0 24px;box-sizing: border-box;height:48px;overflow-x:scroll;white-space: nowrap;border-bottom:1px solid var(--navborder);gap: 38px;scroll-padding-right:24px;}
-      .tabwrap .tab {display:inline-flex;height:100%;padding:0 0;font-size:18px;font-weight:600;align-items: center;justify-content: center;cursor:pointer;user-select:none;}
+    .tabwrap {display:flex;position:relative;width:100%;align-items:center;padding: 0 0 0 12px;box-sizing: border-box;height:48px;overflow-x:scroll;white-space: nowrap;border-bottom:1px solid var(--navborder);gap: 14px;scroll-padding-right:24px;}
+      .tabwrap .tab {display:inline-flex;height:100%;padding:0 12px;font-size:18px;font-weight:600;align-items: center;justify-content: center;cursor:pointer;user-select:none;border-radius:3px 3px  0 0;}
         .tabwrap .tab:hover {color:var(--inkhover);}
         .tabwrap .tab:active {color:var(--inkpress);}
         .tabwrap .tab:last-child {padding-right:24px;}
@@ -797,6 +799,8 @@ jhunter@tunein.com
         .circlebtn:hover svg {fill:var(--circleiconhover);}
         .circlebtn:hover .svgicon {background-color:var(--circleiconhover);}
       .circlebtn:active {background-color:var(--circlebtnpress);}
+        .droid .aink.circlebtn:active {background-color:var(--circlebtnhover);}
+
         .circlebtn:active svg {fill:var(--circleiconpress);}
         .circlebtn:active .svgicon {background-color:var(--circleiconpress);}
 
@@ -918,9 +922,10 @@ jhunter@tunein.com
             .openmenu.morepanel {pointer-events: all;}
       .morepanel .overlay {position: absolute;top:0;left:0;right:0;bottom:0;z-index:1;background:rgba(0,0,0,.65);transition:opacity 200ms ease-in-out;opacity:0;}
       .morepanel .panel {background:var(--morepanel);color:var(--moreitem);border-radius:12px 12px  0 0;position:absolute;left:0;bottom:0;right:0;padding:12px 0;z-index:1;transition:transform 200ms ease-in-out;transform:translateY(100%);}
-        .morepanel .panelitem {padding:0 24px;display:flex;align-items: center;height:48px;font-size:20px;font-weight:500;justify-content: space-between;cursor:pointer;user-select:none;}
+        .morepanel .panelitem {padding:0 24px;display:flex;align-items: center;height:48px;font-size:20px;font-weight:500;justify-content: space-between;cursor:pointer;user-select:none;position: relative;}
             .morepanel .panelitem:hover {background:var(--moreitemhover);}
             .morepanel .panelitem:active {background:var(--moreitempress);transition:background-color 200ms ease-in-out;}
+              .droid  .morepanel .panelitem:active {background:var(--moreitemhover);}
             .openmenu.morepanel .overlay {opacity:1;}
             .openmenu.morepanel .panel {transform:translateY(0);}
 
@@ -1025,6 +1030,12 @@ jhunter@tunein.com
 
       .toast {height:48px;padding:0 16px;display:flex;align-items:center;justify-content:center;border-radius:4px;background:var(--tsharp3);color:black;position:absolute;z-index:999999999999999999;transition:transform 200ms ease-in-out;bottom:8px;right:8px;transform:translateY(calc(100% + 20px));box-shadow:0 4px 8px rgba(0,0,0,0.1);font-size:16px;font-weight:600;}
         .toast.pop {transform:translateY(0);}
+
+
+    .aink {position:relative;}
+    
+    .wrapple {position:absolute;top:0;left:0;right:0;bottom:0;overflow:hidden;pointer-events:none;z-index:0;}
+      .ripple {background:rgba(150,150,150,.125);position: absolute;border-radius:50%;z-index:1;transform:scale(0);}
     
 
     @media screen and (max-width: 666px) {
@@ -1326,7 +1337,7 @@ jhunter@tunein.com
     </div>
 
     <div id=carmode class=" darkui">
-      <div class="btn exitcarmode">Exit</div>
+      <div class="btn exitcarmode aink">Exit</div>
     </div>
 
     <div class="morepanel add2listmenu">
@@ -1362,7 +1373,7 @@ jhunter@tunein.com
         <div class=panelwrap>
           <h2>Name Your Playlist</h2>
           <input type=text class=setplaylistname placeholder="Playlist #3453" />
-          <div class="btn saveplaylist">Create</div>
+          <div class="btn saveplaylist aink">Create</div>
         </div>
       </div>
     </div>
@@ -1433,8 +1444,8 @@ jhunter@tunein.com
             </div>
           </div>
           <label class=toggleinput><input type="checkbox" id="speedcheckbox"><div class="toggle"></div> Apply to all podcasts</label>
-          <div class="btn savenpspeed">Done</div>
-          <div class="btn quietbtn cancelnpspeed">Cancel</div>
+          <div class="btn savenpspeed aink">Done</div>
+          <div class="btn quietbtn cancelnpspeed aink">Cancel</div>
         </div>
       </div>
       <div class="morepanel npmoremenu">
@@ -1509,20 +1520,20 @@ jhunter@tunein.com
             </div>
           </div>
           <div class=npcontrols>
-            <div class="nprewind30 circlebtn medium">
+            <div class="nprewind30 circlebtn medium aink">
               <div class="svgicon rewind"></div>
             </div>
-            <div class="npplay circlebtn">
+            <div class="npplay circlebtn aink">
               <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M8 18.4701C8.00043 18.5908 8.03462 18.709 8.09872 18.8112C8.16281 18.9135 8.25424 18.9958 8.36267 19.0488C8.47195 19.0999 8.5932 19.12 8.71314 19.1069C8.83309 19.0937 8.94709 19.0478 9.04267 18.9741L17.2333 12.5048C17.3096 12.4446 17.3713 12.368 17.4137 12.2806C17.4561 12.1931 17.4781 12.0973 17.4781 12.0001C17.4781 11.903 17.4561 11.8071 17.4137 11.7197C17.3713 11.6323 17.3096 11.5556 17.2333 11.4954L9.04267 5.02744C8.94782 4.95268 8.83387 4.9061 8.71382 4.893C8.59377 4.87991 8.47246 4.90084 8.36373 4.95339C8.255 5.00595 8.16324 5.08802 8.09893 5.19023C8.03461 5.29244 8.00033 5.41068 8 5.53144V18.4701Z" />
               </svg>                        
             </div>
-            <div class="nppause circlebtn">
+            <div class="nppause circlebtn aink">
               <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M16.8893 4.88933C17.0071 4.88933 17.12 4.93611 17.2033 5.01937C17.2865 5.10264 17.3333 5.21557 17.3333 5.33333V18.6667C17.3333 18.7844 17.2865 18.8974 17.2033 18.9806C17.12 19.0639 17.0071 19.1107 16.8893 19.1107H14.2227C14.1642 19.1108 14.1064 19.0995 14.0523 19.0772C13.9983 19.055 13.9492 19.0223 13.9078 18.9811C13.8665 18.9398 13.8336 18.8908 13.8112 18.8369C13.7889 18.7829 13.7773 18.7251 13.7773 18.6667V5.33333C13.7773 5.21557 13.8241 5.10264 13.9074 5.01937C13.9906 4.93611 14.1036 4.88933 14.2213 4.88933H16.8893ZM9.77866 4.88933C9.89641 4.88933 10.0093 4.93611 10.0926 5.01937C10.1759 5.10264 10.2227 5.21557 10.2227 5.33333V18.6667C10.2227 18.7844 10.1759 18.8974 10.0926 18.9806C10.0093 19.0639 9.89641 19.1107 9.77866 19.1107H7.11199C7.05357 19.1108 6.99569 19.0995 6.94167 19.0772C6.88765 19.055 6.83854 19.0223 6.79717 18.9811C6.7558 18.9398 6.72298 18.8908 6.70058 18.8369C6.67818 18.7829 6.66666 18.7251 6.66666 18.6667V5.33333C6.66666 5.21557 6.71343 5.10264 6.7967 5.01937C6.87997 4.93611 6.9929 4.88933 7.11066 4.88933H9.77866Z" />
               </svg>  
             </div>
-            <div class="npforward30 circlebtn medium">
+            <div class="npforward30 circlebtn medium aink">
               <div class="svgicon forward"></div>
             </div>
           </div>
@@ -1589,7 +1600,7 @@ jhunter@tunein.com
         </div>
         <div id=hometabs class="tabwrap touchscroll">
           <div class=tabline></div>
-          <div class=tab data-page=home>For You</div><div class=tab data-page=radio>Local Radio</div><div class=tab data-page=sports>Sports</div><div class=tab data-page=news>News & Talk</div><div class=tab data-page=music>Music</div><div class=tab data-page=podcast>Podcast</div><div class=tab data-page=bylocation>By Location</div><div class=tab data-page=bylanguage>By Language</div>
+          <div class="tab aink" data-page=home>For You</div><div class="tab aink" data-page=radio>Local Radio</div><div class="tab aink" data-page=sports>Sports</div><div class="tab aink" data-page=news>News & Talk</div><div class="tab aink" data-page=music>Music</div><div class="tab aink" data-page=podcast>Podcast</div><div class="tab aink" data-page=bylocation>By Location</div><div class="tab aink" data-page=bylanguage>By Language</div>
         </div>
         <div id=searchbar>
           <div class="inputfield search">
@@ -2203,7 +2214,7 @@ jhunter@tunein.com
               </div>
 
               <div class=btnrow>
-                <div class="btn">Add a Station URL</div>
+                <div class="btn aink">Add a Station URL</div>
               </div>
             </div>
           </div>
@@ -2217,7 +2228,7 @@ jhunter@tunein.com
                   <div class=message>You don't currently have any playlist, <br>create one below.</div>
                 </div>
                 <div class=createplaylistbtn>
-                  <div class="btn menubtn focus setplaceholder" data-focus=setplaylistname data-type=createplaylist>Create a Playlist</div>
+                  <div class="btn menubtn focus setplaceholder aink" data-focus=setplaylistname data-type=createplaylist>Create a Playlist</div>
                 </div>
               </div>
             </div>
@@ -2345,7 +2356,7 @@ jhunter@tunein.com
             details playlist
             <div class=hero>hero</div>
             <div class=editcontrols>edit</div>
-            <div class="btn addtoplaylist">Add to Playlist</div>
+            <div class="btn addtoplaylist aink">Add to Playlist</div>
           </div>
           <div id=favoritespage class="slidepage">
             <div class=contentrow>
@@ -2439,41 +2450,41 @@ jhunter@tunein.com
             <div class="meta streammeta" id=minimeta>Episode 117 - Week of January 11th - 17th</div>
           </div>
           <div class=minicontrols>
-            <div class="play minicontrol circlebtn">
+            <div class="play minicontrol circlebtn aink">
               <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M8 18.4701C8.00043 18.5908 8.03462 18.709 8.09872 18.8112C8.16281 18.9135 8.25424 18.9958 8.36267 19.0488C8.47195 19.0999 8.5932 19.12 8.71314 19.1069C8.83309 19.0937 8.94709 19.0478 9.04267 18.9741L17.2333 12.5048C17.3096 12.4446 17.3713 12.368 17.4137 12.2806C17.4561 12.1931 17.4781 12.0973 17.4781 12.0001C17.4781 11.903 17.4561 11.8071 17.4137 11.7197C17.3713 11.6323 17.3096 11.5556 17.2333 11.4954L9.04267 5.02744C8.94782 4.95268 8.83387 4.9061 8.71382 4.893C8.59377 4.87991 8.47246 4.90084 8.36373 4.95339C8.255 5.00595 8.16324 5.08802 8.09893 5.19023C8.03461 5.29244 8.00033 5.41068 8 5.53144V18.4701Z" />
               </svg>
             </div>
-            <div class="pause minicontrol circlebtn">
+            <div class="pause minicontrol circlebtn aink">
               <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M16.8893 4.88933C17.0071 4.88933 17.12 4.93611 17.2033 5.01937C17.2865 5.10264 17.3333 5.21557 17.3333 5.33333V18.6667C17.3333 18.7844 17.2865 18.8974 17.2033 18.9806C17.12 19.0639 17.0071 19.1107 16.8893 19.1107H14.2227C14.1642 19.1108 14.1064 19.0995 14.0523 19.0772C13.9983 19.055 13.9492 19.0223 13.9078 18.9811C13.8665 18.9398 13.8336 18.8908 13.8112 18.8369C13.7889 18.7829 13.7773 18.7251 13.7773 18.6667V5.33333C13.7773 5.21557 13.8241 5.10264 13.9074 5.01937C13.9906 4.93611 14.1036 4.88933 14.2213 4.88933H16.8893ZM9.77866 4.88933C9.89641 4.88933 10.0093 4.93611 10.0926 5.01937C10.1759 5.10264 10.2227 5.21557 10.2227 5.33333V18.6667C10.2227 18.7844 10.1759 18.8974 10.0926 18.9806C10.0093 19.0639 9.89641 19.1107 9.77866 19.1107H7.11199C7.05357 19.1108 6.99569 19.0995 6.94167 19.0772C6.88765 19.055 6.83854 19.0223 6.79717 18.9811C6.7558 18.9398 6.72298 18.8908 6.70058 18.8369C6.67818 18.7829 6.66666 18.7251 6.66666 18.6667V5.33333C6.66666 5.21557 6.71343 5.10264 6.7967 5.01937C6.87997 4.93611 6.9929 4.88933 7.11066 4.88933H9.77866Z" />
               </svg>                
             </div>
-            <div class="stop minicontrol circlebtn">
+            <div class="stop minicontrol circlebtn aink">
               
             </div>
           </div>
         </div>
         <div class=tabs>
-          <div class="tab current" data-page=home>
+          <div class="tab current aink" data-page=home>
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M22.446 11.362L13.666 2.58201L12.286 1.19101C12.1611 1.06867 11.9933 1.00015 11.8185 1.00015C11.6437 1.00015 11.4759 1.06867 11.351 1.19101L9.971 2.58101L1.191 11.361C1.06936 11.484 1.00113 11.65 1.00113 11.823C1.00113 11.996 1.06936 12.162 1.191 12.285L2.571 13.665C2.694 13.7867 2.86001 13.8549 3.033 13.8549C3.206 13.8549 3.37201 13.7867 3.49501 13.665L4.60801 12.552V20.342C4.60625 20.4287 4.62197 20.5148 4.65421 20.5953C4.68646 20.6758 4.73457 20.749 4.79569 20.8105C4.85681 20.872 4.92969 20.9205 5.00997 20.9533C5.09026 20.986 5.17631 21.0022 5.263 21.001H9.203C9.28969 21.0025 9.37579 20.9865 9.45618 20.954C9.53656 20.9215 9.60958 20.8732 9.67089 20.8119C9.7322 20.7506 9.78054 20.6776 9.81303 20.5972C9.84552 20.5168 9.86149 20.4307 9.86 20.344V14.444H13.777V20.344C13.7755 20.4307 13.7915 20.5168 13.824 20.5972C13.8565 20.6776 13.9048 20.7506 13.9661 20.8119C14.0274 20.8732 14.1004 20.9215 14.1808 20.954C14.2612 20.9865 14.3473 21.0025 14.434 21.001H18.351C18.4377 21.0025 18.5238 20.9865 18.6042 20.954C18.6846 20.9215 18.7576 20.8732 18.8189 20.8119C18.8802 20.7506 18.9285 20.6776 18.961 20.5972C18.9935 20.5168 19.0095 20.4307 19.008 20.344V12.554L20.121 13.666C20.244 13.7877 20.41 13.8559 20.583 13.8559C20.756 13.8559 20.922 13.7877 21.045 13.666L22.425 12.286C22.5496 12.1659 22.6218 12.0015 22.626 11.8285C22.6301 11.6555 22.5658 11.4879 22.447 11.362H22.446Z" />
             </svg>
             <div class=label>Home</div>
           </div>
-          <div class=tab data-page=library>
+          <div class="tab aink" data-page=library>
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M7.157 3.033C6.50064 3.03184 5.85078 3.16292 5.24618 3.4184C4.64158 3.67388 4.09465 4.04853 3.638 4.52C2.58642 5.63465 2.00067 7.1091 2.00067 8.6415C2.00067 10.1739 2.58642 11.6484 3.638 12.763L11.61 21.063C11.7138 21.1664 11.8544 21.2245 12.001 21.2245C12.1476 21.2245 12.2882 21.1664 12.392 21.063L20.364 12.763C21.4156 11.6484 22.0013 10.1739 22.0013 8.6415C22.0013 7.1091 21.4156 5.63465 20.364 4.52C19.9105 4.04285 19.3646 3.66291 18.7597 3.40329C18.1547 3.14368 17.5033 3.0098 16.845 3.0098C16.1867 3.0098 15.5353 3.14368 14.9303 3.40329C14.3254 3.66291 13.7795 4.04285 13.326 4.52L12 5.932L10.675 4.52C10.2221 4.04166 9.6767 3.66028 9.07198 3.399C8.46725 3.13772 7.81576 3.00198 7.157 3"/>
             </svg>
             <div class=label>Library</div>
           </div>
-          <div class=tab data-page=search>
+          <div class="tab aink" data-page=search>
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M21.45 19.018L16.34 13.858C17.0039 12.7533 17.3499 11.4868 17.34 10.198C17.3462 8.58176 16.8061 7.01083 15.8074 5.74005C14.8088 4.46928 13.41 3.5732 11.8381 3.19719C10.2662 2.82118 8.61334 2.9873 7.1477 3.66859C5.68205 4.34988 4.48959 5.50639 3.76374 6.95049C3.0379 8.39459 2.82126 10.0416 3.14897 11.6242C3.47668 13.2069 4.32951 14.6325 5.56912 15.6696C6.80873 16.7067 8.36239 17.2946 9.97806 17.3379C11.5937 17.3812 13.1766 16.8773 14.47 15.908L19.47 20.908C19.5618 20.999 19.6858 21.05 19.815 21.05C19.9442 21.05 20.0682 20.999 20.16 20.908L21.42 19.648C21.511 19.5562 21.562 19.4322 21.562 19.303C21.562 19.1738 21.511 19.0498 21.42 18.958L21.45 19.018ZM5.81999 10.198C5.81801 9.32494 6.07522 8.47093 6.55904 7.74418C7.04285 7.01743 7.7315 6.45064 8.53773 6.11562C9.34396 5.7806 10.2315 5.69242 11.0879 5.86226C11.9443 6.03211 12.731 6.45232 13.3483 7.06967C13.9657 7.68702 14.3859 8.47373 14.5557 9.33011C14.7256 10.1865 14.6374 11.074 14.3024 11.8803C13.9673 12.6865 13.4006 13.3751 12.6738 13.859C11.9471 14.3428 11.0931 14.6 10.22 14.598C9.05385 14.5954 7.93622 14.1309 7.11163 13.3064C6.28705 12.4818 5.82263 11.3641 5.81999 10.198Z" />
             </svg>
             <div class=label>Search</div>
           </div>
-          <div class=tab data-page=premium>
+          <div class="tab aink" data-page=premium>
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M4.43087 12.1552V11.3819C4.43087 11.3616 4.43469 11.3415 4.44212 11.3227C4.44954 11.304 4.46042 11.2869 4.47414 11.2726C4.48786 11.2582 4.50415 11.2468 4.52207 11.2391C4.54 11.2313 4.55921 11.2273 4.57861 11.2273H7.60621C7.64539 11.2273 7.68297 11.2436 7.71068 11.2726C7.73839 11.3016 7.75395 11.3409 7.75395 11.3819V12.1552C7.75395 12.1962 7.73839 12.2355 7.71068 12.2645C7.68297 12.2935 7.64539 12.3098 7.60621 12.3098H6.68296C6.67311 12.3092 6.66327 12.3109 6.65406 12.3145C6.64486 12.3182 6.6365 12.3239 6.62953 12.3312C6.62256 12.3385 6.61714 12.3472 6.61362 12.3569C6.61009 12.3665 6.60855 12.3768 6.60908 12.3871V16.4828C6.60864 16.5237 6.59293 16.5627 6.56532 16.5916C6.53771 16.6205 6.50039 16.6369 6.46134 16.6374H5.72291C5.68386 16.6369 5.64654 16.6205 5.61893 16.5916C5.59132 16.5627 5.57561 16.5237 5.57517 16.4828V12.3865C5.5757 12.3762 5.57416 12.3659 5.57063 12.3563C5.56711 12.3466 5.56169 12.3379 5.55472 12.3306C5.54775 12.3233 5.53939 12.3176 5.53019 12.3139C5.52098 12.3103 5.51114 12.3086 5.5013 12.3092H4.57833C4.53929 12.3091 4.50187 12.2929 4.47424 12.264C4.44661 12.2352 4.43102 12.196 4.43087 12.1552ZM23.9997 4.0796V16.0569C23.9997 16.1331 23.9854 16.2085 23.9575 16.2789C23.9296 16.3493 23.8887 16.4132 23.8372 16.4671C23.7857 16.5209 23.7245 16.5636 23.6572 16.5926C23.5899 16.6217 23.5178 16.6366 23.445 16.6365H12.5539V19.9195C12.5539 20.0732 12.4955 20.2206 12.3917 20.3293C12.2878 20.438 12.1469 20.4991 12 20.4991H0.553894C0.407141 20.4991 0.266385 20.4382 0.162534 20.3297C0.0586833 20.2212 0.000226705 20.074 0 19.9204L0 7.9431C0 7.78938 0.0583566 7.64196 0.162232 7.53326C0.266107 7.42457 0.406992 7.3635 0.553894 7.3635H11.4461V4.0805C11.446 4.00431 11.4602 3.92884 11.488 3.85842C11.5158 3.78799 11.5566 3.72399 11.608 3.67008C11.6595 3.61616 11.7206 3.57339 11.7878 3.5442C11.8551 3.51502 11.9272 3.5 12 3.5H23.445C23.5919 3.5 23.7328 3.56106 23.8366 3.66976C23.9405 3.77846 23.9989 3.92588 23.9989 4.0796H23.9997ZM11.4461 8.5227H1.19991C1.17541 8.5227 1.1519 8.53289 1.13457 8.55102C1.11724 8.56916 1.1075 8.59375 1.1075 8.6194V19.2444C1.1075 19.27 1.11724 19.2946 1.13457 19.3128C1.1519 19.3309 1.17541 19.3411 1.19991 19.3411H11.3537C11.3782 19.3411 11.4017 19.3309 11.419 19.3128C11.4364 19.2946 11.4461 19.27 11.4461 19.2444V8.5227ZM19.163 11.8842C19.163 11.8432 19.1474 11.8039 19.1197 11.7749C19.092 11.7459 19.0544 11.7296 19.0152 11.7296H18.3878C18.3779 11.7302 18.3681 11.7285 18.3589 11.7249C18.3497 11.7212 18.3413 11.7155 18.3343 11.7082C18.3274 11.7009 18.3219 11.6922 18.3184 11.6825C18.3149 11.6729 18.3133 11.6626 18.3139 11.6523V8.4842C18.3133 8.4739 18.3149 8.4636 18.3184 8.45397C18.3219 8.44434 18.3274 8.43559 18.3343 8.4283C18.3413 8.421 18.3497 8.41533 18.3589 8.41164C18.3681 8.40796 18.3779 8.40634 18.3878 8.4069H18.9414C18.9608 8.4069 18.98 8.4029 18.9979 8.39513C19.0158 8.38736 19.0321 8.37597 19.0458 8.36162C19.0596 8.34726 19.0704 8.33022 19.0779 8.31146C19.0853 8.29271 19.0891 8.2726 19.0891 8.2523V7.5181C19.0891 7.4978 19.0853 7.47769 19.0779 7.45894C19.0704 7.44018 19.0596 7.42314 19.0458 7.40878C19.0321 7.39443 19.0158 7.38304 18.9979 7.37527C18.98 7.3675 18.9608 7.3635 18.9414 7.3635H16.6522C16.6328 7.3635 16.6136 7.3675 16.5957 7.37527C16.5777 7.38304 16.5614 7.39443 16.5477 7.40878C16.534 7.42314 16.5231 7.44018 16.5157 7.45894C16.5083 7.47769 16.5045 7.4978 16.5045 7.5181V8.2523C16.5045 8.2726 16.5083 8.29271 16.5157 8.31146C16.5231 8.33022 16.534 8.34726 16.5477 8.36162C16.5614 8.37597 16.5777 8.38736 16.5957 8.39513C16.6136 8.4029 16.6328 8.4069 16.6522 8.4069H17.2061C17.2159 8.40634 17.2258 8.40796 17.235 8.41164C17.2442 8.41533 17.2526 8.421 17.2595 8.4283C17.2665 8.43559 17.2719 8.44434 17.2754 8.45397C17.279 8.4636 17.2805 8.4739 17.28 8.4842V11.6523C17.2805 11.6626 17.279 11.6729 17.2754 11.6825C17.2719 11.6922 17.2665 11.7009 17.2595 11.7082C17.2526 11.7155 17.2442 11.7212 17.235 11.7249C17.2258 11.7285 17.2159 11.7302 17.2061 11.7296H16.5786C16.5394 11.7296 16.5019 11.7459 16.4741 11.7749C16.4464 11.8039 16.4309 11.8432 16.4309 11.8842V12.6184C16.4313 12.6593 16.447 12.6983 16.4746 12.7272C16.5022 12.7561 16.5396 12.7725 16.5786 12.773H19.0155C19.0546 12.7725 19.0919 12.7561 19.1195 12.7272C19.1471 12.6983 19.1628 12.6593 19.1633 12.6184L19.163 11.8842Z" />
             </svg>
@@ -2936,6 +2947,95 @@ jhunter@tunein.com
       valuetweaks();
     }
 
+    function droidpress(e){
+      if ( !document.documentElement.classList.contains('droid')){
+        return
+      }
+
+      var x = e.pageX;
+      var y = e.pageY;
+
+      var bounds = this.getBoundingClientRect();
+      var l = bounds.left + window.pageXOffset;
+
+      var t = bounds.top + window.pageYOffset;
+
+      let w = bounds.width;
+      let h = bounds.height;
+
+      var nx = x - l;
+      var ny = y - t;
+
+      var s = w > h ? w + (Math.abs(w/2 - nx) * 1.52) : h + (Math.abs(h/2 - ny) * 1.52);
+
+      s *= 1.5;
+
+      let ms = Math.max(s / 1.4, 366);
+
+
+      let p = document.createElement('div');
+      let d = document.createElement('div');
+
+      p.className = 'wrapple';
+
+      p.style.borderRadius = window.getComputedStyle(this, null).getPropertyValue('border-radius')
+
+      d.className = 'ripple';
+
+      d.style.left = nx + 'px';
+      d.style.top = ny + 'px';
+      d.style.margin = '-' + (s/2) + 'px 0 0 -' + (s/2) +'px';
+      d.style.width = d.style.height = s + 'px';
+      d.style.transition = 'transform ' + ms + 'ms ease-in-out, opacity 222ms 20ms ease-in-out';
+
+      d.animating = true;
+      d.mouseup = false;
+
+      d.addEventListener('transitionend', notanimating);
+
+      p.appendChild(d);
+      this.appendChild(p);
+
+      window.getComputedStyle(d).opacity;
+
+      d.style.transform = 'scale( 1)'; // + (s * 1.44) + ')';
+
+      function up(e){
+        console.log("UPPPPPPP")
+        window.removeEventListener('mouseup', up);
+
+        if ( d.animating ){
+          d.mouseup = true;
+          return;
+        }
+        //d.parentNode.removeChild(d);
+        d.addEventListener('transitionend', done);
+        d.style.opacity = 0;
+      }
+
+      function done(e){
+          if ( e.propertyName !== 'opacity' ){
+              return;
+          }
+
+          this.removeEventListener('transitionend', done);
+          // this.getparent('wrapple').remove(); //.parentNode.removeChild(this);
+      }
+
+      function notanimating(e){
+    
+        this.animating = false;
+        this.removeEventListener('transitionend', notanimating);
+
+        if ( this.mouseup ){
+          d.addEventListener('transitionend', done);
+          d.style.opacity = 0;
+        }
+      }
+      
+      window.addEventListener('mouseup', up);
+  }
+
     function tabline(e){
       let wrap = this.getparent('tabwrap');
       let line = wrap.getElementsByClassName('tabline')[0];
@@ -2944,8 +3044,8 @@ jhunter@tunein.com
 
       let pad = parseFloat(window.getComputedStyle(this, null).getPropertyValue('padding-right'));
 
-      line.style.width = w - pad + 'px';
-      line.style.transform = 'translateX('+ x + 'px)';
+      line.style.width = w - pad - pad + 'px';
+      line.style.transform = 'translateX('+ (x + pad) + 'px)';
 
       wrap.scroll({left: x - 24 - 48, behavior: 'smooth'});
 
@@ -3949,6 +4049,7 @@ jhunter@tunein.com
     Attach.on('click', '.savenpspeed', savenpspeed);
     Attach.on('click', '.cancelnpspeed', cancelnpspeed);
     Attach.on('click', '.npspeedbtn', npspeed);
+    Attach.on('mousedown', '.aink, .panelitem', droidpress);
     
     pagesizetweak(true);
 
