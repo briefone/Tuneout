@@ -927,8 +927,12 @@ cssfakie2: function (e){
     }
 
     if ( line ){
-      var sx = target.offsetWidth;
+      var sx = target.offsetWidth - 8;
       var ol = target.offsetLeft;
+
+      var pd = window.devicePixelRatio || 1;
+      pd = pd < 2 ? pd : 1;
+      sx = sx / pd;
 
       if ( ol == 0 ){
         ol = -16
@@ -1258,7 +1262,7 @@ paneldom: function(){
         </div>
       </button><button class=PRISMeject style="margin-right:-8px !important;">Close</button><button class=clearzeplins>Clear</button>
     </div>
-    <div class=sub style="padding-bottom:0;overflow:visible;">
+    <!--<div class=sub style="padding-bottom:0;overflow:visible;">
       <h4>Toggle States (experimental)</h4>
       <div class=PRISMtabs>
         <div class=buttontoggles>
@@ -1266,7 +1270,7 @@ paneldom: function(){
         </div>
         <div class=PRISMline style="transform:translateX(-16px) scaleX(25)"></div>
       </div>
-    </div>
+    </div>-->
     <div class="sub name">
       <h4 style="margin-bottom:0;">Info</h4>
       <div>

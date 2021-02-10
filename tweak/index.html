@@ -780,9 +780,11 @@ jhunter@tunein.com
               .tpanel:first-child {margin-top:40px;}
               .tpanel:last-child {margin-bottom:40px;}
 
-    .resetbtn {cursor:pointer;display:flex;height:36px;text-align:center;padding:0 12px;align-items:center;justify-content:center;background:rgba(255, 255, 255, 0.0);color:#ff5757;font-size:15px;text-transform:uppercase;font-weight:600;border-radius:6px;transition:all 200ms ease-in-out;}
-    .resetbtn:hover {background-color:rgba(255, 255, 255, 0.0666);}
-    .resetbtn:active {background-color:rgba(255, 255, 255, 0.1);}
+    .resetbtn, .redlinebtn {cursor:pointer;display:flex;height:36px;text-align:center;padding:0 12px;align-items:center;justify-content:center;background:rgba(255, 255, 255, 0.0);color:#ff5757;font-size:15px;text-transform:uppercase;font-weight:600;border-radius:6px;transition:all 200ms ease-in-out;}
+    .resetbtn:hover, .redlinebtn:hover {background-color:rgba(255, 255, 255, 0.0666);}
+    .resetbtn:active, .redlinebtn:active {background-color:rgba(255, 255, 255, 0.1);}
+
+    .redlinebtn {color:white;}
 
     .tweakbtn {cursor:pointer;display:flex;height:32px;text-align:center;padding:0 12px;align-items:center;justify-content:center;background:rgba(255, 255, 255, 0.05);color:#fff;font-size:14px;font-weight:600;border-radius:6px;transition:all 200ms ease-in-out;text-transform:uppercase;letter-spacing: 0.2px;}
     .tweakbtn:hover {background-color:rgba(255, 255, 255, 0.1);}
@@ -1094,6 +1096,11 @@ jhunter@tunein.com
 <body>
   <input type="color" id=colorpicker />
   <div id=tweaks>
+    <div class=tpanel style="padding:0;">
+      <div class=tgroup>
+        <div class=redlinebtn onclick="redline()">Redline</div>
+      </div>
+    </div>
     <div class=tpanel>
       <div class=colorpalette>
         <div class=palette style="background-color:var(--ui1);" data-ui=1 id=ui1></div><div class=palette style="background-color:var(--ui2);" data-ui=2 id=ui2></div><div class=palette style="background-color:var(--ui3);" data-ui=3 id=ui3></div><div class=palette style="background-color:var(--ui4);" data-ui=4 id=ui4></div><div class=palette style="background-color:var(--ui5);" data-ui=5 id=ui5></div><div class=palette style="background-color:var(--ui6);" data-ui=6 id=ui6></div><div class=palette style="background-color:var(--ui7);" data-ui=7 id=ui7></div><div class=palette style="background-color:var(--ui8);" data-ui=8 id=ui8></div><div class=palette style="background-color:var(--ui9);" data-ui=9 id=ui9></div><div class=palette style="background-color:var(--ui10);" data-ui=10 id=ui10><div class=pb>B</div></div><div class=palette style="background-color:var(--ui11);" data-ui=11 id=ui11></div><div class=palette style="background-color:var(--ui12);" data-ui=12 id=ui12></div>
