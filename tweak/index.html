@@ -413,6 +413,7 @@ jhunter@tunein.com
       .unfav {-webkit-mask: url(../icons/unfav.svg);mask: url(../icons/unfav.svg);}
       .playlistadd {-webkit-mask: url(../icons/PlaylistAdd.svg);mask: url(../icons/PlaylistAdd.svg);}
       .chev {-webkit-mask: url('../icons/Chevron-Thin-Right(RightAligned).svg');mask: url('../icons/Chevron-Thin-Right(RightAligned).svg');}
+      .chevleft {-webkit-mask: url('../icons/Chevron-Left.svg');mask: url('../icons/Chevron-Left.svg');}
       .rewind {-webkit-mask: url('../icons/BackBuffer-Large.svg');mask: url('../icons/BackBuffer-Large.svg');}
       .forward {-webkit-mask: url('../icons/ForwardBuffer-Large.svg');mask: url('../icons/ForwardBuffer-Large.svg');}
       .moreicon {-webkit-mask: url('../icons/More-Small(Horizontal).svg');mask: url('../icons/More-Small(Horizontal).svg');}
@@ -495,7 +496,7 @@ jhunter@tunein.com
       .checkname {display:inline-block;}
 
 
-      .iconbtn {width:44px;height:44px;cursor: pointer;display:inline-flex;align-items: center;justify-content: center;user-select: none;transition:opacity 200ms ease-in-out;position:relative;}
+      .iconbtn {width:44px;height:44px;cursor: pointer;display:inline-flex;align-items: center;justify-content: center;user-select: none;transition:opacity 200ms ease-in-out;position:relative;border-radius:3px;}
         .iconbtn svg {fill:var(--inkdefault);width:24px;height:24px;transition:fill 200ms ease-in-out;}
         .iconbtn:hover svg {fill:var(--inkhover);}
         .iconbtn:active svg {fill:var(--inkpress);}
@@ -543,7 +544,7 @@ jhunter@tunein.com
     #statusbar {height:24px;background:rgba(0,0,0,.03);width:100%;}
 
     .bar {display:flex;width:100%;align-items:center;justify-content: space-between;padding: 0 14px;box-sizing: border-box;height:64px;position: relative;}
-      .navback {position:absolute;top:10px;left:14px;pointer-events: none;opacity:0;}
+      .navback {position:absolute;top:10px;left:8px;pointer-events: none;opacity:0;}
         .subpageactive .navback {opacity: 1;pointer-events:all;}
         .subpageactive .carmode, .subpageactive .profile  {opacity: 0;pointer-events:none;}
 
@@ -607,6 +608,7 @@ jhunter@tunein.com
             .droid .listitem::after {left:0;}
           .listitem:hover {background:var(--ink2);}
           .listitem:active {background:var(--ink3);}
+            .droid .listitem:active {background:var(--ink2);}
           .listitem .title {font-size:20px;font-weight:600;width:calc(100% - 48px);}
           .listitem .chevron {width:24px;height:24px;}
           .listitem .chevron svg {fill:var(--btndefault);}
@@ -636,7 +638,7 @@ jhunter@tunein.com
         .thumb.circle {border-radius:50%;background-color:var(--ink);border:none;}
 
       #tabbar {position:absolute;left:0;bottom:0;right:0;height:56px;background:transparent;backdrop-filter:blur(40px);color:var(--tabcolor);display: flex;justify-content: space-around;flex-direction: column;z-index:99999;}
-        #tabbar .tab {display:flex;align-items: center;justify-content: center;flex-direction: column;width:88px;height:100%;font-size:15px;font-weight:500;cursor:pointer;user-select:none;transition:color 200ms ease-in-out;}
+        #tabbar .tab {display:flex;align-items: center;justify-content: center;flex-direction: column;width:25%;height:100%;font-size:15px;font-weight:500;cursor:pointer;user-select:none;transition:color 200ms ease-in-out;}
           #tabbar .tab svg {fill:var(--tabcolor);width:24px;height:24px;transition:fill 200ms ease-in-out;}
 
           #tabbar .tab:hover {color:var(--tabhover);}
@@ -722,7 +724,7 @@ jhunter@tunein.com
 
       .modalheading {position:absolute;top:0;left:0;right:0;height:72px;box-shadow:inset 0 -1px var(--ink2);}
             .modaltitle {text-align:center;position:absolute;width:100%;font-size:20px;font-weight:600;display:flex;align-items: center;justify-content: center;height:100%;padding:0 80px;box-sizing:border-box;user-select:none;}
-            .modalclose {position: absolute;right:0;top:calc(50% - 24px);height:48px;padding:0 24px;font-size:16px;font-weight:600;display: flex;align-items: center;justify-content: center;cursor:pointer;user-select:none;} 
+            .modalclose {position: absolute;right:12px;top:calc(50% - 24px);height:48px;padding:0 12px;border-radius:3px;font-size:16px;font-weight:600;display: flex;align-items: center;justify-content: center;cursor:pointer;user-select:none;} 
               .modalclose:hover {color:var(--inkhover);}
               .modalclose:active {color:var(--inkpress);}
 
@@ -748,7 +750,7 @@ jhunter@tunein.com
         .albummatch .topbar .colorlay {background:var(--albummatch);}
         .albumblur .topbar .colorlay {background:transparent;}
 
-      .rightactions {}
+      .rightactions {display: flex;gap: 2px;}
         .droid .npairplay {display:none;}
 
             .unfav, .removefav .fav {display:none;}
@@ -1563,9 +1565,7 @@ jhunter@tunein.com
         <div id=statusbar></div>
         <div id=navbar class=bar>
           <div class="iconbtn navback">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M13.196 19.285L6.273 12.352L13.196 5.419C13.2447 5.37233 13.2835 5.31629 13.3099 5.25425C13.3364 5.19221 13.3501 5.12545 13.3501 5.058C13.3501 4.99055 13.3364 4.92379 13.3099 4.86175C13.2835 4.79971 13.2447 4.74367 13.196 4.697L11.009 2.497C10.9126 2.40257 10.783 2.34969 10.648 2.34969C10.513 2.34969 10.3834 2.40257 10.287 2.497L2.987 9.797L0.799999 11.984C0.705574 12.0804 0.652693 12.21 0.652693 12.345C0.652693 12.48 0.705574 12.6096 0.799999 12.706L2.987 14.893L10.26 22.193C10.3564 22.2874 10.486 22.3403 10.621 22.3403C10.756 22.3403 10.8856 22.2874 10.982 22.193L13.2 19.993C13.2487 19.9463 13.2875 19.8903 13.3139 19.8282C13.3404 19.7662 13.3541 19.6995 13.3541 19.632C13.3541 19.5645 13.3404 19.4978 13.3139 19.4358C13.2875 19.3737 13.2487 19.3177 13.2 19.271L13.196 19.285Z" />
-            </svg>
+            <div class="svgicon chevleft"></div>
           </div>
           <div class="iconbtn carmode">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -2966,11 +2966,12 @@ jhunter@tunein.com
       var nx = x - l;
       var ny = y - t;
 
-      var s = w > h ? w + (Math.abs(w/2 - nx) * 1.52) : h + (Math.abs(h/2 - ny) * 1.52);
+      var s = w > h ? w : h;
 
-      s *= 1.5;
+      s = Math.sqrt(Math.pow(s, 2) * 2);
+      s += (Math.abs(w/2 - nx) * 1.52) + (Math.abs(h/2 - ny) * 1.52);
 
-      let ms = Math.max(s / 1.4, 366);
+      let ms = Math.min(Math.max(s / 1.4, 366), 666);
 
 
       let p = document.createElement('div');
@@ -3933,7 +3934,7 @@ jhunter@tunein.com
 
       c.getElementsByClassName('menubtn autoplaylist')[0].dataset.type = 'playlistmore';
       
-      Playlist.push(a.getElementsByClassName('title').innerText);
+      Playlist.push(a.getElementsByClassName('title')[0].innerText);
 
       a.style.display = 'none';
 
@@ -4049,7 +4050,7 @@ jhunter@tunein.com
     Attach.on('click', '.savenpspeed', savenpspeed);
     Attach.on('click', '.cancelnpspeed', cancelnpspeed);
     Attach.on('click', '.npspeedbtn', npspeed);
-    Attach.on('mousedown', '.aink, .panelitem', droidpress);
+    Attach.on('mousedown', '.aink, .panelitem, .listitem, .iconbtn, .modalclose', droidpress);
     
     pagesizetweak(true);
 
