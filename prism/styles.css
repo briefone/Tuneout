@@ -20,7 +20,7 @@ body.PRISMzeplin.MAGIC::before {
       .PRISMredlineactual::before {content:attr(data-value);position:absolute;color:white;top:-2px;left:0;transform:translate(0, -100%);padding:0 4px;border-radius:2px;font-size:12px;white-space:nowrap;background:#F53C3C;line-height:16px;}
 
 
-  .PRISMprezeplin {z-index: 2147483647;pointer-events:none;border:1px solid #E61414;box-sizing:border-box;border-color:rgba(255,0,0,.5);box-shadow:0 0 0 1px rgba(255,0,0,.5);position:absolute;font-family:adobe-clean, sans-serif !important;line-height:16px;}
+  .PRISMprezeplin {z-index: 2147483647;pointer-events:none;border:1px solid #E61414;box-sizing:border-box;border-color:rgba(255,0,0,.5);box-shadow:0 0 0 1px rgba(255,0,0,.5);position:absolute;font-family:calibre, sans-serif !important;line-height:16px;}
 
 
 
@@ -32,12 +32,12 @@ body.PRISMzeplin.MAGIC::before {
   }
 
 
-html .PRISMredlinepanel *, html .PRISMredlinepanel {margin:0;padding:0;cursor:initial !important;box-shadow:none;font-family:adobe-clean, sans-serif;border:none;font-size:12px;pointer-events: all !important;-webkit-user-select:text !important;user-select:text !important;}
-  html .PRISMredlinepanel {position:fixed;top:56px;right:20px;border-radius:6px 6px 0 0;width:296px;z-index:2147483647;background:#eee;border:2px solid #e1e1e1;font:normal 12px adobe-clean, sans-serif !important;text-align: left;color:#4b4b4b;}
+html .PRISMredlinepanel *, html .PRISMredlinepanel {margin:0;padding:0;cursor:initial !important;box-shadow:none;font-family:calibre, sans-serif;border:none;font-size:12px;pointer-events: all !important;-webkit-user-select:text !important;user-select:text !important;}
+  html .PRISMredlinepanel {position:fixed;top:56px;right:20px;border-radius:6px 6px 0 0;width:296px;z-index:2147483647;background:#eee;border:2px solid #e1e1e1;font:normal 12px calibre, sans-serif !important;text-align: left;color:#4b4b4b;}
   html .PRISMredlinewrap {}
 .PRISMredlinepanel .infopanel .sub {padding:20px 24px;border-bottom:2px solid #e1e1e1;overflow-x: hidden;}
   .PRISMredlinepanel .infopanel .sub:last-child {border:none;}
-        .PRISMredlinepanel .infopanel .sub > h4 {margin-bottom:12px;font-size:10.5px !important;letter-spacing:.666px;font-weight:bold;color:#707070;text-transform:uppercase;font-feature-settings:initial;font-family:adobe-clean, sans-serif;}
+        .PRISMredlinepanel .infopanel .sub > h4 {margin-bottom:12px;font-size:10.5px !important;letter-spacing:.666px;font-weight:bold;color:#707070;text-transform:uppercase;font-feature-settings:initial;font-family:calibre, sans-serif;}
           /*.PRISMredlinepanel.SPECTRUM .infopanel .sub > h4 {font-feature-settings: "smcp", "c2sc";font-size: 13px !important;font-weight: normal;}*/
 
       .PRISMredlinepanel .PRISMdrag {background:#e1e1e1;height:20px;cursor:move !important;cursor:-webkit-grab !important;}
@@ -55,7 +55,7 @@ html .PRISMredlinepanel *, html .PRISMredlinepanel {margin:0;padding:0;cursor:in
 
 
 
-    html body .PRISMredlinepanel button:not(.override) {height:32px;margin:0 6px 0 0 !important;background: transparent;padding: 0 12px 1px;border-radius:4px;border:none;font:bold 15px adobe-clean, sans-serif !important;color:#707070 !important;cursor:pointer !important;transition:color 125ms ease-in-out;text-transform:capitalize;}
+    html body .PRISMredlinepanel button:not(.override) {height:32px;margin:0 6px 0 0 !important;background: transparent;padding: 0 12px 1px;border-radius:4px;border:none;font:bold 15px calibre, sans-serif !important;color:#707070 !important;cursor:pointer !important;transition:color 125ms ease-in-out;text-transform:capitalize;}
       html .PRISMredlinepanel button:hover:not(.override) {color:#4b4b4b !important;background:#e1e1e1;}
       html .PRISMredlinepanel button:active:not(.override) {color:#2d2d2d !important;background:#ddd;}
 
