@@ -465,6 +465,8 @@ jhunter@tunein.com
       .btn:hover {background:var(--btnhover);}
       .btn:active {background:var(--btnpress);}
 
+      .btn.fw {display:flex;width:100%;}
+
       .droid .aink.btn:active {background:var(--btnhover);}
 
     .outlinebtn.btn {background-color: transparent;border:2px solid var(--btndefault);color: var(--btndefault);padding:0 14px;}
@@ -1086,7 +1088,13 @@ jhunter@tunein.com
       .playlistlistadd {}
     .playlistlist {padding-top:8px;}
 
-    .playlistbottom {padding:12px 24px 24px;}
+    .playlistrow {}
+      .playlistrow .heading {padding:0 24px;}
+      .playlistrow .thumb {width:64px;height:64px;min-width:64px;min-height:64px;}
+      .playlistrow .add2 {position:absolute;top:50%;margin-top:-22px;right:12px;}
+        .playlistrow .add2 .svgicon {background:var(--ink7);}
+
+    .playlistbottom {padding:12px 24px 40px;}
       .addtoplaylist {width:100%;}
 
     @media screen and (max-width: 666px) {
@@ -1472,6 +1480,17 @@ jhunter@tunein.com
           <h2>Name Your Playlist</h2>
           <input type=text class=setplaylistname placeholder="Playlist #3453" />
           <div class="btn saveplaylist aink">Create</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="morepanel addcustomstation">
+      <div class=overlay></div>
+      <div class=panel>
+        <div class=panelwrap>
+          <h2>Add URL</h2>
+          <input type=text class=setplaylistname placeholder="radio1.com/stream.mp3" />
+          <div class="btn fw aink dismissmenu">Add</div>
         </div>
       </div>
     </div>
@@ -2316,7 +2335,7 @@ jhunter@tunein.com
               </div>
 
               <div class=btnrow>
-                <div class="btn aink">Add a Station URL</div>
+                <div class="btn aink menubtn" data-type=addcustomstation>Add a Station URL</div>
               </div>
             </div>
           </div>
@@ -2475,6 +2494,35 @@ jhunter@tunein.com
             </div>
             <div class="playlistrow playlistbottom">
               <div class="btn addtoplaylist outlinebtn menubtn" data-type=add2playlistmenu>Add to Playlist</div>
+            </div>
+            <div class="playlistrow">
+                <div class="heading ">
+                  <h2>Recommendations</h2>
+                </div>
+                <div class="itemlist">
+                  <div class="rowitem np " data-station="Spark &amp; Fire" data-url="https://dts.podtrac.com/redirect.mp3/chtbl.com/track/E341G/rss.art19.com/episodes/a6161f5f-7a2d-45ef-8130-108652ee1e98.mp3">
+                    <div class="thumb" style="background-image:url(https://cdn-profiles.tunein.com/p1389549/images/logoq.png);"></div><div class="description">
+                      <div class="title">Director Kemp Powers on the creative journey behind Pixar's "Soul."</div>
+                      <div class="meta">1/12/2021 - 43:12</div>
+                    </div>
+                    <div class="add2 menubtn iconbtn" data-type="addsuggestion"><div class="svgicon playlistadd"></div></div>
+                  </div>
+                  <div class="rowitem np " data-station="Science Fridays" data-url="https://cdn.simplecast.com/audio/81fc9f37-3af1-4e45-8d96-ad57b71d9f8b/episodes/9cfa0e69-9879-4473-bda7-4a319798237f/audio/158c1018-a5d2-4a3c-9420-34eca8a2bf45/default_tc.mp3?aid=rss_feed&amp;feed=i5UU6Ljx">
+                    <div class="thumb" style="background-image:url(https://cdn-profiles.tunein.com/p394/images/logoq.png);"></div><div class="description">
+                      <div class="title">Covid Fact Check, Aging Cells, News Roundup</div>
+                      <div class="meta">Janurary 12, 2021 - 47:01</div>
+                    </div>
+                    <div class="add2 menubtn iconbtn" data-type="addsuggestion"><div class="svgicon playlistadd"></div></div>
+                  </div>
+                  <div class="rowitem np " data-station="How to be a Better Human" data-url="https://dts.podtrac.com/redirect.mp3/dovetail.prxu.org/357/0a60222c-8e67-4585-a237-09fc01f7cec6/EP2_Leonard_Final_SegA.mp3">
+                    <div class="thumb" style="background-image:url(https://cdn-profiles.tunein.com/p1389827/images/logoq.png);"></div><div class="description">
+                      <div class="title">How to be a Better Human</div>
+                      <div class="meta">Janurary 12, 2021 - 33:07</div>
+                    </div>
+                    <div class="add2 menubtn iconbtn" data-type="addsuggestion"><div class="svgicon playlistadd"></div></div>
+                  </div>
+                </div>
+              
             </div>
           </div>
           <div id=favoritespage class="slidepage">
@@ -3457,7 +3505,7 @@ jhunter@tunein.com
         let img = album.replace('url(', '').replace(')', '').replace(/"/g,'').replace(/'/g, "").trim();
 
         // getAverageRGB(img);
-        vibe(img);
+        vibe('https://noiseee.com/img/?url=' + img);
 
         document.documentElement.classList.add('playing');
       }
@@ -4422,7 +4470,7 @@ jhunter@tunein.com
     Attach.on('input', '#npscrub', audioscrub);
     Attach.on('click', '.npmore', npmore);
     Attach.on('click', '.morepanel .overlay', nomore);
-    Attach.on('click', '.morepanel .panelitem', panelitem);
+    Attach.on('click', '.morepanel .panelitem, .dismissmenu', panelitem);
     Attach.on('click', '.npfav', npfav); 
     Attach.on('click', '.npforward30', npforward30);
     Attach.on('click', '.nprewind30', nprewind30); 
