@@ -1082,8 +1082,8 @@ jhunter@tunein.com
           .agrid6:nth-child(5) {grid-column-start: 3;grid-row-start: 3;grid-row-end:5;grid-column-end:5;}
           .agrid6:nth-child(6) {grid-column-start: 5;grid-row-start: 3;grid-row-end:5;grid-column-end:7;}
 
-    .playlistcontrols {padding:0 24px;margin-top:-56px;height:56px;display:flex;}
-      .playallplaylist {width:50%;margin-right: 8px;}
+    .playlistcontrols {padding:0 24px;margin-top:-56px;height:44px;display:flex;gap:2px;align-items: center;}
+      .playallplaylist {width:calc(50% - 4px);margin-right:6px;}
       .playlistedit {}
       .playlistlistadd {}
     .playlistlist {padding-top:8px;}
@@ -1096,6 +1096,13 @@ jhunter@tunein.com
 
     .playlistbottom {padding:12px 24px 40px;}
       .addtoplaylist {width:100%;}
+
+      .addplaylist2 {display:none;width:calc(50% - 4px);position: relative;}
+      .notmine .addplaylist2 {display:flex;}
+      .notmine .add2pl, .notmine .morepl {display:none;}
+      .notmine .reccos {display:none;}
+
+    .emptyplay .playallplaylist {display:none;}
 
     @media screen and (max-width: 666px) {
       #container {
@@ -2359,7 +2366,7 @@ jhunter@tunein.com
                   <h2 style="margin-bottom:2px;">Playlist You Might Like</h2>
                 </div>
                 <div class=itemrowlist>
-                  <div class="listrowitem pl" id=autoplaylist1 data-title="Latest News Briefing">
+                  <div class="listrowitem pl apl" id=autoplaylist1 data-title="Latest News Briefing">
                     <div class=collage>
                       <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/s20407/images/logoq.png);"></div>
                       <div class=v2 style="background-image:url(https://cdn-profiles.tunein.com/p952868/images/logoq.png);background-position-x: left;"></div>
@@ -2380,7 +2387,7 @@ jhunter@tunein.com
                       </div>
                     </div>
                   </div>
-                  <div class="listrowitem pl" id=autoplaylist2 data-title="Rock n Roll">
+                  <div class="listrowitem pl apl" id=autoplaylist2 data-title="Rock n Roll">
                     <div class=collage>
                       <div class=h2 style="background-image:url(https://cdn-profiles.tunein.com/s306872/images/brickg.jpg);"></div>
                       <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/s249994/images/logoq.jpg)"></div>
@@ -2402,7 +2409,7 @@ jhunter@tunein.com
                       </div>
                     </div>
                   </div>
-                  <div class="listrowitem pl" id=autoplaylist3 data-title="Wake Up Mix">
+                  <div class="listrowitem pl apl" id=autoplaylist3 data-title="Wake Up Mix">
                     <div class=collage>
                       <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/p1118976/images/logoq.png);"></div>
                       <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/p1391247/images/logoq.png);"></div>
@@ -2424,7 +2431,7 @@ jhunter@tunein.com
                       </div>
                     </div>
                   </div>
-                  <div class="listrowitem pl" id=autoplaylist4 data-title="Chris Hayes">
+                  <div class="listrowitem pl apl" id=autoplaylist4 data-title="Chris Hayes">
                     <div class=collage>
                       <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/p1124593/images/logoq.jpg)"></div>
                       <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/p921816/images/logoq.png)"></div>
@@ -2447,7 +2454,7 @@ jhunter@tunein.com
                       </div>
                     </div>
                   </div>
-                  <div class="listrowitem pl"  id=autoplaylist5 data-title="Dance Party">
+                  <div class="listrowitem pl apl"  id=autoplaylist5 data-title="Dance Party">
                     <div class=collage>
                       <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/s249976/images/logoq.png)"></div>
                       <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/s247154/images/logoq.png)"></div>
@@ -2480,22 +2487,21 @@ jhunter@tunein.com
             </div>
             <div class=playlistcontrols>
               <div class="btn aink playallplaylist npl">Play</div>
-              
-              <div class="iconbtn menubtn" data-type=add2playlistmenu>
+              <div class="btn addplaylist2 outlinebtn" data-id="">Save Playlist</div>
+              <div class="iconbtn menubtn add2pl" data-type=add2playlistmenu>
                 <div class="svgicon playlistadd"></div>
               </div>
-              <div class="iconbtn menubtn" data-type=editplaylist>
+              <div class="iconbtn menubtn morepl" data-type=editplaylist>
                 <div class="svgicon moreicon"></div>
               </div>
             </div>
             <div class="playlistlist itemlist">
-              content
 
             </div>
             <div class="playlistrow playlistbottom">
               <div class="btn addtoplaylist outlinebtn menubtn" data-type=add2playlistmenu>Add to Playlist</div>
             </div>
-            <div class="playlistrow">
+            <div class="playlistrow reccos">
                 <div class="heading ">
                   <h2>Recommendations</h2>
                 </div>
@@ -3675,6 +3681,8 @@ jhunter@tunein.com
       let playlist = this.dataset.title;
       let list = Lists[playlist] || AutoPlaylist[this.id];
 
+      let auto = this.classList.contains('apl');
+
       console.log(list);
 
       this.dataset.page = 'playlistdetail';
@@ -3761,8 +3769,39 @@ jhunter@tunein.com
         hero.appendChild(h);
       }
 
+      let page = document.getElementById('playlistdetailpage');
 
+      if ( count == 0 ){
+        for(var i=0;i<3;i++){
+        let m = images[i];
 
+        let h = document.createElement('div');
+
+        h.className = 'albumgrid agrid3';
+        h.style.backgroundColor = 'var(--ink' + (4 + i) + ')' ;
+        h.style.backgroundImage = 'url(../icons/TIIcon.svg)';
+        h.style.backgroundSize =  i === 0 ? '48px' : '24px';
+        h.style.backgroundRepeat =  'no-repeat';
+        h.style.opacity = 0.33;//(7 - i) / 10;
+
+        hero.appendChild(h);
+      }
+
+        page.classList.add('emptyplay');
+      } else {
+        page.classList.remove('emptyplay');
+      }
+
+     
+
+      let sb = page.getElementsByClassName('addplaylist2')[0];
+      sb.dataset.id = id;
+
+      if ( auto ){
+        page.classList.add('notmine');
+      } else {
+        page.classList.remove('notmine');
+      }
 
       openpage.call(this, e);
     }
@@ -4246,7 +4285,6 @@ jhunter@tunein.com
       let id = p.id;
 
       document.getElementsByClassName('addplaylist')[0].dataset.id = document.getElementsByClassName('hideplaylist')[0].dataset.id = id;
-
     }
 
     function addautoplaylist(){
@@ -4268,6 +4306,7 @@ jhunter@tunein.com
       document.getElementsByClassName('playlistcontent')[0].appendChild(c);
 
       c.getElementsByClassName('menubtn autoplaylist')[0].dataset.type = 'playlistmore';
+      c.classList.remove('apl');
       
       Playlist.push(a.getElementsByClassName('title')[0].innerText);
 
@@ -4275,7 +4314,9 @@ jhunter@tunein.com
 
       let pc = document.getElementsByClassName('playlistcount')[0];
       pc.empty();
-      pc.appendChild(document.createTextNode(Playlist.length))
+      pc.appendChild(document.createTextNode(Playlist.length));
+
+      document.getElementById('playlistdetailpage').classList.remove('notmine');
     }
 
     function playplaylist(e){
@@ -4479,7 +4520,7 @@ jhunter@tunein.com
     Attach.on('input', '#satboost', colorshift);
     Attach.on('input', '#lumboost', colorshift);
     Attach.on('input', '#playbackspeed', playbackspeed);
-    Attach.on('click', '.addplaylist', addautoplaylist);
+    Attach.on('click', '.addplaylist, .addplaylist2', addautoplaylist);
     Attach.on('click', '.hideplaylist', hideplaylist);
     Attach.on('click', '.savenpspeed', savenpspeed);
     Attach.on('click', '.cancelnpspeed', cancelnpspeed);
