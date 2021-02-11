@@ -480,7 +480,9 @@ jhunter@tunein.com
         .darkui .outlinebtn:active {border-color:var(--darkuioutlinebtnpress);background-color:var(--darkuioutlinebtnpress);color:var(--ink);}
           .darkmode .darkui .outlinebtn:active {color:var(--ink3);}
 
-      
+          .invertbtn.btn {background-color:var(--ink1);color:var(--ink10)}
+      .invertbtn.btn:hover {background:var(--ink3);}
+      .invertbtn.btn:active {background:var(--ink4);}
 
     .darktext .btn {color:var(--ink9);}
       .darktext .btn:hover {color:var(--ink10);}
@@ -693,13 +695,20 @@ jhunter@tunein.com
     .premiumpage #nav {background-color:var(--premium);}
 
     .itemlist {display:flex;flex-direction: column;gap:var(--tilegap);margin-bottom:8px;}
-      .rowitem {display:flex;padding:0 24px 0;box-sizing:border-box;gap:12px;cursor:pointer;user-select: none;}
+      .rowitem {display:flex;padding:0 24px 0;box-sizing:border-box;gap:12px;cursor:pointer;user-select: none;position:relative;}
         .rowitem:last-child {margin-bottom:8px;}
         .rowitem:first-child {padding-top:8px;}
         .rowitem .thumb {width:80px;height:80px;min-width:80px;min-height:80px;}
         .rowitem .description {display:flex;flex-direction: column;justify-content: center;max-width:calc(100% - 80px - 12px);}
           .rowitem .description .title {font-weight:500;font-size:18px;padding-bottom:4px;max-height: 40px;text-overflow: ellipsis;overflow: hidden;}
           .rowitem .description .meta {color:var(--lighttext);font-size:16px;text-overflow: ellipsis;white-space:nowrap;overflow:hidden;max-width:100%;}
+
+          .rowitem .morebtn {position:absolute;top:50%;right:12px;margin-top:-22px;}
+          .rowitem .morebtn .svgicon {background-color:var(--ink7);}
+
+
+          .rowitem.npl .thumb {width:64px;height:64px;min-width:64px;min-height:64px;}
+          .rowitem.npl .description .title {padding-bottom:2px;}
 
     .itemrowlist {display:flex;flex-direction: column;margin-bottom:8px;}
       .listrowitem {display:flex;padding:0 0 0 24px;box-sizing:border-box;gap:16px;cursor:pointer;user-select: none;align-items: center;}
@@ -1041,6 +1050,32 @@ jhunter@tunein.com
     .wrapple {position:absolute;top:0;left:0;right:0;bottom:0;overflow:hidden;pointer-events:none;z-index:0;}
       .ripple {background:rgba(125,125,125,.125);position: absolute;border-radius:50%;z-index:1;transform:scale(0);}
     
+    .herowrap {position: relative;}
+    .playlisthero {height:260px;background:var(--ink3);display:grid;grid-template-columns: repeat(6, 1fr);grid-template-rows: repeat(4, 1fr);grid-gap: 0;position:relative;}
+      .albumgrid {width:100%;height:100%;background-size: cover;background-position: center;}
+        .agrid1 {grid-column-start: 1;grid-row-start: 1;grid-row-end:5;grid-column-end:7;}
+
+        .agrid2 {grid-column-start: 1;grid-row-start: 1;grid-row-end:3;grid-column-end:4;}
+          .agrid2:nth-child(2) {}
+
+        .agrid3 {grid-column-start: 3;grid-row-start: 1;grid-row-end:5;grid-column-end:7;}
+          .agrid3:nth-child(2) {grid-column-start: 1;grid-row-start: 1;grid-row-end:3;grid-column-end:3;}
+          .agrid3:nth-child(3) {grid-column-start: 1;grid-row-start: 3;grid-row-end:5;grid-column-end:3;}
+
+        .agrid4 {grid-column-start: 1;grid-row-start: 1;grid-row-end:3;grid-column-end:4;}
+          .agrid4:nth-child(2) {grid-column-start: 4;grid-row-start: 1;grid-row-end:3;grid-column-end:7;}
+          .agrid4:nth-child(3) {grid-column-start: 1;grid-row-start: 3;grid-row-end:5;grid-column-end:4;}
+          .agrid4:nth-child(4) {grid-column-start: 4;grid-row-start: 3;grid-row-end:5;grid-column-end:7;}
+        .agrid6 {}
+
+    .playlistcontrols {padding:0 24px;margin-top:-56px;height:56px;display:flex;}
+      .playallplaylist {width:50%;margin-right: 8px;}
+      .playlistedit {}
+      .playlistlistadd {}
+    .playlistlist {padding-top:8px;}
+
+    .playlistbottom {padding:12px 24px 24px;}
+      .addtoplaylist {width:100%;}
 
     @media screen and (max-width: 666px) {
       #container {
@@ -1363,6 +1398,45 @@ jhunter@tunein.com
         <div class=panelitem>Duplicate</div>
         <div class=panelitem>Share</div>
         <div class=panelitem>Something</div>
+      </div>
+    </div>
+
+    <div class="morepanel editplaylist">
+      <div class=overlay></div>
+      <div class=panel>
+        <div class=panelitem>Edit</div>
+        <div class=panelitem>Sort</div>
+        <div class=panelitem>Share</div>
+        <div class=panelitem>Delete</div>
+        <div class=panelitem>Duplicate</div>
+      </div>
+    </div>
+
+    <div class="morepanel add2playlistmenu">
+      <div class=overlay></div>
+      <div class=panel>
+        <div class=panelitem>Search</div>
+     
+      </div>
+    </div>
+
+    <div class="morepanel playlistitemmore">
+      <div class=overlay></div>
+      <div class=panel>
+        <div class=panelitem>Change Duration</div>
+        <div class=panelitem>Remove From Playlist</div>
+        <div class=panelitem>Share</div>
+        <div class=panelitem>Add to Another Playlist</div>
+      </div>
+    </div>
+
+    <div class="morepanel playlistpodmore">
+      <div class=overlay></div>
+      <div class=panel>
+        <div class=panelitem>Change Episode</div>
+        <div class=panelitem>Remove From Playlist</div>
+        <div class=panelitem>Share</div>
+        <div class=panelitem>Add to Another Playlist</div>
       </div>
     </div>
 
@@ -2245,7 +2319,7 @@ jhunter@tunein.com
                   <h2 style="margin-bottom:2px;">Playlist You Might Like</h2>
                 </div>
                 <div class=itemrowlist>
-                  <div class="listrowitem pl" id=autoplaylist1>
+                  <div class="listrowitem pl" id=autoplaylist1 data-title="Latest News Briefing">
                     <div class=collage>
                       <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/s20407/images/logoq.png);"></div>
                       <div class=v2 style="background-image:url(https://cdn-profiles.tunein.com/p952868/images/logoq.png);background-position-x: left;"></div>
@@ -2266,7 +2340,7 @@ jhunter@tunein.com
                       </div>
                     </div>
                   </div>
-                  <div class="listrowitem pl" id=autoplaylist2>
+                  <div class="listrowitem pl" id=autoplaylist2 data-title="Rock n Roll">
                     <div class=collage>
                       <div class=h2 style="background-image:url(https://cdn-profiles.tunein.com/s306872/images/brickg.jpg);"></div>
                       <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/s249994/images/logoq.jpg)"></div>
@@ -2288,7 +2362,7 @@ jhunter@tunein.com
                       </div>
                     </div>
                   </div>
-                  <div class="listrowitem pl" id=autoplaylist3>
+                  <div class="listrowitem pl" id=autoplaylist3 data-title="Wake Up Mix">
                     <div class=collage>
                       <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/p1118976/images/logoq.png);"></div>
                       <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/p1391247/images/logoq.png);"></div>
@@ -2310,7 +2384,7 @@ jhunter@tunein.com
                       </div>
                     </div>
                   </div>
-                  <div class="listrowitem pl" id=autoplaylist4>
+                  <div class="listrowitem pl" id=autoplaylist4 data-title="Chris Hayes">
                     <div class=collage>
                       <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/p1124593/images/logoq.jpg)"></div>
                       <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/p921816/images/logoq.png)"></div>
@@ -2333,7 +2407,7 @@ jhunter@tunein.com
                       </div>
                     </div>
                   </div>
-                  <div class="listrowitem pl"  id=autoplaylist5>
+                  <div class="listrowitem pl"  id=autoplaylist5 data-title="Dance Party">
                     <div class=collage>
                       <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/s249976/images/logoq.png)"></div>
                       <div class=g1 style="background-image:url(https://cdn-profiles.tunein.com/s247154/images/logoq.png)"></div>
@@ -2360,10 +2434,27 @@ jhunter@tunein.com
             </div>
           </div>
           <div id=playlistdetailpage class=slidepage>
-            details playlist
-            <div class=hero>hero</div>
-            <div class=editcontrols>edit</div>
-            <div class="btn addtoplaylist aink">Add to Playlist</div>
+            <div class=herowrap>
+              <div class=playlisthero></div>
+              <div class="graddd" style="position: absolute;top: 0;left: 0;right: 0;bottom: 0;background: linear-gradient(0deg, var(--ink1), transparent);"></div>
+            </div>
+            <div class=playlistcontrols>
+              <div class="btn aink playallplaylist ">Play</div>
+              
+              <div class="iconbtn menubtn" data-type=add2playlistmenu>
+                <div class="svgicon playlistadd"></div>
+              </div>
+              <div class="iconbtn menubtn" data-type=editplaylist>
+                <div class="svgicon moreicon"></div>
+              </div>
+            </div>
+            <div class="playlistlist itemlist">
+              content
+
+            </div>
+            <div class="playlistrow playlistbottom">
+              <div class="btn addtoplaylist outlinebtn menubtn" data-type=add2playlistmenu>Add to Playlist</div>
+            </div>
           </div>
           <div id=favoritespage class="slidepage">
             <div class=contentrow>
@@ -2519,6 +2610,17 @@ jhunter@tunein.com
             <div class="svgicon moreicon"></div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div id=playlistlistitem class="rowitem np npl" data-station="" data-url="">
+      <div class="thumb" style=""></div>
+      <div class="description">
+        <div class="title"></div>
+        <div class="meta"></div>
+      </div>
+      <div class="iconbtn more menubtn morebtn" data-type="playlistitemmore">
+        <div class="svgicon moreicon"></div>
       </div>
     </div>
   </div>
@@ -3009,7 +3111,6 @@ jhunter@tunein.com
       d.style.transform = 'scale( 1)'; // + (s * 1.44) + ')';
 
       function up(e){
-        console.log("UPPPPPPP")
         window.removeEventListener('mouseup', up);
 
         if ( d.animating ){
@@ -3459,7 +3560,7 @@ jhunter@tunein.com
 
     function plpage(e){
       let playlist = this.dataset.title;
-      let list = Lists[playlist];
+      let list = Lists[playlist] || AutoPlaylist[this.id];
 
       console.log(list);
 
@@ -3468,6 +3569,85 @@ jhunter@tunein.com
       // this.dataset.title = this.getElementsByClassName('title')[0].innerText;
 
       document.body.classList.add('subsubpageactive');
+
+      let content = document.getElementsByClassName('playlistlist')[0];
+      content.empty();
+
+      let hero = document.getElementsByClassName('playlisthero')[0];
+      hero.empty();
+
+      let id = this.id;
+      
+      let images = [];
+
+      for(var i=0;i<list.stations.length;i++){
+
+        let c = document.getElementById('playlistlistitem').cloneNode(true);
+        c.removeAttribute('id');
+
+        let thumb = c.getElementsByClassName('thumb')[0];
+        let title = c.getElementsByClassName('title')[0];
+        let meta = c.getElementsByClassName('meta')[0];
+        let menu = c.getElementsByClassName('morebtn')[0];
+
+        let s = list.stations[i];
+        let n = s.name;
+        let m = s.image;
+        let t = s.stream;
+        let l = s.live || false;
+        let d = s.length || 0;
+        let a = s.meta || 'NA';
+
+        let sub = l ? d + ' Minutes' : 'Latest Episode';
+
+        if ( !l ){
+          menu.dataset.type = 'playlistpodmore';
+        }
+
+        thumb.style.backgroundImage = m;
+        title.appendChild(document.createTextNode(n));
+        meta.appendChild(document.createTextNode(sub));
+
+        c.dataset.url = t;
+        c.dataset.station = n;
+
+        images.push(m);
+
+        content.appendChild(c);
+      }
+
+      var count = 0;
+
+      switch ( images.length ){
+        case 1 :
+          count = 1;
+          break
+        case 2 :
+          count = 2;
+          break
+        case 3 :
+          count = 3;
+          break
+        case 4 : case 5 :
+          count = 3;
+          break
+        default:
+          count = 6;
+      } 
+
+      for(var i=0;i<count;i++){
+        let m = images[i];
+
+        let h = document.createElement('div');
+
+        h.className = 'albumgrid agrid' + count;
+        h.style.backgroundImage = m;
+
+        hero.appendChild(h);
+      }
+
+
+
 
       openpage.call(this, e);
     }
@@ -3478,7 +3658,7 @@ jhunter@tunein.com
       let t = this.dataset.title;
 
       let pagetitle = document.createElement('div')
-      pagetitle.className = 'navlogo navtitle subnavtitle ' + a +'pagetitle';
+      pagetitle.className = 'navlogo navtitle subnavtitle ' + a + 'pagetitle';
 
       pagetitle.appendChild(document.createTextNode(t));
 
@@ -3494,6 +3674,8 @@ jhunter@tunein.com
       b.classList.add('active');
       // d.classList.add('currenttitle');
       f.classList.add('oldtitle');
+
+      b.scroll({top:0});
 
       window.activepage = b;
       window.activeparent = c;
@@ -3829,8 +4011,14 @@ jhunter@tunein.com
       e.stopPropagation();
       let t = this.dataset.type;
 
+      let m = document.getElementsByClassName(t)[0];
+
+      if (!m) {
+        return;
+      }
+
       document.getElementsByClassName('openmenu').removeclass('openmenu');
-      document.getElementsByClassName(t)[0].classList.add('openmenu');
+      m.classList.add('openmenu');
     }
 
     function focuson(e){
@@ -4041,52 +4229,61 @@ jhunter@tunein.com
     }
 
     function redline(e){
-          //if ( !this.classList.contains('on') ){
-              if ( window.PRISM ){
-                  PRISM.eject();
-                  return;
-              }
-            
-          //}
-
-          var fancy = document.getElementById('fancyredline');
-          if ( fancy ) { fancy.style.display = 'none'; }
-          localStorage.fancyredline = true;
-
-          var old = document.getElementById('specism');
-          if ( old ){
-            old.parentNode.removeChild(old);
-          }
-
-          var script = document.createElement('script');
-          script.src = '../prism/inject.js';
-          script.id = 'specism';
-          console.log('on')
-
-          script.onload = function(){
-            var isChromium = window.chrome,
-                vendorName = window.navigator.vendor,
-                isOpera = window.navigator.userAgent.indexOf("OPR") > -1;
-
-            if ( isChromium == null || isChromium == undefined || vendorName !== "Google Inc." || isOpera == true ){
-               return;
-            }
-
-            var panel  = document.getElementsByClassName('PRISMscroll')[0];
-            if ( !panel ){
+      //if ( !this.classList.contains('on') ){
+          if ( window.PRISM ){
+              PRISM.eject();
               return;
-            }
-            panel.innerHTML += '<div class=sub style="text-align:center;padding-top:8px;padding-bottom:8px;"><button onclick="extension()">Get the Chrome Extension</button></div>';
-
           }
+        
+      //}
 
-          document.body.appendChild(script);
+      var fancy = document.getElementById('fancyredline');
+      if ( fancy ) { fancy.style.display = 'none'; }
+      localStorage.fancyredline = true;
+
+      var old = document.getElementById('specism');
+      if ( old ){
+        old.parentNode.removeChild(old);
+      }
+
+      var script = document.createElement('script');
+      script.src = '../prism/inject.js';
+      script.id = 'specism';
+      console.log('on')
+
+      script.onload = function(){
+        var isChromium = window.chrome,
+            vendorName = window.navigator.vendor,
+            isOpera = window.navigator.userAgent.indexOf("OPR") > -1;
+
+        if ( isChromium == null || isChromium == undefined || vendorName !== "Google Inc." || isOpera == true ){
+            return;
         }
 
-        function extension(){
-          var win = window.open('https://chrome.google.com/webstore/detail/prism-redline-tool/hkbhjllliedcceblibllaodamehmbfgm?hl=en-US', '_blank');
-          win.focus();
+        var panel  = document.getElementsByClassName('PRISMscroll')[0];
+        if ( !panel ){
+          return;
         }
+        panel.innerHTML += '<div class=sub style="text-align:center;padding-top:8px;padding-bottom:8px;"><button onclick="extension()">Get the Chrome Extension</button></div>';
+
+      }
+
+      document.body.appendChild(script);
+    }
+
+    function extension(){
+      var win = window.open('https://chrome.google.com/webstore/detail/prism-redline-tool/hkbhjllliedcceblibllaodamehmbfgm?hl=en-US', '_blank');
+      win.focus();
+    }
+    
+    function playallplaylist(e){
+      let p = this.getparent('slidepage');
+      let n = p.getElementsByClassName('rowitem np')[0];
+
+      window.PlayPlaylist = {} //@todo hook to actual playlist
+
+      n.click();
+    }
 
     Attach.on('click', '.saveplaylist', saveplaylist);
     Attach.on('click', '.focus', focuson);
@@ -4131,6 +4328,7 @@ jhunter@tunein.com
     Attach.on('click', '.cancelnpspeed', cancelnpspeed);
     Attach.on('click', '.npspeedbtn', npspeed);
     Attach.on('mousedown', '.aink, .panelitem, .listitem, .iconbtn, .modalclose', droidpress);
+    Attach.on('click', '.playallplaylist', playallplaylist);
 
     window.Playlist = [];
     window.Lists = {}
@@ -4139,11 +4337,11 @@ jhunter@tunein.com
 
     AutoPlaylist = {
       autoplaylist1 : {name: 'Latest News Briefing', stations: [
-        {name: 'CNN', image: 'url(https://cdn-profiles.tunein.com/s20407/images/logoq.png)', stream: 'https://17563.live.streamtheworld.com/CNNTV_SC?sbmid=9664fe78-c2d6-44bb-acb1-d9cfa306c08a&DIST=CBS&TGT=radiocomPlayer&SRC=CBS&lsid=cookie:8ff2da13-08c2-4732-8e99-3e3bd7346e3f', live: true, length: 30 },
-        {name: 'C-Span Radio', image: 'url(https://cdn-profiles.tunein.com/s28047/images/logoq.png)', stream: 'http://18123.live.streamtheworld.com/CSPANRADIO_SC?DIST=TuneIn&TGT=TuneIn&maxServers=2&tdtok=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImZTeXA4In0.eyJpc3MiOiJ0aXNydiIsInN1YiI6IjI0Njk1NTE3MiIsImlhdCI6MTYxMTg3NDIyOSwidGQtcmVnIjpmYWxzZX0.lhNfRp_h4m_KK7bV_uARa41bF-0sXptd7LjCmUGBtmE&gdpr=0&us_privacy=1YNY&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTYxMTg3NDIyOSwiaXNzIjoidGlzcnYifQ.ZujXgt5k8Fa6wrLLWChVPaDSlSG1OwzPYZKrHuPKuvk', live: true, length: 30 },
-        {name: 'The Daily', image: 'url(https://cdn-profiles.tunein.com/p952868/images/logoq.png)', stream: 'https://17563.live.streamtheworld.com/CNNTV_SC?sbmid=9664fe78-c2d6-44bb-acb1-d9cfa306c08a&DIST=CBS&TGT=radiocomPlayer&SRC=CBS&lsid=cookie:8ff2da13-08c2-4732-8e99-3e3bd7346e3f', live: false },
-        {name: 'Cheddar', image: 'url(https://cdn-profiles.tunein.com/s296280/images/logoq.png)', stream: 'http://cheddar.streamguys1.com/live-mp3?aw_0_1st.age=33&aw_0_1st.gender=male&aw_0_1st.playerid=RadioTime&aw_0_1st.skey=1611874277&source=TuneIn&aw_0_1st.premium=false&us_privacy=1YNY&aw_0_1st.lotamesegments=%3ball%3b', live: true, length: 30 },
-        {name: 'Bloomberg Radio', image: 'url(https://cdn-profiles.tunein.com/s165740/images/logoq.png)', stream: 'https://15263.live.streamtheworld.com/BBGRADIONTLAAC_SC?sbmid=90941f1b-82a6-43ae-8820-f1dcbc910b19&DIST=CBS&TGT=radiocomPlayer&SRC=CBS&lsid=cookie:8ff2da13-08c2-4732-8e99-3e3bd7346e3f', live: true, length: 30 }
+        {name: 'CNN', image: 'url(https://cdn-profiles.tunein.com/s20407/images/logoq.png)', stream: 'https://17563.live.streamtheworld.com/CNNTV_SC?sbmid=9664fe78-c2d6-44bb-acb1-d9cfa306c08a&DIST=CBS&TGT=radiocomPlayer&SRC=CBS&lsid=cookie:8ff2da13-08c2-4732-8e99-3e3bd7346e3f', meta: "News Radio", live: true, length: 30 },
+        {name: 'C-Span Radio', image: 'url(https://cdn-profiles.tunein.com/s28047/images/logoq.png)', stream: 'http://18123.live.streamtheworld.com/CSPANRADIO_SC?DIST=TuneIn&TGT=TuneIn&maxServers=2&tdtok=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImZTeXA4In0.eyJpc3MiOiJ0aXNydiIsInN1YiI6IjI0Njk1NTE3MiIsImlhdCI6MTYxMTg3NDIyOSwidGQtcmVnIjpmYWxzZX0.lhNfRp_h4m_KK7bV_uARa41bF-0sXptd7LjCmUGBtmE&gdpr=0&us_privacy=1YNY&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTYxMTg3NDIyOSwiaXNzIjoidGlzcnYifQ.ZujXgt5k8Fa6wrLLWChVPaDSlSG1OwzPYZKrHuPKuvk', meta: "News Radio", live: true, length: 30 },
+        {name: 'The Daily', image: 'url(https://cdn-profiles.tunein.com/p952868/images/logoq.png)', stream: 'https://dts.podtrac.com/redirect.mp3/chtbl.com/track/8DB4DB/pdst.fm/e/nyt.simplecastaudio.com/03d8b493-87fc-4bd1-931f-8a8e9b945d8a/episodes/2456bb9b-b94e-4da5-a167-8b5f6a1a45a4/audio/128/default.mp3?aid=rss_feed&awCollectionId=03d8b493-87fc-4bd1-931f-8a8e9b945d8a&awEpisodeId=2456bb9b-b94e-4da5-a167-8b5f6a1a45a4&feed=54nAGcIl', meta: "Podcast", live: false },
+        {name: 'Cheddar', image: 'url(https://cdn-profiles.tunein.com/s296280/images/logoq.png)', stream: 'http://cheddar.streamguys1.com/live-mp3?aw_0_1st.age=33&aw_0_1st.gender=male&aw_0_1st.playerid=RadioTime&aw_0_1st.skey=1611874277&source=TuneIn&aw_0_1st.premium=false&us_privacy=1YNY&aw_0_1st.lotamesegments=%3ball%3b', meta: "Business & Tech News", live: true, length: 30 },
+        {name: 'Bloomberg Radio', image: 'url(https://cdn-profiles.tunein.com/s165740/images/logoq.png)', meta: "Business News", stream: 'https://15263.live.streamtheworld.com/BBGRADIONTLAAC_SC?sbmid=90941f1b-82a6-43ae-8820-f1dcbc910b19&DIST=CBS&TGT=radiocomPlayer&SRC=CBS&lsid=cookie:8ff2da13-08c2-4732-8e99-3e3bd7346e3f', live: true, length: 30 }
       ]},
       autoplaylist2 : {name: 'Rock n  Roll', stations: [
 
