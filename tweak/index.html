@@ -2619,8 +2619,8 @@ jhunter@tunein.com
           <div class="title"></div>
           <div class="meta">0 Items</div>
         </div>
-        <div class="actions">
-          <div class="iconbtn ">
+        <div class="actions ">
+          <div class="iconbtn playplaylist">
             <div class="bgcircle"></div>
             <div class="svgicon playicon"></div>
           </div>
@@ -3284,7 +3284,7 @@ jhunter@tunein.com
       es.empty();
       es.appendChild(document.createTextNode(station));
 
-      if (this.dataset.radio ){
+      if (this.dataset.radio){
         document.getElementsByClassName('icyscript').remove();
         var s = document.createElement( 'script' );
         s.className = 'icyscript';
@@ -4192,6 +4192,44 @@ jhunter@tunein.com
     function playplaylist(e){
       e.stopPropagation();
 
+      let p = this.getparent('pl');
+      let id = p.id
+      let ti = p.dataset.title;
+
+      let l = Lists[ti] || AutoPlaylist[id];
+
+
+      let c = document.getElementById('playlistlistitem').cloneNode(true);
+      c.removeAttribute('id');
+      c.style.display = 'none';
+
+      let thumb = c.getElementsByClassName('thumb')[0];
+      let title = c.getElementsByClassName('title')[0];
+      let meta = c.getElementsByClassName('meta')[0];
+      let menu = c.getElementsByClassName('morebtn')[0];
+
+      let s = l.stations[0];
+      let n = s.name;
+      let m = s.image;
+      let t = s.stream;
+      let d = s.length || 0;
+      let a = s.meta || 'NA';
+
+     
+
+      thumb.style.backgroundImage = m;
+      title.appendChild(document.createTextNode(n));
+      // meta.appendChild(document.createTextNode(sub));
+
+      c.dataset.url = t;
+      c.dataset.station = n;
+
+
+      document.body.appendChild(c);
+
+      c.click();
+
+      c.remove();
     }
 
     function hideplaylist(e){
