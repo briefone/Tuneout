@@ -419,6 +419,9 @@ jhunter@tunein.com
       .moreicon {-webkit-mask: url('../icons/More-Small(Horizontal).svg');mask: url('../icons/More-Small(Horizontal).svg');}
         .droid .moreicon {-webkit-mask: url('../icons/More-Regular(Vertical).svg');mask: url('../icons/More-Regular(Vertical).svg');width:22px !important;height:22px !important;}
       .playicon {-webkit-mask: url('../icons/Play.svg');mask: url('../icons/Play.svg');}
+      .next {-webkit-mask: url('../icons/Next.svg');mask: url('../icons/Next.svg');}
+      .prev {-webkit-mask: url('../icons/Prev.svg');mask: url('../icons/Prev.svg');}
+
 
     .toggle {width:38px;height:22px;border-radius:30px;position:relative;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(0, 0, 0, 0.02);cursor:pointer;transition:background 150ms ease-in-out;display: inline-block;margin-right:8px;vertical-align: middle;}
         .toggle::after {content:'';position:absolute;top:3px;left:3px;width:16px;height:16px;background:white;display:block;box-shadow:0 2px 4px rgba(0,0,0,.15);border-radius:50%;transition:transform 150ms ease-in-out;}
@@ -921,6 +924,9 @@ jhunter@tunein.com
 
       .live .npforward30, .live .nprewind30 {display:none;} 
 
+      .npnext, .npprev {display:none;} 
+        .npplaylist .npnext, .npplaylist .npprev {display:flex;}
+
 
     .npextras {margin:0 24px;border-radius:6px;background:var(--npextra);}
 
@@ -1055,8 +1061,8 @@ jhunter@tunein.com
       .albumgrid {width:100%;height:100%;background-size: cover;background-position: center;}
         .agrid1 {grid-column-start: 1;grid-row-start: 1;grid-row-end:5;grid-column-end:7;}
 
-        .agrid2 {grid-column-start: 1;grid-row-start: 1;grid-row-end:3;grid-column-end:4;}
-          .agrid2:nth-child(2) {}
+        .agrid2 {grid-column-start: 1;grid-row-start: 1;grid-row-end:5;grid-column-end:4;}
+          .agrid2:nth-child(2) {grid-column-start: 4;grid-row-start: 1;grid-row-end:5;grid-column-end:7;}
 
         .agrid3 {grid-column-start: 3;grid-row-start: 1;grid-row-end:5;grid-column-end:7;}
           .agrid3:nth-child(2) {grid-column-start: 1;grid-row-start: 1;grid-row-end:3;grid-column-end:3;}
@@ -1066,7 +1072,13 @@ jhunter@tunein.com
           .agrid4:nth-child(2) {grid-column-start: 4;grid-row-start: 1;grid-row-end:3;grid-column-end:7;}
           .agrid4:nth-child(3) {grid-column-start: 1;grid-row-start: 3;grid-row-end:5;grid-column-end:4;}
           .agrid4:nth-child(4) {grid-column-start: 4;grid-row-start: 3;grid-row-end:5;grid-column-end:7;}
-        .agrid6 {}
+
+        .agrid6 {grid-column-start: 1;grid-row-start: 1;grid-row-end:3;grid-column-end:3;}
+          .agrid6:nth-child(2) {grid-column-start: 3;grid-row-start: 1;grid-row-end:3;grid-column-end:5;}
+          .agrid6:nth-child(3) {grid-column-start: 5;grid-row-start: 1;grid-row-end:3;grid-column-end:7;}
+          .agrid6:nth-child(4) {grid-column-start: 1;grid-row-start: 3;grid-row-end:5;grid-column-end:3;}
+          .agrid6:nth-child(5) {grid-column-start: 3;grid-row-start: 3;grid-row-end:5;grid-column-end:5;}
+          .agrid6:nth-child(6) {grid-column-start: 5;grid-row-start: 3;grid-row-end:5;grid-column-end:7;}
 
     .playlistcontrols {padding:0 24px;margin-top:-56px;height:56px;display:flex;}
       .playallplaylist {width:50%;margin-right: 8px;}
@@ -1603,6 +1615,9 @@ jhunter@tunein.com
             </div>
           </div>
           <div class=npcontrols>
+            <div class="npprev circlebtn medium aink">
+              <div class="svgicon prev"></div>
+            </div>
             <div class="nprewind30 circlebtn medium aink">
               <div class="svgicon rewind"></div>
             </div>
@@ -1618,6 +1633,9 @@ jhunter@tunein.com
             </div>
             <div class="npforward30 circlebtn medium aink">
               <div class="svgicon forward"></div>
+            </div>
+            <div class="npnext circlebtn medium aink">
+              <div class="svgicon next"></div>
             </div>
           </div>
         </div>
@@ -2436,10 +2454,10 @@ jhunter@tunein.com
           <div id=playlistdetailpage class=slidepage>
             <div class=herowrap>
               <div class=playlisthero></div>
-              <div class="graddd" style="position: absolute;top: 0;left: 0;right: 0;bottom: 0;background: linear-gradient(0deg, var(--ink1), transparent);"></div>
+              <div class="graddd" style="position: absolute;top: 0;left: 0;right: 0;bottom: 0;background: linear-gradient(0deg, var(--ink1), transparent);pointer-events:none;"></div>
             </div>
             <div class=playlistcontrols>
-              <div class="btn aink playallplaylist ">Play</div>
+              <div class="btn aink playallplaylist npl">Play</div>
               
               <div class="iconbtn menubtn" data-type=add2playlistmenu>
                 <div class="svgicon playlistadd"></div>
@@ -3384,6 +3402,12 @@ jhunter@tunein.com
 
         let ei = np.getElementsByClassName('extraimg')[0];
 
+        if (this.classList.contains('npl')){
+          np.classList.add('npplaylist');
+        } else {
+          np.classList.remove('npplaylist');
+        }
+
         art.style.backgroundImage = album;
         ma.style.backgroundImage = album;
         blur.style.backgroundImage = album;
@@ -3619,6 +3643,8 @@ jhunter@tunein.com
       var count = 0;
 
       switch ( images.length ){
+        case 0 :
+          break
         case 1 :
           count = 1;
           break
@@ -4279,6 +4305,10 @@ jhunter@tunein.com
     function playallplaylist(e){
       let p = this.getparent('slidepage');
       let n = p.getElementsByClassName('rowitem np')[0];
+
+      if ( !n ){
+        return;
+      }
 
       window.PlayPlaylist = {} //@todo hook to actual playlist
 
