@@ -1703,7 +1703,7 @@ jhunter@tunein.com
         </div>
         <div id=searchbar>
           <div class="inputfield search">
-            <input type=text placeholder="Search..." />
+            <input type=text placeholder="Search French Rock n Roll..." id=searchfield />
           </div>
         </div>
       </div>
@@ -3189,6 +3189,13 @@ jhunter@tunein.com
         home.className = 'tab' + page;
     }
 
+    function rollthedice(e){
+      let placeholders = ['French Rock n Roll', 'Italian Pop', 'Japanese Rap', 'Antarctic News', 'What Does a Fox Say', 'Rebecca Black', 'That One Song', 'da da dadadada', 'Bieber', 'Kitten Talk Radio', 'Pandas Chewing Bamboo', 'Meowzik', 'John Lemon', 'Emu', 'Silent Film Dialog', 'The Sounds of Nothing', 'The Sounds of Space', 'The Never Ending Song'];
+      let s = document.getElementById('searchfield');
+
+      s.placeholder = 'Search ' + placeholders.random() + '...';
+    }
+
     function tabbar(e){
       let page = this.dataset.page;
 
@@ -3208,8 +3215,15 @@ jhunter@tunein.com
       let current = bar.getElementsByClassName('tab current');
       current.removeclass('current');
       this.classList.add('current');
-
       
+      if (window.searchtimer){
+        clearInterval(window.searchtimer);
+        window.searchtimer = null;
+      }
+      
+      if ( page == 'search'){
+        window.searchtimer = setInterval(rollthedice, 1111);
+      }
 
       console.log(page);
 
