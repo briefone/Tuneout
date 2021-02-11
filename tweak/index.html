@@ -1110,7 +1110,7 @@ jhunter@tunein.com
   <script src="../js/base.js"></script>
   <script src="../js/vibe.js"></script>
   <script src="../js/albumart.js"></script>
-
+  <script src="../js/confetti.js"></script>
   <script>
     /*
  * From: https://stackoverflow.com/a/34699901/2304737
@@ -1138,6 +1138,9 @@ jhunter@tunein.com
   //     return new TextDecoder().decode(arrayBuffer);
   //   });
   // }
+
+  // window.module = {};
+
   </script>
 </head>
 <body>
@@ -2538,20 +2541,20 @@ jhunter@tunein.com
             </div>
           </div>
           <div id=downloadspage class="slidepage">
-            downloads
+            Imagine downloaded things are here...
           </div>
         </div>
       </div>
 
       <div id=search>
         <div class=content>
-          Search
+          
         </div>
       </div>
 
       <div id=premium>
         <div class=content>
-          Premium
+          
         </div>
       </div>
 
@@ -3195,7 +3198,7 @@ jhunter@tunein.com
 
       s.placeholder = 'Search ' + placeholders.random() + '...';
     }
-
+    
     function tabbar(e){
       let page = this.dataset.page;
 
@@ -3205,6 +3208,30 @@ jhunter@tunein.com
       } else  {
         let tp = document.getElementsByClassName('pagehome')[0];
         tp.scroll({top: 0});
+      }
+
+      if (page == 'premium'){
+        var canvas = document.getElementById('boom');
+        let cc = document.getElementById('container');
+        if ( !canvas ){
+          canvas = document.createElement('canvas');
+          canvas.id = 'boom';
+          document.getElementById('premium').getElementsByClassName('content')[0].appendChild(canvas);
+        }
+
+        canvas.width = cc.offsetWidth;
+        canvas.height = cc.offsetHeight;
+
+        canvas.confetti = canvas.confetti || confetti.create(canvas);
+
+        canvas.confetti({
+          particleCount: 220,
+          spread: 50,
+          origin: { y: 1.25 },
+          startVelocity: 60,
+          decay: 0.92,
+  
+        });
       }
 
       if ( this.classList.contains('current')){
@@ -4451,6 +4478,8 @@ jhunter@tunein.com
       breakpoint();
 
       vibe('./imgs/nyan.gif');
+
+      loadcannon();
 
       let tabpages = document.getElementsByClassName('tabpage');
 
