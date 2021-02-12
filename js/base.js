@@ -69,6 +69,15 @@ Object.defineProperty(Object.prototype, "removeclass", {
     enumerable : false
 });
 
+Object.defineProperty(Object.prototype, "addclass", { 
+    value: function(x) {
+        for(var i=0;i<this.length;i++){
+            this[i].classList.add(x);
+        }
+    },
+    enumerable : false
+});
+
 Object.defineProperty(Object.prototype, "offset", { 
     value: function(x) {
         var coords = this.getBoundingClientRect();

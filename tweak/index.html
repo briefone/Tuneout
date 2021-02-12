@@ -886,6 +886,7 @@ jhunter@tunein.com
       .playing .npplay {display:none;}
 
       .npcontrols .medium {width:56px;height:56px;}
+      .npcontrols .medium {width:48px;height:48px;}
 
     .npinfo {padding:40px 80px 0 24px;position: relative;}
       .live .npinfo {padding-right:24px;}
@@ -942,7 +943,7 @@ jhunter@tunein.com
     .morepanel {position: absolute;top:0;left:0;right:0;bottom:0;z-index:999999999999;pointer-events:none;}
             .openmenu.morepanel {pointer-events: all;}
       .morepanel .overlay {position: absolute;top:0;left:0;right:0;bottom:0;z-index:1;background:rgba(0,0,0,.65);transition:opacity 200ms ease-in-out;opacity:0;}
-      .morepanel .panel {background:var(--morepanel);color:var(--moreitem);border-radius:12px 12px  0 0;position:absolute;left:0;bottom:0;right:0;padding:12px 0;z-index:1;transition:transform 200ms ease-in-out;transform:translateY(100%);}
+      .morepanel .panel {background:var(--morepanel);color:var(--moreitem);border-radius:12px 12px  0 0;position:absolute;left:0;bottom:0;right:0;padding:12px 0;z-index:1;transition:transform 200ms ease-in-out;transform:translateY(100%);overflow:hidden;}
         .morepanel .panelitem {padding:0 24px;display:flex;align-items: center;height:48px;font-size:20px;font-weight:500;justify-content: space-between;cursor:pointer;user-select:none;position: relative;}
             .morepanel .panelitem:hover {background:var(--moreitemhover);}
             .morepanel .panelitem:active {background:var(--moreitempress);transition:background-color 200ms ease-in-out;}
@@ -1089,7 +1090,7 @@ jhunter@tunein.com
     .playlistlist {padding-top:8px;}
 
     .playlistrow {}
-      .playlistrow .heading {padding:0 24px;}
+      .playlistrow .heading {padding:0 24px 8px;}
       .playlistrow .thumb {width:64px;height:64px;min-width:64px;min-height:64px;}
       .playlistrow .add2 {position:absolute;top:50%;margin-top:-22px;right:12px;}
         .playlistrow .add2 .svgicon {background:var(--ink7);}
@@ -1100,9 +1101,18 @@ jhunter@tunein.com
       .addplaylist2 {display:none;width:calc(50% - 4px);position: relative;}
       .notmine .addplaylist2 {display:flex;}
       .notmine .add2pl, .notmine .morepl {display:none;}
-      .notmine .reccos {display:none;}
+      .notmine .reccos, .notmine .addtoplaylist {display:none;}
 
     .emptyplay .playallplaylist {display:none;}
+    .hiderecco {display:none;}
+
+
+    .playlistsearch {padding:24px 24px 16px;position:relative;margin-top:-12px;border-radius:12px 12px 0 0 ;z-index:3;backdrop-filter:blur(40px);box-sizing: border-box;left:.25px;width: calc(100% - 0.5px);overflow:hidden;}
+      .droid .playlistsearch {border-radius: 0;}
+
+      .playlistsearch .colorlay {position:absolute;top:0;left:0;right:0;bottom:0;background:var(--ink1);opacity:0.5;z-index:-1;}
+
+    .panelcontent {position:absolute;top:0;left:0;right:0;bottom:0;overflow-y:scroll;padding-top:80px;}
 
     @media screen and (max-width: 666px) {
       #container {
@@ -1375,35 +1385,27 @@ jhunter@tunein.com
           <div class="listitem " >
             <div class=title>Settings</div>
             <div class=chevron>
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15.11 7.14599L19.956 11.999L15.11 16.852C15.0754 16.8844 15.0479 16.9236 15.029 16.9671C15.0102 17.0107 15.0005 17.0576 15.0005 17.105C15.0005 17.1524 15.0102 17.1993 15.029 17.2428C15.0479 17.2863 15.0754 17.3255 15.11 17.358L16.641 18.896C16.7085 18.9623 16.7994 18.9995 16.894 18.9995C16.9886 18.9995 17.0795 18.9623 17.147 18.896L22.26 13.783L23.791 12.252C23.8573 12.1845 23.8945 12.0936 23.8945 11.999C23.8945 11.9044 23.8573 11.8135 23.791 11.746L22.26 10.215L17.168 5.10599C17.1005 5.03967 17.0096 5.0025 16.915 5.0025C16.8204 5.0025 16.7295 5.03967 16.662 5.10599L15.11 6.63999C15.0754 6.67244 15.0479 6.71164 15.029 6.75515C15.0102 6.79866 15.0005 6.84558 15.0005 6.89299C15.0005 6.94041 15.0102 6.98732 15.029 7.03083C15.0479 7.07435 15.0754 7.11354 15.11 7.14599Z" />
-                </svg>
+              <div class="svgicon chev"></div>
             </div>
             
           </div>
           <div class="listitem ">
             <div class=title>TuneIn Premium</div>
             <div class=chevron>
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15.11 7.14599L19.956 11.999L15.11 16.852C15.0754 16.8844 15.0479 16.9236 15.029 16.9671C15.0102 17.0107 15.0005 17.0576 15.0005 17.105C15.0005 17.1524 15.0102 17.1993 15.029 17.2428C15.0479 17.2863 15.0754 17.3255 15.11 17.358L16.641 18.896C16.7085 18.9623 16.7994 18.9995 16.894 18.9995C16.9886 18.9995 17.0795 18.9623 17.147 18.896L22.26 13.783L23.791 12.252C23.8573 12.1845 23.8945 12.0936 23.8945 11.999C23.8945 11.9044 23.8573 11.8135 23.791 11.746L22.26 10.215L17.168 5.10599C17.1005 5.03967 17.0096 5.0025 16.915 5.0025C16.8204 5.0025 16.7295 5.03967 16.662 5.10599L15.11 6.63999C15.0754 6.67244 15.0479 6.71164 15.029 6.75515C15.0102 6.79866 15.0005 6.84558 15.0005 6.89299C15.0005 6.94041 15.0102 6.98732 15.029 7.03083C15.0479 7.07435 15.0754 7.11354 15.11 7.14599Z" />
-                </svg>
+              <div class="svgicon chev"></div>
             </div>
            
           </div>
           <div class="listitem ">
             <div class=title>About TuneIn</div>
             <div class=chevron>
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15.11 7.14599L19.956 11.999L15.11 16.852C15.0754 16.8844 15.0479 16.9236 15.029 16.9671C15.0102 17.0107 15.0005 17.0576 15.0005 17.105C15.0005 17.1524 15.0102 17.1993 15.029 17.2428C15.0479 17.2863 15.0754 17.3255 15.11 17.358L16.641 18.896C16.7085 18.9623 16.7994 18.9995 16.894 18.9995C16.9886 18.9995 17.0795 18.9623 17.147 18.896L22.26 13.783L23.791 12.252C23.8573 12.1845 23.8945 12.0936 23.8945 11.999C23.8945 11.9044 23.8573 11.8135 23.791 11.746L22.26 10.215L17.168 5.10599C17.1005 5.03967 17.0096 5.0025 16.915 5.0025C16.8204 5.0025 16.7295 5.03967 16.662 5.10599L15.11 6.63999C15.0754 6.67244 15.0479 6.71164 15.029 6.75515C15.0102 6.79866 15.0005 6.84558 15.0005 6.89299C15.0005 6.94041 15.0102 6.98732 15.029 7.03083C15.0479 7.07435 15.0754 7.11354 15.11 7.14599Z" />
-                </svg>
+              <div class="svgicon chev"></div>
             </div>
           </div>
           <div class="listitem ">
             <div class=title>Get Help</div>
             <div class=chevron>
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15.11 7.14599L19.956 11.999L15.11 16.852C15.0754 16.8844 15.0479 16.9236 15.029 16.9671C15.0102 17.0107 15.0005 17.0576 15.0005 17.105C15.0005 17.1524 15.0102 17.1993 15.029 17.2428C15.0479 17.2863 15.0754 17.3255 15.11 17.358L16.641 18.896C16.7085 18.9623 16.7994 18.9995 16.894 18.9995C16.9886 18.9995 17.0795 18.9623 17.147 18.896L22.26 13.783L23.791 12.252C23.8573 12.1845 23.8945 12.0936 23.8945 11.999C23.8945 11.9044 23.8573 11.8135 23.791 11.746L22.26 10.215L17.168 5.10599C17.1005 5.03967 17.0096 5.0025 16.915 5.0025C16.8204 5.0025 16.7295 5.03967 16.662 5.10599L15.11 6.63999C15.0754 6.67244 15.0479 6.71164 15.029 6.75515C15.0102 6.79866 15.0005 6.84558 15.0005 6.89299C15.0005 6.94041 15.0102 6.98732 15.029 7.03083C15.0479 7.07435 15.0754 7.11354 15.11 7.14599Z" />
-                </svg>
+              <div class="svgicon chev"></div>
             </div>
           </div>
         </div>
@@ -1444,9 +1446,12 @@ jhunter@tunein.com
 
     <div class="morepanel add2playlistmenu">
       <div class=overlay></div>
-      <div class=panel>
-        <div class=panelitem>Search</div>
-     
+      <div class=panel style="height:666px;max-height:75%;">
+        <div class="playlistsearch search">
+          <div class=colorlay></div>
+          <input class=input type=text placeholder="Search for genres, stations, or podcasts..." />  
+        </div>
+        <div class=playlistsearchcontent style=""></div>
       </div>
     </div>
 
@@ -1513,9 +1518,13 @@ jhunter@tunein.com
         .darkui .btn.quietbtn:active {color:var(--ink6);background:transparent;}
 
       .pillbtn {height:36px;padding:0 16px;border-radius:18px;}
+        .greybtn {background-color:var(--ink3);color:var(--ink10);}
+          .greybtn:hover {background-color:var(--ink4);color:var(--ink11);}
+          .greybtn:active {background-color:var(--ink5);color:var(--ink12);}
 
         .npspeedbtn {position:absolute;top:44px;right:24px;height:32px;font-size:14px;padding:0 14px;font-variant-numeric: tabular-nums;}
 
+      .pillbottle {padding:4px 24px 0;display:flex;flex-wrap: wrap;gap:8px;}
 
       .panel.steppanel {padding:24px 24px 8px;}
 
@@ -1660,10 +1669,10 @@ jhunter@tunein.com
                 <path d="M16.8893 4.88933C17.0071 4.88933 17.12 4.93611 17.2033 5.01937C17.2865 5.10264 17.3333 5.21557 17.3333 5.33333V18.6667C17.3333 18.7844 17.2865 18.8974 17.2033 18.9806C17.12 19.0639 17.0071 19.1107 16.8893 19.1107H14.2227C14.1642 19.1108 14.1064 19.0995 14.0523 19.0772C13.9983 19.055 13.9492 19.0223 13.9078 18.9811C13.8665 18.9398 13.8336 18.8908 13.8112 18.8369C13.7889 18.7829 13.7773 18.7251 13.7773 18.6667V5.33333C13.7773 5.21557 13.8241 5.10264 13.9074 5.01937C13.9906 4.93611 14.1036 4.88933 14.2213 4.88933H16.8893ZM9.77866 4.88933C9.89641 4.88933 10.0093 4.93611 10.0926 5.01937C10.1759 5.10264 10.2227 5.21557 10.2227 5.33333V18.6667C10.2227 18.7844 10.1759 18.8974 10.0926 18.9806C10.0093 19.0639 9.89641 19.1107 9.77866 19.1107H7.11199C7.05357 19.1108 6.99569 19.0995 6.94167 19.0772C6.88765 19.055 6.83854 19.0223 6.79717 18.9811C6.7558 18.9398 6.72298 18.8908 6.70058 18.8369C6.67818 18.7829 6.66666 18.7251 6.66666 18.6667V5.33333C6.66666 5.21557 6.71343 5.10264 6.7967 5.01937C6.87997 4.93611 6.9929 4.88933 7.11066 4.88933H9.77866Z" />
               </svg>  
             </div>
-            <div class="npforward30 circlebtn medium aink">
+            <div class="npforward30 circlebtn small aink">
               <div class="svgicon forward"></div>
             </div>
-            <div class="npnext circlebtn medium aink">
+            <div class="npnext circlebtn small aink">
               <div class="svgicon next"></div>
             </div>
           </div>
@@ -1762,9 +1771,7 @@ jhunter@tunein.com
             <div class="heading clickable">
               <h2>Popular Stations in Your Area</h2>
               <div class=chevron>
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M15.11 7.14599L19.956 11.999L15.11 16.852C15.0754 16.8844 15.0479 16.9236 15.029 16.9671C15.0102 17.0107 15.0005 17.0576 15.0005 17.105C15.0005 17.1524 15.0102 17.1993 15.029 17.2428C15.0479 17.2863 15.0754 17.3255 15.11 17.358L16.641 18.896C16.7085 18.9623 16.7994 18.9995 16.894 18.9995C16.9886 18.9995 17.0795 18.9623 17.147 18.896L22.26 13.783L23.791 12.252C23.8573 12.1845 23.8945 12.0936 23.8945 11.999C23.8945 11.9044 23.8573 11.8135 23.791 11.746L22.26 10.215L17.168 5.10599C17.1005 5.03967 17.0096 5.0025 16.915 5.0025C16.8204 5.0025 16.7295 5.03967 16.662 5.10599L15.11 6.63999C15.0754 6.67244 15.0479 6.71164 15.029 6.75515C15.0102 6.79866 15.0005 6.84558 15.0005 6.89299C15.0005 6.94041 15.0102 6.98732 15.029 7.03083C15.0479 7.07435 15.0754 7.11354 15.11 7.14599Z" />
-                  </svg>
+                <div class="svgicon chev"></div>
               </div>
             </div>
             <div class=scrollrow>
@@ -2317,32 +2324,26 @@ jhunter@tunein.com
                 <div class=title>Playlist</div>
                 <div class="rowcount playlistcount">0</div>
                 <div class=chevron>
-                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M15.11 7.14599L19.956 11.999L15.11 16.852C15.0754 16.8844 15.0479 16.9236 15.029 16.9671C15.0102 17.0107 15.0005 17.0576 15.0005 17.105C15.0005 17.1524 15.0102 17.1993 15.029 17.2428C15.0479 17.2863 15.0754 17.3255 15.11 17.358L16.641 18.896C16.7085 18.9623 16.7994 18.9995 16.894 18.9995C16.9886 18.9995 17.0795 18.9623 17.147 18.896L22.26 13.783L23.791 12.252C23.8573 12.1845 23.8945 12.0936 23.8945 11.999C23.8945 11.9044 23.8573 11.8135 23.791 11.746L22.26 10.215L17.168 5.10599C17.1005 5.03967 17.0096 5.0025 16.915 5.0025C16.8204 5.0025 16.7295 5.03967 16.662 5.10599L15.11 6.63999C15.0754 6.67244 15.0479 6.71164 15.029 6.75515C15.0102 6.79866 15.0005 6.84558 15.0005 6.89299C15.0005 6.94041 15.0102 6.98732 15.029 7.03083C15.0479 7.07435 15.0754 7.11354 15.11 7.14599Z" />
-                    </svg>
+                  <div class="svgicon chev"></div>
                 </div>
               </div>
               <div class="listitem openpage" data-page=favorites data-title=Favorites data-parent=library id=favoritesrow>
                 <div class=title>Favorites</div>
                 <div class=rowcount>10</div>
                 <div class=chevron>
-                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M15.11 7.14599L19.956 11.999L15.11 16.852C15.0754 16.8844 15.0479 16.9236 15.029 16.9671C15.0102 17.0107 15.0005 17.0576 15.0005 17.105C15.0005 17.1524 15.0102 17.1993 15.029 17.2428C15.0479 17.2863 15.0754 17.3255 15.11 17.358L16.641 18.896C16.7085 18.9623 16.7994 18.9995 16.894 18.9995C16.9886 18.9995 17.0795 18.9623 17.147 18.896L22.26 13.783L23.791 12.252C23.8573 12.1845 23.8945 12.0936 23.8945 11.999C23.8945 11.9044 23.8573 11.8135 23.791 11.746L22.26 10.215L17.168 5.10599C17.1005 5.03967 17.0096 5.0025 16.915 5.0025C16.8204 5.0025 16.7295 5.03967 16.662 5.10599L15.11 6.63999C15.0754 6.67244 15.0479 6.71164 15.029 6.75515C15.0102 6.79866 15.0005 6.84558 15.0005 6.89299C15.0005 6.94041 15.0102 6.98732 15.029 7.03083C15.0479 7.07435 15.0754 7.11354 15.11 7.14599Z" />
-                    </svg>
+                  <div class="svgicon chev"></div>
                 </div>
               </div>
               <div class="listitem openpage" data-page=downloads data-title=Downloads data-parent=library id=downloadsrow>
                 <div class=title>Downloads</div>
                 <div class=rowcount>3</div>
                 <div class=chevron>
-                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M15.11 7.14599L19.956 11.999L15.11 16.852C15.0754 16.8844 15.0479 16.9236 15.029 16.9671C15.0102 17.0107 15.0005 17.0576 15.0005 17.105C15.0005 17.1524 15.0102 17.1993 15.029 17.2428C15.0479 17.2863 15.0754 17.3255 15.11 17.358L16.641 18.896C16.7085 18.9623 16.7994 18.9995 16.894 18.9995C16.9886 18.9995 17.0795 18.9623 17.147 18.896L22.26 13.783L23.791 12.252C23.8573 12.1845 23.8945 12.0936 23.8945 11.999C23.8945 11.9044 23.8573 11.8135 23.791 11.746L22.26 10.215L17.168 5.10599C17.1005 5.03967 17.0096 5.0025 16.915 5.0025C16.8204 5.0025 16.7295 5.03967 16.662 5.10599L15.11 6.63999C15.0754 6.67244 15.0479 6.71164 15.029 6.75515C15.0102 6.79866 15.0005 6.84558 15.0005 6.89299C15.0005 6.94041 15.0102 6.98732 15.029 7.03083C15.0479 7.07435 15.0754 7.11354 15.11 7.14599Z" />
-                    </svg>
+                  <div class="svgicon chev"></div>
                 </div>
               </div>
 
               <div class=btnrow>
-                <div class="btn aink menubtn" data-type=addcustomstation>Add a Station URL</div>
+                <div class="btn aink menubtn outlinebtn" data-type=addcustomstation>Add a Station by URL</div>
               </div>
             </div>
           </div>
@@ -2511,21 +2512,21 @@ jhunter@tunein.com
                       <div class="title">Director Kemp Powers on the creative journey behind Pixar's "Soul."</div>
                       <div class="meta">1/12/2021 - 43:12</div>
                     </div>
-                    <div class="add2 menubtn iconbtn" data-type="addsuggestion"><div class="svgicon playlistadd"></div></div>
+                    <div class="add2  iconbtn playlistaddrec" data-type="addsuggestion"><div class="svgicon playlistadd"></div></div>
                   </div>
                   <div class="rowitem np " data-station="Science Fridays" data-url="https://cdn.simplecast.com/audio/81fc9f37-3af1-4e45-8d96-ad57b71d9f8b/episodes/9cfa0e69-9879-4473-bda7-4a319798237f/audio/158c1018-a5d2-4a3c-9420-34eca8a2bf45/default_tc.mp3?aid=rss_feed&amp;feed=i5UU6Ljx">
                     <div class="thumb" style="background-image:url(https://cdn-profiles.tunein.com/p394/images/logoq.png);"></div><div class="description">
                       <div class="title">Covid Fact Check, Aging Cells, News Roundup</div>
                       <div class="meta">Janurary 12, 2021 - 47:01</div>
                     </div>
-                    <div class="add2 menubtn iconbtn" data-type="addsuggestion"><div class="svgicon playlistadd"></div></div>
+                    <div class="add2  iconbtn playlistaddrec" data-type="addsuggestion"><div class="svgicon playlistadd"></div></div>
                   </div>
                   <div class="rowitem np " data-station="How to be a Better Human" data-url="https://dts.podtrac.com/redirect.mp3/dovetail.prxu.org/357/0a60222c-8e67-4585-a237-09fc01f7cec6/EP2_Leonard_Final_SegA.mp3">
                     <div class="thumb" style="background-image:url(https://cdn-profiles.tunein.com/p1389827/images/logoq.png);"></div><div class="description">
                       <div class="title">How to be a Better Human</div>
                       <div class="meta">Janurary 12, 2021 - 33:07</div>
                     </div>
-                    <div class="add2 menubtn iconbtn" data-type="addsuggestion"><div class="svgicon playlistadd"></div></div>
+                    <div class="add2  iconbtn playlistaddrec" data-type="addsuggestion"><div class="svgicon playlistadd"></div></div>
                   </div>
                 </div>
               
@@ -2601,8 +2602,104 @@ jhunter@tunein.com
       </div>
 
       <div id=search>
-        <div class=content>
-          
+        <div class="searchcontent content">
+          <div class=contentrow>
+            <div class=heading>
+              <h4>Trending</h4>
+            </div>
+            <div class=pillbottle>
+              <div class="pillbtn btn greybtn trendingsearch">Hannah Montana</div>
+              <div class="pillbtn btn greybtn trendingsearch">Super Bowl LV</div>
+              <div class="pillbtn btn greybtn trendingsearch">Alexa Jokes</div>
+            </div>
+          </div>
+          <div class=contentrow>
+            <div class=heading>
+              <h4>Recent Searches</h4>
+            </div>
+            <div class=simplelist>
+              <div class="listitem recentsearch">
+                <div class="title">The Sounds of Silence</div>
+                <!-- <div class="chevron"><div class="svgicon chev"></div></div> -->
+              </div>
+              <div class="listitem recentsearch">
+                <div class="title">Miley Cyrus</div>
+                <!-- <div class="chevron"><div class="svgicon chev"></div></div> -->
+              </div>
+            </div>
+          </div>
+          <div class=contentrow>
+            <div class=heading>
+              <h4>Recent Listens</h4>
+            </div>
+            <div class="scrollrow textless">
+              <div class="scrollitem np" data-station="Adult Hits"  data-url="https://rfcmedia.streamguys1.com/sradulthits.mp3" data-radio=true>
+                <div class="thumb recentthumb " style="background-image:url(https://cdn-profiles.tunein.com/s247154/images/logoq.png);"></div>
+              </div><div class="scrollitem np" data-station="The Daily"  data-url="https://dts.podtrac.com/redirect.mp3/chtbl.com/track/8DB4DB/pdst.fm/e/nyt.simplecastaudio.com/03d8b493-87fc-4bd1-931f-8a8e9b945d8a/episodes/2456bb9b-b94e-4da5-a167-8b5f6a1a45a4/audio/128/default.mp3?aid=rss_feed&awCollectionId=03d8b493-87fc-4bd1-931f-8a8e9b945d8a&awEpisodeId=2456bb9b-b94e-4da5-a167-8b5f6a1a45a4&feed=54nAGcIl">
+                <div class="thumb recentthumb " style="background-image:url(https://cdn-profiles.tunein.com/p952868/images/logoq.png);"></div>
+              </div><div class="scrollitem np" data-station="Pop Hits"  data-url="https://rfcmedia.streamguys1.com/newpophitspremium.mp3" data-radio=true>
+                <div class="thumb recentthumb " style="background-image:url(https://cdn-profiles.tunein.com/s249976/images/logoq.png);"></div>
+              </div><div class="scrollitem np" data-station="Up First"  data-url="https://edge2.pod.npr.org/anon.npr-mp3/npr/upfirst/2021/01/20210120_upfirst_uf_new_trump_leaves_wh.mp3/20210120_upfirst_uf_new_trump_leaves_wh.mp3_3c7278103420af376f0a61580cd6c4f6_10079328.mp3?awCollectionId=510318&awEpisodeId=957889681&orgId=1&d=631&p=510318&story=957889681&t=podcast&e=957889681&size=10079307&ft=pod&f=510318&hash_redirect=1&x-total-bytes=10079328&x-ais-classified=download&listeningSessionID=0CD_382_20__8377f9a2f90de7b91b72270f180a608cb13ffedf">
+                <div class="thumb recentthumb " style="background-image:url(https://cdn-profiles.tunein.com/p983396/images/logoq.png);"></div>
+              </div><div class="scrollitem  np" data-station="Alt Hits"  data-url="https://rfcmedia.streamguys1.com/alternativehitspremium.mp3" data-radio=true>
+                <div class="thumb recentthumb" style="background-image:url(https://cdn-profiles.tunein.com/s249990/images/logoq.png);"></div>
+              </div><div class="scrollitem np" data-station="Soul Groove"  data-url="https://rfcmedia.streamguys1.com/specs.mp3" data-radio=true>
+                <div class="thumb recentthumb" style="background-image:url(https://cdn-profiles.tunein.com/s259261/images/logoq.png);"></div>
+              </div>
+            </div>
+          </div>
+          <div class=contentrow>
+            <div class="heading ">
+              <h2>Favorites</h2>
+            </div>
+            <div class=scrollrow>
+              <div class="scrollitem np" data-station="80's Hits" data-url="https://rfcmedia.streamguys1.com/80hitspremium.mp3" data-radio=true>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/s249945/images/logoq.png);"></div>
+                <div class=label>80's Hits</div>
+              </div><div class="scrollitem np" data-station="Coffee House" data-url="https://rfcmedia.streamguys1.com/coffeehousepremium.mp3" data-radio=true>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/s304385/images/logoq.png);"></div>
+                <div class=label>Coffee House</div>
+              </div><div class="scrollitem np" data-station="Soft Rock Hits" data-url="https://rfcmedia.streamguys1.com/softrockhitspremium.mp3" data-radio=true>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/s249905/images/logoq.png);"></div>
+                <div class=label>Soft Rock Hits</div>
+              </div><div class="scrollitem np" data-station="Sounds of the Symphony" data-url="https://rfcmedia.streamguys1.com/classicalpremium.mp3" data-radio=true>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/s250018/images/logoq.png);"></div>
+                <div class=label>Sounds of the Symphony</div>
+              </div><div class="scrollitem np" data-station="Relax and Unwind" data-url="https://rfcmedia.streamguys1.com/relaxationpremium.mp3" data-radio=true>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/s249937/images/logoq.png);"></div>
+                <div class=label>Relax and Unwind</div>
+              </div><div class="scrollitem np" data-station="Mix Lite" data-url="https://rfcmedia.streamguys1.com/mixlitepremium.mp3" data-radio=true>
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/s247158/images/logoq.png);"></div>
+                <div class=label>Mix Lite</div>
+              </div>
+            </div>
+          </div>
+
+          <div class=contentrow>
+            <div class="heading ">
+              <h2>Popular</h2>
+            </div>
+            <div class=itemlist>
+              <div class="rowitem np" data-station="Spark & Fire" data-url="https://dts.podtrac.com/redirect.mp3/chtbl.com/track/E341G/rss.art19.com/episodes/a6161f5f-7a2d-45ef-8130-108652ee1e98.mp3">
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p1389549/images/logoq.png);"></div><div class=description>
+                  <div class=title>Director Kemp Powers on the creative journey behind Pixar's "Soul."</div>
+                  <div class=meta>1/12/2021 - 43:12</div>
+                </div>
+              </div>
+              <div class="rowitem np" data-station="Science Fridays" data-url="https://cdn.simplecast.com/audio/81fc9f37-3af1-4e45-8d96-ad57b71d9f8b/episodes/9cfa0e69-9879-4473-bda7-4a319798237f/audio/158c1018-a5d2-4a3c-9420-34eca8a2bf45/default_tc.mp3?aid=rss_feed&feed=i5UU6Ljx">
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p394/images/logoq.png);"></div><div class=description>
+                  <div class=title>Covid Fact Check, Aging Cells, News Roundup</div>
+                  <div class=meta>Janurary 12, 2021 - 47:01</div>
+                </div>
+              </div>
+              <div class="rowitem np" data-station="How to be a Better Human" data-url="https://dts.podtrac.com/redirect.mp3/dovetail.prxu.org/357/0a60222c-8e67-4585-a237-09fc01f7cec6/EP2_Leonard_Final_SegA.mp3">
+                <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p1389827/images/logoq.png);"></div><div class=description>
+                  <div class=title>How to be a Better Human</div>
+                  <div class=meta>Janurary 12, 2021 - 33:07</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -2670,7 +2767,7 @@ jhunter@tunein.com
   <div id=templates style="display:none;">
     <div class="listrowitem pl" id=playlistrowitem>
       <div class="collage">
-        <div class="f1" ></div>
+        <div class="f1" style="background-color: var(--ink4);background-image: url(../icons/TIIcon.svg);background-size: 24px;background-repeat: no-repeat;opacity: 0.33;"></div>
       </div><div class="rowcontent">
         <div class="description">
           <div class="title"></div>
@@ -3788,11 +3885,14 @@ jhunter@tunein.com
       }
 
         page.classList.add('emptyplay');
+
+        document.getElementsByClassName('hiderecco').removeclass('hiderecco');
       } else {
         page.classList.remove('emptyplay');
       }
-
-     
+      
+      page.dataset.id = id;
+      page.dataset.title = playlist;
 
       let sb = page.getElementsByClassName('addplaylist2')[0];
       sb.dataset.id = id;
@@ -4483,6 +4583,221 @@ jhunter@tunein.com
       n.click();
     }
 
+    function playlistaddrec(e){
+      e.preventDefault();
+      e.stopPropagation();
+      let p = this.getparent('rowitem');
+
+      let pl = document.getElementById('playlistdetailpage');
+      let pid = pl.dataset.id;
+      let ti = pl.dataset.title;
+
+      pl.classList.remove('emptyplay');
+
+      let list = Lists[ti];
+
+      let content = document.getElementsByClassName('playlistlist')[0];
+
+      let hero = document.getElementsByClassName('playlisthero')[0];
+      hero.empty();
+
+      let c = document.getElementById('playlistlistitem').cloneNode(true);
+      c.removeAttribute('id');
+
+      let thumb = c.getElementsByClassName('thumb')[0];
+      let title = c.getElementsByClassName('title')[0];
+      let meta = c.getElementsByClassName('meta')[0];
+      let menu = c.getElementsByClassName('morebtn')[0];
+
+      let n = p.dataset.station;
+      let m = window.getComputedStyle(p.getElementsByClassName('thumb')[0], null).getPropertyValue('background-image');;
+      let u = p.dataset.url;
+      let l = p.dataset.radio || false;
+      let d =  0;
+
+      let sub = l ? d + ' Minutes' : 'Latest Episode';
+
+      if ( !l ){
+        menu.dataset.type = 'playlistpodmore';
+      }
+
+      thumb.style.backgroundImage = m;
+      title.appendChild(document.createTextNode(n));
+      meta.appendChild(document.createTextNode(sub));
+
+      c.dataset.url = u;
+      c.dataset.station = n;
+
+
+      content.appendChild(c);
+
+      Lists[ti].stations.push({name: n,  image: m, stream: u, live: l, length: l ? 30 : 0});
+
+
+      p.classList.add('hiderecco');
+
+      var images = [];
+
+      for(var i=0;i<Lists[ti].stations.length;i++){
+        let a = Lists[ti].stations[i];
+        images.push(a.image);
+      }
+
+      var count = 0;
+
+      switch ( images.length ){
+        case 0 :
+          break
+        case 1 :
+          count = 1;
+          break
+        case 2 :
+          count = 2;
+          break
+        case 3 :
+          count = 3;
+          break
+        case 4 : case 5 :
+          count = 3;
+          break
+        default:
+          count = 6;
+      } 
+
+      for(var i=0;i<count;i++){
+        let m = images[i];
+
+        let h = document.createElement('div');
+
+        h.className = 'albumgrid agrid' + count;
+        h.style.backgroundImage = m;
+
+        hero.appendChild(h);
+      }
+
+      let hid = document.getElementsByClassName('rowitem hiderecco');
+
+      if ( hid.length == 3){
+        document.getElementsByClassName('playlistrow reccos')[0].classList.add('hiderecco');
+      }
+    }
+
+    function addtoplaylistsearch(e){
+      let s = document.getElementsByClassName('searchcontent')[0];
+      let p = document.getElementsByClassName('playlistsearchcontent')[0];
+      p.empty();
+
+      let c = s.cloneNode(true);
+
+      c.className = 'searchcontent panelcontent';
+
+      let np = c.getElementsByClassName('np');
+
+      np.addclass('a2pl');
+      np.removeclass('np');
+
+      p.appendChild(c);
+    }
+
+    function a2pl(e){
+      let p = document.getElementById('playlistdetailpage');
+      let pl = p.dataset.title;
+ 
+
+      let station = this.dataset.station;
+      let img =  window.getComputedStyle(this.getElementsByClassName('thumb')[0], null).getPropertyValue('background-image');
+      let stream = this.dataset.url;
+      let islive = this.dataset.radio || false;
+      let l = islive ? 30 : 0;
+
+      let id = Lists[pl].id;
+      
+      Lists[pl].stations.push({name: station,  image: img, stream: stream, live: islive, length: l});
+      
+      console.log(Lists);
+
+      let meta2 = document.getElementById(id).getElementsByClassName('meta')[0];
+      meta2.empty();
+      let count2 = (Lists[pl].stations.length);
+      let s2 = count2 !== 1 ? 's' : '';
+      meta2.appendChild(document.createTextNode( count2 + ' Item' + s2));
+
+      p.classList.remove('emptyplay');
+
+      let content = document.getElementsByClassName('playlistlist')[0];
+
+      let hero = document.getElementsByClassName('playlisthero')[0];
+      hero.empty();
+
+      let c = document.getElementById('playlistlistitem').cloneNode(true);
+      c.removeAttribute('id');
+
+      let thumb = c.getElementsByClassName('thumb')[0];
+      let title = c.getElementsByClassName('title')[0];
+      let meta = c.getElementsByClassName('meta')[0];
+      let menu = c.getElementsByClassName('morebtn')[0];
+
+     
+      let sub = islive ? l + ' Minutes' : 'Latest Episode';
+
+      if ( !islive ){
+        menu.dataset.type = 'playlistpodmore';
+      }
+
+      thumb.style.backgroundImage = img;
+      title.appendChild(document.createTextNode(station));
+      meta.appendChild(document.createTextNode(sub));
+
+      c.dataset.url = stream;
+      c.dataset.station = station;
+
+      content.appendChild(c);
+
+      var images = [];
+
+      for(var i=0;i<Lists[pl].stations.length;i++){
+        let a = Lists[pl].stations[i];
+        images.push(a.image);
+      }
+
+      var count = 0;
+
+      switch ( images.length ){
+        case 0 :
+          break
+        case 1 :
+          count = 1;
+          break
+        case 2 :
+          count = 2;
+          break
+        case 3 :
+          count = 3;
+          break
+        case 4 : case 5 :
+          count = 3;
+          break
+        default:
+          count = 6;
+      } 
+
+      for(var i=0;i<count;i++){
+        let m = images[i];
+
+        let h = document.createElement('div');
+
+        h.className = 'albumgrid agrid' + count;
+        h.style.backgroundImage = m;
+
+        hero.appendChild(h);
+      }
+
+      toast('Added to ' + pl);
+    
+    }
+
+    Attach.on('click', '.addtoplaylist', addtoplaylistsearch);
+    Attach.on('click', '.playlistaddrec', playlistaddrec);
     Attach.on('click', '.saveplaylist', saveplaylist);
     Attach.on('click', '.focus', focuson);
     Attach.on('click', '.addtothisplaylist', addtothisplaylist);
@@ -4527,7 +4842,9 @@ jhunter@tunein.com
     Attach.on('click', '.npspeedbtn', npspeed);
     Attach.on('mousedown', '.aink, .panelitem, .listitem, .iconbtn, .modalclose', droidpress);
     Attach.on('click', '.playallplaylist', playallplaylist);
-
+    Attach.on('click', '.a2pl', a2pl);
+    
+    
     window.Playlist = [];
     window.Lists = {}
     window.onresize = resize;
