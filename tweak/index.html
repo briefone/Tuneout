@@ -1632,8 +1632,8 @@ jhunter@tunein.com
             <div class=npalbum></div>
           </div>
           <div class=npinfo>
-            <div class=npstation>Station</div>
-            <div class=npmeta>Meta</div>
+            <div class=npstation>Nyan Cat 24/7</div>
+            <div class=npmeta>Meow meow meow</div>
             <div class="nplist menubtn aink" data-type=add2listmenu><div class="svgicon playlistadd"></div><div class=nplistlabel>Add to Playlist</div></div>
             <div class="pillbtn btn npspeedbtn aink" data-type=npspeed>1.0x</div>
           </div>
@@ -3448,6 +3448,10 @@ jhunter@tunein.com
       
     }
 
+    function opennp(){
+      document.body.classList.add('nppage', 'modalview');
+    }
+
     function nowplaying(e){
       let url = this.dataset.url || './audio/nyancat.mp3';
       document.body.classList.add('nppage', 'modalview');
@@ -4815,7 +4819,7 @@ jhunter@tunein.com
     Attach.on('change', '.tweakr', tweakr);
     Attach.on('click', '.carmode', carmode);
     Attach.on('click', '.exitcarmode', exitcarmode);
-    Attach.on('click', '#miniplayer .miniinfo, #miniplayer .minialbum', nowplaying);
+    Attach.on('click', '#miniplayer .miniinfo, #miniplayer .minialbum', opennp);
     Attach.on('click', '#miniplayer .play', miniplay);
     Attach.on('click', '#miniplayer .pause', minipause);
     Attach.on('click', '.openpage', openpage);
