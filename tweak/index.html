@@ -3071,21 +3071,8 @@ jhunter@tunein.com
 
       let title = json.streamtitle;
 
-      if ( document.getElementsByClassName('npmeta')[0].dataset.title == json.streamtitle ){
-        return;
-      }
-
+      let samesame = document.getElementsByClassName('npmeta')[0].dataset.title == json.streamtitle;
       let ugh = title.split('-');
-
-      albumArt( ugh[0], ( error, response ) => {
-        console.log( response )
-        if ( error || response.indexOf('http') < 0 ){
-          return;
-        }
-        document.getElementsByClassName('npalbum')[0].style.backgroundImage = document.getElementById('miniartwork').style.backgroundImage = document.getElementById('bluralbum').style.backgroundImage = 'url(' + response + ')';
-
-        vibe(response);
-      });
 
       let meta = document.getElementsByClassName('npmeta')[0];
       let mtitle = document.getElementById('minititle');
@@ -3097,6 +3084,18 @@ jhunter@tunein.com
       mtitle.appendChild(document.createTextNode(ugh[1]));
       mmeta.appendChild(document.createTextNode(ugh[0]));
       meta.dataset.title = title;
+
+      if (!samesame) {
+        albumArt( ugh[0], ( error, response ) => {
+          console.log( response )
+          if ( error || response.indexOf('http') < 0 ){
+            return;
+          }
+          document.getElementsByClassName('npalbum')[0].style.backgroundImage = document.getElementById('miniartwork').style.backgroundImage = document.getElementById('bluralbum').style.backgroundImage = 'url(' + response + ')';
+
+          vibe(response);
+        });
+      }
     }
 
     function tweakr(e){
@@ -3572,6 +3571,9 @@ jhunter@tunein.com
       let station = this.dataset.station || defaultstation;
 
       let npstation = document.getElementsByClassName('npstation')[0];
+      
+      let samesame = npstation.dataset.name == station ? true : false;
+
       npstation.empty();
       npstation.appendChild(document.createTextNode(station));
       npstation.dataset.name = station;
@@ -3722,15 +3724,17 @@ jhunter@tunein.com
           np.classList.remove('npplaylist');
         }
 
-        art.style.backgroundImage = album;
-        ma.style.backgroundImage = album;
-        blur.style.backgroundImage = album;
-        ei.style.backgroundImage = album;
+        if ( !samesame ){
+          art.style.backgroundImage = album;
+          ma.style.backgroundImage = album;
+          blur.style.backgroundImage = album;
+          ei.style.backgroundImage = album;
+        
+          let img = album.replace('url(', '').replace(')', '').replace(/"/g,'').replace(/'/g, "").trim();
 
-        let img = album.replace('url(', '').replace(')', '').replace(/"/g,'').replace(/'/g, "").trim();
-
-        // getAverageRGB(img);
-        vibe('https://noiseee.com/img/?url=' + img);
+          // getAverageRGB(img);
+          vibe('https://noiseee.com/img/?url=' + img);
+        }
 
         document.documentElement.classList.add('playing');
       }
