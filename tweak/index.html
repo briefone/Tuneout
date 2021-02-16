@@ -406,22 +406,25 @@ jhunter@tunein.com
       user-select: none;
     }
 
-    .svgicon {background-color:var(--ink);-webkit-mask-size: cover;mask-size: cover;width:24px;height:24px;display:inline-block;vertical-align: middle;transition:background-color 200ms ease-in-out;}
+    .svgicon {background-color:var(--ink);-webkit-mask-size: cover;mask-size: cover;-webkit-mask-position: center;mask-position: center;-webkit-mask-repeat: no-repeat;mask-repeat: no-repeat;width:24px;height:24px;display:inline-block;vertical-align: middle;transition:background-color 200ms ease-in-out;}
 
     .invert .svgicon {background-color: var(--ink1);}
 
-      .fav {-webkit-mask: url(../icons/Favorites.svg);mask: url(../icons/Favorites.svg);}
-      .unfav {-webkit-mask: url(../icons/unfav.svg);mask: url(../icons/unfav.svg);}
-      .playlistadd {-webkit-mask: url(../icons/PlaylistAdd.svg);mask: url(../icons/PlaylistAdd.svg);}
-      .chev {-webkit-mask: url('../icons/Chevron-Thin-Right(RightAligned).svg');mask: url('../icons/Chevron-Thin-Right(RightAligned).svg');}
-      .chevleft {-webkit-mask: url('../icons/Chevron-Left.svg');mask: url('../icons/Chevron-Left.svg');}
-      .rewind {-webkit-mask: url('../icons/BackBuffer-Large.svg');mask: url('../icons/BackBuffer-Large.svg');}
-      .forward {-webkit-mask: url('../icons/ForwardBuffer-Large.svg');mask: url('../icons/ForwardBuffer-Large.svg');}
-      .moreicon {-webkit-mask: url('../icons/More-Small(Horizontal).svg');mask: url('../icons/More-Small(Horizontal).svg');}
-        .droid .moreicon {-webkit-mask: url('../icons/More-Regular(Vertical).svg');mask: url('../icons/More-Regular(Vertical).svg');width:22px !important;height:22px !important;}
-      .playicon {-webkit-mask: url('../icons/Play.svg');mask: url('../icons/Play.svg');}
-      .next {-webkit-mask: url('../icons/Next.svg');mask: url('../icons/Next.svg');}
-      .prev {-webkit-mask: url('../icons/Prev.svg');mask: url('../icons/Prev.svg');}
+      .fav {-webkit-mask-image: url(../icons/Favorites.svg);mask-image: url(../icons/Favorites.svg);}
+      .unfav {-webkit-mask-image: url(../icons/unfav.svg);mask-image: url(../icons/unfav.svg);}
+      .favoutline {-webkit-mask-image: url('../icons/Favorites(Outlined).svg');mask-image: url('../icons/Favorites(Outlined).svg');}
+      .playlistadd {-webkit-mask-image: url(../icons/PlaylistAdd.svg);mask-image: url(../icons/PlaylistAdd.svg);}
+      .playlist {-webkit-mask-image: url(../icons/Playlist.svg);mask-image: url(../icons/Playlist.svg);}
+      .download {-webkit-mask-image: url(../icons/Download.svg);mask-image: url(../icons/Download.svg);}
+      .chev {-webkit-mask-image: url('../icons/Chevron-Thin-Right(RightAligned).svg');mask-image: url('../icons/Chevron-Thin-Right(RightAligned).svg');}
+      .chevleft {-webkit-mask-image: url('../icons/Chevron-Left.svg');mask-image: url('../icons/Chevron-Left.svg');}
+      .rewind {-webkit-mask-image: url('../icons/BackBuffer-Large.svg');mask-image: url('../icons/BackBuffer-Large.svg');}
+      .forward {-webkit-mask-image: url('../icons/ForwardBuffer-Large.svg');mask-image: url('../icons/ForwardBuffer-Large.svg');}
+      .moreicon {-webkit-mask-image: url('../icons/More-Small(Horizontal).svg');mask-image: url('../icons/More-Small(Horizontal).svg');}
+        .droid .moreicon {-webkit-mask-image: url('../icons/More-Regular(Vertical).svg');mask-image: url('../icons/More-Regular(Vertical).svg');width:22px !important;height:22px !important;}
+      .playicon {-webkit-mask-image: url('../icons/Play.svg');mask-image: url('../icons/Play.svg');}
+      .next {-webkit-mask-image: url('../icons/Next.svg');mask-image: url('../icons/Next.svg');}
+      .prev {-webkit-mask-image: url('../icons/Prev.svg');mask-image: url('../icons/Prev.svg');}
 
 
     .toggle {width:38px;height:22px;border-radius:30px;position:relative;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(0, 0, 0, 0.02);cursor:pointer;transition:background 150ms ease-in-out;display: inline-block;margin-right:8px;vertical-align: middle;}
@@ -524,6 +527,8 @@ jhunter@tunein.com
         .iconbtn.invert:active .svgicon {background-color:var(--ink5);}
 
 
+      .rowicon {margin-right:12px;width: 24px;min-width: 24px;}
+
 
 
     #container {position:relative;background:black;border-radius:6px;
@@ -579,7 +584,7 @@ jhunter@tunein.com
 
       .tabwrap .tabline {height:3px;width:54.86px;background:var(--ink);position:absolute;bottom:0;left:0;transform:translateX(24px);transition: all 200ms ease-in-out;}
 
-    .content {position:absolute;top:0;left:0;bottom:0;right:0;overflow-y: scroll;padding-bottom:56px;}
+    .content {position:absolute;top:0;left:0;bottom:0;right:0;overflow-y:scroll;overflow-x:scroll;padding-bottom:56px;}
       
       .played .content {padding-bottom:112px;}
       .played .slidepage {padding-bottom:112px;}
@@ -768,7 +773,7 @@ jhunter@tunein.com
       .rightactions {display: flex;gap: 2px;}
         .droid .npairplay {display:none;}
 
-            .unfav, .removefav .fav {display:none;}
+            .rightactions .unfav, .removefav .fav {display:none;}
             .removefav .unfav {display:block;}
 
       .npcontent {overflow-y: scroll;position:absolute;top:0;left:0;right:0;bottom:0;padding:88px 0 24px;display: flex;flex-direction: column;}
@@ -2410,6 +2415,7 @@ jhunter@tunein.com
             </div>
             <div class=contentrow style="padding-top:4px;">
               <div class="listitem openpage" data-page=playlist data-title="Playlists" data-parent=library id=playlistrow>
+                <div class="rowicon svgicon playlist"></div>
                 <div class=title>Playlist</div>
                 <div class="rowcount playlistcount">0</div>
                 <div class=chevron>
@@ -2417,6 +2423,7 @@ jhunter@tunein.com
                 </div>
               </div>
               <div class="listitem openpage" data-page=favorites data-title=Favorites data-parent=library id=favoritesrow>
+                <div class="rowicon svgicon fav"></div>
                 <div class=title>Favorites</div>
                 <div class=rowcount>10</div>
                 <div class=chevron>
@@ -2424,6 +2431,7 @@ jhunter@tunein.com
                 </div>
               </div>
               <div class="listitem openpage" data-page=downloads data-title=Downloads data-parent=library id=downloadsrow>
+                <div class="rowicon svgicon download"></div>
                 <div class=title>Downloads</div>
                 <div class=rowcount>3</div>
                 <div class=chevron>
@@ -3858,10 +3866,7 @@ jhunter@tunein.com
         css += '}';
 
         //if ( initial ){
-          css += ` #container {height: var(--pageheight);
-          width: var(--pagewidth);
-          margin-left: calc(var(--pagewidth) / 2 * -1 - 112px);
-          margin-top: calc(var(--pageheight) / 2 * -1);}`;
+          css += ` #container {height:var(--pageheight);width:var(--pagewidth);margin-left:calc(var(--pagewidth) / 2 * -1 - 112px);margin-top:calc(var(--pageheight) / 2 * -1);}`;
         //}
 
         style.innerHTML = css;
