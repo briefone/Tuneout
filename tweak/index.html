@@ -83,6 +83,7 @@ jhunter@tunein.com
 
       --ink:var(--ink10);
       --inklight:var(--ink9);
+      --brand: var(--ui10);
 
       --premium: var(--gold3);
 
@@ -451,7 +452,7 @@ jhunter@tunein.com
         .tweaked .tweak {margin-bottom:20px;}
 
     .tweak .label {font-size:12px;display:flex;margin-bottom:2px;text-transform: uppercase;    font-size: 11px;    font-weight: 500;    letter-spacing: 0.75px;}
-    .tweak span {width: 100%;opacity: 0.87;}
+    .tweak .label > span {width: 100%;opacity: 0.87;}
     .tweak .value {opacity:.54;text-align:right;}
     .tweak input[type=range] {padding:0 4px;width: 100%;height: 22px;border-radius:30px;position:relative;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(0, 0, 0, 0.02);cursor:pointer;transition:background 150ms ease-in-out;display: inline-block;margin-right:8px;vertical-align: middle;}
 
@@ -790,9 +791,15 @@ jhunter@tunein.com
     .thumbshadow .ts-toggles, .albumblur .ab-toggles, .albummatch .am-toggles {display:block;}
 
     #tweaks {position: fixed;top:0;right:20px;max-height:calc(100%);width:204px;color:rgba(255, 255, 255, 0.92);z-index:9999999;box-sizing:border-box;overflow-y:scroll;-webkit-overflow-scrolling:touch;user-select:none;}
-            .tpanel {margin-top:8px;width:100%;padding:6px;border-radius:8px;background:#222;box-sizing:border-box;}
-              .tpanel:first-child {margin-top:40px;}
-              .tpanel:last-child {margin-bottom:40px;}
+      .tpanel {margin-top:8px;width:100%;padding:6px;border-radius:8px;background:#222;box-sizing:border-box;}
+        .tpanel:first-child {margin-top:40px;}
+        .tpanel:last-child {margin-bottom:40px;}
+
+      .hidetweaks #tweaks .tpanel {display:none;}
+      
+      .showspan {display:none;}
+        .hidetweaks .showspan {display:inline-block;}
+        .hidetweaks .hidespan {display:none;}
 
     .resetbtn, .redlinebtn {cursor:pointer;display:flex;height:36px;text-align:center;padding:0 12px;align-items:center;justify-content:center;background:rgba(255, 255, 255, 0.0);color:#ff5757;font-size:15px;text-transform:uppercase;font-weight:600;border-radius:6px;transition:all 200ms ease-in-out;}
     .resetbtn:hover, .redlinebtn:hover {background-color:rgba(255, 255, 255, 0.0666);}
@@ -1115,11 +1122,11 @@ jhunter@tunein.com
     .panelcontent {position:absolute;top:0;left:0;right:0;bottom:0;overflow-y:scroll;padding-top:80px;}
       .droid .searchcontent {padding-top:68px;}
 
-    .selectwrap {display:flex;flex-direction: column;gap:2px;margin-bottom:12px;user-select:none;}
+    .selectwrap {display:flex;flex-direction: column;gap:4px;margin-bottom:16px;user-select:none;}
       .selectbtn {display: flex;align-items: center;height:40px;border-radius:var(--buttonradius);padding:0 16px;font-size:16px;font-weight:500;cursor:pointer;position:relative;}
         .selectbtn:hover {background-color: var(--ink2);color:var(--ink11);}
         .selectbtn:active {background-color: var(--ink3);color:var(--ink12);}
-        .selectbtn.current {background-color:var(--ink4);color:var(--ink12);}
+        .selectbtn.current {background-color:var(--tsharp2);color:var(--brand);}
 
     .durationpicker {background-color: var(--ink3);display: flex;align-items: center;height:40px;border-radius:var(--buttonradius);padding:0 16px;font-size:16px;font-weight:500;cursor:pointer;position:relative;margin-bottom:12px;}
       .durationpicker:hover {background-color: var(--ink4);color:var(--ink11);}
@@ -1188,6 +1195,11 @@ jhunter@tunein.com
 <body>
   <input type="color" id=colorpicker />
   <div id=tweaks>
+    <div class="tpanel alwayspresent" style="padding:0;display:block;">
+      <div class="tweak">
+        <label><input type="checkbox" id="cb666" class="tweakr " data-class=hidetweaks><div class="toggle"></div> Hide Tweaks</label>
+      </div>
+    </div>
     <div class=tpanel style="padding:0;">
       <div class=tgroup>
         <div class=redlinebtn onclick="clearplaylist()">Clear Playlist</div>
@@ -1699,9 +1711,7 @@ jhunter@tunein.com
             <div class="fav svgicon"></div>
             <div class="unfav svgicon"></div>          
           </div><div class="iconbtn npmore invert menubtn" data-type=npmoremenu>
-            <svg viewBox="0 0 24 24"  xmlns="http://www.w3.org/2000/svg">
-              <path d="M6.27084 10.0903C6.64854 10.0903 7.01777 10.2023 7.33182 10.4121C7.64587 10.622 7.89065 10.9202 8.03519 11.2692C8.17973 11.6181 8.21755 12.0021 8.14386 12.3726C8.07018 12.743 7.88829 13.0833 7.62121 13.3504C7.35413 13.6175 7.01385 13.7993 6.6434 13.873C6.27296 13.9467 5.88897 13.9089 5.54002 13.7643C5.19106 13.6198 4.8928 13.375 4.68296 13.061C4.47312 12.7469 4.36111 12.3777 4.36111 12C4.36111 11.4935 4.56232 11.0078 4.92046 10.6496C5.2786 10.2915 5.76435 10.0903 6.27084 10.0903ZM12 10.0903C12.3777 10.0903 12.7469 10.2023 13.061 10.4121C13.375 10.622 13.6198 10.9202 13.7644 11.2692C13.9089 11.6181 13.9467 12.0021 13.873 12.3726C13.7993 12.743 13.6175 13.0833 13.3504 13.3504C13.0833 13.6175 12.743 13.7993 12.3726 13.873C12.0021 13.9467 11.6181 13.9089 11.2692 13.7643C10.9202 13.6198 10.622 13.375 10.4121 13.061C10.2023 12.7469 10.0903 12.3777 10.0903 12C10.0903 11.4935 10.2915 11.0078 10.6496 10.6496C11.0078 10.2915 11.4935 10.0903 12 10.0903ZM17.7292 10.0903C18.1069 10.0903 18.4761 10.2023 18.7902 10.4121C19.1042 10.622 19.349 10.9202 19.4935 11.2692C19.6381 11.6181 19.6759 12.0021 19.6022 12.3726C19.5285 12.743 19.3466 13.0833 19.0795 13.3504C18.8125 13.6175 18.4722 13.7993 18.1017 13.873C17.7313 13.9467 17.3473 13.9089 16.9984 13.7643C16.6494 13.6198 16.3511 13.375 16.1413 13.061C15.9315 12.7469 15.8194 12.3777 15.8194 12C15.8194 11.4935 16.0206 11.0078 16.3788 10.6496C16.7369 10.2915 17.2227 10.0903 17.7292 10.0903Z" />
-            </svg>
+            <div class="svgicon moreicon"></div>
           </div>
         </div>
       </div>
@@ -2877,6 +2887,10 @@ jhunter@tunein.com
   </div>
   <audio controls="" loop="" id="meow" style="display:none;" src="./audio/nyancat.mp3" type="audio/mpeg" preload="auto"></audio>
   <script>
+    function showhidetweaks(){
+      document.documentElement.classList.toggle('hidetweaks');
+    }
+
     function clearplaylist(){
       localStorage.clear();
     }
@@ -3057,6 +3071,10 @@ jhunter@tunein.com
 
       let title = json.streamtitle;
 
+      if ( document.getElementsByClassName('npmeta')[0].dataset.title == json.streamtitle ){
+        return;
+      }
+
       let ugh = title.split('-');
 
       albumArt( ugh[0], ( error, response ) => {
@@ -3078,6 +3096,7 @@ jhunter@tunein.com
       meta.appendChild(document.createTextNode(title));
       mtitle.appendChild(document.createTextNode(ugh[1]));
       mmeta.appendChild(document.createTextNode(ugh[0]));
+      meta.dataset.title = title;
     }
 
     function tweakr(e){
@@ -3585,6 +3604,7 @@ jhunter@tunein.com
       }
 
       let meow = document.getElementById('meow');
+      meow.dataset.time = Date.now();
 
       document.getElementsByClassName('npcontent')[0].scroll({top:0, behavior: 'smooth'});
 
@@ -3643,7 +3663,17 @@ jhunter@tunein.com
           let dur = meow.duration;
 
           if ( dur == Infinity){
-            meow.ontimeupdate = null;
+            // meow.ontimeupdate = null;
+
+            if ( Date.now() - Number(meow.dataset.time) > 9999 ){
+              console.log('10 seconds')
+              meow.dataset.time = Date.now();
+              document.getElementsByClassName('icyscript').remove();
+              var s = document.createElement( 'script' );
+              s.className = 'icyscript';
+              s.setAttribute('src', 'https://noiseee.com/icy?url=' + url );
+              document.body.appendChild( s );
+            }
             return;
           }
 
@@ -4724,7 +4754,7 @@ jhunter@tunein.com
       let m = window.getComputedStyle(p.getElementsByClassName('thumb')[0], null).getPropertyValue('background-image');;
       let u = p.dataset.url;
       let l = p.dataset.radio || false;
-      let d =  0;
+      let d =  'Latest Episode';
 
       let sub = d;//l ? d + ' Minutes' : 'Latest Episode';
 
@@ -5058,8 +5088,8 @@ jhunter@tunein.com
     Attach.on('click', '.durationoverlay', durationoverlay);
     
     
-    window.Playlist = [];
-    window.Lists = {}
+    window.Playlist = localStorage.getObject('playlist') || [];
+    window.Lists = localStorage.getObject('lists') || {};
     window.onresize = resize;
     window.pbs = 1;
 
