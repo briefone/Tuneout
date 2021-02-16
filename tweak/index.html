@@ -2893,6 +2893,9 @@ jhunter@tunein.com
 
     function clearplaylist(){
       localStorage.clear();
+
+       Lists = {};
+       Playlist = [];
     }
 
     function savelocalplaylist(){
@@ -4407,6 +4410,46 @@ jhunter@tunein.com
       setTimeout(function(){document.getElementsByClassName(f)[0].focus();}, 200);
     }
 
+    function generateplaylist(){
+     
+      for (const [key, value] of Object.entries(Lists)) {
+        let pl = document.getElementsByClassName('playlistcontent')[0];
+
+        let pr = document.getElementById('playlistrowitem').cloneNode(true);
+        pr.removeAttribute('id');
+
+        let name = key;
+        let data = value;
+        let scount = data.stations.length
+
+        pr.id = name.replace(/\W/g, '');
+
+        pr.dataset.title = name;
+
+        console.log(data)
+        
+        let t = pr.getElementsByClassName('title')[0];
+        t.appendChild(document.createTextNode(name));
+
+        let m = pr.getElementsByClassName('meta')[0];
+        m.empty();
+        m.appendChild(document.createTextNode(scount + ' Item' + (scount === 1 ? '' : 's')));
+
+        pl.appendChild(pr);
+      }
+
+      if ( Playlist.length ){
+        document.getElementsByClassName('emptystate playlistemptystate')[0].style.display = 'none';
+      }
+
+      let c = document.getElementsByClassName('playlistcount')[0];
+      c.empty();
+      c.appendChild(document.createTextNode(Playlist.length));
+
+
+    
+    }
+
     function saveplaylist(e){
       nomore.call(this, e);
       let input = document.getElementsByClassName('setplaylistname')[0];
@@ -4776,7 +4819,7 @@ jhunter@tunein.com
 
       content.appendChild(c);
 
-      Lists[ti].stations.push({name: n,  image: m, stream: u, live: l, length: l ? 30 : 0});
+      Lists[ti].stations.push({name: n,  image: m, stream: u, live: l, length: d});
 
       savelocalplaylist();
 
@@ -5099,11 +5142,11 @@ jhunter@tunein.com
 
     AutoPlaylist = {
       autoplaylist1 : {name: 'Latest News Briefing', stations: [
-        {name: 'CNN', image: 'url(https://cdn-profiles.tunein.com/s20407/images/logoq.png)', stream: 'https://17563.live.streamtheworld.com/CNNTV_SC?sbmid=9664fe78-c2d6-44bb-acb1-d9cfa306c08a&DIST=CBS&TGT=radiocomPlayer&SRC=CBS&lsid=cookie:8ff2da13-08c2-4732-8e99-3e3bd7346e3f', meta: "News Radio", live: true, length: 30 },
-        {name: 'C-Span Radio', image: 'url(https://cdn-profiles.tunein.com/s28047/images/logoq.png)', stream: 'http://18123.live.streamtheworld.com/CSPANRADIO_SC?DIST=TuneIn&TGT=TuneIn&maxServers=2&tdtok=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImZTeXA4In0.eyJpc3MiOiJ0aXNydiIsInN1YiI6IjI0Njk1NTE3MiIsImlhdCI6MTYxMTg3NDIyOSwidGQtcmVnIjpmYWxzZX0.lhNfRp_h4m_KK7bV_uARa41bF-0sXptd7LjCmUGBtmE&gdpr=0&us_privacy=1YNY&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTYxMTg3NDIyOSwiaXNzIjoidGlzcnYifQ.ZujXgt5k8Fa6wrLLWChVPaDSlSG1OwzPYZKrHuPKuvk', meta: "News Radio", live: true, length: 30 },
-        {name: 'The Daily', image: 'url(https://cdn-profiles.tunein.com/p952868/images/logoq.png)', stream: 'https://dts.podtrac.com/redirect.mp3/chtbl.com/track/8DB4DB/pdst.fm/e/nyt.simplecastaudio.com/03d8b493-87fc-4bd1-931f-8a8e9b945d8a/episodes/2456bb9b-b94e-4da5-a167-8b5f6a1a45a4/audio/128/default.mp3?aid=rss_feed&awCollectionId=03d8b493-87fc-4bd1-931f-8a8e9b945d8a&awEpisodeId=2456bb9b-b94e-4da5-a167-8b5f6a1a45a4&feed=54nAGcIl', meta: "Podcast", live: false },
-        {name: 'Cheddar', image: 'url(https://cdn-profiles.tunein.com/s296280/images/logoq.png)', stream: 'http://cheddar.streamguys1.com/live-mp3?aw_0_1st.age=33&aw_0_1st.gender=male&aw_0_1st.playerid=RadioTime&aw_0_1st.skey=1611874277&source=TuneIn&aw_0_1st.premium=false&us_privacy=1YNY&aw_0_1st.lotamesegments=%3ball%3b', meta: "Business & Tech News", live: true, length: 30 },
-        {name: 'Bloomberg Radio', image: 'url(https://cdn-profiles.tunein.com/s165740/images/logoq.png)', meta: "Business News", stream: 'https://15263.live.streamtheworld.com/BBGRADIONTLAAC_SC?sbmid=90941f1b-82a6-43ae-8820-f1dcbc910b19&DIST=CBS&TGT=radiocomPlayer&SRC=CBS&lsid=cookie:8ff2da13-08c2-4732-8e99-3e3bd7346e3f', live: true, length: 30 }
+        {name: 'CNN', image: 'url(https://cdn-profiles.tunein.com/s20407/images/logoq.png)', stream: 'https://17563.live.streamtheworld.com/CNNTV_SC?sbmid=9664fe78-c2d6-44bb-acb1-d9cfa306c08a&DIST=CBS&TGT=radiocomPlayer&SRC=CBS&lsid=cookie:8ff2da13-08c2-4732-8e99-3e3bd7346e3f', meta: "News Radio", live: true, length: '30 Minutes' },
+        {name: 'C-Span Radio', image: 'url(https://cdn-profiles.tunein.com/s28047/images/logoq.png)', stream: 'http://18123.live.streamtheworld.com/CSPANRADIO_SC?DIST=TuneIn&TGT=TuneIn&maxServers=2&tdtok=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImZTeXA4In0.eyJpc3MiOiJ0aXNydiIsInN1YiI6IjI0Njk1NTE3MiIsImlhdCI6MTYxMTg3NDIyOSwidGQtcmVnIjpmYWxzZX0.lhNfRp_h4m_KK7bV_uARa41bF-0sXptd7LjCmUGBtmE&gdpr=0&us_privacy=1YNY&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTYxMTg3NDIyOSwiaXNzIjoidGlzcnYifQ.ZujXgt5k8Fa6wrLLWChVPaDSlSG1OwzPYZKrHuPKuvk', meta: "News Radio", live: true, length: '30 Minutes' },
+        {name: 'The Daily', image: 'url(https://cdn-profiles.tunein.com/p952868/images/logoq.png)', stream: 'https://dts.podtrac.com/redirect.mp3/chtbl.com/track/8DB4DB/pdst.fm/e/nyt.simplecastaudio.com/03d8b493-87fc-4bd1-931f-8a8e9b945d8a/episodes/2456bb9b-b94e-4da5-a167-8b5f6a1a45a4/audio/128/default.mp3?aid=rss_feed&awCollectionId=03d8b493-87fc-4bd1-931f-8a8e9b945d8a&awEpisodeId=2456bb9b-b94e-4da5-a167-8b5f6a1a45a4&feed=54nAGcIl', meta: "Podcast", live: false, length: 'Latest Episode' },
+        {name: 'Cheddar', image: 'url(https://cdn-profiles.tunein.com/s296280/images/logoq.png)', stream: 'http://cheddar.streamguys1.com/live-mp3?aw_0_1st.age=33&aw_0_1st.gender=male&aw_0_1st.playerid=RadioTime&aw_0_1st.skey=1611874277&source=TuneIn&aw_0_1st.premium=false&us_privacy=1YNY&aw_0_1st.lotamesegments=%3ball%3b', meta: "Business & Tech News", live: true, length: '30 Minutes' },
+        {name: 'Bloomberg Radio', image: 'url(https://cdn-profiles.tunein.com/s165740/images/logoq.png)', meta: "Business News", stream: 'https://15263.live.streamtheworld.com/BBGRADIONTLAAC_SC?sbmid=90941f1b-82a6-43ae-8820-f1dcbc910b19&DIST=CBS&TGT=radiocomPlayer&SRC=CBS&lsid=cookie:8ff2da13-08c2-4732-8e99-3e3bd7346e3f', live: true, length: '30 Minutes' }
       ]},
       autoplaylist2 : {name: 'Rock n  Roll', stations: [
 
@@ -5133,6 +5176,8 @@ jhunter@tunein.com
       vibe('./imgs/nyan.gif');
 
       loadcannon();
+
+      generateplaylist();
 
       let tabpages = document.getElementsByClassName('tabpage');
 
