@@ -101,9 +101,17 @@ Object.defineProperty(Object.prototype, "offset", {
     enumerable : false
 });
 
+Storage.prototype.setObject = function(key, value) {
+    this.setItem(key, JSON.stringify(value));
+}
+
+Storage.prototype.getObject = function(key) {
+    return JSON.parse(this.getItem(key));
+}
+
 function componentToHex(c) {
-let hex = c.toString(16);
-return hex.length == 1 ? "0" + hex : hex;
+    let hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
 }
   
 function rgb2hex(rgb) {

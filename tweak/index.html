@@ -1114,6 +1114,22 @@ jhunter@tunein.com
 
     .panelcontent {position:absolute;top:0;left:0;right:0;bottom:0;overflow-y:scroll;padding-top:80px;}
 
+    .selectwrap {display:flex;flex-direction: column;gap:2px;margin-bottom:12px;user-select:none;}
+      .selectbtn {display: flex;align-items: center;height:40px;border-radius:var(--buttonradius);padding:0 16px;font-size:16px;font-weight:500;cursor:pointer;position:relative;}
+        .selectbtn:hover {background-color: var(--ink2);color:var(--ink11);}
+        .selectbtn:active {background-color: var(--ink3);color:var(--ink12);}
+        .selectbtn.current {background-color:var(--ink4);color:var(--ink12);}
+
+    .durationpicker {background-color: var(--ink3);display: flex;align-items: center;height:40px;border-radius:var(--buttonradius);padding:0 16px;font-size:16px;font-weight:500;cursor:pointer;position:relative;margin-bottom:12px;}
+      .durationpicker:hover {background-color: var(--ink4);color:var(--ink11);}
+      .durationpicker:active {background-color: var(--ink3);color:var(--ink12);}
+
+    .durationoverlay {position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.2);z-index:99999999999999;transition:opacity 200ms ease-in-out;}
+      .durationselectmenu {position:absolute;overflow-y:auto;background-color:var(--ink1);border-radius:6px;transition:all 200ms ease-in-out;padding:8px 0;box-sizing:border-box;}
+        .duratime {display:flex;align-items:center;height:40px;padding:0 16px;font-size:16px;font-weight:500;color:var(--ink10);user-select:none;cursor:pointer}
+          .duratime:hover {background-color:var(--ink2);}
+          .duratime:active {background-color:var(--ink3);}
+
     @media screen and (max-width: 666px) {
       #container {
           border-radius: 0 !important;
@@ -1171,6 +1187,11 @@ jhunter@tunein.com
 <body>
   <input type="color" id=colorpicker />
   <div id=tweaks>
+    <div class=tpanel style="padding:0;">
+      <div class=tgroup>
+        <div class=redlinebtn onclick="clearplaylist()">Clear Playlist</div>
+      </div>
+    </div>
     <div class=tpanel style="padding:0;">
       <div class=tgroup>
         <div class=redlinebtn onclick="redline()">Redline</div>
@@ -1507,13 +1528,42 @@ jhunter@tunein.com
       </div>
     </div>
 
+    <div class="morepanel durationmenu" id=durationmenu>
+      <div class=overlay></div>
+      <div class=panel>
+        <div class=panelwrap>
+          <h2>Set Duration</h2>
+          <div class=durationpicker data-time=30>30 Minutes</div>
+          <div class="btn fw aink addtobtn2 dismissmenu" style="margin-bottom:8px;">Save</div>
+          <div class="btn fw quietbtn dismissmenu">Cancel</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="morepanel episodemenu" id=episodemenu>
+      <div class=overlay></div>
+      <div class=panel>
+        <div class=panelwrap>
+          <h2>Which Episodes?</h2>
+          <div class=selectwrap>
+            <div class="selectbtn current">Latest Episode</div>
+            <div class="selectbtn ">All Unlistened to Episodes</div>
+            <div class="selectbtn ">All Episodes</div>
+          </div>
+          <div class="btn fw aink addtobtn2 epbtn dismissmenu" style="margin-bottom:8px;">Save</div>
+          <div class="btn fw quietbtn dismissmenu">Cancel</div>
+        </div>
+      </div>
+    </div>
+
     <style>
       .toggleinput {cursor:pointer;}
       .toggleinput input {display:none;}
-      .btn.quietbtn {background:transparent;}
-      .btn.quietbtn:hover {background:var(--ink2);}
-      .btn.quietbtn:active {background:var(--ink3);}
+      .btn.quietbtn {background:transparent;color:var(--ink10);}
+      .btn.quietbtn:hover {background:var(--ink2);color:var(--ink11);}
+      .btn.quietbtn:active {background:var(--ink3);color:var(--ink12);}
 
+      .darkui .btn.quietbtn {color:var(--ink3);background:transparent;}
         .darkui .btn.quietbtn:hover {color:var(--ink4);background:transparent;}
         .darkui .btn.quietbtn:active {color:var(--ink6);background:transparent;}
 
@@ -2798,6 +2848,15 @@ jhunter@tunein.com
   </div>
   <audio controls="" loop="" id="meow" style="display:none;" src="./audio/nyancat.mp3" type="audio/mpeg" preload="auto"></audio>
   <script>
+    function clearplaylist(){
+      localStorage.clear();
+    }
+
+    function savelocalplaylist(){
+      localStorage.setObject('lists', Lists);
+      localStorage.setObject('playlist', Playlist);
+    }
+
     function playbackspeed(e){
       let v = this.value;
       document.getElementById('meow').playbackRate = v;
@@ -3820,7 +3879,7 @@ jhunter@tunein.com
         let d = s.length || 0;
         let a = s.meta || 'NA';
 
-        let sub = l ? d + ' Minutes' : 'Latest Episode';
+        let sub = d;//l ? d + ' Minutes' : 'Latest Episode';
 
         if ( !l ){
           menu.dataset.type = 'playlistpodmore';
@@ -4293,7 +4352,7 @@ jhunter@tunein.com
 
       Playlist.push(name);
 
-      
+      savelocalplaylist();
 
       document.getElementsByClassName('playlistemptystate')[0].style.display = 'none';
 
@@ -4308,6 +4367,7 @@ jhunter@tunein.com
 
       if ( !Lists[name] ){
         Lists[name] = {name: name, id: pr.id, stations: [] };
+        savelocalplaylist();
       }
       
       let t = pr.getElementsByClassName('title')[0];
@@ -4340,15 +4400,31 @@ jhunter@tunein.com
       let pl = this.dataset.playlist;
       console.log(this.dataset.playlist);
 
+      let islive = document.getElementById('nowplaying').classList.contains('live');
+
+      let t = islive ? 'durationmenu' : 'episodemenu';
+
+      let m = document.getElementById(t);
+      let b = m.getElementsByClassName('addtobtn2')[0];
+      b.dataset.playlist = pl;
+      document.getElementsByClassName('openmenu').removeclass('openmenu');
+      m.classList.add('openmenu');
+    }
+
+    function addtostep2(){
+      let pl = this.dataset.playlist;
+      let len = this.classList.contains('epbtn') ? this.getparent('panelwrap').getElementsByClassName('selectbtn current')[0].innerText : this.getparent('panelwrap').getElementsByClassName('durationpicker')[0].dataset.time;
       let np = document.getElementById('nowplaying');
       let station = np.getElementsByClassName('npstation')[0].dataset.name;
       let img =  window.getComputedStyle(np.getElementsByClassName('extraimg')[0], null).getPropertyValue('background-image');
       let stream = document.getElementById('meow').src;
-      let islive = document.getElementById('nowplaying').classList.contains('live');
+      let islive = np.classList.contains('live');
 
       let id = Lists[pl].id;
       
-      Lists[pl].stations.push({name: station,  image: img, stream: stream, live: islive, length: islive ? 30 : 0});
+      Lists[pl].stations.push({name: station,  image: img, stream: stream, live: islive, length: len});
+
+      savelocalplaylist();
       
       console.log(Lists);
 
@@ -4356,7 +4432,7 @@ jhunter@tunein.com
       meta.empty();
       let count = (Lists[pl].stations.length);
       let s = count !== 1 ? 's' : '';
-      meta.appendChild(document.createTextNode( count + ' Item' + s))
+      meta.appendChild(document.createTextNode( count + ' Item' + s));
 
       toast('Added to Playlist - ' + pl);
     }
@@ -4413,6 +4489,8 @@ jhunter@tunein.com
       c.classList.remove('apl');
       
       Playlist.push(a.getElementsByClassName('title')[0].innerText);
+
+      savelocalplaylist();
 
       a.style.display = 'none';
 
@@ -4619,7 +4697,7 @@ jhunter@tunein.com
       let l = p.dataset.radio || false;
       let d =  0;
 
-      let sub = l ? d + ' Minutes' : 'Latest Episode';
+      let sub = d;//l ? d + ' Minutes' : 'Latest Episode';
 
       if ( !l ){
         menu.dataset.type = 'playlistpodmore';
@@ -4636,6 +4714,8 @@ jhunter@tunein.com
       content.appendChild(c);
 
       Lists[ti].stations.push({name: n,  image: m, stream: u, live: l, length: l ? 30 : 0});
+
+      savelocalplaylist();
 
 
       p.classList.add('hiderecco');
@@ -4717,6 +4797,8 @@ jhunter@tunein.com
       let id = Lists[pl].id;
       
       Lists[pl].stations.push({name: station,  image: img, stream: stream, live: islive, length: l});
+
+      savelocalplaylist();
       
       console.log(Lists);
 
@@ -4742,7 +4824,7 @@ jhunter@tunein.com
       let menu = c.getElementsByClassName('morebtn')[0];
 
      
-      let sub = islive ? l + ' Minutes' : 'Latest Episode';
+      let sub = l;//islive ? l + ' Minutes' : 'Latest Episode';
 
       if ( !islive ){
         menu.dataset.type = 'playlistpodmore';
@@ -4800,6 +4882,76 @@ jhunter@tunein.com
     
     }
 
+    function selectbtn(e){
+      let w = this.getparent('selectwrap');
+      let o = w.getElementsByClassName('current');
+      o.removeclass('current');
+
+      this.classList.add('current');
+    }
+
+    function durationpicker(e){
+      let s = document.createElement('div');
+      let o = document.createElement('div');
+
+      s.className = 'durationselectmenu';
+      o.className = 'durationoverlay';
+
+      let off = this.offset();
+      let con = document.getElementById('container').offset();
+
+      s.style.left = off.x - con.x + 'px';
+      s.style.top = off.y - con.y + 'px';
+      s.style.width = off.w +'px';
+      s.style.height = off.h + 'px';
+
+      o.style.opacity = 0;
+
+      for(var i=1;i<289;i++){
+        let d = document.createElement('div');
+        d.className = 'duratime';
+        let length = i * 5;
+        let h = Math.floor(length / 60);
+        let m = length % 60;
+
+        let t = h > 0 ? h + ' Hour' + (h>1 ? 's' : '') + (m>0 ? ' ' + m + ' Minutes' : '') : m + ' Minutes';
+        d.dataset.time = t;
+        d.appendChild(document.createTextNode(t));
+
+        s.appendChild(d);
+      }
+
+      o.appendChild(s);
+
+      document.getElementById('container').appendChild(o);
+
+      s.scroll({top: 108});
+
+      s.offsetLeft;
+
+      o.style.opacity = 1;
+
+      s.style.left = off.x - con.x - 16 + 'px';
+      s.style.top = off.y - con.y - 100 + 'px';
+      s.style.width = off.w + 32 +'px';
+      s.style.height = off.h + 200  + 'px'
+    }
+
+    function durationoverlay(){
+      this.remove();
+    }
+
+    function duratime(){
+      let v = this.dataset.time;
+      let p = document.getElementsByClassName('durationpicker')[0];
+
+      p.dataset.time = v;
+      p.empty();
+      p.appendChild(document.createTextNode(v));
+
+      durationoverlay.call(this.getparent('durationoverlay'));
+    }
+
     Attach.on('click', '.addtoplaylist', addtoplaylistsearch);
     Attach.on('click', '.playlistaddrec', playlistaddrec);
     Attach.on('click', '.saveplaylist', saveplaylist);
@@ -4844,9 +4996,14 @@ jhunter@tunein.com
     Attach.on('click', '.savenpspeed', savenpspeed);
     Attach.on('click', '.cancelnpspeed', cancelnpspeed);
     Attach.on('click', '.npspeedbtn', npspeed);
-    Attach.on('mousedown', '.aink, .panelitem, .listitem, .iconbtn, .modalclose', droidpress);
+    Attach.on('mousedown', '.aink, .panelitem, .listitem, .iconbtn, .modalclose, .selectbtn', droidpress);
     Attach.on('click', '.playallplaylist', playallplaylist);
     Attach.on('click', '.a2pl', a2pl);
+    Attach.on('click', '.addtobtn2', addtostep2);
+    Attach.on('click', '.selectbtn', selectbtn);
+    Attach.on('click', '.durationpicker', durationpicker);
+    Attach.on('click', '.durationoverlay', durationoverlay);
+    Attach.on('click', '.duratime', duratime);
     
     
     window.Playlist = [];
