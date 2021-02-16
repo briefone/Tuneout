@@ -1108,11 +1108,12 @@ jhunter@tunein.com
 
 
     .playlistsearch {padding:24px 24px 16px;position:relative;margin-top:-12px;border-radius:12px 12px 0 0 ;z-index:3;backdrop-filter:blur(40px);box-sizing: border-box;left:.25px;width: calc(100% - 0.5px);overflow:hidden;}
-      .droid .playlistsearch {border-radius: 0;}
+      .droid .playlistsearch {border-radius: 0;padding-bottom:0;backdrop-filter:none;background:var(--ink1);}
 
       .playlistsearch .colorlay {position:absolute;top:0;left:0;right:0;bottom:0;background:var(--ink1);opacity:0.5;z-index:-1;}
 
     .panelcontent {position:absolute;top:0;left:0;right:0;bottom:0;overflow-y:scroll;padding-top:80px;}
+      .droid .searchcontent {padding-top:68px;}
 
     .selectwrap {display:flex;flex-direction: column;gap:2px;margin-bottom:12px;user-select:none;}
       .selectbtn {display: flex;align-items: center;height:40px;border-radius:var(--buttonradius);padding:0 16px;font-size:16px;font-weight:500;cursor:pointer;position:relative;}
@@ -1551,6 +1552,34 @@ jhunter@tunein.com
             <div class="selectbtn ">All Episodes</div>
           </div>
           <div class="btn fw aink addtobtn2 epbtn dismissmenu" style="margin-bottom:8px;">Save</div>
+          <div class="btn fw quietbtn dismissmenu">Cancel</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="morepanel durationmenu" id=durationmenu2>
+      <div class=overlay></div>
+      <div class=panel>
+        <div class=panelwrap>
+          <h2>Set Duration</h2>
+          <div class=durationpicker data-time=30>30 Minutes</div>
+          <div class="btn fw aink a2plstep2 dismissmenu" style="margin-bottom:8px;">Save</div>
+          <div class="btn fw quietbtn dismissmenu">Cancel</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="morepanel episodemenu" id=episodemenu2>
+      <div class=overlay></div>
+      <div class=panel>
+        <div class=panelwrap>
+          <h2>Which Episodes?</h2>
+          <div class=selectwrap>
+            <div class="selectbtn current">Latest Episode</div>
+            <div class="selectbtn ">All Unlistened to Episodes</div>
+            <div class="selectbtn ">All Episodes</div>
+          </div>
+          <div class="btn fw aink a2plstep2 epbtn dismissmenu" style="margin-bottom:8px;">Save</div>
           <div class="btn fw quietbtn dismissmenu">Cancel</div>
         </div>
       </div>
@@ -4784,15 +4813,35 @@ jhunter@tunein.com
     }
 
     function a2pl(e){
+      let o = document.getElementsByClassName('a2pl currenta2pl');
+      o.removeclass('currenta2pl');
+      this.classList.add('currenta2pl');
+
+      let l = this.dataset.radio || false;
+
+      let t = l ? 'durationmenu2' : 'episodemenu2';
+
+      let m = document.getElementById(t);
+      document.getElementsByClassName('openmenu').removeclass('openmenu');
+      m.classList.add('openmenu');
+    }
+
+    function a2plprestep(){
+      let len = this.classList.contains('epbtn') ? this.getparent('panelwrap').getElementsByClassName('selectbtn current')[0].innerText : this.getparent('panelwrap').getElementsByClassName('durationpicker')[0].dataset.time;
+      let a = document.getElementsByClassName('a2pl currenta2pl')[0];
+      a.dataset.length = len;
+      a2plstep2.call(a);
+    }
+
+    function a2plstep2(){
       let p = document.getElementById('playlistdetailpage');
       let pl = p.dataset.title;
- 
 
       let station = this.dataset.station;
       let img =  window.getComputedStyle(this.getElementsByClassName('thumb')[0], null).getPropertyValue('background-image');
       let stream = this.dataset.url;
       let islive = this.dataset.radio || false;
-      let l = islive ? 30 : 0;
+      let l = this.dataset.length;//islive ? 30 : 0;
 
       let id = Lists[pl].id;
       
@@ -4891,6 +4940,7 @@ jhunter@tunein.com
     }
 
     function durationpicker(e){
+      this.classList.add('current');
       let s = document.createElement('div');
       let o = document.createElement('div');
 
@@ -4939,11 +4989,12 @@ jhunter@tunein.com
 
     function durationoverlay(){
       this.remove();
+      document.getElementsByClassName('durationpicker current').removeclass('current');
     }
 
     function duratime(){
       let v = this.dataset.time;
-      let p = document.getElementsByClassName('durationpicker')[0];
+      let p = document.getElementsByClassName('durationpicker current')[0];
 
       p.dataset.time = v;
       p.empty();
@@ -4952,7 +5003,8 @@ jhunter@tunein.com
       durationoverlay.call(this.getparent('durationoverlay'));
     }
 
-    Attach.on('click', '.addtoplaylist', addtoplaylistsearch);
+    Attach.on('click', '.a2plstep2', a2plprestep);
+    Attach.on('click', '.addtoplaylist, .add2pl', addtoplaylistsearch);
     Attach.on('click', '.playlistaddrec', playlistaddrec);
     Attach.on('click', '.saveplaylist', saveplaylist);
     Attach.on('click', '.focus', focuson);
@@ -5002,8 +5054,8 @@ jhunter@tunein.com
     Attach.on('click', '.addtobtn2', addtostep2);
     Attach.on('click', '.selectbtn', selectbtn);
     Attach.on('click', '.durationpicker', durationpicker);
-    Attach.on('click', '.durationoverlay', durationoverlay);
     Attach.on('click', '.duratime', duratime);
+    Attach.on('click', '.durationoverlay', durationoverlay);
     
     
     window.Playlist = [];
