@@ -1458,7 +1458,7 @@ jhunter@tunein.com
     <div class="morepanel add2listmenu">
       <div class=overlay></div>
       <div class=panel>
-        
+        <div id=addtomenu></div>
         <div class="panelitem menubtn focus panelcreateplaylist setplaceholder" data-focus="setplaylistname" data-type="createplaylist">Create a Playlist</div>
       </div>
     </div>
@@ -1593,6 +1593,7 @@ jhunter@tunein.com
           <h2>Which Episodes?</h2>
           <div class=selectwrap>
             <div class="selectbtn current">Latest Episode</div>
+            <div class="selectbtn ">This Episode</div>
             <div class="selectbtn ">All Unlistened to Episodes</div>
             <div class="selectbtn ">All Episodes</div>
           </div>
@@ -4407,12 +4408,18 @@ jhunter@tunein.com
     }
 
     function generateplaylist(){
-     
+      let pl = document.getElementsByClassName('playlistcontent')[0];
+      pl.empty();
+
+      let addtomenu = document.getElementById('addtomenu');
+      addtomenu.empty();
+
       for (const [key, value] of Object.entries(Lists)) {
-        let pl = document.getElementsByClassName('playlistcontent')[0];
+        
 
         let pr = document.getElementById('playlistrowitem').cloneNode(true);
         pr.removeAttribute('id');
+        pr.classList.add('pppppl');
 
         let name = key;
         let data = value;
@@ -4431,7 +4438,66 @@ jhunter@tunein.com
         m.empty();
         m.appendChild(document.createTextNode(scount + ' Item' + (scount === 1 ? '' : 's')));
 
+
+        let ap = document.createElement('div');
+        ap.className = 'panelitem addtothisplaylist';
+        ap.appendChild(document.createTextNode(name));
+        ap.dataset.title = name;
+
+        addtomenu.appendChild(ap);
+
+
+
+        let col = pr.getElementsByClassName('collage')[0];
+        col.empty();
+
+        let images = [];
+
+        for(var i=0;i<data.stations.length;i++){
+          let s = data.stations[i];
+          images.push(s.image);
+        }
+
+        let loop = Math.min(images.length, 4);
+
+        if (loop == 0){
+          let a = document.createElement('div');
+          a.className = 'f1';
+          a.style.backgroundColor = 'var(--ink4)';
+          a.style.backgroundImage = 'url(../icons/TIIcon.svg)';
+          a.style.backgroundSize = '24px';
+          a.style.backgroundRepeat = 'no-repeat';
+          a.style.opacity = 0.33;
+          col.appendChild(a);
+        }
+
+        for(var i=0;i<loop;i++){
+          let a = document.createElement('div');
+          a.style.backgroundImage = images[i];
+
+          var cl = 'g1';
+          if ( loop == 2 ){
+            if ( i === 0 ){
+              cl = 'v1';
+            } else {
+              cl = 'v2';
+            }
+          } else if ( loop == 3 ){
+            if ( i == 2 ){
+              cl = 'v2';
+            } 
+          } else if ( loop === 1 ){
+            cl = 'f1';
+          } 
+          a.className = cl
+
+          col.appendChild(a);
+        }
+        
+
         pl.appendChild(pr);
+
+
       }
 
       if ( Object.keys(Lists).length ){
@@ -4441,9 +4507,6 @@ jhunter@tunein.com
       let c = document.getElementsByClassName('playlistcount')[0];
       c.empty();
       c.appendChild(document.createTextNode(Object.keys(Lists).length));
-
-
-    
     }
 
     function saveplaylist(e){
@@ -4452,53 +4515,29 @@ jhunter@tunein.com
       let name = input.value || 'Playlist #' + (Object.keys(Lists).length + 1);
       input.value = '';
 
-      savelocalplaylist();
-
-      document.getElementsByClassName('playlistemptystate')[0].style.display = 'none';
-
-      let pl = document.getElementsByClassName('playlistcontent')[0];
-
-      let pr = document.getElementById('playlistrowitem').cloneNode(true);
-      pr.removeAttribute('id');
-
-      pr.id = name.replace(/\W/g, '');
-
-      pr.dataset.title = name;
+      let id = name.replace(/\W/g, '');
 
       if ( !Lists[name] ){
-        Lists[name] = {name: name, id: pr.id, stations: [] };
+        Lists[name] = {name: name, id: id, stations: [] };
         savelocalplaylist();
       }
-      
-      let t = pr.getElementsByClassName('title')[0];
-      t.appendChild(document.createTextNode(name));
 
-      pl.appendChild(pr);
+      savelocalplaylist();
 
-      let pc = document.getElementsByClassName('panelcreateplaylist')[0];
-      
-      let i = document.createElement('div');
-      i.className = 'panelitem addtothisplaylist';
-      i.dataset.playlist = name;
-      i.appendChild(document.createTextNode(name));
+      generateplaylist();
 
-      pc.parentElement.insertBefore(i, pc);
-
-      let c = document.getElementsByClassName('playlistcount')[0];
-      c.empty();
-      c.appendChild(document.createTextNode(Object.keys(Lists).length));
+      var pr = document.getElementsByClassName('listrowitem pl pppppl');
+      pr = pr[pr.length - 1];
 
       if ( !document.body.classList.contains('nppage')){
         pr.click();
       } else {
-        pr.dataset.playlist = name;
         addtothisplaylist.call(pr, e);
       }
     }
 
     function addtothisplaylist(e){
-      let pl = this.dataset.playlist;
-      console.log(this.dataset.playlist);
+      let pl = this.dataset.title;
 
       let islive = document.getElementById('nowplaying').classList.contains('live');
 
@@ -4506,33 +4545,37 @@ jhunter@tunein.com
 
       let m = document.getElementById(t);
       let b = m.getElementsByClassName('addtobtn2')[0];
-      b.dataset.playlist = pl;
+      b.dataset.title = pl;
       document.getElementsByClassName('openmenu').removeclass('openmenu');
       m.classList.add('openmenu');
     }
 
     function addtostep2(){
-      let pl = this.dataset.playlist;
+      let pl = this.dataset.title;
       let len = this.classList.contains('epbtn') ? this.getparent('panelwrap').getElementsByClassName('selectbtn current')[0].innerText : this.getparent('panelwrap').getElementsByClassName('durationpicker')[0].dataset.time;
       let np = document.getElementById('nowplaying');
       let station = np.getElementsByClassName('npstation')[0].dataset.name;
       let img =  window.getComputedStyle(np.getElementsByClassName('extraimg')[0], null).getPropertyValue('background-image');
       let stream = document.getElementById('meow').src;
       let islive = np.classList.contains('live');
-
+      console.log(pl, 'iddd', Lists);
       let id = Lists[pl].id;
+
+      console.log(id, pl, 'iddd', Lists);
       
       Lists[pl].stations.push({name: station,  image: img, stream: stream, live: islive, length: len});
 
       savelocalplaylist();
       
-      console.log(Lists);
+      console.log(id, pl, 'iddd', Lists);
 
-      let meta = document.getElementById(id).getElementsByClassName('meta')[0];
-      meta.empty();
-      let count = (Lists[pl].stations.length);
-      let s = count !== 1 ? 's' : '';
-      meta.appendChild(document.createTextNode( count + ' Item' + s));
+      // let meta = document.getElementById(id).getElementsByClassName('meta')[0];
+      // meta.empty();
+      // let count = (Lists[pl].stations.length);
+      // let s = count !== 1 ? 's' : '';
+      // meta.appendChild(document.createTextNode( count + ' Item' + s));
+
+      generateplaylist();
 
       toast('Added to Playlist - ' + pl);
     }
@@ -4865,6 +4908,8 @@ jhunter@tunein.com
       if ( hid.length == 3){
         document.getElementsByClassName('playlistrow reccos')[0].classList.add('hiderecco');
       }
+
+      generateplaylist();
     }
 
     function addtoplaylistsearch(e){
@@ -4923,11 +4968,13 @@ jhunter@tunein.com
       
       console.log(Lists);
 
-      let meta2 = document.getElementById(id).getElementsByClassName('meta')[0];
-      meta2.empty();
-      let count2 = (Lists[pl].stations.length);
-      let s2 = count2 !== 1 ? 's' : '';
-      meta2.appendChild(document.createTextNode( count2 + ' Item' + s2));
+      // let meta2 = document.getElementById(id).getElementsByClassName('meta')[0];
+      // meta2.empty();
+      // let count2 = (Lists[pl].stations.length);
+      // let s2 = count2 !== 1 ? 's' : '';
+      // meta2.appendChild(document.createTextNode( count2 + ' Item' + s2));
+
+      generateplaylist();
 
       p.classList.remove('emptyplay');
 
