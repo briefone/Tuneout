@@ -2513,7 +2513,7 @@ jhunter@tunein.com
                     <div class=rowcontent>
                       <div class=description>
                         <div class=title>Wake Up Mix</div>
-                        <div class=meta>8 Items</div>
+                        <div class=meta>6 Items</div>
                       </div>
                       <div class=actions>
                         <div class="iconbtn playplaylist">
@@ -2536,7 +2536,7 @@ jhunter@tunein.com
                     <div class=rowcontent>
                       <div class=description>
                         <div class=title>Chris Hayes</div>
-                        <div class=meta>5 Items</div>
+                        <div class=meta>4 Items</div>
                       </div>
                       <div class=actions>
                         <div class="iconbtn playplaylist">
@@ -2558,7 +2558,7 @@ jhunter@tunein.com
                     <div class=rowcontent>
                       <div class=description>
                         <div class=title>Dance Party</div>
-                        <div class=meta>22 Items</div>
+                        <div class=meta>6 Items</div>
                       </div>
                       <div class=actions>
                         <div class="iconbtn playplaylist">
@@ -4598,6 +4598,8 @@ jhunter@tunein.com
       pc.appendChild(document.createTextNode(Object.keys(Lists).length));
 
       document.getElementById('playlistdetailpage').classList.remove('notmine');
+
+      toast('Playlist ' + name + ' Saved!');
     }
 
     function playplaylist(e){
@@ -5140,17 +5142,41 @@ jhunter@tunein.com
         {name: 'Cheddar', image: 'url(https://cdn-profiles.tunein.com/s296280/images/logoq.png)', stream: 'http://cheddar.streamguys1.com/live-mp3?aw_0_1st.age=33&aw_0_1st.gender=male&aw_0_1st.playerid=RadioTime&aw_0_1st.skey=1611874277&source=TuneIn&aw_0_1st.premium=false&us_privacy=1YNY&aw_0_1st.lotamesegments=%3ball%3b', meta: "Business & Tech News", live: true, length: '30 Minutes' },
         {name: 'Bloomberg Radio', image: 'url(https://cdn-profiles.tunein.com/s165740/images/logoq.png)', meta: "Business News", stream: 'https://15263.live.streamtheworld.com/BBGRADIONTLAAC_SC?sbmid=90941f1b-82a6-43ae-8820-f1dcbc910b19&DIST=CBS&TGT=radiocomPlayer&SRC=CBS&lsid=cookie:8ff2da13-08c2-4732-8e99-3e3bd7346e3f', live: true, length: '30 Minutes' }
       ]},
-      autoplaylist2 : {name: 'Rock n  Roll', stations: [
-
+      autoplaylist2 : {name: 'Rock n Roll', stations: [
+        {name: 'Just Classic Rock', image: 'url(https://cdn-radiotime-logos.tunein.com/s284735q.png)', stream: 'https://streams.1radio.ca/just', meta: "Only Classic Rock", live: true, length: '30 Minutes' },
+        {name: '24-7 Rock \'n\' Roll', image: 'url(https://cdn-profiles.tunein.com/s173998/images/logoq.png?t=1)', stream: 'https://ssl.shoutcaststreaming.us:8038/', meta: "WHERE MUSIC COMES FIRST", live: true, length: '30 Minutes' },
+        {name: 'Hot Rocks Radio', image: 'url(https://cdn-radiotime-logos.tunein.com/s116310q.png)', stream: 'https://ca8ssl.rcast.net/stream/64801/', meta: "Scottsdale, AZ", live: true, length: '30 Minutes' },
+        {name: 'Pyrate Radio', image: 'url(https://cdn-profiles.tunein.com/s301918/images/logoq.jpg?t=151301)', stream: 'https://streams.radio.co/s0d4cc95c4/listen', meta: "Edie Brickell - What I Am", live: true, length: '30 Minutes' },
+        {name: 'Punk Aristocrats Radio 1', image: 'url(https://cdn-profiles.tunein.com/s251435/images/logoq.png?t=156266)', stream: 'https://stream.radio.co/s36b42b76f/listen', meta: "The Spitfires - (Just Won't) Keep Me Down", live: true, length: '30 Minutes' },
+        {name: 'Goat Radio', image: 'url(https://cdn-profiles.tunein.com/s305632/images/logoq.png?t=152208)', stream: 'https://streaming.live365.com/a67763', meta: "Hi-Fi Stereolicious Rock N Roll", live: true, length: '30 Minutes' },
+        {name: '1.FM - Alternative Rock X Hits Radio', image: 'url(https://cdn-radiotime-logos.tunein.com/s47734q.png)', stream: 'https://strm112.1.fm/x_mobile_mp3', meta: "Ghost - Square Hammer", live: true, length: '30 Minutes' },
+        {name: '98Rocks', image: 'url(https://cdn-profiles.tunein.com/s35572/images/logoq.png?t=155007)', stream: 'https://live.wostreaming.net/direct/alphacorporate-ktalfmaac-ibc4?source=TuneIn&gdpr=0&us_privacy=1YNY', meta: "Greg 'The Nuke Man' Hanson", live: true, length: '30 Minutes' },
+        {name: 'Classic Rock Hits', image: 'url(https://cdn-profiles.tunein.com/s249994/images/logoq.jpg?t=6)', stream: 'https://rfcmedia.streamguys1.com/classicrock.mp3', meta: "TuneIn Exclusive", live: true, length: '30 Minutes' },
+        {name: 'Radio Boo!', image: 'url(https://cdn-radiotime-logos.tunein.com/s247830q.png)', stream: 'https://buu.hostingradio.ru:8005/radio', meta: "Russia", live: true, length: '30 Minutes' },
+        {name: 'KBACK.ROCKS', image: 'url(https://cdn-profiles.tunein.com/s302158/images/logoq.jpg)', stream: 'https://streaming.live365.com/b42133_128mp3', meta: "Talking Heads - Life During Wartime", live: true, length: '30 Minutes' },
+        {name: 'WZQQ', image: 'url(https://cdn-profiles.tunein.com/s24416/images/logoq.jpg?t=155420)', stream: 'https://ice24.securenetsystems.net/WZQQ', meta: "Hazard's Rock!!", live: true, length: '30 Minutes' }        
       ]},
       autoplaylist3 : {name: 'Wake Up Mix', stations: [
-
+        {name: 'The Daily', image: 'url(https://cdn-profiles.tunein.com/p952868/images/logoq.png?t=1)', stream: 'https://dts.podtrac.com/redirect.mp3/chtbl.com/track/8DB4DB/pdst.fm/e/nyt.simplecastaudio.com/03d8b493-87fc-4bd1-931f-8a8e9b945d8a/episodes/a4231e42-b741-4f44-b6d5-432bb25e80e0/audio/128/default.mp3?aid=rss_feed&awCollectionId=03d8b493-87fc-4bd1-931f-8a8e9b945d8a&awEpisodeId=a4231e42-b741-4f44-b6d5-432bb25e80e0&feed=54nAGcIl', meta: "The Blackout in Texas", live: false, length: 'Latest Episode' },
+        {name: 'Up First', image: 'url(https://cdn-profiles.tunein.com/p983396/images/logoq.png?t=636270)', stream: 'https://play.podtrac.com/npr-510318/edge1.pod.npr.org/anon.npr-mp3/npr/upfirst/2021/02/20210217_upfirst_uf_2-17-21.mp3?awCollectionId=510318&awEpisodeId=967961857&orgId=1&d=807&p=510318&story=967961857&t=podcast&e=967961857&size=12893640&ft=pod&f=510318', meta: "Wednesday, February 17, 2021", live: false, length: 'Latest Episode' },
+        {name: 'Hot Hitz 80\'s', image: 'url(https://cdn-profiles.tunein.com/s253849/images/logoq.png?t=158506)', stream: 'https://s1.reliastream.com/proxy/hothitz80s?mp=/stream', meta: "Spandau Ballet - True", live: true, length: '30 Minutes' },
+        {name: 'Coffeehouse', image: 'url(https://cdn-profiles.tunein.com/s304385/images/logoq.png?t=1)', stream: 'https://rfcmedia.streamguys1.com/coffeehousepremium.mp3', meta: "TuneIn Exclusive", live: true, length: '30 Minutes' },
+        {name: 'Chill', image: 'url(https://cdn-profiles.tunein.com/s303758/images/logoq.jpg?t=158586)', stream: 'https://rfcmedia.streamguys1.com/relaxationpremium.mp3', meta: "TuneIn Exclusive", live: true, length: '30 Minutes' },
+        {name: 'Tiny Desk Concerts - Audio', image: 'url(https://cdn-profiles.tunein.com/p332598/images/logoq.png?t=156511)', stream: 'https://play.podtrac.com/npr-510306/edge1.pod.npr.org/anon.npr-mp3/npr/tinydesk/2021/02/20210216_tinydesk_john_fogerty_family.mp3?awCollectionId=510306&awEpisodeId=968655608&orgId=1&d=897&p=510306&story=968655608&t=podcast&e=968655608&size=28681074&ft=pod&f=510306', meta: "Fogerty's Factory - John Fogerty + Family: Tiny Desk (Home) Concert", live: true, length: '30 Minutes' }
       ]},
       autoplaylist4 : {name: 'Chris Hayes', stations: [
-
+        {name: 'Why Is This Happening? with Chris Hayes', image: 'url(https://cdn-profiles.tunein.com/p1124593/images/logoq.jpg?t=157166)', stream: 'https://dts.podtrac.com/redirect.mp3/chtbl.com/track/6D589D/pdst.fm/e/nbcnews.simplecastaudio.com/59eb82e8-198b-4b11-b64a-c04a9083812d/episodes/dd4c721a-5307-4faf-b819-96244e6cd8bd/audio/128/default.mp3?aid=rss_feed&awCollectionId=59eb82e8-198b-4b11-b64a-c04a9083812d&awEpisodeId=dd4c721a-5307-4faf-b819-96244e6cd8bd&feed=Ftpd36Dg', meta: "Whose Land with Rebecca Nagle", live: false, length: 'Latest Episode' },
+        {name: 'Hooniverse', image: 'url(https://cdn-profiles.tunein.com/p1136361/images/logoq.png)', stream: 'https://shoutengine.com/Hooniverse/Hooniverse-0300-is-this-the-end-84736.mp3', meta: "Automotive", live: false, length: 'Latest Episode' },
+        {name: 'The Nation: The Breakdown Podcast', image: 'url(https://cdn-radiotime-logos.tunein.com/p352076q.png)', stream: 'https://s3.amazonaws.com/thenation/audio/mp3/Breakdown/Breakdown_GOPprez_2011617.mp3', meta: "Politics", live: false, length: 'Latest Episode' },
+        {name: 'All In with Chris Hayes', image: 'url(https://cdn-profiles.tunein.com/p921816/images/logoq.png?t=3)', stream: 'https://dts.podtrac.com/redirect.mp3/chtbl.com/track/6D589D/pdst.fm/e/nbcnews.simplecastaudio.com/24c4a3b6-ddfb-4d0f-8ec1-c3b138ade05b/episodes/868bfa23-2475-4070-9475-f4d0883346a4/audio/128/default.mp3?aid=rss_feed&awCollectionId=24c4a3b6-ddfb-4d0f-8ec1-c3b138ade05b&awEpisodeId=868bfa23-2475-4070-9475-f4d0883346a4&feed=K5Wu8vub', meta: "Chris Hayes debunks GOP, right-wing media lies about Texas power outages", live: false, length: 'Latest Episode' }
       ]},
       autoplaylist5 : {name: 'Dance Party', stations: [
-
+        {name: 'Tomorrowland One World Radio', image: 'url(https://cdn-profiles.tunein.com/s307749/images/logoq.jpg)', stream: 'https://playerservices.streamtheworld.com/api/livestream-redirect/OWR_INTERNATIONAL.mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&us_privacy=1YNY&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTYxMzYwMDM2NiwiaXNzIjoidGlzcnYifQ.vhhitgQqF5uYBZ6hgrFtdVhF5Zk9WAM88YnKAUq4Oko', meta: "Oliver Heldens, Shungudzo - Freedom for my People", live: true, length: '30 Minutes' },
+        {name: 'Lost Notes', image: 'url(https://cdn-profiles.tunein.com/p1118976/images/logoq.png?t=1)', stream: 'https://dts.podtrac.com/redirect.mp3/podcast-download.kcrw.com/kcrw/audio/podcast/etc/ln/KCRW-lost_notes-grace_jones-2-200924.mp3', meta: "Grace Jones", live: false, length: 'Latest Episode' },
+        {name: 'Jacked', image: 'url(https://cdn-profiles.tunein.com/p1378974/images/logoq.png?t=2)', stream: 'https://chtbl.com/track/9EE2G/pdst.fm/e/dts.podtrac.com/redirect.mp3/rss.art19.com/episodes/25f28deb-5699-4030-8ac7-547c72d05b13.mp3', meta: "Carla Hall Interviews New Jack Producer Kyle West", live: false, length: 'Latest Episode' },
+        {name: 'Pool Side', image: 'url(https://cdn-profiles.tunein.com/s303755/images/logoq.png)', stream: 'https://rfcmedia.streamguys1.com/relaxationpremium.mp3', meta: "TuneIn Exclusive", live: true, length: '30 Minutes' },
+        {name: 'BBC Radio 1Xtra', image: 'url(https://cdn-radiotime-logos.tunein.com/s20277q.png)', stream: 'https://stream.live.vc.bbcmedia.co.uk/bbc_1xtra?s=1613593068&e=1613607468&h=127b123f98e428277efe19ca690d98c9', meta: "DJ Edu - Destination Africa", live: true, length: '30 Minutes' },
+        {name: 'Ibiza Live Radio', image: 'url(https://cdn-profiles.tunein.com/s203278/images/logoq.png)', stream: 'https://streams.radio.co/sdc9cfaf77/listen', meta: "24/7 of Selected Sounds from Ibiza. Welcome To The Family!", live: true, length: '30 Minutes' }
       ]}
     }
     
