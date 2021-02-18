@@ -1202,7 +1202,7 @@ jhunter@tunein.com
   <div id=tweaks>
     <div class="tpanel alwayspresent" style="padding:0;display:block;">
       <div class="tweak">
-        <label><input type="checkbox" id="cb666" class="tweakr " data-class=hidetweaks><div class="toggle"></div> Hide - Double Tap Logo</label>
+        <label><input type="checkbox" id="cb666" class="tweakr " data-class=hidetweaks><div class="toggle"></div> Hide (Double Tap Logo)</label>
       </div>
     </div>
     <div class=tpanel style="padding:0;">
@@ -2895,8 +2895,8 @@ jhunter@tunein.com
   <script>
     function clearplaylist(){
       localStorage.clear();
-
-       Lists = {};
+      Lists = {};
+      generateplaylist();
     }
 
     function savelocalplaylist(){
@@ -4415,8 +4415,6 @@ jhunter@tunein.com
       addtomenu.empty();
 
       for (const [key, value] of Object.entries(Lists)) {
-        
-
         let pr = document.getElementById('playlistrowitem').cloneNode(true);
         pr.removeAttribute('id');
         pr.classList.add('pppppl');
@@ -4445,8 +4443,6 @@ jhunter@tunein.com
         ap.dataset.title = name;
 
         addtomenu.appendChild(ap);
-
-
 
         let col = pr.getElementsByClassName('collage')[0];
         col.empty();
@@ -4502,6 +4498,8 @@ jhunter@tunein.com
 
       if ( Object.keys(Lists).length ){
         document.getElementsByClassName('emptystate playlistemptystate')[0].style.display = 'none';
+      } else {
+        document.getElementsByClassName('emptystate playlistemptystate')[0].style.display = 'flex';
       }
 
       let c = document.getElementsByClassName('playlistcount')[0];
