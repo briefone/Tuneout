@@ -1060,7 +1060,7 @@ jhunter@tunein.com
         input.setplaylistname {background:var(--ink3);width:100%;height:40px;font-size:22px;font-weight:500;text-align:center;margin-bottom:16px;text-indent: 0;}
         .saveplaylist {width:100%;}
 
-      .toast {height:48px;padding:0 16px;display:flex;align-items:center;justify-content:center;border-radius:4px;background:var(--tsharp3);color:black;position:absolute;z-index:999999999999999999;transition:transform 200ms ease-in-out;bottom:8px;right:8px;transform:translateY(calc(100% + 20px));box-shadow:0 4px 8px rgba(0,0,0,0.1);font-size:16px;font-weight:600;}
+      .toast {height:48px;padding:0 16px;display:flex;align-items:center;justify-content:center;border-radius:4px;background:var(--tsharp3);color:black;position:absolute;z-index:999999999999999999;transition:transform 200ms ease-in-out;bottom:12px;right:12px;transform:translateY(calc(100% + 20px));box-shadow:0 4px 8px rgba(0,0,0,0.1);font-size:16px;font-weight:600;cursor:pointer;user-select:none;}
         .toast.pop {transform:translateY(0);}
 
 
@@ -1207,7 +1207,7 @@ jhunter@tunein.com
     </div>
     <div class=tpanel style="padding:0;">
       <div class=tgroup>
-        <div class=redlinebtn onclick="clearplaylist()">Clear Playlist</div>
+        <div class=resetbtn onclick="clearplaylist()">Clear Playlist</div>
       </div>
     </div>
     <div class=tpanel style="padding:0;">
@@ -4579,6 +4579,9 @@ jhunter@tunein.com
     }
 
     function toast(x){
+      let burnttoast = document.getElementsByClassName('pop');
+      burnttoast.removeclass('pop');
+
       let  t = document.createElement('div');
       t.className = 'toast';
       t.appendChild(document.createTextNode(x));
@@ -4587,13 +4590,22 @@ jhunter@tunein.com
 
       t.offsetLeft;
 
-      t.classList.add('pop');
-      setTimeout(function(){
-        t.classList.remove('pop');
-        setTimeout(function(){
+      t.ontransitionend = function(){
+        if ( !this.classList.contains('pop') ){
+          t.ontransitionend = null;
           t.remove();
-        }, 300)
+        }
+      };
+
+      t.ptimer = setTimeout(function(){
+        t.classList.remove('pop');
       }, 2222);
+
+      t.classList.add('pop');
+    }
+
+    function toastclick(){
+      this.classList.remove('pop');
     }
 
     function setplaceholder(){
@@ -5173,6 +5185,7 @@ jhunter@tunein.com
     Attach.on('click', '.durationpicker', durationpicker);
     Attach.on('click', '.duratime', duratime);
     Attach.on('click', '.durationoverlay', durationoverlay);
+    Attach.on('click', '.toast', toastclick);
     
     
     window.Lists = localStorage.getObject('lists') || {};
