@@ -712,6 +712,7 @@ jhunter@tunein.com
         .rowitem:first-child {padding-top:8px;}
         .rowitem .thumb {width:80px;height:80px;min-width:80px;min-height:80px;}
         .rowitem .description {display:flex;flex-direction: column;justify-content: center;max-width:calc(100% - 80px - 12px);}
+          .rowitem .description.nothumb {max-width:100%;}
           .rowitem .description .title {font-weight:500;font-size:18px;padding-bottom:4px;max-height: 40px;text-overflow: ellipsis;overflow: hidden;}
           .rowitem .description .meta {color:var(--lighttext);font-size:16px;text-overflow: ellipsis;white-space:nowrap;overflow:hidden;max-width:100%;}
 
@@ -944,7 +945,18 @@ jhunter@tunein.com
         .npplaylist .npnext, .npplaylist .npprev {display:flex;}
 
 
-    .npextras {margin:0 24px;border-radius:6px;background:var(--npextra);}
+    .npextras {margin:0 24px;}
+      .extracard {border-radius:6px;background:var(--npextra);margin-bottom:16px;}
+        .extracard h3 {padding:12px 16px 8px;font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing: 0.2px;opacity:0.6;}
+        .extracard .itemlist {padding-bottom:4px;}
+        .extracard .rowitem {padding: 4px 16px;}
+        .extracard .rowitem .description {max-width:calc(100% - 48px);}
+          .extracard .rowitem .title {font-size: 16px;}
+          .extracard .rowitem .meta {font-size: 14px;}
+
+        .live .podcard {display:none;}
+
+          .extracard .circlebtn {background-color: var(--ink8);width:40px;height:40px;}
 
             .cardstation {}
               .stationrow {display:flex;gap:12px;align-items: center;padding:16px;}
@@ -1061,6 +1073,8 @@ jhunter@tunein.com
       .panelwrap {padding:4px 24px 8px;}
         .panelwrap h2 {margin-bottom:8px;}
         input.setplaylistname {background:var(--ink3);width:100%;height:40px;font-size:22px;font-weight:500;text-align:center;margin-bottom:16px;text-indent: 0;}
+          .darkui input.setplaylistname {background-color:var(--ink6);}
+          .darkui input.setplaylistname::placeholder {color:var(--ink8);}
         .saveplaylist {width:100%;}
 
       .toast {height:48px;padding:0 16px;display:flex;align-items:center;justify-content:center;border-radius:4px;background:var(--tsharp3);color:black;position:absolute;z-index:999999999999999999;transition:transform 200ms ease-in-out;bottom:12px;right:12px;transform:translateY(calc(100% + 20px));box-shadow:0 4px 8px rgba(0,0,0,0.1);font-size:16px;font-weight:600;cursor:pointer;user-select:none;}
@@ -1132,17 +1146,46 @@ jhunter@tunein.com
       .selectbtn {display: flex;align-items: center;height:40px;border-radius:var(--buttonradius);padding:0 16px;font-size:16px;font-weight:500;cursor:pointer;position:relative;}
         .selectbtn:hover {background-color: var(--ink2);color:var(--ink11);}
         .selectbtn:active {background-color: var(--ink3);color:var(--ink12);}
+
+        .darkui .selectbtn:hover {background-color: var(--ink8);color:var(--ink1);}
+        .darkui .selectbtn:active {background-color: var(--ink7);color:var(--ink1);}
+
         .selectbtn.current {background-color:var(--tsharp2);color:var(--brand);}
+
+       
 
     .durationpicker {background-color: var(--ink3);display: flex;align-items: center;height:40px;border-radius:var(--buttonradius);padding:0 16px;font-size:16px;font-weight:500;cursor:pointer;position:relative;margin-bottom:12px;}
       .durationpicker:hover {background-color: var(--ink4);color:var(--ink11);}
       .durationpicker:active {background-color: var(--ink3);color:var(--ink12);}
 
+
+      .darkui .durationpicker {background-color: var(--ink6);color:var(--ink10);}
+        .darkui .durationpicker:hover {background-color: var(--ink5);color:var(--ink11);}
+        .darkui .durationpicker:active {background-color: var(--ink4);color:var(--ink12);}
+
     .durationoverlay {position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.2);z-index:99999999999999;transition:opacity 200ms ease-in-out;}
       .durationselectmenu {position:absolute;overflow-y:auto;background-color:var(--ink1);border-radius:6px;transition:all 200ms ease-in-out;padding:8px 0;box-sizing:border-box;}
-        .duratime {display:flex;align-items:center;height:40px;padding:0 16px;font-size:16px;font-weight:500;color:var(--ink10);user-select:none;cursor:pointer}
+        .darkui .durationselectmenu {background-color:var(--ink10);color:var(--ink1);}
+        .duratime {display:flex;align-items:center;height:40px;padding:0 16px;font-size:16px;font-weight:500;user-select:none;cursor:pointer}
           .duratime:hover {background-color:var(--ink2);}
           .duratime:active {background-color:var(--ink3);}
+
+          .darkui .duratime:hover {background-color:var(--ink9);}
+          .darkui .duratime:active {background-color:var(--ink8);}
+
+
+      .hidetweaks #container {
+        border-radius: 0 !important;
+        height:100% !important;
+        top: 0 !important;
+        left: 0 !important;
+        bottom: 0 !important;
+        width: 100% !important;
+        max-width: none !important;
+        overflow: hidden !important;
+        margin-left: 0 !important;
+        margin-top:0 !important;
+      }
 
     @media screen and (max-width: 666px) {
       #container {
@@ -1568,6 +1611,7 @@ jhunter@tunein.com
           <h2>Which Episodes?</h2>
           <div class=selectwrap>
             <div class="selectbtn current">Latest Episode</div>
+            <div class="selectbtn ">This Episode</div>
             <div class="selectbtn ">All Unlistened to Episodes</div>
             <div class="selectbtn ">All Episodes</div>
           </div>
@@ -1777,7 +1821,7 @@ jhunter@tunein.com
         </div>
         <div class=npcolumn>
           <div class=npextras>
-            <div class=cardstation>
+            <div class="cardstation extracard">
               <div class=stationrow>
                 <div class="img extraimg"></div>
                 <div class=details>
@@ -1789,7 +1833,107 @@ jhunter@tunein.com
                 MSNBC is the premier destination for breaking news and in-depth analysis through commentary and informed perspectives from...
               </div>
             </div>
+            <div class="extracard podcard">
+              <h3>Episodes</h3>
+              <div class=itemlist>
+                <div class=rowitem>
+                  <div class=excontrol>
+                    <div class="circlebtn aink">
+                      <div class="svgicon playicon"></div>
+                    </div>
+                  </div>
+                  <div class="description">
+                    <div class=title>Apollo Theater’s Kamilah Forbes on "Between the World and Me"</div>
+                    <div class=meta>2/9/2021</div>
+                  </div>
+                </div>
 
+                <div class=rowitem>
+                  <div class=excontrol>
+                    <div class="circlebtn aink">
+                      <div class="svgicon playicon"></div>
+                    </div>
+                  </div>
+                  <div class="description">
+                    <div class=title>Architect Thomas Heatherwick on NYC’s “Vessel”</div>
+                    <div class=meta>2/2/2021</div>
+                </div>
+              </div>
+
+                  <div class=rowitem>
+                    <div class=excontrol>
+                      <div class="circlebtn aink">
+                        <div class="svgicon playicon"></div>
+                      </div>
+                    </div>
+                    <div class="description">
+                      <div class=title>Bill T. Jones on "Afterwardsness," his pandemic masterpiece</div>
+                      <div class=meta>1/26/2021</div>
+                </div>
+              </div>
+
+                  <div class=rowitem>
+                    <div class=excontrol>
+                      <div class="circlebtn aink">
+                        <div class="svgicon playicon"></div>
+                      </div>
+                    </div>
+                    <div class="description">
+                      <div class=title>Isabel Allende on "The House of the Spirits"</div>
+                      <div class=meta>1/19/2021</div>
+                </div>
+              </div>
+
+                  <div class=rowitem>
+                    <div class=excontrol>
+                      <div class="circlebtn aink">
+                        <div class="svgicon playicon"></div>
+                      </div>
+                    </div>
+                    <div class="description">
+                      <div class=title>Chip Kidd on the "Jurassic Park” book cover</div>
+                      <div class=meta>1/12/2021</div>
+                </div>
+              </div>
+
+                  <div class=rowitem>
+                    <div class=excontrol>
+                      <div class="circlebtn aink">
+                        <div class="svgicon playicon"></div>
+                      </div>
+                    </div>
+                    <div class="description">
+                      <div class=title>Susan Orlean on writing "The Orchid Thief"</div>
+                      <div class=meta>1/4/2021</div>
+                </div>
+              </div>
+
+                  <div class=rowitem>
+                    <div class=excontrol>
+                      <div class="circlebtn aink">
+                        <div class="svgicon playicon"></div>
+                      </div>
+                    </div>
+                    <div class="description">
+                      <div class=title> Kemp Powers on Pixar’s Soul</div>
+                      <div class=meta>1/4/2021</div>
+                </div>
+              </div>
+
+                  <div class=rowitem>
+                    <div class=excontrol>
+                      <div class="circlebtn aink">
+                        <div class="svgicon playicon"></div>
+                      </div>
+                    </div>
+                    <div class="description">
+                      <div class=title>Introducing ... Spark & Fire</div>
+                      <div class=meta>12/10/2020</div>
+                </div>
+              </div>
+              </div>
+
+            </div>
           </div>
         </div>
       </div>
@@ -3732,7 +3876,10 @@ jhunter@tunein.com
           meow.src = url;
         }
 
-        meow.play();
+        meow.oncanplay = (event) => {
+          meow.play();
+          meow.oncanplay = null;
+        } 
 
         var album = window.getComputedStyle(this, null).getPropertyValue('background-image');
         if ( album == 'none'){
@@ -4423,6 +4570,12 @@ jhunter@tunein.com
 
       document.getElementsByClassName('openmenu').removeclass('openmenu');
       m.classList.add('openmenu');
+
+      if ( document.body.classList.contains('nppage')){
+        m.classList.add('darkui')
+      } else {
+        m.classList.remove('darkui');
+      }
     }
 
     function focuson(e){
@@ -4570,6 +4723,12 @@ jhunter@tunein.com
       b.dataset.title = pl;
       document.getElementsByClassName('openmenu').removeclass('openmenu');
       m.classList.add('openmenu');
+
+      if ( document.body.classList.contains('nppage')){
+        m.classList.add('darkui')
+      } else {
+        m.classList.remove('darkui');
+      }
     }
 
     function addtostep2(){
@@ -4975,6 +5134,12 @@ jhunter@tunein.com
       let m = document.getElementById(t);
       document.getElementsByClassName('openmenu').removeclass('openmenu');
       m.classList.add('openmenu');
+
+      if ( document.body.classList.contains('nppage')){
+        m.classList.add('darkui')
+      } else {
+        m.classList.remove('darkui');
+      }
     }
 
     function a2plprestep(){
@@ -5124,6 +5289,10 @@ jhunter@tunein.com
         s.appendChild(d);
       }
 
+      if (this.getparent('darkui')){
+        o.classList.add('darkui');
+      }
+
       o.appendChild(s);
 
       document.getElementById('container').appendChild(o);
@@ -5137,7 +5306,7 @@ jhunter@tunein.com
       s.style.left = off.x - con.x - 16 + 'px';
       s.style.top = off.y - con.y - 100 + 'px';
       s.style.width = off.w + 32 +'px';
-      s.style.height = off.h + 200  + 'px'
+      s.style.height = off.h + 200  + 'px';
     }
 
     function durationoverlay(){
@@ -5158,7 +5327,7 @@ jhunter@tunein.com
 
     function albumplaypause(e){
       let m = document.getElementById('meow');
-      if ( m.playing ){
+      if ( m.paused ){
         m.play();
       } else {
         m.pause();
@@ -5221,7 +5390,7 @@ jhunter@tunein.com
     Attach.on('click', '.savenpspeed', savenpspeed);
     Attach.on('click', '.cancelnpspeed', cancelnpspeed);
     Attach.on('click', '.npspeedbtn', npspeed);
-    Attach.on('mousedown', '.aink, .panelitem, .listitem, .iconbtn, .modalclose, .selectbtn', droidpress);
+    Attach.on('mousedown', '.aink, .panelitem, .listitem, .iconbtn, .modalclose, .selectbtn, .rowitem ', droidpress);
     Attach.on('click', '.playallplaylist', playallplaylist);
     Attach.on('click', '.a2pl', a2pl);
     Attach.on('click', '.addtobtn2', addtostep2);
