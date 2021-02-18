@@ -557,7 +557,7 @@ jhunter@tunein.com
     #statusbar {height:24px;background:rgba(0,0,0,.03);width:100%;}
 
     .bar {display:flex;width:100%;align-items:center;justify-content: space-between;padding: 0 14px;box-sizing: border-box;height:64px;position: relative;}
-      .navback {position:absolute;top:10px;left:8px;pointer-events: none;opacity:0;}
+      .navback {position:absolute;top:10px;left:8px;pointer-events: none;opacity:0;z-index: 8888;}
         .subpageactive .navback {opacity: 1;pointer-events:all;}
         .subpageactive .carmode, .subpageactive .profile  {opacity: 0;pointer-events:none;}
 
@@ -590,7 +590,7 @@ jhunter@tunein.com
       .played .slidepage {padding-bottom:112px;}
 
     #home .content {padding-top:136px;}
-    #search .content {top:136px;}
+    #search .content {padding-top:136px;}
 
     .contentrow {padding:12px 0 var(--rowspacing) 0;width:100%;}
       .contentrow:first-child {padding-top:var(--firstrowspacing);}
@@ -686,6 +686,7 @@ jhunter@tunein.com
       .droid .search input:focus {border-color:var(--tsharp3);}
 
     #searchbar {padding:0 24px 8px;}
+      .droid #searchbar {padding-bottom:0;}
       .search {}
 
 
@@ -1961,22 +1962,22 @@ jhunter@tunein.com
               <div class="scrollitem np" data-station="PBS News Hour" data-url="https://feedproxy.google.com/~r/NewshourFullProgramPodcast/~5/YA6PMiEQrC4/210120_fullepisode_ID3_1.mp3">
                 <div class=thumb style="background-image:url(https://cdn-radiotime-logos.tunein.com/p47926q.png);"></div>
                 <div class=label>PBS News Hour</div>
-              </div><div class="scrollitem np" data-station="Deadline: White House" data-url="https://dts.podtrac.com/redirect.mp3/chtbl.com/track/6D589D/pdst.fm/e/rss.art19.com/episodes/68574eb6-4b15-4948-9ce1-e7c849122d62.mp3">
+              </div><div class="scrollitem np" data-station="Deadline: White House" data-url="https://dts.podtrac.com/redirect.mp3/chtbl.com/track/6D589D/pdst.fm/e/nbcnews.simplecastaudio.com/3dc76520-8dd4-4ae8-933b-91b9b80b2932/episodes/2cf5bd94-f39c-4442-a32a-663749a1ec61/audio/128/default.mp3?aid=rss_feed&awCollectionId=3dc76520-8dd4-4ae8-933b-91b9b80b2932&awEpisodeId=2cf5bd94-f39c-4442-a32a-663749a1ec61&feed=iDG4OTeq">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p999743/images/logoq.png);"></div>
                 <div class=label>Deadline: White House</div>
-              </div><div class="scrollitem np" data-station="Stuff You Should Know" data-url="https://dcs.megaphone.fm/HSW8356008250.mp3?key=c5f6e44021685917d301db6d322bc9a7">
+              </div><div class="scrollitem np" data-station="Stuff You Should Know" data-url="https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/chtbl.com/track/5899E/traffic.megaphone.fm/HSW5334312402.mp3?updated=1613654734">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p295446/images/logoq.png);"></div>
                 <div class=label>Stuff You Should Know</div>
-              </div><div class="scrollitem np" data-station="The 11th Hour with Brian Williams" data-url="https://dts.podtrac.com/redirect.mp3/chtbl.com/track/6D589D/pdst.fm/e/rss.art19.com/episodes/e25a1197-872e-41a2-bdf3-b29990c347ee.mp3">
+              </div><div class="scrollitem np" data-station="The 11th Hour with Brian Williams" data-url="https://dts.podtrac.com/redirect.mp3/chtbl.com/track/6D589D/pdst.fm/e/nbcnews.simplecastaudio.com/818c79ea-ecbd-49ef-9118-fb6e70249747/episodes/42efa4d7-67bb-4a94-a9d0-a5aedd037885/audio/128/default.mp3?aid=rss_feed&awCollectionId=818c79ea-ecbd-49ef-9118-fb6e70249747&awEpisodeId=42efa4d7-67bb-4a94-a9d0-a5aedd037885&feed=0j_7K9RB">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p921985/images/logoq.png);"></div>
                 <div class=label>The 11th Hour with Brian Williams</div>
               </div><div class="scrollitem np" data-station="Wait Wait... Don't Tell Me! from NPR" data-url="https://play.podtrac.com/npr-344098539/edge1.pod.npr.org/anon.npr-mp3/npr/waitwait/2021/01/20210116_waitwait_wwdtmpodcast210116.mp3?awCollectionId=344098539&awEpisodeId=957558090&orgId=1&d=3003&p=344098539&story=957558090&t=podcast&e=957558090&size=47941656&ft=pod&f=344098539">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p46/images/logoq.png);"></div>
                 <div class=label>Wait Wait... Don't Tell Me! from NPR</div>
-              </div><div class="scrollitem np" data-station="NPR News Now" data-url="https://pd.npr.org/anon.npr-mp3/npr/news/newscast.mp3">
+              </div><div class="scrollitem np" data-station="NPR News Now" data-url="https://play.podtrac.com/npr-500005/edge1.pod.npr.org/anon.npr-mp3/npr/newscasts/2021/02/18/newscast090736.mp3?awCollectionId=500005&awEpisodeId=968979838&orgId=1&d=300&p=500005&story=968979838&t=podcast&e=968979838&size=4500000&ft=pod&f=500005">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p212/images/logoq.png);"></div>
                 <div class=label>NPR News Now</div>
-              </div><div class="scrollitem np" data-station="News Hour" data-url="https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/http/vpid/p094m96n.mp3">
+              </div><div class="scrollitem np" data-station="News Hour" data-url="https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/w1mshbbvfdxxb13.mp3">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p5/images/logoq.png);"></div>
                 <div class=label>News Hour</div>
               </div>
@@ -2215,10 +2216,10 @@ jhunter@tunein.com
               <div class="scrollitem np" data-station="" data-url="https://play.podtrac.com/npr-500005/edge1.pod.npr.org/anon.npr-mp3/npr/newscasts/2021/01/28/newscast170741.mp3?awCollectionId=500005&awEpisodeId=961779494&orgId=1&d=300&p=500005&story=961779494&t=podcast&e=961779494&size=4500000&ft=pod&f=500005">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p212/images/logoq.png);"></div>
                 <div class=label>NPR News Now</div>
-              </div><div class="scrollitem np" data-station="" data-url="https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/chtbl.com/track/8G441/traffic.megaphone.fm/WWO8691870455.mp3">
+              </div><div class="scrollitem np" data-station="" data-url="https://play.podtrac.com/npr-500005/edge1.pod.npr.org/anon.npr-mp3/npr/newscasts/2021/02/18/newscast090736.mp3?awCollectionId=500005&awEpisodeId=968979838&orgId=1&d=300&p=500005&story=968979838&t=podcast&e=968979838&size=4500000&ft=pod&f=500005">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p1342422/images/logoq.png);"></div>
                 <div class=label>Marketplace Minute</div>
-              </div><div class="scrollitem np" data-station="" data-url="https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/w1mshbbtblzlgy7.mp3">
+              </div><div class="scrollitem np" data-station="" data-url="https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/w1mshbbvfdxxb13.mp3">
                 <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p14/images/logoq.jpg);"></div>
                 <div class=label>BBC News</div>
               </div><div class="scrollitem np" data-station="" data-url="https://traffic.megaphone.fm/WSJ6695693289.mp3">
@@ -2639,15 +2640,15 @@ jhunter@tunein.com
                   <div class=thumb style="background-image:url(https://cdn-radiotime-logos.tunein.com/p47926q.png);"></div><div class=description>
                   <div class=title>PBS News Hour</div>
                   <div class=meta>News</div></div>
-                </div><div class="rowitem np" data-station="Deadline: White House" data-url="https://dts.podtrac.com/redirect.mp3/chtbl.com/track/6D589D/pdst.fm/e/rss.art19.com/episodes/68574eb6-4b15-4948-9ce1-e7c849122d62.mp3">
+                </div><div class="rowitem np" data-station="Deadline: White House" data-url="https://dts.podtrac.com/redirect.mp3/chtbl.com/track/6D589D/pdst.fm/e/nbcnews.simplecastaudio.com/3dc76520-8dd4-4ae8-933b-91b9b80b2932/episodes/2cf5bd94-f39c-4442-a32a-663749a1ec61/audio/128/default.mp3?aid=rss_feed&awCollectionId=3dc76520-8dd4-4ae8-933b-91b9b80b2932&awEpisodeId=2cf5bd94-f39c-4442-a32a-663749a1ec61&feed=iDG4OTeq">
                   <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p999743/images/logoq.png);"></div><div class=description>
                   <div class=title>Deadline: White House</div>
                   <div class=meta>News</div></div>
-                </div><div class="rowitem np" data-station="Stuff You Should Know" data-url="https://dcs.megaphone.fm/HSW8356008250.mp3?key=c5f6e44021685917d301db6d322bc9a7">
+                </div><div class="rowitem np" data-station="Stuff You Should Know" data-url="https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/chtbl.com/track/5899E/traffic.megaphone.fm/HSW5334312402.mp3?updated=1613654734">
                   <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p295446/images/logoq.png);"></div><div class=description>
                   <div class=title>Stuff You Should Know</div>
                   <div class=meta>Learn</div></div>
-                </div><div class="rowitem np" data-station="The 11th Hour with Brian Williams" data-url="https://dts.podtrac.com/redirect.mp3/chtbl.com/track/6D589D/pdst.fm/e/rss.art19.com/episodes/e25a1197-872e-41a2-bdf3-b29990c347ee.mp3">
+                </div><div class="rowitem np" data-station="The 11th Hour with Brian Williams" data-url="https://dts.podtrac.com/redirect.mp3/chtbl.com/track/6D589D/pdst.fm/e/nbcnews.simplecastaudio.com/818c79ea-ecbd-49ef-9118-fb6e70249747/episodes/42efa4d7-67bb-4a94-a9d0-a5aedd037885/audio/128/default.mp3?aid=rss_feed&awCollectionId=818c79ea-ecbd-49ef-9118-fb6e70249747&awEpisodeId=42efa4d7-67bb-4a94-a9d0-a5aedd037885&feed=0j_7K9RB">
                   <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p921985/images/logoq.png);"></div><div class=description>
                   <div class=title>The 11th Hour with Brian Williams</div>
                   <div class=meta>News</div></div>
@@ -2655,11 +2656,11 @@ jhunter@tunein.com
                   <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p46/images/logoq.png);"></div><div class=description>
                   <div class=title>Wait Wait... Don't Tell Me! from NPR</div>
                   <div class=meta>Talk News</div></div>
-                </div><div class="rowitem np" data-station="NPR News Now" data-url="https://pd.npr.org/anon.npr-mp3/npr/news/newscast.mp3">
+                </div><div class="rowitem np" data-station="NPR News Now" data-url="https://play.podtrac.com/npr-500005/edge1.pod.npr.org/anon.npr-mp3/npr/newscasts/2021/02/18/newscast090736.mp3?awCollectionId=500005&awEpisodeId=968979838&orgId=1&d=300&p=500005&story=968979838&t=podcast&e=968979838&size=4500000&ft=pod&f=500005">
                   <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p212/images/logoq.png);"></div><div class=description>
                   <div class=title>NPR News Now</div>
                   <div class=meta>News</div></div>
-                </div><div class="rowitem np" data-station="News Hour" data-url="https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download-low/proto/http/vpid/p094m96n.mp3">
+                </div><div class="rowitem np" data-station="News Hour" data-url="https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/w1mshbbvfdxxb13.mp3">
                   <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p5/images/logoq.png);"></div><div class=description>
                   <div class=title>News Hour</div>
                   <div class=meta>News</div></div>
@@ -3556,7 +3557,7 @@ jhunter@tunein.com
       let nb = document.getElementById('navbar');
       let ph = document.getElementsByClassName('pagehome')[0];
 
-      document.getElementById('nav').style.height = '88px';
+      document.getElementById('nav').style.height = 'auto';
       nb.style.transform = ht.style.transform = 'translateY(0)';
 
       nb.style.opacity = 1;
