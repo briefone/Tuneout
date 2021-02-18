@@ -758,7 +758,9 @@ jhunter@tunein.com
             #nowplaying .iconbtn .svgicon {background-color:var(--nptextcolor);}
 
     #carmode {position: absolute;top:0;left:0;right:0;bottom:0;background:var(--darkui);border-top:24px solid var(--statusbar);z-index:1337;transform:translateY(100%);pointer-events: none;transition:all 200ms ease-in-out;color:var(--darkuitext);}
-      .carpage #carmode {transform:translateY(0);pointer-events: all;}
+      /* .carpage #carmode {transform:translateY(0);pointer-events: all;} */
+
+      .carpage .cardstation, .carpage .npairplay, .carpage .npchromecast, .carpage .npmore, .carpage .nplist {display:none;}
 
       .topbar {padding:32px 14px 8px;display: flex;justify-content: space-between;position:relative;z-index:7;backdrop-filter: blur(40px);
         left: 0.7px;
@@ -2691,7 +2693,31 @@ jhunter@tunein.com
             </div>
           </div>
           <div id=downloadspage class="slidepage">
-            Imagine downloaded things are here...
+            <div class=contentrow>
+              <div class="heading">
+                <h2>Podcast</h2>
+              </div>
+              <div class=itemlist>
+                <div class="rowitem np" data-station="Spark & Fire" data-url="https://dts.podtrac.com/redirect.mp3/chtbl.com/track/E341G/rss.art19.com/episodes/a6161f5f-7a2d-45ef-8130-108652ee1e98.mp3">
+                  <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p1389549/images/logoq.png);"></div><div class=description>
+                    <div class=title>Director Kemp Powers on the creative journey behind Pixar's "Soul."</div>
+                    <div class=meta>1/12/2021 - 43:12</div>
+                  </div>
+                </div>
+                <div class="rowitem np" data-station="Science Fridays" data-url="https://cdn.simplecast.com/audio/81fc9f37-3af1-4e45-8d96-ad57b71d9f8b/episodes/9cfa0e69-9879-4473-bda7-4a319798237f/audio/158c1018-a5d2-4a3c-9420-34eca8a2bf45/default_tc.mp3?aid=rss_feed&feed=i5UU6Ljx">
+                  <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p394/images/logoq.png);"></div><div class=description>
+                    <div class=title>Covid Fact Check, Aging Cells, News Roundup</div>
+                    <div class=meta>Janurary 12, 2021 - 47:01</div>
+                  </div>
+                </div>
+                <div class="rowitem np" data-station="How to be a Better Human" data-url="https://dts.podtrac.com/redirect.mp3/dovetail.prxu.org/357/0a60222c-8e67-4585-a237-09fc01f7cec6/EP2_Leonard_Final_SegA.mp3">
+                  <div class=thumb style="background-image:url(https://cdn-profiles.tunein.com/p1389827/images/logoq.png);"></div><div class=description>
+                    <div class=title>How to be a Better Human</div>
+                    <div class=meta>Janurary 12, 2021 - 33:07</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -3754,11 +3780,11 @@ jhunter@tunein.com
     }
 
     function carmode(e){
-      document.body.classList.add('carpage', 'modalview');
+      document.body.classList.add('carpage', 'nppage', 'modalview');
     }
 
     function closenp(e){
-      document.body.classList.remove('nppage', 'modalview');
+      document.body.classList.remove('nppage', 'carpage', 'modalview');
     }
 
     function exitcarmode(e){
@@ -3889,13 +3915,11 @@ jhunter@tunein.com
     }
 
     function miniplay(){
-      document.documentElement.classList.add('playing');
       let meow = document.getElementById('meow');
       meow.play();
     }
 
     function minipause(){
-      document.documentElement.classList.remove('playing');
       let meow = document.getElementById('meow');
       meow.pause();
     }
@@ -4238,12 +4262,11 @@ jhunter@tunein.com
 
     function npplay(){
       document.getElementById('meow').play();
-      document.documentElement.classList.add('playing');
+      
     }
 
     function nppause(){
       document.getElementById('meow').pause();
-      document.documentElement.classList.remove('playing');
     }
 
     function audioscrub(){
@@ -4575,7 +4598,7 @@ jhunter@tunein.com
 
       generateplaylist();
 
-      toast('Added to Playlist - ' + pl);
+      toast('Added to ' + pl);
     }
 
     function toast(x){
@@ -5132,6 +5155,25 @@ jhunter@tunein.com
       durationoverlay.call(this.getparent('durationoverlay'));
     }
 
+    function albumplaypause(e){
+      let m = document.getElementById('meow');
+      if ( m.playing ){
+        m.play();
+      } else {
+        m.pause();
+      }
+    }
+
+    function meowing(e){
+      console.log('playing');
+      document.documentElement.classList.add('playing');
+    }
+
+    function meowed(e){
+      console.log('paused');
+      document.documentElement.classList.remove('playing');
+    }
+
     Attach.on('click', '.a2plstep2', a2plprestep);
     Attach.on('click', '.addtoplaylist, .add2pl', addtoplaylistsearch);
     Attach.on('click', '.playlistaddrec', playlistaddrec);
@@ -5160,6 +5202,7 @@ jhunter@tunein.com
     Attach.on('click', '.navback', navback);
     Attach.on('click', '.npplay', npplay);
     Attach.on('click', '.nppause', nppause);
+    Attach.on('click', '.npalbum', albumplaypause);
     Attach.on('input', '#npscrub', audioscrub);
     Attach.on('click', '.npmore', npmore);
     Attach.on('click', '.morepanel .overlay', nomore);
@@ -5256,6 +5299,9 @@ jhunter@tunein.com
       generateplaylist();
 
       let tabpages = document.getElementsByClassName('tabpage');
+
+      document.getElementById('meow').onplay = meowing;
+      document.getElementById('meow').onpause = meowed;
 
       for(var i=0;i<tabpages.length;i++){
         let t = tabpages[i];
