@@ -5486,11 +5486,18 @@ jhunter@tunein.com
     function meowing(e){
       console.log('playing');
       document.documentElement.classList.add('playing');
+
+      document.getElementsByClassName('currentplay currentpause').removeclass('currentpause');
     }
 
     function meowed(e){
       console.log('paused');
       document.documentElement.classList.remove('playing');
+      let pl = document.getElementsByClassName('currentplay')[0];
+      if ( pl){
+        pl.classList.add('currentpause');
+      }
+
     }
 
     function npnext(){
