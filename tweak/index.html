@@ -423,6 +423,7 @@ jhunter@tunein.com
       .moreicon {-webkit-mask-image: url('../icons/More-Small(Horizontal).svg');mask-image: url('../icons/More-Small(Horizontal).svg');}
         .droid .moreicon {-webkit-mask-image: url('../icons/More-Regular(Vertical).svg');mask-image: url('../icons/More-Regular(Vertical).svg');width:22px !important;height:22px !important;}
       .playicon {-webkit-mask-image: url('../icons/Play.svg');mask-image: url('../icons/Play.svg');}
+      .pauseicon {-webkit-mask-image: url('../icons/Pause.svg');mask-image: url('../icons/Pause.svg');}
       .next {-webkit-mask-image: url('../icons/Next.svg');mask-image: url('../icons/Next.svg');}
       .prev {-webkit-mask-image: url('../icons/Prev.svg');mask-image: url('../icons/Prev.svg');}
 
@@ -837,6 +838,10 @@ jhunter@tunein.com
         .circlebtn:active .svgicon {background-color:var(--circleiconpress);}
 
 
+      .circlebtn.disabled {pointer-events: none;background:var(--ink7);}
+        .darkui .circlebtn.disabled {background:var(--ink11);}
+          .darkui .circlebtn.disabled .svgicon {background-color:var(--ink7);}
+
     #miniplayer {height:56px;border-bottom:1px solid var(--miniplayerborder);display:none;color:var(--miniplayertext);user-select:none;}
             .played #miniplayer {display:flex;}
 
@@ -918,7 +923,7 @@ jhunter@tunein.com
 
         .nplistlabel {line-height:24px;}
     
-    .npscrubber {width:calc(100% - 48px);margin-left:24px;height:48px;position: relative;margin-bottom:24px;}
+    .npscrubber {width:calc(100% - 48px);margin-left:24px;height:48px;position: relative;margin-bottom:24px;z-index:3;}
       .npscrubber input[type=range] {width:100%;height:48px;position: relative;z-index:88;}
         .npscrubber input[type=range]::-webkit-slider-thumb {width:8px;height:8px;background: var(--npprogress);display: block;box-shadow:none;border-radius:50%;transition: all 150ms ease-in-out;}
           .npscrubber input[type=range]:hover::-webkit-slider-thumb {box-shadow:none;}
@@ -954,8 +959,18 @@ jhunter@tunein.com
           .extracard .rowitem .title {font-size: 16px;}
           .extracard .rowitem .meta {font-size: 14px;}
 
+          .extracard .itemlist .thumb {overflow:hidden;}
+
+          /* .extracard .rowitem.currentplay {background:rgba(255, 255, 255, 0.1);} */
+          .extracard .itemlist .currentplay .thumb::before {content:'';position:absolute;top:0;left:0;bottom:0;right:0;background:rgba(0,0,0,.5);z-index:2;}
+          .extracard .itemlist .currentplay .thumb::after {content:'';position:absolute;left:50%;top:50%;transform:translate(-50%, -50%);background-color:white;-webkit-mask-size: cover;mask-size: cover;-webkit-mask-position: center;mask-position: center;-webkit-mask-repeat: no-repeat;mask-repeat: no-repeat;width:36px;height:36px;transition:background-color 200ms ease-in-out;-webkit-mask-image: url('../icons/Pause.svg');mask-image: url('../icons/Pause.svg');z-index:3;}
+
+          .extracard .itemlist .currentplay.currentpause .thumb::after {-webkit-mask-image: url('../icons/Play.svg');mask-image: url('../icons/Play.svg');}
+
+
+
           .extracard .itemlist {}
-            .extracard .itemlist .thumb {width:64px;height:64px;min-width:64px;min-height:64px;}
+            .extracard .itemlist .thumb {width:64px;height:64px;min-width:64px;min-height:64px;box-shadow:none;}
 
         .live .podcard {display:none;}
 
@@ -1153,7 +1168,7 @@ jhunter@tunein.com
         .darkui .selectbtn:hover {background-color: var(--ink8);color:var(--ink1);}
         .darkui .selectbtn:active {background-color: var(--ink7);color:var(--ink1);}
 
-        .selectbtn.current {background-color:var(--tsharp2);color:var(--brand);}
+        .selectbtn.current, .darkui .selectbtn.current {background-color:var(--tsharp2);color:var(--brand);}
 
        
 
@@ -2760,6 +2775,7 @@ jhunter@tunein.com
             </div>
           </div>
           <div id=playlistdetailpage class=slidepage>
+            <div class=splitcolumn>
             <div class=herowrap>
               <div class=playlisthero></div>
               <div class="graddd" style="position: absolute;top: 0;left: 0;right: 0;bottom: 0;background: linear-gradient(0deg, var(--ink1), transparent);pointer-events:none;"></div>
@@ -2774,12 +2790,15 @@ jhunter@tunein.com
                 <div class="svgicon moreicon"></div>
               </div>
             </div>
+          
             <div class="playlistlist itemlist">
 
             </div>
             <div class="playlistrow playlistbottom">
               <div class="btn addtoplaylist outlinebtn menubtn" data-type=add2playlistmenu>Add to Playlist</div>
             </div>
+          </div>
+          <div class=splitcolumn>
             <div class="playlistrow reccos">
                 <div class="heading ">
                   <h2>Recommendations</h2>
@@ -2807,7 +2826,7 @@ jhunter@tunein.com
                     <div class="add2  iconbtn playlistaddrec" data-type="addsuggestion"><div class="svgicon playlistadd"></div></div>
                   </div>
                 </div>
-              
+              </div>
             </div>
           </div>
           <div id=favoritespage class="slidepage">
@@ -3936,6 +3955,9 @@ jhunter@tunein.com
           np.classList.add('npplaylist');
 
           makeplaylist.call(this);
+        } else if (this.classList.contains('npl2')){
+          console.log('ugh')
+          document.getElementsByClassName('currentpause').removeclass('currentpause');
         } else {
           np.classList.remove('npplaylist');
           document.getElementById('npplaylist2').empty();
@@ -3983,6 +4005,13 @@ jhunter@tunein.com
       
       ex.appendChild(h3);
 
+      var current = false;
+
+      let station = this.dataset.station || false;
+
+      let next = document.getElementsByClassName('npnext')[0];
+      let prev = document.getElementsByClassName('npprev')[0];
+
       for(var i=0;i<stations.length;i++){
         let s = stations[i];
         let r = document.createElement('div');
@@ -3997,10 +4026,30 @@ jhunter@tunein.com
         t.className = 'title';
         m.className = 'meta';
 
+        if ( !station && i == 0  || station == s.name && !current ){
+          r.className += ' currentplay';
+          current = true;
+
+          if ( i == 0 ){
+            prev.classList.add('disabled');
+          } else {
+            prev.classList.remove('disabled');
+          }
+
+          if ( i == stations.length - 1 ){
+            next.classList.add('disabled');
+          } else {
+            next.classList.remove('disabled');
+          }
+          
+        }
+
         r.dataset.station = s.name;
         r.dataset.url = s.stream;
         a.style.backgroundImage = s.image;
         a.style.width = a.style.minWidth = a.style.height = a.style.minHeight = '48px';
+        a.style.boxShadow = 'none';
+        a.style.position = 'relative';
 
         t.appendChild(document.createTextNode(s.name));
         m.appendChild(document.createTextNode(s.length));
@@ -5444,6 +5493,67 @@ jhunter@tunein.com
       document.documentElement.classList.remove('playing');
     }
 
+    function npnext(){
+      if ( this.classList.contains('disabled') ) {
+        return;
+      }
+      let c = document.getElementsByClassName('currentplay')[0];
+      let n = c.nextElementSibling;
+
+      if ( n ){
+        n.click();
+      }
+    }
+
+    function npprev(){
+      if ( this.classList.contains('disabled') ) {
+        return;
+      }
+      let c = document.getElementsByClassName('currentplay')[0];
+      let n = c.previousElementSibling;
+
+      if ( n ){
+        n.click();
+      }
+    }
+
+    function npl2(e){
+      if ( this.classList.contains('currentplay')){
+        let meow = document.getElementById('meow');
+        if ( !meow.paused){
+          meow.pause();
+          this.classList.add('currentpause');
+        } else {
+          meow.play();
+          this.classList.remove('currentpause');
+        }
+        return;
+      }
+
+      let next = document.getElementsByClassName('npnext')[0];
+      let prev = document.getElementsByClassName('npprev')[0];
+
+      if ( !this.previousElementSibling){
+        prev.classList.add('disabled');
+      } else {
+        prev.classList.remove('disabled');
+      }
+
+      if ( !this.nextElementSibling){
+        next.classList.add('disabled');
+      } else {
+        next.classList.remove('disabled');
+      }
+
+      let old = document.getElementsByClassName('currentplay');
+      old.removeclass('currentplay');
+
+      this.classList.add('currentplay');
+
+
+      nowplaying.call(this, e);
+    }
+
     Attach.on('click', '.a2plstep2', a2plprestep);
     Attach.on('click', '.addtoplaylist, .add2pl', addtoplaylistsearch);
     Attach.on('click', '.playlistaddrec', playlistaddrec);
@@ -5499,6 +5609,9 @@ jhunter@tunein.com
     Attach.on('click', '.duratime', duratime);
     Attach.on('click', '.durationoverlay', durationoverlay);
     Attach.on('click', '.toast', toastclick);
+    Attach.on('click', '.npnext', npnext);
+    Attach.on('click', '.npprev', npprev);
+    Attach.on('click', '.npl2', npl2);
     
     
     window.Lists = localStorage.getObject('lists') || {};
