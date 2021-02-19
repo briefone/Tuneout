@@ -3639,10 +3639,11 @@ jhunter@tunein.com
       let w = this.offsetWidth;
       let x = this.offsetLeft;
 
-      let pad = parseFloat(window.getComputedStyle(this, null).getPropertyValue('padding-right'));
+      let padr = parseFloat(window.getComputedStyle(this, null).getPropertyValue('padding-right'));
+      let padl = parseFloat(window.getComputedStyle(this, null).getPropertyValue('padding-left'));
 
-      line.style.width = w - pad - pad + 'px';
-      line.style.transform = 'translateX('+ (x + pad) + 'px)';
+      line.style.width = w - padr - padl + 'px';
+      line.style.transform = 'translateX('+ (x + padl) + 'px)';
 
       wrap.scroll({left: x - 24 - 48, behavior: 'smooth'});
 
