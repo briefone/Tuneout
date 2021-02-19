@@ -780,7 +780,7 @@ jhunter@tunein.com
             .rightactions .unfav, .removefav .fav {display:none;}
             .removefav .unfav {display:block;}
 
-      .npcontent {overflow-y: scroll;position:absolute;top:0;left:0;right:0;bottom:0;padding:88px 0 24px;display: flex;flex-direction: column;}
+      .npcontent {overflow-y: scroll;position:absolute;top:0;left:0;right:0;bottom:0;padding:88px 0 8px;display: flex;flex-direction: column;}
         .npcolumn {width:100%;}
 
       .darkui {color:var(--darkuitext);}
@@ -953,6 +953,9 @@ jhunter@tunein.com
         .extracard .rowitem .description {max-width:calc(100% - 48px);}
           .extracard .rowitem .title {font-size: 16px;}
           .extracard .rowitem .meta {font-size: 14px;}
+
+          .extracard .itemlist {}
+            .extracard .itemlist .thumb {width:64px;height:64px;min-width:64px;min-height:64px;}
 
         .live .podcard {display:none;}
 
@@ -1597,7 +1600,7 @@ jhunter@tunein.com
       <div class=panel>
         <div class=panelwrap>
           <h2>Set Duration</h2>
-          <div class=durationpicker data-time=30>30 Minutes</div>
+          <div class=durationpicker data-time="30 Minutes">30 Minutes</div>
           <div class="btn fw aink addtobtn2 dismissmenu" style="margin-bottom:8px;">Save</div>
           <div class="btn fw quietbtn dismissmenu">Cancel</div>
         </div>
@@ -1660,6 +1663,10 @@ jhunter@tunein.com
       .darkui .btn.quietbtn {color:var(--ink3);background:transparent;}
         .darkui .btn.quietbtn:hover {color:var(--ink4);background:transparent;}
         .darkui .btn.quietbtn:active {color:var(--ink6);background:transparent;}
+
+      .darkmode .darkui .btn.quietbtn {color:var(--ink9);background:transparent;}
+        .darkmode .darkui .btn.quietbtn:hover {color:var(--ink8);background:transparent;}
+        .darkmode .darkui .btn.quietbtn:active {color:var(--ink7);background:transparent;}
 
       .pillbtn {height:36px;padding:0 16px;border-radius:18px;}
         .greybtn {background-color:var(--ink3);color:var(--ink10);}
@@ -1821,6 +1828,7 @@ jhunter@tunein.com
         </div>
         <div class=npcolumn>
           <div class=npextras>
+            <div id=npplaylist2></div>
             <div class="cardstation extracard">
               <div class=stationrow>
                 <div class="img extraimg"></div>
@@ -1843,11 +1851,10 @@ jhunter@tunein.com
                     </div>
                   </div>
                   <div class="description">
-                    <div class=title>Apollo Theater’s Kamilah Forbes on "Between the World and Me"</div>
+                    <div class=title>Apollo Theater's Kamilah Forbes on "Between the World and Me"</div>
                     <div class=meta>2/9/2021</div>
                   </div>
                 </div>
-
                 <div class=rowitem>
                   <div class=excontrol>
                     <div class="circlebtn aink">
@@ -1855,85 +1862,114 @@ jhunter@tunein.com
                     </div>
                   </div>
                   <div class="description">
-                    <div class=title>Architect Thomas Heatherwick on NYC’s “Vessel”</div>
+                    <div class=title>Architect Thomas Heatherwick on NYC's "Vessel"</div>
                     <div class=meta>2/2/2021</div>
+                  </div>
                 </div>
-              </div>
-
-                  <div class=rowitem>
-                    <div class=excontrol>
-                      <div class="circlebtn aink">
-                        <div class="svgicon playicon"></div>
-                      </div>
+                <div class=rowitem>
+                  <div class=excontrol>
+                    <div class="circlebtn aink">
+                      <div class="svgicon playicon"></div>
                     </div>
-                    <div class="description">
-                      <div class=title>Bill T. Jones on "Afterwardsness," his pandemic masterpiece</div>
-                      <div class=meta>1/26/2021</div>
+                  </div>
+                  <div class="description">
+                    <div class=title>Bill T. Jones on "Afterwardsness," his pandemic masterpiece</div>
+                    <div class=meta>1/26/2021</div>
+                  </div>
                 </div>
-              </div>
-
-                  <div class=rowitem>
-                    <div class=excontrol>
-                      <div class="circlebtn aink">
-                        <div class="svgicon playicon"></div>
-                      </div>
+                <div class=rowitem>
+                  <div class=excontrol>
+                    <div class="circlebtn aink">
+                      <div class="svgicon playicon"></div>
                     </div>
-                    <div class="description">
-                      <div class=title>Isabel Allende on "The House of the Spirits"</div>
-                      <div class=meta>1/19/2021</div>
+                  </div>
+                  <div class="description">
+                    <div class=title>Isabel Allende on "The House of the Spirits"</div>
+                    <div class=meta>1/19/2021</div>
+                  </div>
                 </div>
-              </div>
-
-                  <div class=rowitem>
-                    <div class=excontrol>
-                      <div class="circlebtn aink">
-                        <div class="svgicon playicon"></div>
-                      </div>
+                <div class=rowitem>
+                  <div class=excontrol>
+                    <div class="circlebtn aink">
+                      <div class="svgicon playicon"></div>
                     </div>
-                    <div class="description">
-                      <div class=title>Chip Kidd on the "Jurassic Park” book cover</div>
-                      <div class=meta>1/12/2021</div>
+                  </div>
+                  <div class="description">
+                    <div class=title>Chip Kidd on the "Jurassic Park" book cover</div>
+                    <div class=meta>1/12/2021</div>
+                  </div>
                 </div>
-              </div>
-
-                  <div class=rowitem>
-                    <div class=excontrol>
-                      <div class="circlebtn aink">
-                        <div class="svgicon playicon"></div>
-                      </div>
+                <div class=rowitem>
+                  <div class=excontrol>
+                    <div class="circlebtn aink">
+                      <div class="svgicon playicon"></div>
                     </div>
-                    <div class="description">
-                      <div class=title>Susan Orlean on writing "The Orchid Thief"</div>
-                      <div class=meta>1/4/2021</div>
+                  </div>
+                  <div class="description">
+                    <div class=title>Susan Orlean on writing "The Orchid Thief"</div>
+                    <div class=meta>1/4/2021</div>
+                  </div>
                 </div>
-              </div>
-
-                  <div class=rowitem>
-                    <div class=excontrol>
-                      <div class="circlebtn aink">
-                        <div class="svgicon playicon"></div>
-                      </div>
+                <div class=rowitem>
+                  <div class=excontrol>
+                    <div class="circlebtn aink">
+                      <div class="svgicon playicon"></div>
                     </div>
-                    <div class="description">
-                      <div class=title> Kemp Powers on Pixar’s Soul</div>
-                      <div class=meta>1/4/2021</div>
+                  </div>
+                  <div class="description">
+                    <div class=title> Kemp Powers on Pixar's Soul</div>
+                    <div class=meta>1/4/2021</div>
+                  </div>
                 </div>
-              </div>
-
-                  <div class=rowitem>
-                    <div class=excontrol>
-                      <div class="circlebtn aink">
-                        <div class="svgicon playicon"></div>
-                      </div>
+                <div class=rowitem>
+                  <div class=excontrol>
+                    <div class="circlebtn aink">
+                      <div class="svgicon playicon"></div>
                     </div>
-                    <div class="description">
-                      <div class=title>Introducing ... Spark & Fire</div>
-                      <div class=meta>12/10/2020</div>
+                  </div>
+                  <div class="description">
+                    <div class=title>Introducing ... Spark & Fire</div>
+                    <div class=meta>12/10/2020</div>
+                  </div>
                 </div>
               </div>
-              </div>
-
             </div>
+
+            <div class="extracard reccard">
+              <h3 style="padding-bottom:2px;">Shows You Might Like</h3>
+              <div class="itemlist">
+                <div class="rowitem np" data-station="PBS News Hour" data-url="https://feedproxy.google.com/~r/NewshourFullProgramPodcast/~5/YA6PMiEQrC4/210120_fullepisode_ID3_1.mp3">
+                  <div class="thumb" style="background-image:url(https://cdn-radiotime-logos.tunein.com/p47926q.png);"></div><div class="description">
+                  <div class="title">PBS News Hour</div>
+                  <div class="meta">News</div></div>
+                </div><div class="rowitem np" data-station="Deadline: White House" data-url="https://dts.podtrac.com/redirect.mp3/chtbl.com/track/6D589D/pdst.fm/e/nbcnews.simplecastaudio.com/3dc76520-8dd4-4ae8-933b-91b9b80b2932/episodes/2cf5bd94-f39c-4442-a32a-663749a1ec61/audio/128/default.mp3?aid=rss_feed&amp;awCollectionId=3dc76520-8dd4-4ae8-933b-91b9b80b2932&amp;awEpisodeId=2cf5bd94-f39c-4442-a32a-663749a1ec61&amp;feed=iDG4OTeq">
+                  <div class="thumb" style="background-image:url(https://cdn-profiles.tunein.com/p999743/images/logoq.png);"></div><div class="description">
+                  <div class="title">Deadline: White House</div>
+                  <div class="meta">News</div></div>
+                </div><div class="rowitem np" data-station="Stuff You Should Know" data-url="https://www.podtrac.com/pts/redirect.mp3/pdst.fm/e/chtbl.com/track/5899E/traffic.megaphone.fm/HSW5334312402.mp3?updated=1613654734">
+                  <div class="thumb" style="background-image:url(https://cdn-profiles.tunein.com/p295446/images/logoq.png);"></div><div class="description">
+                  <div class="title">Stuff You Should Know</div>
+                  <div class="meta">Learn</div></div>
+                </div><div class="rowitem np" data-station="The 11th Hour with Brian Williams" data-url="https://dts.podtrac.com/redirect.mp3/chtbl.com/track/6D589D/pdst.fm/e/nbcnews.simplecastaudio.com/818c79ea-ecbd-49ef-9118-fb6e70249747/episodes/42efa4d7-67bb-4a94-a9d0-a5aedd037885/audio/128/default.mp3?aid=rss_feed&amp;awCollectionId=818c79ea-ecbd-49ef-9118-fb6e70249747&amp;awEpisodeId=42efa4d7-67bb-4a94-a9d0-a5aedd037885&amp;feed=0j_7K9RB">
+                  <div class="thumb" style="background-image:url(https://cdn-profiles.tunein.com/p921985/images/logoq.png);"></div><div class="description">
+                  <div class="title">The 11th Hour with Brian Williams</div>
+                  <div class="meta">News</div></div>
+                </div><div class="rowitem np" data-station="Wait Wait... Don't Tell Me! from NPR" data-url="https://play.podtrac.com/npr-344098539/edge1.pod.npr.org/anon.npr-mp3/npr/waitwait/2021/01/20210116_waitwait_wwdtmpodcast210116.mp3?awCollectionId=344098539&amp;awEpisodeId=957558090&amp;orgId=1&amp;d=3003&amp;p=344098539&amp;story=957558090&amp;t=podcast&amp;e=957558090&amp;size=47941656&amp;ft=pod&amp;f=344098539">
+                  <div class="thumb" style="background-image:url(https://cdn-profiles.tunein.com/p46/images/logoq.png);"></div><div class="description">
+                  <div class="title">Wait Wait... Don't Tell Me! from NPR</div>
+                  <div class="meta">Talk News</div></div>
+                </div><div class="rowitem np" data-station="NPR News Now" data-url="https://play.podtrac.com/npr-500005/edge1.pod.npr.org/anon.npr-mp3/npr/newscasts/2021/02/18/newscast090736.mp3?awCollectionId=500005&amp;awEpisodeId=968979838&amp;orgId=1&amp;d=300&amp;p=500005&amp;story=968979838&amp;t=podcast&amp;e=968979838&amp;size=4500000&amp;ft=pod&amp;f=500005">
+                  <div class="thumb" style="background-image:url(https://cdn-profiles.tunein.com/p212/images/logoq.png);"></div><div class="description">
+                  <div class="title">NPR News Now</div>
+                  <div class="meta">News</div></div>
+                </div><div class="rowitem np" data-station="News Hour" data-url="https://open.live.bbc.co.uk/mediaselector/6/redir/version/2.0/mediaset/audio-nondrm-download/proto/https/vpid/w1mshbbvfdxxb13.mp3">
+                  <div class="thumb" style="background-image:url(https://cdn-profiles.tunein.com/p5/images/logoq.png);"></div><div class="description">
+                  <div class="title">News Hour</div>
+                  <div class="meta">News</div></div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -3897,8 +3933,11 @@ jhunter@tunein.com
 
         if (this.classList.contains('npl')){
           np.classList.add('npplaylist');
+
+          makeplaylist.call(this);
         } else {
           np.classList.remove('npplaylist');
+          document.getElementById('npplaylist2').empty();
         }
 
         if ( !samesame ){
@@ -3919,6 +3958,63 @@ jhunter@tunein.com
       document.documentElement.classList.add('played');
 
       document.getElementById('cb4').checked = true;
+    }
+
+    function makeplaylist(){
+      let p = this.getparent('playlistdetailpage') || this;
+      let title = p.dataset.title;
+      console.log(title, this, p)
+      let list = Lists[title] || AutoPlaylist[p.dataset.id];
+
+      let stations = list.stations;
+
+      let pl = document.getElementById('npplaylist2');
+      pl.empty();
+
+      let ex = document.createElement('div');
+      ex.className = 'extracard';
+
+      let ir = document.createElement('div');
+      ir.className = 'itemlist';
+
+      let h3 = document.createElement('h3');
+      h3.appendChild(document.createTextNode('Playlist'));
+      
+      ex.appendChild(h3);
+
+      for(var i=0;i<stations.length;i++){
+        let s = stations[i];
+        let r = document.createElement('div');
+        let a = document.createElement('div');
+        let d = document.createElement('div');
+        let t = document.createElement('div');
+        let m = document.createElement('div');
+
+        r.className = 'rowitem npl2';
+        a.className = 'thumb';
+        d.className = 'description';
+        t.className = 'title';
+        m.className = 'meta';
+
+        r.dataset.station = s.name;
+        r.dataset.url = s.stream;
+        a.style.backgroundImage = s.image;
+        a.style.width = a.style.minWidth = a.style.height = a.style.minHeight = '48px';
+
+        t.appendChild(document.createTextNode(s.name));
+        m.appendChild(document.createTextNode(s.length));
+
+        d.appendChild(t);
+        d.appendChild(m);
+
+        r.appendChild(a);
+        r.appendChild(d);
+        
+        ir.appendChild(r);
+      }
+
+      ex.appendChild(ir);
+      pl.appendChild(ex);
     }
 
     function formatDuration(seconds) {
@@ -4872,6 +4968,9 @@ jhunter@tunein.com
 
       c.dataset.url = t;
       c.dataset.station = n;
+
+      c.dataset.id = id;
+      c.dataset.title = ti;
 
 
       document.body.appendChild(c);
