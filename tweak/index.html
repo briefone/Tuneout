@@ -952,17 +952,17 @@ jhunter@tunein.com
 
     .npextras {margin:0 24px;}
       .extracard {border-radius:6px;background:var(--npextra);margin-bottom:16px;}
-        .extracard h3 {padding:12px 16px 8px;font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing: 0.2px;opacity:0.6;}
-        .extracard .itemlist {padding-bottom:4px;}
-        .extracard .rowitem {padding: 4px 16px;}
+        .extracard h3 {padding:12px 16px 6px;font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing: 0.2px;opacity:0.6;}
+        .extracard .itemlist {padding-bottom:8px;}
+        .extracard .rowitem {padding: 4px 4px;border-radius: 6px;margin:0 12px;}
         .extracard .rowitem .description {max-width:calc(100% - 48px);}
           .extracard .rowitem .title {font-size: 16px;}
           .extracard .rowitem .meta {font-size: 14px;}
 
           .extracard .itemlist .thumb {overflow:hidden;}
 
-          /* .extracard .rowitem.currentplay {background:rgba(255, 255, 255, 0.1);} */
-          .extracard .itemlist .currentplay .thumb::before {content:'';position:absolute;top:0;left:0;bottom:0;right:0;background:rgba(0,0,0,.5);z-index:2;}
+          .extracard .rowitem.currentplay {background:rgba(255, 255, 255, 0.05);}
+          .extracard .itemlist .currentplay .thumb::before {content:'';position:absolute;top:0;left:0;bottom:0;right:0;background:rgba(0,0,0,.6);z-index:2;}
           .extracard .itemlist .currentplay .thumb::after {content:'';position:absolute;left:50%;top:50%;transform:translate(-50%, -50%);background-color:white;-webkit-mask-size: cover;mask-size: cover;-webkit-mask-position: center;mask-position: center;-webkit-mask-repeat: no-repeat;mask-repeat: no-repeat;width:36px;height:36px;transition:background-color 200ms ease-in-out;-webkit-mask-image: url('../icons/Pause.svg');mask-image: url('../icons/Pause.svg');z-index:3;}
 
           .extracard .itemlist .currentplay.currentpause .thumb::after {-webkit-mask-image: url('../icons/Play.svg');mask-image: url('../icons/Play.svg');}
@@ -1628,8 +1628,8 @@ jhunter@tunein.com
         <div class=panelwrap>
           <h2>Which Episodes?</h2>
           <div class=selectwrap>
-            <div class="selectbtn current">Latest Episode</div>
-            <div class="selectbtn ">This Episode</div>
+            <div class="selectbtn current">This Episode</div>
+            <div class="selectbtn ">Latest Episode</div>
             <div class="selectbtn ">All Unlistened to Episodes</div>
             <div class="selectbtn ">All Episodes</div>
           </div>
@@ -1657,8 +1657,8 @@ jhunter@tunein.com
         <div class=panelwrap>
           <h2>Which Episodes?</h2>
           <div class=selectwrap>
-            <div class="selectbtn current">Latest Episode</div>
-            <div class="selectbtn ">This Episode</div>
+            <div class="selectbtn current">This Episode</div>
+            <div class="selectbtn ">Latest Episode</div>
             <div class="selectbtn ">All Unlistened to Episodes</div>
             <div class="selectbtn ">All Episodes</div>
           </div>
@@ -5424,14 +5424,19 @@ jhunter@tunein.com
 
       o.style.opacity = 0;
 
-      for(var i=1;i<289;i++){
+
+      for(var i=0;i<289;i++){
         let d = document.createElement('div');
         d.className = 'duratime';
         let length = i * 5;
         let h = Math.floor(length / 60);
         let m = length % 60;
 
-        let t = h > 0 ? h + ' Hour' + (h>1 ? 's' : '') + (m>0 ? ' ' + m + ' Minutes' : '') : m + ' Minutes';
+        var t = h > 0 ? h + ' Hour' + (h>1 ? 's' : '') + (m>0 ? ' ' + m + ' Minutes' : '') : m + ' Minutes';
+
+        if ( i == 0 ){
+          t = 'Infinite';
+        }
         d.dataset.time = t;
         d.appendChild(document.createTextNode(t));
 
