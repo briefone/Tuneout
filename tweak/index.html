@@ -3792,6 +3792,8 @@ jhunter@tunein.com
       let url = this.dataset.url || './audio/nyancat.mp3';
       document.body.classList.add('nppage', 'modalview');
 
+      document.getElementById('meow').dataset.time = 0;
+
       var defaultstation = 'Nyan Cat 24/7';
       let label = this.getElementsByClassName('label')[0] || this.getElementsByClassName('title')[0];
       if ( label ){
