@@ -967,7 +967,7 @@ jhunter@tunein.com
 
           .extracard .itemlist .currentplay.currentpause .thumb::after {-webkit-mask-image: url('../icons/Play.svg');mask-image: url('../icons/Play.svg');}
 
-
+          #npplaylist2 .extracard .rowitem {margin:0 10px;}
 
           .extracard .itemlist {}
             .extracard .itemlist .thumb {width:64px;height:64px;min-width:64px;min-height:64px;box-shadow:none;}
@@ -1271,7 +1271,7 @@ jhunter@tunein.com
     </div>
     <div class=tpanel style="padding:0;">
       <div class=tgroup>
-        <div class=resetbtn onclick="clearplaylist()">Clear Playlist</div>
+        <div class=resetbtn onclick="clearplaylist()">Clear Mixes</div>
       </div>
     </div>
     <div class=tpanel style="padding:0;">
@@ -1523,7 +1523,7 @@ jhunter@tunein.com
       <div class=overlay></div>
       <div class=panel>
         <div id=addtomenu></div>
-        <div class="panelitem menubtn focus panelcreateplaylist setplaceholder" data-focus="setplaylistname" data-type="createplaylist">Create a Playlist</div>
+        <div class="panelitem menubtn focus panelcreateplaylist setplaceholder" data-focus="setplaylistname" data-type="createplaylist">Create a Mix</div>
       </div>
     </div>
 
@@ -1562,9 +1562,9 @@ jhunter@tunein.com
       <div class=overlay></div>
       <div class=panel>
         <div class=panelitem>Change Duration</div>
-        <div class=panelitem>Remove From Playlist</div>
+        <div class=panelitem>Remove From Mix</div>
         <div class=panelitem>Share</div>
-        <div class=panelitem>Add to Another Playlist</div>
+        <div class=panelitem>Add to Another Mix</div>
       </div>
     </div>
 
@@ -1572,16 +1572,16 @@ jhunter@tunein.com
       <div class=overlay></div>
       <div class=panel>
         <div class=panelitem>Change Episode</div>
-        <div class=panelitem>Remove From Playlist</div>
+        <div class=panelitem>Remove From Mix</div>
         <div class=panelitem>Share</div>
-        <div class=panelitem>Add to Another Playlist</div>
+        <div class=panelitem>Add to Another Mix</div>
       </div>
     </div>
 
     <div class="morepanel playlistautomore">
       <div class=overlay></div>
       <div class=panel>
-        <div class="panelitem addplaylist">Save Playlist</div>
+        <div class="panelitem addplaylist">Save Mix</div>
         <div class=panelitem>Share</div>
         <div class="panelitem hideplaylist">Hide</div>
       </div>
@@ -1592,7 +1592,7 @@ jhunter@tunein.com
       <div class=overlay></div>
       <div class=panel>
         <div class=panelwrap>
-          <h2>Name Your Playlist</h2>
+          <h2>Name Your Mix</h2>
           <input type=text class=setplaylistname placeholder="Playlist #3453" />
           <div class="btn saveplaylist aink">Create</div>
         </div>
@@ -1750,7 +1750,7 @@ jhunter@tunein.com
       <div class="morepanel npmoremenu">
         <div class=overlay></div>
         <div class=panel>
-          <div class="panelitem menubtn" data-type="add2listmenu">Add to Playlist</div>
+          <div class="panelitem menubtn" data-type="add2listmenu">Add to Mix</div>
           <div class=panelitem>Share</div>
           <div class=panelitem>Choose Stream</div>
           <div class=panelitem>Need Help?</div>
@@ -1798,7 +1798,7 @@ jhunter@tunein.com
           <div class=npinfo>
             <div class=npstation>Nyan Cat 24/7</div>
             <div class=npmeta>Meow meow meow</div>
-            <div class="nplist menubtn aink" data-type=add2listmenu><div class="svgicon playlistadd"></div><div class=nplistlabel>Add to Playlist</div></div>
+            <div class="nplist menubtn aink" data-type=add2listmenu><div class="svgicon playlistadd"></div><div class=nplistlabel>Add to Mix</div></div>
             <div class="pillbtn btn npspeedbtn aink" data-type=npspeed>1.0x</div>
           </div>
           <div class="npscrubber" id=npscrubber>
@@ -2610,9 +2610,9 @@ jhunter@tunein.com
               </div>
             </div>
             <div class=contentrow style="padding-top:4px;">
-              <div class="listitem openpage" data-page=playlist data-title="Playlists" data-parent=library id=playlistrow>
+              <div class="listitem openpage" data-page=playlist data-title="Mixes" data-parent=library id=playlistrow>
                 <div class="rowicon svgicon playlist"></div>
-                <div class=title>Playlist</div>
+                <div class=title>You Mixes</div>
                 <div class="rowcount playlistcount">0</div>
                 <div class=chevron>
                   <div class="svgicon chev"></div>
@@ -2647,17 +2647,17 @@ jhunter@tunein.com
                 <div class="playlistcontent itemrowlist"></div>
                 <div class="emptystate playlistemptystate">
                   <div class=ill></div>
-                  <div class=message>You don't currently have any playlist, <br>create one below.</div>
+                  <div class=message>You don't currently have any Mix, <br>create one below.</div>
                 </div>
                 <div class=createplaylistbtn>
-                  <div class="btn menubtn focus setplaceholder aink" data-focus=setplaylistname data-type=createplaylist>Create a Playlist</div>
+                  <div class="btn menubtn focus setplaceholder aink" data-focus=setplaylistname data-type=createplaylist>Create a Mix</div>
                 </div>
               </div>
             </div>
             <div class=splitcolumn>
               <div class=contentrow>
                 <div class="heading">
-                  <h2 style="margin-bottom:2px;">Playlist You Might Like</h2>
+                  <h2 style="margin-bottom:2px;">Mix You Might Like</h2>
                 </div>
                 <div class=itemrowlist>
                   <div class="listrowitem pl apl" id=autoplaylist1 data-title="Latest News Briefing">
@@ -2782,7 +2782,7 @@ jhunter@tunein.com
             </div>
             <div class=playlistcontrols>
               <div class="btn aink playallplaylist npl">Play</div>
-              <div class="btn addplaylist2 outlinebtn" data-id="">Save Playlist</div>
+              <div class="btn addplaylist2 outlinebtn" data-id="">Save Mix</div>
               <div class="iconbtn menubtn add2pl" data-type=add2playlistmenu>
                 <div class="svgicon playlistadd"></div>
               </div>
@@ -2795,7 +2795,7 @@ jhunter@tunein.com
 
             </div>
             <div class="playlistrow playlistbottom">
-              <div class="btn addtoplaylist outlinebtn menubtn" data-type=add2playlistmenu>Add to Playlist</div>
+              <div class="btn addtoplaylist outlinebtn menubtn" data-type=add2playlistmenu>Add to Mix</div>
             </div>
           </div>
           <div class=splitcolumn>
@@ -4003,7 +4003,7 @@ jhunter@tunein.com
       ir.className = 'itemlist';
 
       let h3 = document.createElement('h3');
-      h3.appendChild(document.createTextNode('Playlist'));
+      h3.appendChild(document.createTextNode('Mix'));
       
       ex.appendChild(h3);
 
@@ -4835,7 +4835,7 @@ jhunter@tunein.com
     function saveplaylist(e){
       nomore.call(this, e);
       let input = document.getElementsByClassName('setplaylistname')[0];
-      let name = input.value || 'Playlist #' + (Object.keys(Lists).length + 1);
+      let name = input.value || 'Mix #' + (Object.keys(Lists).length + 1);
       input.value = '';
 
       let id = name.replace(/\W/g, '');
@@ -4941,7 +4941,7 @@ jhunter@tunein.com
 
     function setplaceholder(){
       let input = document.getElementsByClassName('setplaylistname')[0];
-      input.placeholder = 'Playlist #' + (Object.keys(Lists).length + 1);
+      input.placeholder = 'Mix #' + (Object.keys(Lists).length + 1);
     }
 
     function autoplaylist(){
@@ -4957,7 +4957,7 @@ jhunter@tunein.com
       let a = document.getElementById(id);
       let c = a.cloneNode(true);
       // c.removeAttribute('id');
-      c.id = 'Playlist' + (Object.keys(Lists).length + 1);
+      c.id = 'Mix' + (Object.keys(Lists).length + 1);
 
       
       let name = AutoPlaylist[id].name;
