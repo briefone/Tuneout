@@ -549,7 +549,7 @@ jhunter@tunein.com
       margin-top: calc(var(--pageheight) / 2 * -1);*/
   }
 
-    #nav {position:absolute;top:0;left:0;right:0;z-index:1337;backdrop-filter: blur(40px);}
+    #nav {position:absolute;top:0;left:0;right:0;z-index:1337;-webkit-backdrop-filter: blur(40px);backdrop-filter: blur(40px);}
       #nav .colorlay {position:absolute;top:0;left:0;right:0;bottom:0;background:var(--background);opacity:0.5;z-index:-1;}
         .premiumpage #nav .colorlay {background:var(--premium);}
 
@@ -655,7 +655,7 @@ jhunter@tunein.com
 
         .thumb.circle {border-radius:50%;background-color:var(--ink);border:none;}
 
-      #tabbar {position:absolute;left:0;bottom:0;right:0;height:56px;background:transparent;backdrop-filter:blur(40px);color:var(--tabcolor);display: flex;justify-content: space-around;flex-direction: column;z-index:99999;}
+      #tabbar {position:absolute;left:0;bottom:0;right:0;height:56px;background:transparent;-webkit-backdrop-filter:blur(40px);backdrop-filter:blur(40px);color:var(--tabcolor);display: flex;justify-content: space-around;flex-direction: column;z-index:99999;}
         #tabbar .tab {display:flex;align-items: center;justify-content: center;flex-direction: column;width:25%;height:100%;font-size:15px;font-weight:500;cursor:pointer;user-select:none;transition:color 200ms ease-in-out;}
           #tabbar .tab svg {fill:var(--tabcolor);width:24px;height:24px;transition:fill 200ms ease-in-out;}
 
@@ -744,7 +744,7 @@ jhunter@tunein.com
             .listrowitem .actions .iconbtn {width:40px;height:40px;}
               .listrowitem .actions .iconbtn .moreicon {background-color:var(--ink7);}
 
-      .nogap .listrowitem > * {margin-bottom:var(--tilegap);}
+      .nogap .listrowitem > * {margin-right:var(--tilegap);}
 
     #mainwrap {height:100%;background:var(--background);transition:all 200ms ease-in-out;overflow: hidden;transform-origin: top;position:relative;z-index:1;}
 
@@ -774,7 +774,7 @@ jhunter@tunein.com
 
       .carpage .cardstation, .carpage .npairplay, .carpage .npchromecast, .carpage .npmore, .carpage .nplist {display:none;}
 
-      .topbar {padding:32px 14px 8px;display: flex;justify-content: space-between;position:relative;z-index:7;backdrop-filter: blur(40px);
+      .topbar {padding:32px 14px 8px;display: flex;justify-content: space-between;position:relative;z-index:7;-webkit-backdrop-filter: blur(40px);backdrop-filter: blur(40px);
         left: 0.7px;
         width: calc(100% - 0.7px);
         box-sizing: border-box;
@@ -885,7 +885,7 @@ jhunter@tunein.com
 
     #npblur {position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;pointer-events: none;opacity:0;}
             .albumblur #npblur {opacity:1;}
-            #blurblur {position:absolute;top:0;left:0;right:0;bottom:0;z-index:2;backdrop-filter: blur(var(--albumblur));}
+            #blurblur {position:absolute;top:0;left:0;right:0;bottom:0;z-index:2;-webkit-backdrop-filter: blur(var(--albumblur));backdrop-filter: blur(var(--albumblur));}
             #bluralbum {background-size:cover;background-position:center;position:absolute;top:0;left:0;right:0;bottom:0;z-index:1;opacity:var(--albumalpha);}
 
     #npmatch {position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;pointer-events: none;opacity:0;background-color:var(--albummatch);}
@@ -1146,7 +1146,7 @@ jhunter@tunein.com
           .agrid6:nth-child(6) {grid-column-start: 5;grid-row-start: 3;grid-row-end:5;grid-column-end:7;}
 
     .playlistcontrols {padding:0 24px;margin-top:-56px;height:44px;display:flex;gap:2px;align-items: center;}
-      .nogap .playlistcontrols > * {margin-right:2px;}
+      .nogap .playlistcontrols > * {margin-right:6px;}
       .playallplaylist {width:calc(50% - 4px);margin-right:6px;}
       .playlistedit {}
       .playlistlistadd {}
@@ -1170,8 +1170,8 @@ jhunter@tunein.com
     .hiderecco {display:none;}
 
 
-    .playlistsearch {padding:24px 24px 16px;position:relative;margin-top:-12px;border-radius:12px 12px 0 0 ;z-index:3;backdrop-filter:blur(40px);box-sizing: border-box;left:.25px;width: calc(100% - 0.5px);overflow:hidden;}
-      .droid .playlistsearch {border-radius: 0;padding-bottom:0;backdrop-filter:none;background:var(--ink1);}
+    .playlistsearch {padding:24px 24px 16px;position:relative;margin-top:-12px;border-radius:12px 12px 0 0 ;z-index:3;-webkit-backdrop-filter:blur(40px);backdrop-filter:blur(40px);box-sizing: border-box;left:.25px;width: calc(100% - 0.5px);overflow:hidden;}
+      .droid .playlistsearch {border-radius: 0;padding-bottom:0;-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--ink1);}
 
       .playlistsearch .colorlay {position:absolute;top:0;left:0;right:0;bottom:0;background:var(--ink1);opacity:0.5;z-index:-1;}
 
@@ -1710,7 +1710,7 @@ jhunter@tunein.com
         .npspeedbtn {position:absolute;top:44px;right:24px;height:32px;font-size:14px;padding:0 14px;font-variant-numeric: tabular-nums;}
 
       .pillbottle {padding:4px 24px 0;display:flex;flex-wrap: wrap;gap:8px;}
-      .nogap .pillbottle > * {margin-right:8px;}
+      .nogap .pillbottle > * {margin:0 8px 8px 0;}
 
       .panel.steppanel {padding:24px 24px 8px;}
 
