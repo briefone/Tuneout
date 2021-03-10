@@ -426,6 +426,7 @@ jhunter@tunein.com
       .pauseicon {-webkit-mask-image: url('../icons/Pause.svg');mask-image: url('../icons/Pause.svg');}
       .next {-webkit-mask-image: url('../icons/Next.svg');mask-image: url('../icons/Next.svg');}
       .prev {-webkit-mask-image: url('../icons/Prev.svg');mask-image: url('../icons/Prev.svg');}
+      .editicon {-webkit-mask-image: url('../icons/Edit.svg');mask-image: url('../icons/Edit.svg');}
 
 
     .toggle {width:38px;height:22px;border-radius:30px;position:relative;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(0, 0, 0, 0.02);cursor:pointer;transition:background 150ms ease-in-out;display: inline-block;margin-right:8px;vertical-align: middle;}
@@ -722,9 +723,16 @@ jhunter@tunein.com
           .rowitem .description .meta {color:var(--lighttext);font-size:16px;text-overflow: ellipsis;white-space:nowrap;overflow:hidden;max-width:100%;}
 
           .rowitem .morebtn {position:absolute;top:50%;right:12px;margin-top:-22px;}
-          .rowitem .morebtn .svgicon {background-color:var(--ink7);}
+            .rowitem .morebtn .svgicon {background-color:var(--ink7);}
+
+          .rowitem .rowsecondaryaction {position:absolute;top:50%;right:60px;margin-top:-22px;}
+            .rowitem .rowsecondaryaction .svgicon {background-color:var(--ink7);}
+
+          .notmine .rowitem .rowsecondaryaction {display:none;}
 
 
+          .rowitem.npl {padding-right:108px;}
+            .notmine .rowitem.npl {padding-right:64px;}
           .rowitem.npl .thumb {width:64px;height:64px;min-width:64px;min-height:64px;}
           .rowitem.npl .description .title {padding-bottom:2px;}
 
@@ -1115,7 +1123,7 @@ jhunter@tunein.com
       .toast {height:48px;padding:0 16px;display:flex;align-items:center;justify-content:center;border-radius:4px;background:var(--tsharp3);color:black;position:absolute;z-index:999999999999999999;transition:transform 200ms ease-in-out;bottom:12px;right:12px;transform:translateY(calc(100% + 20px));box-shadow:0 4px 8px rgba(0,0,0,0.1);font-size:16px;font-weight:600;cursor:pointer;user-select:none;}
         .toast.pop {transform:translateY(0);}
 
-
+  
     .aink {position:relative;}
     
     .wrapple {position:absolute;top:0;left:0;right:0;bottom:0;overflow:hidden;pointer-events:none;z-index:0;}
@@ -1211,6 +1219,48 @@ jhunter@tunein.com
           .darkui .duratime:active {background-color:var(--ink8);}
 
 
+    .toggleinput {cursor:pointer;}
+      .toggleinput input {display:none;}
+      .btn.quietbtn {background:transparent;color:var(--ink10);}
+      .btn.quietbtn:hover {background:var(--ink2);color:var(--ink11);}
+      .btn.quietbtn:active {background:var(--ink3);color:var(--ink12);}
+
+      .darkui .btn.quietbtn {color:var(--ink3);background:transparent;}
+        .darkui .btn.quietbtn:hover {color:var(--ink4);background:transparent;}
+        .darkui .btn.quietbtn:active {color:var(--ink6);background:transparent;}
+
+      .darkmode .darkui .btn.quietbtn {color:var(--ink9);background:transparent;}
+        .darkmode .darkui .btn.quietbtn:hover {color:var(--ink8);background:transparent;}
+        .darkmode .darkui .btn.quietbtn:active {color:var(--ink7);background:transparent;}
+
+      .pillbtn {height:36px;padding:0 16px;border-radius:18px;}
+        .greybtn {background-color:var(--ink3);color:var(--ink10);}
+          .greybtn:hover {background-color:var(--ink4);color:var(--ink11);}
+          .greybtn:active {background-color:var(--ink5);color:var(--ink12);}
+
+        .npspeedbtn {position:absolute;top:44px;right:24px;height:32px;font-size:14px;padding:0 14px;font-variant-numeric: tabular-nums;}
+
+      .pillbottle {padding:4px 24px 0;display:flex;flex-wrap: wrap;gap:8px;}
+      .nogap .pillbottle > * {margin:0 8px 8px 0;}
+
+      .panel.steppanel {padding:24px 24px 8px;}
+
+      .steppanel .toggleinput {margin:12px 0 ;display:block;}
+      .steppanel .btn {display:flex;width:100%;margin-top: 8px;}
+      .steppedinput {width:100%;position:relative;margin-top:20px;}
+        .steppedinput input {width:calc(100% + 12px);position: relative;z-index:4;display:block;height:40px;margin:0 -6px}
+      .steppedinput .steptrack {position:absolute;top:50%;left:2px;right:2px;height:4px;background:var(--nptrack);margin-top:-2px;pointer-events: none;}
+        .steptrack .stepdot {position:absolute;top:50%;height:4px;width:4px;margin-left:-2px;margin-top:-2px;background:var(--ink7);border-radius:50%;color:var(--moreitem);}
+        .steptrack .stepdot.selected {color:var(--tsharp3)}
+
+        .steptrack .stepdot:first-child .label {left:0;transform:none;}
+        .steptrack .stepdot:last-child .label {left:auto;right:0;transform:none;}
+
+          .stepdot .label {position:absolute;left:50%;top:-28px;transform:translateX(-50%);font-weight: 500;}
+
+        .panel h5 {font-size:12px;text-transform:uppercase;color:var(--ink6);font-weight:500;margin-bottom:8px;}
+
+
       .hidetweaks #container {
         border-radius: 0 !important;
         height:100% !important;
@@ -1248,37 +1298,6 @@ jhunter@tunein.com
   <script src="../js/vibe.js"></script>
   <script src="../js/albumart.js"></script>
   <script src="../js/confetti.js"></script>
-  <script>
-    /*
- * From: https://stackoverflow.com/a/34699901/2304737
- * d = decrypt
- * e = encrypt
- */
-  function de(b){var a,e={},d=b.split(""),c=f=d[0],g=[c],h=o=256;for(b=1;b<d.length;b++)a=d[b].charCodeAt(0),a=h>a?d[b]:e[a]?e[a]:f+c,g.push(a),c=a.charAt(0),e[o]=f+c,o++,f=a;return g.join("")}
-  function en(c){var x='charCodeAt',b=z={},f=c.split(""),d=[],a=f[0],g=256;for(b=1;b<f.length;b++)c=f[b],null!=z[a+c]?a+=c:(d.push(1<a.length?z[a]:a[x](0)),z[a+c]=g,g++,a=c);d.push(1<a.length?z[a]:a[x](0));for(b=0;b<d.length;b++)d[b]=String.fromCharCode(d[b]);return d.join("")}
-
-  // function compress(string, encoding) {
-  //   const byteArray = new TextEncoder().encode(string);
-  //   const cs = new CompressionStream(encoding);
-  //   const writer = cs.writable.getWriter();
-  //   writer.write(byteArray);
-  //   writer.close();
-  //   return new Response(cs.readable).arrayBuffer();
-  // }
-
-  // function decompress(byteArray, encoding) {
-  //   const cs = new DecompressionStream(encoding);
-  //   const writer = cs.writable.getWriter();
-  //   writer.write(byteArray);
-  //   writer.close();
-  //   return new Response(cs.readable).arrayBuffer().then(function (arrayBuffer) {
-  //     return new TextDecoder().decode(arrayBuffer);
-  //   });
-  // }
-
-  // window.module = {};
-
-  </script>
 </head>
 <body>
   <input type="color" id=colorpicker />
@@ -1686,50 +1705,6 @@ jhunter@tunein.com
         </div>
       </div>
     </div>
-
-    <style>
-      .toggleinput {cursor:pointer;}
-      .toggleinput input {display:none;}
-      .btn.quietbtn {background:transparent;color:var(--ink10);}
-      .btn.quietbtn:hover {background:var(--ink2);color:var(--ink11);}
-      .btn.quietbtn:active {background:var(--ink3);color:var(--ink12);}
-
-      .darkui .btn.quietbtn {color:var(--ink3);background:transparent;}
-        .darkui .btn.quietbtn:hover {color:var(--ink4);background:transparent;}
-        .darkui .btn.quietbtn:active {color:var(--ink6);background:transparent;}
-
-      .darkmode .darkui .btn.quietbtn {color:var(--ink9);background:transparent;}
-        .darkmode .darkui .btn.quietbtn:hover {color:var(--ink8);background:transparent;}
-        .darkmode .darkui .btn.quietbtn:active {color:var(--ink7);background:transparent;}
-
-      .pillbtn {height:36px;padding:0 16px;border-radius:18px;}
-        .greybtn {background-color:var(--ink3);color:var(--ink10);}
-          .greybtn:hover {background-color:var(--ink4);color:var(--ink11);}
-          .greybtn:active {background-color:var(--ink5);color:var(--ink12);}
-
-        .npspeedbtn {position:absolute;top:44px;right:24px;height:32px;font-size:14px;padding:0 14px;font-variant-numeric: tabular-nums;}
-
-      .pillbottle {padding:4px 24px 0;display:flex;flex-wrap: wrap;gap:8px;}
-      .nogap .pillbottle > * {margin:0 8px 8px 0;}
-
-      .panel.steppanel {padding:24px 24px 8px;}
-
-      .steppanel .toggleinput {margin:12px 0 ;display:block;}
-      .steppanel .btn {display:flex;width:100%;margin-top: 8px;}
-      .steppedinput {width:100%;position:relative;margin-top:20px;}
-        .steppedinput input {width:calc(100% + 12px);position: relative;z-index:4;display:block;height:40px;margin:0 -6px}
-      .steppedinput .steptrack {position:absolute;top:50%;left:2px;right:2px;height:4px;background:var(--nptrack);margin-top:-2px;pointer-events: none;}
-        .steptrack .stepdot {position:absolute;top:50%;height:4px;width:4px;margin-left:-2px;margin-top:-2px;background:var(--ink7);border-radius:50%;color:var(--moreitem);}
-        .steptrack .stepdot.selected {color:var(--tsharp3)}
-
-        .steptrack .stepdot:first-child .label {left:0;transform:none;}
-        .steptrack .stepdot:last-child .label {left:auto;right:0;transform:none;}
-
-          .stepdot .label {position:absolute;left:50%;top:-28px;transform:translateX(-50%);font-weight: 500;}
-
-        .panel h5 {font-size:12px;text-transform:uppercase;color:var(--ink6);font-weight:500;margin-bottom:8px;}
-
-    </style>
 
     <div id=nowplaying class="live darkui">
       <div class="morepanel npspeed">
@@ -3131,6 +3106,9 @@ jhunter@tunein.com
       <div class="description">
         <div class="title"></div>
         <div class="meta"></div>
+      </div>
+      <div class="iconbtn rowsecondaryaction menubtn">
+        <div class="svgicon editicon"></div>
       </div>
       <div class="iconbtn more menubtn morebtn" data-type="playlistitemmore">
         <div class="svgicon moreicon"></div>
@@ -5748,7 +5726,7 @@ jhunter@tunein.com
         alert('Not optimized for Firefox, try Chrome.');
       }
 
-      if ( !checkFlexGap() ){
+      if ( !checkFlexGap() ){ //safari sucks
         document.documentElement.classList.add('nogap');
       }
     })();
