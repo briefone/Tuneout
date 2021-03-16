@@ -406,7 +406,7 @@ jhunter@tunein.com
       user-select: none;
     }
 
-    .svgicon {background-color:var(--ink);-webkit-mask-size: cover;mask-size: cover;-webkit-mask-position: center;mask-position: center;-webkit-mask-repeat: no-repeat;mask-repeat: no-repeat;width:24px;height:24px;display:inline-block;vertical-align: middle;transition:background-color 200ms ease-in-out;}
+    .svgicon {background-color:var(--ink);-webkit-mask-size: fill;mask-size: fill;-webkit-mask-position: center;mask-position: center;-webkit-mask-repeat: no-repeat;mask-repeat: no-repeat;width:24px;height:24px;display:inline-block;vertical-align: middle;transition:background-color 200ms ease-in-out;}
 
     .invert .svgicon {background-color: var(--ink1);}
 
@@ -428,6 +428,7 @@ jhunter@tunein.com
       .prev {-webkit-mask-image: url('../icons/Prev.svg');mask-image: url('../icons/Prev.svg');}
       .editicon {-webkit-mask-image: url('../icons/Edit.svg');mask-image: url('../icons/Edit.svg');}
       .logoicon {-webkit-mask-image: url('../icons/Logo.svg');mask-image: url('../icons/Logo.svg');}
+      .searchicon {-webkit-mask-image: url('../icons/Search.svg');mask-image: url('../icons/Search.svg');}
 
 
     .toggle {width:38px;height:22px;border-radius:30px;position:relative;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(0, 0, 0, 0.02);cursor:pointer;transition:background 150ms ease-in-out;display: inline-block;margin-right:8px;vertical-align: middle;}
@@ -551,7 +552,39 @@ jhunter@tunein.com
       margin-top: calc(var(--pageheight) / 2 * -1);*/
   }
 
-  #webnav {display:none;}
+  #webnav {position:absolute;z-index:9999;left:0;top:0;bottom:0;background:var(--ink10);color:var(--ink1);width:216px;pointer-events:none;transform:translateX(-100%);transition:transform 200ms ease-in-out;}
+    .webview #webnav {transform:translateX(0);pointer-events:all;}
+    .weblogo {margin:40px 0 36px 32px;}
+      .weblogo .svgicon {background-color:var(--tsharp3);height:48px;width:104px;}
+
+    .webpageheading {display:none;font-size:28px;font-weight:700;padding:0 0 8px 24px;}
+      .webview .webpageheading {display:block;}
+
+    .navscroll {position:absolute;top:96px;padding-top:24px;left:0;right:0;bottom:0;overflow-y:auto;padding-bottom:32px;}
+
+    .navitem {font-weight: 600;font-size: 20px;height:36px;font-weight:600;display:flex;padding:0 32px;align-items:center;transition: color 0.2s ease-in-out;cursor:pointer;user-select:none;}
+      .navitem:hover {background-color:var(--ink9);}
+      .navitem:active {color:var(--tsharp2);}
+
+      .navitem.current {background-color:var(--ink11);color:var(--tsharp3);}
+
+      .navitem .svgicon {background-color:white;transition:background-color 200ms ease-in-out;}
+        .navitem:hover .svgicon {background-color:white;}
+        .navitem:active  .svgicon{background-color:var(--tsharp2);}
+       .navitem.current .svgicon {background-color:var(--tsharp3);}
+
+    .subnavgroup {margin-top:24px;}
+      .navsubitem {font-size: 18px;font-weight:400;height:36px;display:flex;padding:0 32px;align-items:center;transition: color 0.2s ease-in-out;cursor:pointer;user-select:none;}
+      .navsubitem:hover {color:var(--tsharp3);}
+      .navsubitem:active {color:var(--tsharp2);}
+
+    .navcta {display:flex;align-items:center;padding:0 24px;border-radius:calc(var(--buttonradius) / 2);background:var(--coral3);color:white;font-weight:500;height:48px;font-size:16px;margin:0 32px;transition: background-color 0.2s ease-in-out,color 0.2s ease-in-out;cursor:pointer;user-select:none;justify-content:center;}
+      .navcta:hover {background-color:var(--coral2);}
+      .navcta:active {background-color:var(--coral1);}
+
+    .navlink {margin:24px 32px 0;font-size:16px;font-weight:400;cursor: pointer;user-select:none;transition: all 0.2s ease-in-out;}
+      .navlink:hover {text-decoration: underline;color:var(--sky3);}
+      .navlink:active {text-decoration: underline;color:var(--sky2);}
 
     #nav {position:absolute;top:0;left:0;right:0;z-index:1337;-webkit-backdrop-filter: blur(40px);backdrop-filter: blur(40px);}
       #nav .colorlay {position:absolute;top:0;left:0;right:0;bottom:0;background:var(--background);opacity:0.5;z-index:-1;}
@@ -757,7 +790,9 @@ jhunter@tunein.com
 
       .nogap .listrowitem > * {margin-right:var(--tilegap);}
 
-    #mainwrap {height:100%;background:var(--background);transition:all 200ms ease-in-out;overflow: hidden;transform-origin: top;position:relative;z-index:1;}
+    #mainwrap {height:100%;background:var(--background);transition:all 200ms ease-in-out;overflow: hidden;transform-origin: top;position:relative;z-index:1;position:absolute;left:0;right:0;}
+      .webview #mainwrap {left:216px;}
+      .mobilewebview #mainwrap {left:0;}
 
     .modalview #mainwrap {transform:scale(.92) translateY(20px);border-radius:12px;opacity:0.9;}
 
@@ -1277,6 +1312,12 @@ jhunter@tunein.com
         margin-top:0 !important;
       }
 
+      .webview #tabbar, .webview #nav {display:none;}
+      .webview #home .content, .webview #search .content {padding-top:32px;}
+      .webview .contentrow .heading {justify-content: unset;}
+
+      .webview #nowplaying {left:216px;}
+
     @media screen and (max-width: 666px) {
       #container {
           border-radius: 0 !important;
@@ -1349,7 +1390,10 @@ jhunter@tunein.com
     </div>
     <div class=tpanel>
       <div class="tweak">
-        <label><input type="checkbox" id="cb18" class="tweakr " data-class=droid><div class="toggle"></div> Android-ish</label>
+        <label><input type="checkbox" id="cb18" class="tweakr " data-class=droid data-uncheck=cb22><div class="toggle"></div> Android-ish</label>
+      </div>
+      <div class="tweak">
+        <label><input type="checkbox" id="cb22" class="tweakr " data-class=webview data-uncheck=cb18><div class="toggle"></div> Web</label>
       </div>
     </div>
     <div class=tpanel>
@@ -1987,31 +2031,36 @@ jhunter@tunein.com
         </div>
       </div>
     </div>
-    <div id=mainwrap>
-      <div id=webnav>
-        <div class=weblogo>
-          <div class="svgicon logoicon"></div>
+    <div id=webnav>
+      <div class=weblogo>
+        <div class="svgicon logoicon"></div>
+      </div>
+      <div class=navscroll>
+        <div class=navitem data-page=search style="justify-content: space-between;">Search <div class="svgicon searchicon" style="width:18px;margin-left:8px;margin-top:-3px;"></div></div>
+        <div class=navitem data-page=home>Home</div>
+        <div class=navitem data-page=premium>Premium</div>
+        <div class=navitem data-page=radio>Local Radio</div>
+        <div class=navitem data-page=home>Recents</div>
+        <div class=navitem data-page=home>Trending</div>
+        <div class=navitem data-page=music>Music</div>
+        <div class=navitem data-page=sports>Sports</div>
+        <div class=navitem data-page=news>News & Talk</div>
+        <div class=navitem data-page=podcast>Podcasts</div>
+        <div class=navitem data-page=bylocation>By Location</div>
+        <div class=navitem data-page=bylanguage>By Language</div>
+
+        <div class=subnavgroup>
+          <div class=navsubitem>Sign In</div>
+          <div class=navsubitem>Sign Up</div>
         </div>
 
-        <div class=navitem>Search</div>
-        <div class=navitem>Home</div>
-        <div class=navitem>Premium</div>
-        <div class=navitem>Local Radio</div>
-        <div class=navitem>Recents</div>
-        <div class=navitem>Trending</div>
-        <div class=navitem>Music</div>
-        <div class=navitem>Sports</div>
-        <div class=navitem>News & Talk</div>
-        <div class=navitem>Podcasts</div>
-        <div class=navitem>By Location</div>
-        <div class=navitem>By Language</div>
-
-        <div class=navsubitem>Sign In</div>
-        <div class=navsubitem>Sign Up</div>
-
-        <div class=navcta>Start Free Trial</div>
-        <div class=navlink>Download App</div>
+        <div class=subnavgroup>
+          <div class=navcta>Start Free Trial</div>
+          <div class=navlink>Download App</div>
+        </div>
       </div>
+    </div>
+    <div id=mainwrap>
       <div id=nav>
         <div class=colorlay></div>
         <div id=statusbar></div>
@@ -2059,6 +2108,9 @@ jhunter@tunein.com
       </div>
       <div id=home class="tabhome">
         <div class="content touchscroll pagehome tabpage">
+          <div class=webpageheading>
+            Home
+          </div>
           <div class=contentrow>
             <div class=heading>
               <h4>Recent</h4>
@@ -2223,6 +2275,9 @@ jhunter@tunein.com
         </div>
 
         <div class="tabpage content touchscroll pageradio">
+          <div class=webpageheading>
+            Local Radio
+          </div>
           <div class=contentrow>
             <div class="heading ">
               <h2>FM</h2>
@@ -2299,6 +2354,9 @@ jhunter@tunein.com
           </div>
         </div>
         <div class="tabpage content touchscroll pagesports">
+          <div class=webpageheading>
+            Sports
+          </div>
           <div class=contentrow>
             <div class=heading>
               <h2>Nonstop Sports Talk</h2>
@@ -2365,6 +2423,9 @@ jhunter@tunein.com
           </div>
         </div>
         <div class="tabpage content touchscroll pagenews">
+          <div class=webpageheading>
+            News & Talk
+          </div>
           <div class=contentrow>
             <div class=heading>
               <h2>Most Popular News Stations</h2>
@@ -2454,6 +2515,9 @@ jhunter@tunein.com
           
         </div>
         <div class="tabpage content touchscroll pagemusic">
+          <div class=webpageheading>
+            Music
+          </div>
           <div class=contentrow>
             <div class="heading ">
               <h2>Most Popular Stations</h2>
@@ -2500,6 +2564,9 @@ jhunter@tunein.com
           </div>
         </div>
         <div class="tabpage content touchscroll pagepodcast">
+          <div class=webpageheading>
+            Podcast
+          </div>
           <div class=contentrow>
             <div class="heading ">
               <h2>This Week's Featured Podcasts</h2>
@@ -2547,6 +2614,9 @@ jhunter@tunein.com
           </div>
         </div>
         <div class="tabpage content touchscroll pagebylocation">
+          <div class=webpageheading>
+            By Location
+          </div>
           <div class=contentrow>
             <div class="heading ">
               <h2 style="padding-bottom:6px;">Regions</h2>
@@ -2598,6 +2668,9 @@ jhunter@tunein.com
           </div>
         </div>
         <div class="tabpage content touchscroll pagebylanguage">
+          <div class=webpageheading>
+            By Language
+          </div>
           <div class=contentrow>
             <div class="heading ">
               <h2 style="padding-bottom:6px;">Languages</h2>
@@ -2946,6 +3019,9 @@ jhunter@tunein.com
 
       <div id=search>
         <div class="searchcontent content">
+          <div class=webpageheading>
+            Search
+          </div>
           <div class=contentrow>
             <div class=heading>
               <h4>Trending</h4>
@@ -3048,7 +3124,9 @@ jhunter@tunein.com
 
       <div id=premium>
         <div class=content>
-          
+          <div class=webpageheading style="padding-top:32px;">
+            Premium
+          </div>
         </div>
       </div>
 
@@ -3187,6 +3265,13 @@ jhunter@tunein.com
           d.click();
         }
       }
+
+      let web = document.getElementById('cb22');
+
+      if ( web.checked ){
+        web.click();
+      }
+      
     }
 
     function resetcolors(){
@@ -3676,6 +3761,22 @@ jhunter@tunein.com
       
       window.addEventListener('mouseup', up);
   }
+
+    function webnavtab(e){
+      let p = this.dataset.page;
+      let tab = document.querySelector(".tab[data-page=" + p + "]");
+
+      let o = document.getElementsByClassName('navitem current');
+      o.removeclass('current');
+      this.classList.add('current');
+
+      tab.click();
+
+      if ( p != 'search' && p != 'premium'){
+        let home = document.querySelector(".tabs .tab[data-page=home]");
+        home.click();
+      }
+    }
 
     function tabline(e){
       let wrap = this.getparent('tabwrap');
@@ -5670,6 +5771,7 @@ jhunter@tunein.com
     Attach.on('click', '.npnext', npnext);
     Attach.on('click', '.npprev', npprev);
     Attach.on('click', '.npl2', npl2);
+    Attach.on('click', '#webnav .navitem', webnavtab);
     
     
     window.Lists = localStorage.getObject('lists') || {};
