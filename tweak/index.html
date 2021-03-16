@@ -562,11 +562,11 @@ jhunter@tunein.com
 
     .navscroll {position:absolute;top:96px;padding-top:24px;left:0;right:0;bottom:0;overflow-y:auto;padding-bottom:32px;}
 
-    .navitem {font-weight: 600;font-size: 20px;height:36px;font-weight:600;display:flex;padding:0 32px;align-items:center;transition: color 0.2s ease-in-out;cursor:pointer;user-select:none;}
+    .navitem {font-weight: 600;font-size: 20px;height:36px;font-weight:600;display:flex;padding:0 16px;margin:0 16px 2px;border-radius:4px;align-items:center;transition: color 0.2s ease-in-out;cursor:pointer;user-select:none;}
       .navitem:hover {background-color:var(--ink9);}
-      .navitem:active {color:var(--tsharp2);}
+      .navitem:active {background-color:var(--ink8);transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;}
 
-      .navitem.current {background-color:var(--ink11);color:var(--tsharp3);}
+      .navitem.current {background-color:var(--ink9);color:var(--tsharp3);}
 
       .navitem .svgicon {background-color:white;transition:background-color 200ms ease-in-out;}
         .navitem:hover .svgicon {background-color:white;}
@@ -2032,12 +2032,12 @@ jhunter@tunein.com
       </div>
     </div>
     <div id=webnav>
-      <div class=weblogo>
+      <div class=weblogo ondblclick="document.getElementById('cb666').click();">
         <div class="svgicon logoicon"></div>
       </div>
       <div class=navscroll>
         <div class=navitem data-page=search style="justify-content: space-between;">Search <div class="svgicon searchicon" style="width:18px;margin-left:8px;margin-top:-3px;"></div></div>
-        <div class=navitem data-page=home>Home</div>
+        <div class="navitem current" data-page=home>Home</div>
         <div class=navitem data-page=premium>Premium</div>
         <div class=navitem data-page=radio>Local Radio</div>
         <div class=navitem data-page=home>Recents</div>
