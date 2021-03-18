@@ -561,7 +561,7 @@ jhunter@tunein.com
   .burgerking {width:64px;height:100%;display:flex;align-items: center;justify-content: center;cursor:pointer;}
     .burgerking .svgicon {background-color:var(--ink1);}
 
-  .mwlogo {margin:0;}
+  .mwlogo {margin:0;cursor:pointer;}
     .mwlogo .svgicon {background-color:var(--tsharp3);height:64px;width:76px;}
   
   .mwsearch {width:64px;height:100%;display:flex;align-items: center;justify-content: center;cursor:pointer;position: absolute;right: 0;}
@@ -575,7 +575,7 @@ jhunter@tunein.com
   #webnavoverlay {position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.4);opacity:0;transition:opacity 200ms ease-in-out;pointer-events: none;z-index:9999;cursor:pointer;}
     .openforbusiness.mobilewebview #webnavoverlay {opacity:1;pointer-events: all;}
 
-    .weblogo {margin:40px 0 36px 32px;}
+    .weblogo {margin:40px 0 36px 32px;cursor:pointer;}
       .weblogo .svgicon {background-color:var(--tsharp3);height:48px;width:104px;}
 
     .webpageheading {display:none;font-size:28px;font-weight:700;padding:0 0 8px 24px;}
@@ -1553,7 +1553,7 @@ jhunter@tunein.com
     <div class=tpanel>
       <div class="tweak">
         <div class="label"><span>Page Width</span><div class="value">1444</div></div>
-          <input type="range" class="valuetweak" min="280" max="1444" value="1444" step="1" id="pagewidth" oninput="breakpoint()" data-unit=px>
+          <input type="range" class="valuetweak" min="280" max="1444" value="1444" step="1" id="pagewidth" oninput="breakpoint()" onchange="breakpoint()" data-unit=px>
       </div>
       <div class="tweak">
         <div class="label"><span>Page Height</span><div class="value">1444</div></div>
@@ -2058,21 +2058,21 @@ jhunter@tunein.com
       <div class=burgerking>
         <div class="svgicon menuicon"></div>
       </div>
-      <div class=mwlogo ondblclick="document.getElementById('cb666').click();">
+      <div class=mwlogo ondblclick="document.getElementById('cb666').click();" onclick="document.getElementsByClassName('navhome')[0].click();">
         <div class="svgicon logoicon"></div>
       </div>
-      <div class=mwsearch onclick="opensearch()">
+      <div class=mwsearch onclick="document.getElementsByClassName('navsearch')[0].click();">
         <div class="svgicon searchicon"></div>
       </div>
     </div>
     <div id=webnavoverlay></div>
     <div id=webnav>
-      <div class=weblogo ondblclick="document.getElementById('cb666').click();">
+      <div class=weblogo ondblclick="document.getElementById('cb666').click();" onclick="document.getElementsByClassName('navhome')[0].click();">
         <div class="svgicon logoicon"></div>
       </div>
       <div class=navscroll>
-        <div class=navitem data-page=search style="justify-content: space-between;">Search <div class="svgicon searchicon" style="width:18px;margin-left:8px;margin-top:-3px;"></div></div>
-        <div class="navitem current" data-page=home>Home</div>
+        <div class="navitem navsearch" data-page=search style="justify-content: space-between;">Search <div class="svgicon searchicon" style="width:18px;margin-left:8px;margin-top:-3px;"></div></div>
+        <div class="navitem current navhome" data-page=home>Home</div>
         <div class=navitem data-page=premium>Premium</div>
         <div class=navitem data-page=radio>Local Radio</div>
         <div class=navitem data-page=home>Recents</div>
@@ -3824,12 +3824,6 @@ jhunter@tunein.com
       }
 
       document.documentElement.classList.remove('openforbusiness');
-    }
-
-    function opensearch(){
-      let tab = document.querySelector(".tab[data-page=search]");
-
-      tab.click();
     }
 
     function tabline(e){
