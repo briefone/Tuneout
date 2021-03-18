@@ -570,6 +570,10 @@ jhunter@tunein.com
   #webnav {position:absolute;z-index:9999;left:0;top:0;bottom:0;background:var(--ink10);color:var(--ink1);width:216px;pointer-events:none;transform:translateX(-100%);transition:transform 200ms ease-in-out;}
     .webview #webnav {transform:translateX(0);pointer-events:all;}
     .mobilewebview #webnav {transform:translateX(-100%);pointer-events:none;}
+      .openforbusiness.mobilewebview #webnav {transform:translateX(0);pointer-events:all;}
+
+  #webnavoverlay {position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.4);opacity:0;transition:opacity 200ms ease-in-out;pointer-events: none;z-index:9999;cursor:pointer;}
+    .openforbusiness.mobilewebview #webnavoverlay {opacity:1;pointer-events: all;}
 
     .weblogo {margin:40px 0 36px 32px;}
       .weblogo .svgicon {background-color:var(--tsharp3);height:48px;width:104px;}
@@ -1334,6 +1338,7 @@ jhunter@tunein.com
       .webview .contentrow .heading {justify-content: unset;}
 
       .webview #nowplaying {left:216px;}
+      .webview.mobilewebview #nowplaying {left:0;}
 
     @media screen and (max-width: 666px) {
       #container {
@@ -2055,10 +2060,11 @@ jhunter@tunein.com
       <div class=mwlogo ondblclick="document.getElementById('cb666').click();">
         <div class="svgicon logoicon"></div>
       </div>
-      <div class=mwsearch>
+      <div class=mwsearch onclick="opensearch()">
         <div class="svgicon searchicon"></div>
       </div>
     </div>
+    <div id=webnavoverlay></div>
     <div id=webnav>
       <div class=weblogo ondblclick="document.getElementById('cb666').click();">
         <div class="svgicon logoicon"></div>
@@ -3811,6 +3817,14 @@ jhunter@tunein.com
         let home = document.querySelector(".tabs .tab[data-page=home]");
         home.click();
       }
+
+      document.documentElement.classList.remove('openforbusiness');
+    }
+
+    function opensearch(){
+      let tab = document.querySelector(".tab[data-page=search]");
+
+      tab.click();
     }
 
     function tabline(e){
@@ -4369,6 +4383,8 @@ jhunter@tunein.com
 
     function resize(e){
       pagesizetweak(false);
+
+      breakpoint();
     }
 
     function miniplay(){
@@ -5748,6 +5764,14 @@ jhunter@tunein.com
       return isSupported;
     }
 
+    function bk(){
+      document.documentElement.classList.toggle('openforbusiness');
+    }
+
+    function closewebnav(){
+      document.documentElement.classList.remove('openforbusiness');
+    }
+
     Attach.on('click', '.a2plstep2', a2plprestep);
     Attach.on('click', '.addtoplaylist, .add2pl', addtoplaylistsearch);
     Attach.on('click', '.playlistaddrec', playlistaddrec);
@@ -5807,6 +5831,8 @@ jhunter@tunein.com
     Attach.on('click', '.npprev', npprev);
     Attach.on('click', '.npl2', npl2);
     Attach.on('click', '#webnav .navitem', webnavtab);
+    Attach.on('click', '.burgerking', bk);
+    Attach.on('click', '#webnavoverlay', closewebnav);
     
     
     window.Lists = localStorage.getObject('lists') || {};
