@@ -1334,7 +1334,8 @@ jhunter@tunein.com
       }
 
       .webview #tabbar, .webview #nav {display:none;}
-      .webview #home .content, .webview #search .content {padding-top:32px;}
+      .webview #home .content, .webview #search .content, .premiumheading {padding-top:32px;}
+      .webview.mobilewebview #home .content, .webview.mobilewebview #search .content, .webview.mobilewebview .premiumheading {padding-top:24px;}
       .webview .contentrow .heading {justify-content: unset;}
 
       .webview #nowplaying {left:216px;}
@@ -2136,7 +2137,7 @@ jhunter@tunein.com
         </div>
         <div id=searchbar>
           <div class="inputfield search">
-            <input type=text placeholder="Search French Rock n Roll..." id=searchfield />
+            <input type=text placeholder="Search French Rock n Roll..." class=searchfield />
           </div>
         </div>
       </div>
@@ -3055,6 +3056,10 @@ jhunter@tunein.com
         <div class="searchcontent content">
           <div class=webpageheading>
             Search
+
+            <div class="websearch inputfield search" style="width:calc(100% - 24px);padding:12px 0 8px;">
+              <input type=text class=searchfield placeholder="Search..." />
+            </div>
           </div>
           <div class=contentrow>
             <div class=heading>
@@ -3158,7 +3163,7 @@ jhunter@tunein.com
 
       <div id=premium>
         <div class=content>
-          <div class=webpageheading style="padding-top:32px;">
+          <div class="webpageheading premiumheading">
             Premium
           </div>
         </div>
@@ -3856,9 +3861,11 @@ jhunter@tunein.com
 
     function rollthedice(e){
       let placeholders = ['French Rock n Roll', 'Italian Pop', 'Japanese Rap', 'Antarctic News', 'What Does a Fox Say', 'Rebecca Black', 'That One Song', 'da da dadadada', 'Bieber', 'Kitten Talk Radio', 'Pandas Chewing Bamboo', 'Meowzik', 'John Lemon', 'Emu', 'Silent Film Dialog', 'The Sounds of Nothing', 'The Sounds of Space', 'The Never Ending Song'];
-      let s = document.getElementById('searchfield');
-
-      s.placeholder = 'Search ' + placeholders.random() + '...';
+      let s = document.getElementsByClassName('searchfield');
+      for(var i=0;i<s.length;i++){
+        let ss = s[i];
+        ss.placeholder = 'Search ' + placeholders.random() + '...';
+      }
     }
     
     function tabbar(e){
