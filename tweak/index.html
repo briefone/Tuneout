@@ -173,6 +173,7 @@ jhunter@tunein.com
       --nptextcolor: white;
 
       --morepanel: var(--ink1);
+      --morepaneltransparent: #ffffff00;
       --moreitem: var(--ink);
       --moreitemhover: var(--ink2);
       --moreitempress: var(--ink3);
@@ -224,8 +225,8 @@ jhunter@tunein.com
       --circlebtnpress: var(--ink7);
 
       --statusbar:var(--ink11);
-
       --morepanel: var(--ink10);
+      --morepaneltransparent: #1C203C00;
       --moreitem: var(--ink1);
       --moreitemhover: var(--ink9);
       --moreitempress: var(--ink8);
@@ -239,6 +240,7 @@ jhunter@tunein.com
       --darkuioutlinebtnpress: var(--ink10);
 
       --morepanel: var(--ink1);
+      --morepaneltransparent: #0B0E2300;
       --moreitem: var(--ink12);
       --moreitemhover: var(--ink2);
       --moreitempress: var(--ink3);
@@ -1327,18 +1329,18 @@ jhunter@tunein.com
 
       .speedbars {width:calc(100% + 48px);overflow-x:scroll;scroll-snap-type:x mandatory;margin:0 -24px 24px;position:relative;user-select: none;-webkit-overflow-scrolling:touch;}
         .sbarwrap {display:flex;padding:0 50% 32px;}
-        .sbar {min-width:4px;height:60px;position:relative;border-radius:2px;background:var(--ink1);margin-right:32px;float:left;scroll-snap-align: center;}
+        .sbar {min-width:4px;height:60px;position:relative;border-radius:2px;background:var(--ui1);margin-right:32px;float:left;scroll-snap-align: center;user-select: none;}
         .sbspacer {min-width:50vw;}
 
-        .sbv {position: absolute;bottom:-30px;left:50%;transform:translateX(-50%);color:var(--ink1);font-size: 16px;font-weight: 500;}
+        .sbv {position: absolute;bottom:-30px;left:50%;transform:translateX(-50%);color:var(--ui1);font-size: 16px;font-weight: 500;user-select: none;}
 
       .panel .toggleinput {font-weight:500;font-size:16px;}
 
-      .bargrad {position:absolute;top:0;left:-24px;bottom:0;width:140px;background:linear-gradient(to right, var(--morepanel), transparent);z-index:7;pointer-events:none;}
-        .bargradright {left:auto;right:-24px;background:linear-gradient(to left, var(--morepanel), transparent);}
+      .bargrad {position:absolute;top:0;left:-24px;bottom:0;width:140px;background:linear-gradient(to right, var(--morepanel), var(--morepaneltransparent));z-index:7;pointer-events:none;}
+        .bargradright {left:auto;right:-24px;background:linear-gradient(to left, var(--morepanel), var(--morepaneltransparent));}
 
-      .speedbubble {margin:0 auto;width:60px;height:32px;border-radius:16px;background-color:var(--ink9);color:white;font-size:18px;font-weight:600;display:flex;align-items: center;justify-content: center;position:relative;margin-bottom:24px;user-select: none;font-variant-numeric: tabular-nums;}
-        .sbtip {width:10px;height:10px;border-radius:2px;background:var(--ink9);position:absolute;bottom:-4.5px;left:50%;transform:translateX(-50%) rotate(45deg);}
+      .speedbubble {margin:0 auto;width:60px;height:32px;border-radius:16px;background-color:var(--ink9);color:var(--ink1);font-size:18px;font-weight:600;display:flex;align-items: center;justify-content: center;position:relative;margin-bottom:24px;user-select: none;font-variant-numeric: tabular-nums;}
+        .sbtip {width:10px;height:10px;border-radius:2px;background:var(--ink9);position:absolute;bottom:-4px;left:50%;transform:translateX(-50%) rotate(45deg);}
 
       .hidetweaks #container {
         border-radius: 0 !important;
@@ -1917,7 +1919,7 @@ jhunter@tunein.com
           </div>
           <div class="npscrubber" id=npscrubber>
             <div class=scrubbable>
-              <input type=range id=npscrub />
+              <input type=range id=npscrub value=0 />
               <div class=track id=nptrack></div>
               <div class=buffer id=npbuffer></div>
               <div class=progress id=npprogress></div>
@@ -5896,7 +5898,6 @@ jhunter@tunein.com
       document.addEventListener('mousemove', mouseMoveHandler);
       document.addEventListener('mouseup', mouseUpHandler);
     
-
       function mouseMoveHandler(e) {
           // How far the mouse has been moved
           const dx = e.clientX - t.pos.x;
@@ -5909,6 +5910,10 @@ jhunter@tunein.com
 
       function mouseUpHandler() {
           t.style.cursor = 'grab';
+
+          if ( isSafari ){
+            t.scrollLeft = Math.round((t.scrollLeft - 2) / 36) * 36 + 2;
+          }
 
           document.removeEventListener('mousemove', mouseMoveHandler);
           document.removeEventListener('mouseup', mouseUpHandler);
@@ -6054,6 +6059,8 @@ jhunter@tunein.com
 
       document.getElementById('meow').onplay = meowing;
       document.getElementById('meow').onpause = meowed;
+
+      window.isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
       for(var i=0;i<tabpages.length;i++){
         let t = tabpages[i];
