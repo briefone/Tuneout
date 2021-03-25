@@ -607,11 +607,15 @@ jhunter@tunein.com
       .navlink:hover {text-decoration: underline;color:var(--sky3);}
       .navlink:active {text-decoration: underline;color:var(--sky2);}
 
-    #nav {position:absolute;top:0;left:0;right:0;z-index:1337;-webkit-backdrop-filter: blur(40px);backdrop-filter: blur(40px);}
+    #nav {position:absolute;top:0;left:0;right:0;z-index:1337;}
       #nav .colorlay {position:absolute;top:0;left:0;right:0;bottom:0;background:var(--background);opacity:0.5;z-index:-1;}
         .premiumpage #nav .colorlay {background:var(--premium);}
 
         .droid #nav .colorlay {opacity:1;}
+
+        #nav .blurlay {position:absolute;top:0;left:0.5px;right:0;bottom:0;z-index:;-webkit-backdrop-filter: blur(40px);backdrop-filter: blur(40px);}
+
+        .droid #nav .blurlay {display:none;}
 
     #statusbar {height:24px;background:rgba(0,0,0,.03);width:100%;}
 
@@ -1319,6 +1323,22 @@ jhunter@tunein.com
 
         .panel h5 {font-size:12px;text-transform:uppercase;color:var(--ink6);font-weight:500;margin-bottom:8px;}
 
+      .speedwrap {position:relative;}
+
+      .speedbars {width:calc(100% + 48px);overflow-x:scroll;scroll-snap-type:x mandatory;margin:0 -24px 24px;position:relative;user-select: none;}
+        .sbarwrap {display:flex;padding:0 50% 32px;}
+        .sbar {min-width:4px;height:60px;position:relative;border-radius:2px;background:var(--ink1);margin-right:32px;float:left;scroll-snap-align: center;}
+        .sbspacer {min-width:50vw;}
+
+        .sbv {position: absolute;bottom:-30px;left:50%;transform:translateX(-50%);color:var(--ink1);font-size: 16px;font-weight: 500;}
+
+      .panel .toggleinput {font-weight:500;font-size:16px;}
+
+      .bargrad {position:absolute;top:0;left:-24px;bottom:0;width:140px;background:linear-gradient(to right, var(--morepanel), transparent);z-index:7;pointer-events:none;}
+        .bargradright {left:auto;right:-24px;background:linear-gradient(to left, var(--morepanel), transparent);}
+
+      .speedbubble {margin:0 auto;width:60px;height:32px;border-radius:16px;background-color:var(--ink9);color:white;font-size:18px;font-weight:600;display:flex;align-items: center;justify-content: center;position:relative;margin-bottom:24px;user-select: none;font-variant-numeric: tabular-nums;}
+        .sbtip {width:10px;height:10px;border-radius:2px;background:var(--ink9);position:absolute;bottom:-4.5px;left:50%;transform:translateX(-50%) rotate(45deg);}
 
       .hidetweaks #container {
         border-radius: 0 !important;
@@ -1446,8 +1466,13 @@ jhunter@tunein.com
       <div class="tweak">
         <label><input type="checkbox" id="cb4" class="tweakr" data-class=played><div class="toggle"></div> Mini Player</label>
       </div>
+    </div>
+    <div class=tpanel>
       <div class="tweak">
-        <label><input type="checkbox" id="cb21" class="tweakr" data-class=speedtap><div class="toggle"></div> Tap Speed Change</label>
+        <label><input type="checkbox" id="cb23" class="tweakr" data-class=speed2 data-uncheck=cb21><div class="toggle"></div> Slider Speed Control</label>
+      </div>
+      <div class="tweak">
+        <label><input type="checkbox" id="cb21" class="tweakr" data-class=speedtap data-uncheck=cb23><div class="toggle"></div> Tap Speed Change</label>
       </div>
     </div>
     <div class=tpanel>
@@ -1812,6 +1837,30 @@ jhunter@tunein.com
           <div class="btn quietbtn cancelnpspeed aink">Cancel</div>
         </div>
       </div>
+
+      <div class="morepanel npspeed2">
+        <div class=overlay></div>
+        <div class="panel steppanel">
+          <h5>Audio Speed</h5>
+          <div class=speedwrap>
+            <div class="bargradleft bargrad"></div>
+            <div class="bargradright bargrad"></div>
+            <div class=speedbubble><div class=spvalue>1x</div>
+              <div class=sbtip></div>
+            </div>
+            <div class=speedbars>
+              <div class=sbarwrap>
+                <div class=sbar><div class=sbv>0.5</div></div><div class=sbar></div><div class=sbar></div><div class=sbar></div><div class=sbar></div><div class=sbar><div class=sbv>1</div></div><div class=sbar></div><div class=sbar></div><div class=sbar></div><div class=sbar></div><div class=sbar><div class=sbv>1.5</div></div><div class=sbar></div><div class=sbar></div><div class=sbar></div><div class=sbar></div><div class=sbar><div class=sbv>2</div></div><div class=sbar></div><div class=sbar></div><div class=sbar></div><div class=sbar></div><div class=sbar><div class=sbv>2.5</div></div><div class=sbar></div><div class=sbar></div><div class=sbar></div><div class=sbar></div><div class=sbar><div class=sbv>3</div></div><div class=sbar></div><div class=sbar></div><div class=sbar></div><div class=sbar></div><div class=sbar><div class=sbv>3.5</div></div>
+                <div class=sbspacer></div>
+              </div>
+            </div>
+          </div>
+          <label class=toggleinput><input type="checkbox" id="speedcheckbox2"><div class="toggle"></div> Apply to all podcasts</label>
+          <div class="btn savenpspeed2 aink" style="margin-bottom: 12px;margin-top:24px;">Done</div>
+          <!-- <div class="btn quietbtn cancelnpspeed aink">Cancel</div> -->
+        </div>
+      </div>
+
       <div class="morepanel npmoremenu">
         <div class=overlay></div>
         <div class=panel>
@@ -1864,7 +1913,7 @@ jhunter@tunein.com
             <div class=npstation>Nyan Cat 24/7</div>
             <div class=npmeta>Meow meow meow</div>
             <div class="nplist menubtn aink" data-type=add2listmenu><div class="svgicon playlistadd"></div><div class=nplistlabel>Add to Mix</div></div>
-            <div class="pillbtn btn npspeedbtn aink" data-type=npspeed>1.0x</div>
+            <div class="pillbtn btn npspeedbtn aink" data-type=npspeed2>1.0x</div>
           </div>
           <div class="npscrubber" id=npscrubber>
             <div class=scrubbable>
@@ -2097,6 +2146,7 @@ jhunter@tunein.com
     </div>
     <div id=mainwrap>
       <div id=nav>
+        <div class=blurlay></div>
         <div class=colorlay></div>
         <div id=statusbar></div>
         <div id=navbar class=bar>
@@ -5232,12 +5282,34 @@ jhunter@tunein.com
       nomore.call(this, e);
     }
 
+    function savenpspeed2(e){
+      let r = document.getElementById('playbackspeed');
+
+      let v = document.getElementById('meow').playbackRate;
+
+      if ( document.getElementById('speedcheckbox2').checked ){
+        window.pbs = Number(v);
+      }
+
+      let btn = document.getElementsByClassName('npspeedbtn')[0];
+      btn.empty();
+      btn.appendChild(document.createTextNode(Number(v).toFixed(1) + 'x'));
+
+      r.dataset.pbs = Number(v);
+
+      nomore.call(this, e);
+    }
+
     function cancelnpspeed(e){
       let r = document.getElementById('playbackspeed');
       r.value = r.dataset.pbs || window.pbs;
 
       document.getElementsByClassName('stepdot selected').removeclass('selected');
-      document.getElementsByClassName('stepdot')[(window.pbs / 0.5 - 1)].classList.add('selected');
+      let sd = document.getElementsByClassName('stepdot')[(window.pbs / 0.5 - 1)];
+      
+      if ( sd ){
+        sd.classList.add('selected');
+      }
 
       document.getElementById('meow').playbackRate = r.value;
 
@@ -5246,7 +5318,14 @@ jhunter@tunein.com
 
     function npspeed(e){
       if ( !document.documentElement.classList.contains('speedtap') ){
-        menubtn.call(this, e);
+        if ( !document.documentElement.classList.contains('speed2') ){
+          var x = {dataset:{type: 'npspeed2'}};
+          // x.dataset.type = 'npspeed2';
+          menubtn.call(x, e);
+        } else {
+          var x = {dataset:{type: 'npspeed'}};
+          menubtn.call(x, e);
+        }
       } else {
         let pbs = document.getElementById('playbackspeed');
         var v = Number(pbs.value);
@@ -5773,6 +5852,36 @@ jhunter@tunein.com
       document.documentElement.classList.remove('openforbusiness');
     }
 
+    function scrollscrub(){
+      let a = document.getElementsByClassName('speedbars')[0];
+
+      a.scrollLeft = 182;
+
+      a.onscroll = scrubscrolling;
+    }
+
+    function scrubscrolling(e){
+      var x = this.scrollLeft;
+
+      console.log(x);
+
+      x -= 2;
+
+      let half = x / 180;
+
+      let v = half * 0.5 + 0.5;
+
+      console.log(half, half * 0.5, v);
+
+      let sv = document.getElementsByClassName('spvalue')[0];
+
+      sv.empty();
+
+      sv.appendChild(document.createTextNode(v.toFixed(1) + 'x'));
+
+      document.getElementById('meow').playbackRate = v;
+    }
+
     Attach.on('click', '.a2plstep2', a2plprestep);
     Attach.on('click', '.addtoplaylist, .add2pl', addtoplaylistsearch);
     Attach.on('click', '.playlistaddrec', playlistaddrec);
@@ -5817,6 +5926,7 @@ jhunter@tunein.com
     Attach.on('click', '.addplaylist, .addplaylist2', addautoplaylist);
     Attach.on('click', '.hideplaylist', hideplaylist);
     Attach.on('click', '.savenpspeed', savenpspeed);
+    Attach.on('click', '.savenpspeed2', savenpspeed2);
     Attach.on('click', '.cancelnpspeed', cancelnpspeed);
     Attach.on('click', '.npspeedbtn', npspeed);
     Attach.on('mousedown', '.aink, .panelitem, .listitem, .iconbtn, .modalclose, .selectbtn, .rowitem ', droidpress);
@@ -5902,6 +6012,8 @@ jhunter@tunein.com
       loadcannon();
 
       generateplaylist();
+
+      scrollscrub();
 
       let tabpages = document.getElementsByClassName('tabpage');
 
