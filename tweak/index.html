@@ -1325,7 +1325,7 @@ jhunter@tunein.com
 
       .speedwrap {position:relative;}
 
-      .speedbars {width:calc(100% + 48px);overflow-x:scroll;scroll-snap-type:x mandatory;margin:0 -24px 24px;position:relative;user-select: none;}
+      .speedbars {width:calc(100% + 48px);overflow-x:scroll;scroll-snap-type:x mandatory;margin:0 -24px 24px;position:relative;user-select: none;-webkit-overflow-scrolling:touch;}
         .sbarwrap {display:flex;padding:0 50% 32px;}
         .sbar {min-width:4px;height:60px;position:relative;border-radius:2px;background:var(--ink1);margin-right:32px;float:left;scroll-snap-align: center;}
         .sbspacer {min-width:50vw;}
@@ -5882,6 +5882,39 @@ jhunter@tunein.com
       document.getElementById('meow').playbackRate = v;
     }
 
+    function barmousedown(e) {
+      this.style.cursor = 'grabbing';
+      let t = this;
+      this.pos = {
+          left: this.scrollLeft,
+          top: this.scrollTop,
+          // Get the current mouse position
+          x: e.clientX,
+          y: e.clientY,
+      };
+
+      document.addEventListener('mousemove', mouseMoveHandler);
+      document.addEventListener('mouseup', mouseUpHandler);
+    
+
+      function mouseMoveHandler(e) {
+          // How far the mouse has been moved
+          const dx = e.clientX - t.pos.x;
+          const dy = e.clientY - t.pos.y;
+
+          // Scroll the element
+          t.scrollTop = t.pos.top - dy;
+          t.scrollLeft = t.pos.left - dx;
+      }
+
+      function mouseUpHandler() {
+          t.style.cursor = 'grab';
+
+          document.removeEventListener('mousemove', mouseMoveHandler);
+          document.removeEventListener('mouseup', mouseUpHandler);
+      }
+    }
+
     Attach.on('click', '.a2plstep2', a2plprestep);
     Attach.on('click', '.addtoplaylist, .add2pl', addtoplaylistsearch);
     Attach.on('click', '.playlistaddrec', playlistaddrec);
@@ -5944,6 +5977,7 @@ jhunter@tunein.com
     Attach.on('click', '#webnav .navitem', webnavtab);
     Attach.on('click', '.burgerking', bk);
     Attach.on('click', '#webnavoverlay', closewebnav);
+    Attach.on('mousedown', '.speedbars', barmousedown);
     
     
     window.Lists = localStorage.getObject('lists') || {};
@@ -5995,6 +6029,7 @@ jhunter@tunein.com
         {name: 'Ibiza Live Radio', image: 'url(https://cdn-profiles.tunein.com/s203278/images/logoq.png)', stream: 'https://streams.radio.co/sdc9cfaf77/listen', meta: "24/7 of Selected Sounds from Ibiza. Welcome To The Family!", live: true, length: '30 Minutes' }
       ]}
     }
+    
     
     pagesizetweak(true);
 
