@@ -4164,8 +4164,10 @@ jhunter@tunein.com
         if ( meow.src != url ){
           meow.src = url;
 
-          meow.play();
-          meow.pause();
+          if ( isMobileSafari()){
+            meow.play();
+            meow.pause();
+          }
         }
 
         meow.oncanplay = (event) => {
@@ -5891,7 +5893,12 @@ jhunter@tunein.com
 
       sv.appendChild(document.createTextNode(v.toFixed(1) + 'x'));
 
-      document.getElementById('meow').playbackRate = v;
+      if ( this.timer ){
+        clearTimeout(this.timer);
+        this.timer = null;
+      }
+
+      this.timer = setTimeout(function(){document.getElementById('meow').playbackRate = v;}, 250);
     }
 
     function barmousedown(e) {
@@ -6048,7 +6055,7 @@ jhunter@tunein.com
     pagesizetweak(true);
 
     function isMobileSafari() {
-        return navigator.userAgent.match(/(iPod|iPhone|iPad)/) && navigator.userAgent.match(/AppleWebKit/)
+        return /iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
     }
 
     (function() {
