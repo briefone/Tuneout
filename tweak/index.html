@@ -367,23 +367,18 @@ jhunter@tunein.com
     input {border: none;background: transparent;color: var(--ink);font:500 14px calibre, sans-serif;box-sizing: border-box;border-radius: 0;}
 
     input[type=range] {
-      -webkit-appearance: none;
-      width: 280px;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-    }
-
-    input[type=range] {
         -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
         width: 280px; /* Specific width is required for Firefox. */
         background: transparent; /* Otherwise white in Chrome */
         border:none;
         cursor:pointer;
+        outline:none;
     }
 
     input[type=range]::-webkit-slider-thumb {
         -webkit-appearance: none;
+        border:none;
+        outline:none;
     }
 
     input[type=range]:focus {
@@ -1329,7 +1324,8 @@ jhunter@tunein.com
 
       .speedbars {width:calc(100% + 48px);overflow-x:scroll;scroll-snap-type:x mandatory;margin:0 -24px 24px;position:relative;user-select: none;-webkit-overflow-scrolling:touch;}
         .sbarwrap {display:flex;padding:0 50% 32px;}
-        .sbar {min-width:4px;height:60px;position:relative;border-radius:2px;background:var(--ui1);margin-right:32px;float:left;scroll-snap-align: center;user-select: none;}
+        .sbar {min-width:4px;height:60px;position:relative;border-radius:2px;background:var(--ui1);margin-right:32px;scroll-snap-align: center;user-select: none;}
+          .sbar:last-child {margin:0;}
         .sbspacer {min-width:50vw;}
 
         .sbv {position: absolute;bottom:-30px;left:50%;transform:translateX(-50%);color:var(--ui1);font-size: 16px;font-weight: 500;user-select: none;}
@@ -4017,6 +4013,12 @@ jhunter@tunein.com
     }
 
     function nowplaying(e){
+
+      if ( isMobileSafari() ){
+        document.getElementById('meow').muted = false
+        document.getElementById('meow').play();
+      } 
+      
       let url = this.dataset.url || './audio/nyancat.mp3';
       document.body.classList.add('nppage', 'modalview');
 
@@ -6035,8 +6037,11 @@ jhunter@tunein.com
       ]}
     }
     
-    
     pagesizetweak(true);
+
+    function isMobileSafari() {
+        return navigator.userAgent.match(/(iPod|iPhone|iPad)/) && navigator.userAgent.match(/AppleWebKit/)
+    }
 
     (function() {
       
