@@ -4014,11 +4014,12 @@ jhunter@tunein.com
 
     function nowplaying(e){
 
-      if ( isMobileSafari() ){
-        document.getElementById('meow').muted = false
-        document.getElementById('meow').play();
-      } 
-      
+      // if ( isMobileSafari() ){
+        let m = document.getElementById('meow');
+        m.play();
+        m.pause();
+      // } 
+
       let url = this.dataset.url || './audio/nyancat.mp3';
       document.body.classList.add('nppage', 'modalview');
 
@@ -4165,8 +4166,12 @@ jhunter@tunein.com
         }
 
         meow.oncanplay = (event) => {
-          meow.play();
+          const promise = meow.play();
           meow.oncanplay = null;
+
+          if (promise !== undefined) {
+              promise.then(() => {}).catch(error => console.error);
+          }
         } 
 
         var album = window.getComputedStyle(this, null).getPropertyValue('background-image');
