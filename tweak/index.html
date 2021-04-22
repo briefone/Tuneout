@@ -610,7 +610,7 @@ jhunter@tunein.com
 
         .droid #nav .colorlay {opacity:1;}
 
-        #nav .blurlay {position:absolute;top:0;left:1px;right:0;bottom:0;border-radius:6px 6px  0 0;-webkit-backdrop-filter: blur(40px);backdrop-filter: blur(40px);}
+        #nav .blurlay {position:absolute;top:1px;left:1px;right:0;bottom:0;border-radius:6px 6px  0 0;-webkit-backdrop-filter: blur(40px);backdrop-filter: blur(40px);}
 
         .droid #nav .blurlay {display:none;}
 
@@ -1351,7 +1351,7 @@ jhunter@tunein.com
         margin-top:0 !important;
       }
 
-      .hidetweaks #nav .blurlay {border-radius:0;left:0;}
+      .hidetweaks #nav .blurlay {border-radius:0;left:0;top:0;right:0;}
 
       .webview #tabbar, .webview #nav {display:none;}
       .webview #home .content, .webview #search .content, .premiumheading {padding-top:32px;}
@@ -1375,7 +1375,7 @@ jhunter@tunein.com
           margin-top:0 !important;
       }
 
-      #nav .blurlay {border-radius:0;}
+      #nav .blurlay {border-radius:0;left:0;top:0;right:0;}
 
       .hidetweaks #tweaks {display:none;}
     }
@@ -1938,6 +1938,11 @@ jhunter@tunein.com
             </div>
             <div class="nprewind30 circlebtn medium aink">
               <div class="svgicon rewind"></div>
+            </div>
+            <div class="nploading circlebtn aink">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 18.4701C8.00043 18.5908 8.03462 18.709 8.09872 18.8112C8.16281 18.9135 8.25424 18.9958 8.36267 19.0488C8.47195 19.0999 8.5932 19.12 8.71314 19.1069C8.83309 19.0937 8.94709 19.0478 9.04267 18.9741L17.2333 12.5048C17.3096 12.4446 17.3713 12.368 17.4137 12.2806C17.4561 12.1931 17.4781 12.0973 17.4781 12.0001C17.4781 11.903 17.4561 11.8071 17.4137 11.7197C17.3713 11.6323 17.3096 11.5556 17.2333 11.4954L9.04267 5.02744C8.94782 4.95268 8.83387 4.9061 8.71382 4.893C8.59377 4.87991 8.47246 4.90084 8.36373 4.95339C8.255 5.00595 8.16324 5.08802 8.09893 5.19023C8.03461 5.29244 8.00033 5.41068 8 5.53144V18.4701Z" />
+              </svg>                        
             </div>
             <div class="npplay circlebtn aink">
               <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
