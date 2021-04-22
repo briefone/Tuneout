@@ -981,10 +981,18 @@ jhunter@tunein.com
     
     .npcontrols {display:flex;align-items:center;justify-content: center;height:88px;margin-bottom:24px;gap:16px}
     .nogap .npcontrols > * {margin:0 8px;}
-    .npplay, .nppause {width:72px;height:72px;}
-      .nppause {display:none;}
+    .npplay, .nppause, .nploading {width:72px;height:72px;}
+      .nppause, .nploading {display:none;}
       .playing .nppause {display:flex;}
-      .playing .npplay {display:none;}
+      .playing .npplay, .loadingstream .npplay, .loadingstream .nppause {display:none;}
+      .loadingstream .nploading {display:flex;}
+
+      .svgspin {animation: spinspin 1s steps(12) infinite;transform:rotate(0);}
+
+      @keyframes spinspin {
+        from {transform:rotate(0);}
+        to {transform:rotate(360deg);}
+      }
 
       .npcontrols .medium {width:56px;height:56px;}
       .npcontrols .medium {width:48px;height:48px;}
@@ -1940,9 +1948,20 @@ jhunter@tunein.com
               <div class="svgicon rewind"></div>
             </div>
             <div class="nploading circlebtn aink">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8 18.4701C8.00043 18.5908 8.03462 18.709 8.09872 18.8112C8.16281 18.9135 8.25424 18.9958 8.36267 19.0488C8.47195 19.0999 8.5932 19.12 8.71314 19.1069C8.83309 19.0937 8.94709 19.0478 9.04267 18.9741L17.2333 12.5048C17.3096 12.4446 17.3713 12.368 17.4137 12.2806C17.4561 12.1931 17.4781 12.0973 17.4781 12.0001C17.4781 11.903 17.4561 11.8071 17.4137 11.7197C17.3713 11.6323 17.3096 11.5556 17.2333 11.4954L9.04267 5.02744C8.94782 4.95268 8.83387 4.9061 8.71382 4.893C8.59377 4.87991 8.47246 4.90084 8.36373 4.95339C8.255 5.00595 8.16324 5.08802 8.09893 5.19023C8.03461 5.29244 8.00033 5.41068 8 5.53144V18.4701Z" />
-              </svg>                        
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27 27" style="max-width:32px;max-height:32px;" class=svgspin>
+                <path d="M18.7,10.5a1,1,0,0,1,.365-1.367L23.82,6.382a1.007,1.007,0,0,1,1.37.368,1,1,0,0,1-.364,1.364l-4.764,2.751A1,1,0,0,1,18.7,10.5Z" style="opacity:0.9;"/>
+                <path d="M16.133,6.938l2.75-4.765a1,1,0,1,1,1.732,1L17.867,7.935a1,1,0,1,1-1.734-1Z" style="opacity:0.84;"/>
+                <path d="M13.5,7.5a1,1,0,0,1-1-1V1a1,1,0,0,1,2,0V6.5A1,1,0,0,1,13.5,7.5Z" style="opacity:0.78;"/>
+                <path d="M8.3,10.5a1,1,0,0,1-1.365.365L2.175,8.114a1,1,0,0,1,1-1.732L7.937,9.133A1,1,0,0,1,8.3,10.5Z" style="opacity:0.72;"/>
+                <path d="M9.133,7.937,6.383,3.174a1,1,0,1,1,1.732-1l2.75,4.765a1,1,0,0,1-1.732,1Z" style="opacity:0.66;"/>
+                <path d="M6.5,14.5H1a1,1,0,0,1,0-2H6.5a1,1,0,1,1,0,2Z" style="opacity:0.6;"/>
+                <path d="M8.3,16.5a1,1,0,0,1-.365,1.366L3.176,20.617a1,1,0,1,1-1-1.734l4.762-2.748A1,1,0,0,1,8.3,16.5Z" style="opacity:0.54;"/>
+                <path d="M10.866,20.062l-2.75,4.767a1,1,0,0,1-1.732-1l2.75-4.764a1,1,0,0,1,1.732,1Z" style="opacity:0.48;"/>
+                <path d="M13.5,19.5a1,1,0,0,1,1,1V26a1,1,0,0,1-2,0V20.5A1,1,0,0,1,13.5,19.5Z" style="opacity:0.42;"/>
+                <path d="M17.867,19.062l2.748,4.764a1,1,0,0,1-1.732,1l-2.75-4.767a1,1,0,0,1,1.734-1Z" style="opacity:0.36;"/>
+                <path d="M18.7,16.5a1,1,0,0,1,1.365-.367l4.765,2.748a1,1,0,0,1-1.006,1.734l-4.759-2.749A1,1,0,0,1,18.7,16.5Z" style="opacity:0.3;"/>
+                <path d="M26,12.5H20.5a1,1,0,1,0,0,2H26a1,1,0,1,0,0-2Z" style="opacity:0.24;"/>
+              </svg>  
             </div>
             <div class="npplay circlebtn aink">
               <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -4029,6 +4048,8 @@ jhunter@tunein.com
       //   m.pause();
       // // } 
 
+      document.documentElement.classList.add('loadingstream');
+
       let url = this.dataset.url || './audio/nyancat.mp3';
       document.body.classList.add('nppage', 'modalview');
 
@@ -4093,6 +4114,9 @@ jhunter@tunein.com
           console.log('The duration and dimensions ' + 'of the media and tracks are now known. ', meow.duration);
 
           let dur = meow.duration;
+
+          document.documentElement.classList.add('playing');
+          document.documentElement.classList.remove('loadingstream');
 
           if ( dur == Infinity){
             document.getElementById('nowplaying').classList.add('live');
@@ -4183,6 +4207,9 @@ jhunter@tunein.com
           const promise = meow.play();
           meow.oncanplay = null;
 
+          document.documentElement.classList.add('playing');
+          document.documentElement.classList.remove('loadingstream');
+
           if (promise !== undefined) {
               promise.then(() => {}).catch(error => console.error);
           }
@@ -4225,8 +4252,6 @@ jhunter@tunein.com
           // getAverageRGB(img);
           vibe('https://noiseee.com/img/?url=' + img);
         }
-
-        document.documentElement.classList.add('playing');
       }
 
       document.documentElement.classList.add('played');
