@@ -9,11 +9,11 @@
 ╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚═════╝
 ```
 
-https://tuneout.github.io/playground
+https://tunein.github.io/johnny/
 
-https://tuneout.github.io/playground/colors
+https://tunein.github.io/johnny/colors
 
-https://tuneout.github.io/playground/playlist
+https://tunein.github.io/johnny/tweak
 
 
 Swing
